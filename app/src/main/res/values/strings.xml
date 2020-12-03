@@ -1,3 +1,9 @@
-<resources>
-    <string name="app_name">CoffeeForCodeApp</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Coffee For Code</string>
+
+    <!--First Screen-->
+    <string name="saibamais">Saiba Mais</string>
+    <string name="logar">Logar</string>
+    <string name="txtbemvindomenulogin"><u><b>Bem Vindo!!</b></u></string>
+    <string name="txtmenulogin" tools:ignore="TypographyEllipsis">Coffee For Code é uma empresa multinacional brasileira, com a maior cadeia de cafeterias do mundo. ... A companhia criou seu nome inspirada nso programados do pelo mundo, e seu logotipo é um entalhe escandinavo do século XVI de uma sereia com duas caudas.</string>
 </resources>
