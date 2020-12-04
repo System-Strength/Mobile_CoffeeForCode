@@ -1,7 +1,11 @@
 package com.example.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -12,6 +16,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class MainActivity extends AppCompatActivity{
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
+    CardView cardviewseemore, cardviewlogin;
     LinearLayout navbarmain, bodymain, linearanimationcoffeeconstant;
     LottieAnimationView animationcoffee, animationcoffeeconstant;
 
@@ -24,7 +29,10 @@ public class MainActivity extends AppCompatActivity{
         animationcoffee = findViewById(R.id.animationcoffee);
         animationcoffeeconstant = findViewById(R.id.animationcoffeeconstant);
         linearanimationcoffeeconstant = findViewById(R.id.linearanimationcoffeeconstant);
+        cardviewseemore = findViewById(R.id.cardviewseemore);
+        cardviewlogin = findViewById(R.id.cardviewlogin);
 
+        //  Set some thinks with gone and set background color
         navbarmain.setVisibility(View.GONE);
         animationcoffee.setVisibility(View.GONE);
         linearanimationcoffeeconstant.setVisibility(View.GONE);
@@ -44,5 +52,18 @@ public class MainActivity extends AppCompatActivity{
                 animationcoffeeconstant.playAnimation();
             },2500);
         },700);
+
+        //  WHen click here go to MoreActivity
+        cardviewseemore.setOnClickListener(v -> {
+            //  Soon
+        });
+
+        //  When click here will go to LoginActivity
+        cardviewlogin.setOnClickListener(v -> {
+            Intent irparalogin = new Intent(MainActivity.this,LoginActivity.class);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerda, R.anim.mover_direita);
+            ActivityCompat.startActivity(MainActivity.this,irparalogin, activityOptionsCompat.toBundle());
+            finish();
+        });
     }
 }

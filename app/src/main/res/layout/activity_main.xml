@@ -115,6 +115,7 @@
 
             <!--Btn know more-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardviewseemore"
                 android:layout_width="150dp"
                 android:layout_height="55dp"
                 app:cardElevation="@dimen/cardview_default_elevation"
@@ -147,6 +148,7 @@
 
             <!--Btn Login-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardviewlogin"
                 android:layout_width="150dp"
                 android:layout_height="55dp"
                 app:cardBackgroundColor="#fff"
