@@ -1,6 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Coffee For Code</string>
 
+    <!--Hints / Mask-->
+    <string name="mascaracpf" tools:ignore="TypographyDashes">000.000.000-00</string>
+    <string name="mascaraphone" tools:ignore="TypographyDashes">(00) 00000-0000</string>
+    <string name="mascaraemail">exemplo@gmail.com</string>
+    <string name="exnome">Ex. Fulano de tal</string>
+
+    <!--Loading-->
+    <string name="carregando" tools:ignore="TypographyEllipsis">Carregando...</string>
+
+    <!--Terms-->
+    <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>CoffeeForCode</b></u>\nO presente instrumento estabelece os termos e as condições aplicáveis ao seu acesso e a participação no programa My CoffeeForCode Rewards™, operado pela CoffeeForCode Brasil Comércio de Cafés Ltda.- CNPJ Nº. 17.884.267/0001-00, com endereço na Avenida Paulista nº 900, Bela Vista São Paulo,(aqui denominada CoffeeForCode Brasil), suas subsidiárias, filiais licenciadas e empresas coligadas, e não reduz os termos e condições de qualquer outro acordo celebrado entre o cliente e a Starbucks, no que diz respeito a produtos e serviços oferecidos pela CoffeeForCode.\n\n<u><b>MIT License</b></u>\n<u>Copyright (c) 2020 System Strength</u>\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+    <string name="aceitoostermos">Eu aceito os Termos</string>
+
     <!--First Screen-->
     <string name="saibamais">Saiba Mais</string>
     <string name="acessar">Acessar</string>
@@ -15,5 +28,21 @@
     <string name="logar">Logar</string>
     <string name="sounovoaqui">Sou novo aqui.</string>
     <string name="criarconta">Criar Conta</string>
+
+    <!--Create Account Screen-->
+    <string name="nomecriarconta">Nome*</string>
+    <string name="emailcriarconta">Email*</string>
+    <string name="senhacriarconta">Senha*</string>
+    <string name="criarcontabtn"><u>Criar Conta</u></string>
+    <string name="lowercase_letters">Lowercase Letters</string>
+    <string name="uppercase_letters">Uppercase Letters</string>
+    <string name="digits">Digits</string>
+    <string name="special_characters">Special Characters</string>
+    <string name="logaragora">Logar Agora</string>
+    <string name="jatenhoconta">Já tenho conta. </string>
+    <string name="cpfcriarconta">Cpf*</string>
+    <string name="eceitoostermos">Eu aceito os termos de CoffeeForCode</string>
+    <string name="termos"><u>Termos</u></string>
+    <string name="explicacaoesteristico">* - Obrigatório</string>
 
 </resources>
