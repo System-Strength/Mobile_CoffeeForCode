@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEDCB"
+    android:background="@color/backgroung"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
     tools:context=".LoginActivity">
@@ -24,7 +24,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/arrowbackstraight"/>
+            app:lottie_rawRes="@raw/arrowleftback"/>
 
         <!--Coffee Animation-->
         <com.airbnb.lottie.LottieAnimationView

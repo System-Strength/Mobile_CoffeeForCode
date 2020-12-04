@@ -7,7 +7,6 @@ import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -16,12 +15,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 public class LoginActivity extends AppCompatActivity {
-    @SuppressWarnings("deprecation")
-    Handler timer = new Handler();
     TextView txtcriarnovaconta;
     LottieAnimationView btnvoltarlogin;
     ImageView imgolhofechado, imgolhoaberto;
@@ -44,8 +42,15 @@ public class LoginActivity extends AppCompatActivity {
         imgolhoaberto.setVisibility(View.GONE);
         imgolhofechado.setVisibility(View.GONE);
 
-        //  Set timer to play animation
-        timer.postDelayed(() -> btnvoltarlogin.playAnimation(),500);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null){
+            edittextemail.setText(null);
+            edittextsenha.setText(null);
+        }else {
+            edittextemail.setText(bundle.getString("emailusu"));
+            edittextsenha.setText(bundle.getString("senhausu"));
+        }
 
         //  Set commands to start in real time
         edittextsenha.addTextChangedListener(new TextWatcher() {
