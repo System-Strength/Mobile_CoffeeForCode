@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity{
     CardView cardviewseemore, cardviewlogin;
     LinearLayout navbarmain, bodymain, linearanimationcoffeeconstant;
     LottieAnimationView animationcoffee, animationcoffeeconstant;
+    int TIME_STARTLOADING = 500;
+    int TIMER_SHOWOPTION = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,16 @@ public class MainActivity extends AppCompatActivity{
         linearanimationcoffeeconstant = findViewById(R.id.linearanimationcoffeeconstant);
         cardviewseemore = findViewById(R.id.cardviewseemore);
         cardviewlogin = findViewById(R.id.cardviewlogin);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null){
+            TIME_STARTLOADING = 500;
+            TIMER_SHOWOPTION = 2500;
+        }else {
+            TIME_STARTLOADING = bundle.getInt("novotimerstart");
+            TIMER_SHOWOPTION = bundle.getInt("novotimershowoption");
+        }
 
         //  Set some thinks with gone and set background color
         navbarmain.setVisibility(View.GONE);
@@ -50,8 +62,8 @@ public class MainActivity extends AppCompatActivity{
                 linearanimationcoffeeconstant.setVisibility(View.VISIBLE);
                 animationcoffee.setVisibility(View.GONE);
                 animationcoffeeconstant.playAnimation();
-            },2500);
-        },700);
+            },TIMER_SHOWOPTION);
+        },TIME_STARTLOADING);
 
         //  WHen click here go to MoreActivity
         cardviewseemore.setOnClickListener(v -> {
