@@ -95,47 +95,88 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtenderecoemaillogin"
                     tools:ignore="Autofill,LabelFor" />
 
-                <!--Text Senha Address-->
-                <TextView
-                    android:id="@+id/txtenderecosenhalogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/senha"
-                    android:textAlignment="center"
-                    android:textColor="#D8393939"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextemail" />
-
-                <!--Edit Senha-->
-                <EditText
-                    android:id="@+id/edittextsenha"
+                <!--Base PassWord-->
+                <RelativeLayout
+                    android:id="@+id/basesenha"
                     android:layout_width="350dp"
-                    android:layout_height="50dp"
-                    android:textColor="#000"
-                    android:textAlignment="textStart"
-                    android:inputType="textPassword"
-                    android:background="@drawable/edittextpersologin"
+                    android:layout_height="70dp"
                     android:layout_marginTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtenderecosenhalogin"
-                    tools:ignore="Autofill,LabelFor" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittextemail">
+
+                    <!--Text Senha Address-->
+                    <TextView
+                        android:id="@+id/txtenderecosenhalogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/senha"
+                        android:textAlignment="center"
+                        android:textColor="#D8393939"
+                        android:textSize="12sp" />
+
+                    <!--Edit Senha-->
+                    <EditText
+                        android:id="@+id/edittextsenha"
+                        android:layout_width="350dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittextpersologin"
+                        android:inputType="textPassword"
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtenderecosenhalogin"
+                        tools:ignore="Autofill,LabelFor" />
+
+                    <!--Img Eye Closed-->
+                    <ImageView
+                        android:id="@+id/imgolhofechado"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="visible"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/olhofechado"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Img Eye Opened-->
+                    <ImageView
+                        android:id="@+id/imgolhoaberto"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="gone"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/olhoaberto"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
 
                 <!--Text Forgot Password-->
                 <TextView
                     android:id="@+id/txtesqueceuasenha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="34dp"
+                    android:layout_marginTop="3dp"
                     android:text="@string/esqueceuasenha"
                     android:textColor="#A4000000"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextsenha" />
+                    app:layout_constraintTop_toBottomOf="@+id/basesenha" />
 
                 <!--CardView Btn Logar-->
                 <androidx.cardview.widget.CardView
@@ -186,11 +227,12 @@
 
                 <!--Text Criar Conta-->
                 <TextView
+                    android:id="@+id/txtcriarnovaconta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/criarconta"
                     android:layout_marginStart="2dp"
-                    android:textColor="#FFB82D"
+                    android:textColor="#FFB421"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginTop="40dp"
