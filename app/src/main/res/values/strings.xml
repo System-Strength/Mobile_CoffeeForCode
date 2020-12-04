@@ -3,7 +3,17 @@
 
     <!--First Screen-->
     <string name="saibamais">Saiba Mais</string>
-    <string name="logar">Logar</string>
+    <string name="acessar">Acessar</string>
     <string name="txtbemvindomenulogin"><u><b>Bem Vindo!!</b></u></string>
     <string name="txtmenulogin" tools:ignore="TypographyEllipsis">Coffee For Code é uma empresa multinacional brasileira, com a maior cadeia de cafeterias do mundo. ... A companhia criou seu nome inspirada nso programados do pelo mundo, e seu logotipo é um entalhe escandinavo do século XVI de uma sereia com duas caudas.</string>
+
+    <!--Login Screen-->
+    <string name="login">Login</string>
+    <string name="emailadress">Endereço de Email</string>
+    <string name="senha">Senha</string>
+    <string name="esqueceuasenha">Esqueceu sua senha?</string>
+    <string name="logar">Logar</string>
+    <string name="sounovoaqui">Sou novo aqui.</string>
+    <string name="criarconta">Criar Conta</string>
+
 </resources>

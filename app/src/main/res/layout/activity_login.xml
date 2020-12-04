@@ -1,9 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEDCB"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Body/Header-->
+    <RelativeLayout
+        android:layout_weight="1.7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--Btn Back-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/btnvoltarlogin"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/arrowbackstraight"/>
+
+        <!--Coffee Animation-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/coffeelove"
+            app:lottie_autoPlay="true"/>
+
+    </RelativeLayout>
+
+    <!--Body Login-->
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/designerlogin"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <!--Text Login-->
+                <TextView
+                    android:id="@+id/txttiulelogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/login"
+                    android:textColor="#000"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--Text Email Address-->
+                <TextView
+                    android:id="@+id/txtenderecoemaillogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/emailadress"
+                    android:textAlignment="center"
+                    android:textColor="#D8393939"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttiulelogin" />
+
+                <!--Edit Email-->
+                <EditText
+                    android:id="@+id/edittextemail"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:textColor="#000"
+                    android:textAlignment="textStart"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edittextpersologin"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtenderecoemaillogin"
+                    tools:ignore="Autofill,LabelFor" />
+
+                <!--Text Senha Address-->
+                <TextView
+                    android:id="@+id/txtenderecosenhalogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/senha"
+                    android:textAlignment="center"
+                    android:textColor="#D8393939"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextemail" />
+
+                <!--Edit Senha-->
+                <EditText
+                    android:id="@+id/edittextsenha"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:textColor="#000"
+                    android:textAlignment="textStart"
+                    android:inputType="textPassword"
+                    android:background="@drawable/edittextpersologin"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtenderecosenhalogin"
+                    tools:ignore="Autofill,LabelFor" />
+
+                <!--Text Forgot Password-->
+                <TextView
+                    android:id="@+id/txtesqueceuasenha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="34dp"
+                    android:text="@string/esqueceuasenha"
+                    android:textColor="#A4000000"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextsenha" />
+
+                <!--CardView Btn Logar-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewbtnlogar"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="#FFC75A"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtesqueceuasenha">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/logar"
+                            android:textColor="#fff"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Text New User-->
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sounovoaqui"
+                    android:layout_marginEnd="80dp"
+                    android:layout_marginTop="40dp"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtnlogar" />
+
+                <!--Text Criar Conta-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criarconta"
+                    android:layout_marginStart="2dp"
+                    android:textColor="#FFB82D"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtnlogar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
