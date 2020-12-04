@@ -28,7 +28,7 @@ public class LoadingDialog {
         dialog.show();
     }
 
-    void dimissDialog(){
+   public void dimissDialog(){
         dialog.dismiss();
     }
 }

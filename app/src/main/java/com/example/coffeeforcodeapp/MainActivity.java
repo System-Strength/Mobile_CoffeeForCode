@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity{
     CardView cardviewseemore, cardviewlogin;
     LinearLayout navbarmain, bodymain, linearanimationcoffeeconstant;
     LottieAnimationView animationcoffee, animationcoffeeconstant;
-    int TIME_STARTLOADING = 500;
-    int TIMER_SHOWOPTION = 3000;
+    int TIME_STARTLOADING;
+    int TIMER_SHOWOPTION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
         Bundle bundle = intent.getExtras();
         if (bundle == null){
             TIME_STARTLOADING = 500;
-            TIMER_SHOWOPTION = 2500;
+            TIMER_SHOWOPTION = 3000;
         }else {
             TIME_STARTLOADING = bundle.getInt("novotimerstart");
             TIMER_SHOWOPTION = bundle.getInt("novotimershowoption");
