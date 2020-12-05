@@ -194,7 +194,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+                        <!--Animation Login-->
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/animationloadinglogin"
+                            android:layout_width="200dp"
+                            app:lottie_loop="true"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:lottie_autoPlay="true"
+                            app:lottie_rawRes="@raw/coffeeloading" />
+
+                        <!--Text Logar-->
                         <TextView
+                            android:id="@+id/txtlogarlogin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/logar"

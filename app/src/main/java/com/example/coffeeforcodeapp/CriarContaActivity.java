@@ -2,6 +2,8 @@ package com.example.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
+import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 
 
 public class CriarContaActivity extends AppCompatActivity {
@@ -31,7 +35,7 @@ public class CriarContaActivity extends AppCompatActivity {
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
-    Dialog termos;
+    Dialog termos, avisoerro;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
 
@@ -52,6 +56,7 @@ public class CriarContaActivity extends AppCompatActivity {
         txttermos = findViewById(R.id.txttermos);
         txtlogar = findViewById(R.id.txtlogar);
         termos = new Dialog(this);
+        avisoerro = new Dialog(this);
         LoadingDialog loadingDialog = new LoadingDialog(CriarContaActivity.this);
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -116,14 +121,26 @@ public class CriarContaActivity extends AppCompatActivity {
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
+                DtoClientes dtoClientes = new DtoClientes();
+                dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
+                dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
+                dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
+                dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
+                DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
                 loadingDialog.startLoading();
                 timer.postDelayed(() -> {
                     try {
-                        Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                        voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
-                        voltaraologin.putExtra("senhausu",edittextsenhacriarconta.getText().toString());
-                        startActivity(voltaraologin);
-                        finish();
+                        long linhasafetadas = daoClientes.cadastrar(dtoClientes);
+                        if (linhasafetadas > 0){
+                            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+                            voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
+                            voltaraologin.putExtra("senhausu",edittextsenhacriarconta.getText().toString());
+                            startActivity(voltaraologin);
+                            finish();
+                        }else {
+                            loadingDialog.dimissDialog();
+                            mostrarerro();
+                        }
                     }catch (Exception ex){
                         Toast.makeText(this, "Erro ao criar conta: "+ ex, Toast.LENGTH_SHORT).show();
                     }
@@ -196,6 +213,25 @@ public class CriarContaActivity extends AppCompatActivity {
         });
 
         termos.show();
+    }
+
+    //  Create method to see the error
+    private void mostrarerro(){
+        CardView cardokavisoerro;
+        avisoerro.setContentView(R.layout.aviso_erro_criarconta);
+        cardokavisoerro = avisoerro.findViewById(R.id.cardokavisoerro);
+        avisoerro.setCancelable(false);
+
+        cardokavisoerro.setOnClickListener(v -> {
+            Intent voltaramain = new Intent(CriarContaActivity.this,MainActivity.class);
+            voltaramain.putExtra("novotimerstart",1);
+            voltaramain.putExtra("novotimershowoption",200);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerda, R.anim.mover_direita);
+            ActivityCompat.startActivity(CriarContaActivity.this,voltaramain, activityOptionsCompat.toBundle());
+            finish();
+        });
+
+        avisoerro.show();
     }
 
     @Override

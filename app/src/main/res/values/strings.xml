@@ -28,6 +28,7 @@
     <string name="logar">Logar</string>
     <string name="sounovoaqui">Sou novo aqui.</string>
     <string name="criarconta">Criar Conta</string>
+    <string name="avisoemailousenhaerrado">EMAIL OU SENHA informados não estão corretos ou não estão cadastrados\nVerifique o EMAIL e a SENHA!</string>
 
     <!--Create Account Screen-->
     <string name="nomecriarconta">Nome*</string>
@@ -44,5 +45,7 @@
     <string name="eceitoostermos">Eu aceito os termos de CoffeeForCode</string>
     <string name="termos"><u>Termos</u></string>
     <string name="explicacaoesteristico">* - Obrigatório</string>
+    <string name="criarcontaerro" tools:ignore="TypographyEllipsis">Não foi possivel realizar o cadastro...\nTente novamente mais tarde</string>
+    <string name="ok">OK</string>
 
 </resources>
