@@ -125,6 +125,7 @@ public class CriarContaActivity extends AppCompatActivity {
                 dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
                 dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
                 dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
+                dtoClientes.setParceiro("nao");
                 dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
                 DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
                 loadingDialog.startLoading();

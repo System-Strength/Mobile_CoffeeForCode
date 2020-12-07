@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DaoClientes extends SQLiteOpenHelper {
     private final String TABELA ="TB_CLIENTES";
 
@@ -25,6 +27,7 @@ public class DaoClientes extends SQLiteOpenHelper {
                 "CELULARCLI VARCHAR(15) ," +
                 "ENDERECOCLI VARCHAR(50) ," +
                 "COMPLEMENTO VARCHAR(50) ," +
+                "PARCEIRO CHAR(3) ," +
                 "SENHACLI VARCHAR(28) NOT NULL)";
 
         db.execSQL(comando);
@@ -54,8 +57,52 @@ public class DaoClientes extends SQLiteOpenHelper {
         values.put("CELULARCLI", clientes.getCelularcliente());
         values.put("ENDERECOCLI", clientes.getEnderecocliente());
         values.put("COMPLEMENTO", clientes.getComplementocliente());
+        values.put("PARCEIRO", clientes.getParceiro());
         values.put("SENHACLI", clientes.getSenhacliente());
 
         return getWritableDatabase().insert(TABELA, null, values);
+    }
+
+    public ArrayList<DtoClientes> consultarTodos(){
+        String comando = "SELECT * FROM " + TABELA;
+        Cursor cursor = getWritableDatabase().rawQuery(comando, null);
+        ArrayList<DtoClientes> ArrayListclientes = new ArrayList<>();
+
+        while (cursor.moveToNext()){
+            DtoClientes dtoClientes = new DtoClientes();
+            dtoClientes.setId(cursor.getInt(0));
+            dtoClientes.setNomecliente(cursor.getString(1));
+            dtoClientes.setCpfcliente(cursor.getString(2));
+            dtoClientes.setEmailcliente(cursor.getString(3));
+            dtoClientes.setCelularcliente(cursor.getString(4));
+            dtoClientes.setEnderecocliente(cursor.getString(5));
+            dtoClientes.setComplementocliente(cursor.getString(6));
+            dtoClientes.setParceiro(cursor.getString(7));
+            dtoClientes.setSenhacliente(cursor.getString(8));
+
+            ArrayListclientes.add(dtoClientes);
+        }
+        return  ArrayListclientes;
+    }
+
+    public DtoClientes consultarcliente(String email){
+        String comando = "SELECT * FROM " + TABELA + " WHERE  EMAILCLI=?";
+        String[] parametros = {email};
+        Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
+        DtoClientes dtoClientes = new DtoClientes();
+
+        while (cursor.moveToNext()){
+            dtoClientes.setId(cursor.getInt(0));
+            dtoClientes.setNomecliente(cursor.getString(1));
+            dtoClientes.setCpfcliente(cursor.getString(2));
+            dtoClientes.setEmailcliente(cursor.getString(3));
+            dtoClientes.setCelularcliente(cursor.getString(4));
+            dtoClientes.setEnderecocliente(cursor.getString(5));
+            dtoClientes.setComplementocliente(cursor.getString(6));
+            dtoClientes.setParceiro(cursor.getString(7));
+            dtoClientes.setSenhacliente(cursor.getString(8));
+
+        }
+        return dtoClientes;
     }
 }
