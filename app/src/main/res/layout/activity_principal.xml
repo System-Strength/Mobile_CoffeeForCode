@@ -1,9 +1,621 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroung"
     tools:context=".PrincipalActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <!--Avatar-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/personprofile" />
+
+        <!--Text Hello-->
+        <TextView
+            android:id="@+id/txtolavirgula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/olavirgula"
+            android:textColor="#000"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Text Name of Client-->
+        <TextView
+            android:id="@+id/txtnomedocliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nomecriarconta"
+            android:textColor="#000"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/txtolavirgula"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Text How your order today-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qualseupedidohj"
+            android:layout_marginStart="40dp"
+            android:textStyle="bold"
+            android:textColor="#83151515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtolavirgula" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Text Atalhos-->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/atalhos"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Base Contender Mini Info-->
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollViewatalhos"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:scrollbarSize="1dp"
+                android:scrollbarThumbHorizontal="@drawable/custom_scroll_style_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!--Card Not Partner-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardviewnotpartner"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:outlineProvider="none"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FFB422"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="3dp"
+                            android:outlineProvider="none">
+
+                            <!--Text Be Partner-->
+                            <TextView
+                                android:id="@+id/txtsejaparceiro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sejaparceiro"
+                                android:layout_marginTop="8dp"
+                                android:textSize="17sp"
+                                android:textColor="#ED000000"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc Partner-->
+                            <TextView
+                                android:id="@+id/txtdescpartner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/descpartner"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="12sp"
+                                app:layout_constraintTop_toBottomOf="@+id/txtsejaparceiro"
+                                tools:layout_editor_absoluteX="2dp" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardBackgroundColor="#fff"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdescpartner" >
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/iconemais"
+                                        android:textSize="30sp"
+                                        android:textColor="#000"
+                                        android:textStyle="bold"
+                                        android:layout_marginBottom="4dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardtest2"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#000"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/cardtest3"
+                        app:layout_constraintStart_toEndOf="@+id/cardviewnotpartner"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardtest3"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#000"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardtest2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardtest4"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#000"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/cardviewnotpartner"
+                        app:layout_constraintStart_toEndOf="@+id/cardtest3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardtest5"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#000"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/cardviewnotpartner"
+                        app:layout_constraintStart_toEndOf="@+id/cardtest4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardtest6"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#000"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/cardviewnotpartner"
+                        app:layout_constraintStart_toEndOf="@+id/cardtest5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </HorizontalScrollView>
+
+            <!--Text Most Popular-->
+            <TextView
+                android:id="@+id/txtpopular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/popular"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewatalhos" />
+
+            <!--Card Top of week-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtopdasemana"
+                android:layout_width="350dp"
+                android:layout_height="220dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtpopular">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgstarmaispopular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Top of week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/topdasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgstarmaispopular"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Vampire Frappuccino-->
+                    <TextView
+                        android:id="@+id/txtnomeprodutotopdasemana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/mochafrappuccino"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgstarmaispopular" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtnomeprodutotopdasemana" />
+
+                    <!--Text Size of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/quinhentosml"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintTop_toBottomOf="@+id/txtnomeprodutotopdasemana" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_vampirefrappuccino"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Card Most Popular-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtest22"
+                android:layout_width="350dp"
+                android:layout_height="220dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardtopdasemana">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgtest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Top of week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/topdasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgtest"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Vampire Frappuccino-->
+                    <TextView
+                        android:id="@+id/txttest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/mochafrappuccino"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgtest" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/txttext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest" />
+
+                    <!--Text Size of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/quinhentosml"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/txttext"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_vampirefrappuccino"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Card Most Popular-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtest222"
+                android:layout_width="350dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardtest22">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgtest2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Top of week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/topdasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgtest2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Vampire Frappuccino-->
+                    <TextView
+                        android:id="@+id/txttest2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/mochafrappuccino"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgtest2" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/txttext2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest2" />
+
+                    <!--Text Size of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/quinhentosml"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/txttext2"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest2" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_vampirefrappuccino"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>
