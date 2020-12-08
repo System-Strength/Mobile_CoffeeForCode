@@ -35,6 +35,7 @@ public class CriarContaActivity extends AppCompatActivity {
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
+    DtoClientes clientes = new DtoClientes();
     Dialog termos, avisoerro;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
@@ -121,31 +122,40 @@ public class CriarContaActivity extends AppCompatActivity {
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
-                DtoClientes dtoClientes = new DtoClientes();
-                dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
-                dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
-                dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
-                dtoClientes.setParceiro("nao");
-                dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
-                DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
-                loadingDialog.startLoading();
-                timer.postDelayed(() -> {
-                    try {
-                        long linhasafetadas = daoClientes.cadastrar(dtoClientes);
-                        if (linhasafetadas > 0){
-                            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                            voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
-                            voltaraologin.putExtra("senhausu",edittextsenhacriarconta.getText().toString());
-                            startActivity(voltaraologin);
-                            finish();
-                        }else {
-                            loadingDialog.dimissDialog();
-                            mostrarerro();
+                String emailsendocadastrado = edittextemailcriarconta.getText().toString();
+                DaoClientes clientesconsultados = new DaoClientes(CriarContaActivity.this);
+                clientes = clientesconsultados.consultarclienteporemail(emailsendocadastrado);
+                if (clientes.getEmailcliente() == null){
+                    DtoClientes dtoClientes = new DtoClientes();
+                    dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
+                    dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
+                    dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
+                    dtoClientes.setParceiro("nao");
+                    dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
+                    DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
+                    loadingDialog.startLoading();
+                    timer.postDelayed(() -> {
+                        try {
+                            long linhasafetadas = daoClientes.cadastrar(dtoClientes);
+                            if (linhasafetadas > 0){
+                                Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+                                voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
+                                voltaraologin.putExtra("senhausu",edittextsenhacriarconta.getText().toString());
+                                startActivity(voltaraologin);
+                                finish();
+                            }else {
+                                loadingDialog.dimissDialog();
+                                mostrarerro();
+                            }
+                        }catch (Exception ex){
+                            Toast.makeText(this, "Erro ao criar conta: "+ ex, Toast.LENGTH_SHORT).show();
                         }
-                    }catch (Exception ex){
-                        Toast.makeText(this, "Erro ao criar conta: "+ ex, Toast.LENGTH_SHORT).show();
-                    }
-                },2000);
+                    },2000);
+                } else if (clientes.getEmailcliente().equals(edittextemailcriarconta.getText().toString())){
+                    Toast.makeText(this, "O email informado já está em uso!!", Toast.LENGTH_SHORT).show();
+                    edittextemailcriarconta.requestFocus();
+                    imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
+                }
             }
         });
 

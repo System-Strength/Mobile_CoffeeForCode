@@ -85,7 +85,29 @@ public class DaoClientes extends SQLiteOpenHelper {
         return  ArrayListclientes;
     }
 
-    public DtoClientes consultarcliente(String email){
+    public DtoClientes consultarclienteporcpf(String cpf){
+        String comando = "SELECT * FROM " + TABELA + " WHERE  EMAILCLI=?";
+        String[] parametros = {cpf};
+        Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
+        DtoClientes dtoClientes = new DtoClientes();
+
+        while (cursor.moveToNext()){
+            dtoClientes.setId(cursor.getInt(0));
+            dtoClientes.setNomecliente(cursor.getString(1));
+            dtoClientes.setCpfcliente(cursor.getString(2));
+            dtoClientes.setEmailcliente(cursor.getString(3));
+            dtoClientes.setCelularcliente(cursor.getString(4));
+            dtoClientes.setEnderecocliente(cursor.getString(5));
+            dtoClientes.setComplementocliente(cursor.getString(6));
+            dtoClientes.setParceiro(cursor.getString(7));
+            dtoClientes.setSenhacliente(cursor.getString(8));
+
+        }
+        return dtoClientes;
+    }
+
+
+    public DtoClientes consultarclienteporemail(String email){
         String comando = "SELECT * FROM " + TABELA + " WHERE  EMAILCLI=?";
         String[] parametros = {email};
         Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
