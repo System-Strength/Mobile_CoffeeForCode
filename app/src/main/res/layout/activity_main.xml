@@ -73,18 +73,19 @@
                         android:layout_marginBottom="282dp"
                         android:text="@string/txtbemvindomenulogin"
                         android:textColor="#CD292929"
-                        android:textSize="30sp"
+                        android:textSize="40sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/txtmenulogin"
                         android:layout_marginTop="8dp"
-                        android:textSize="17sp"
-                        android:textColor="#C64C4C4C"
+                        android:textSize="28sp"
+                        android:textColor="#BA4C4C4C"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
