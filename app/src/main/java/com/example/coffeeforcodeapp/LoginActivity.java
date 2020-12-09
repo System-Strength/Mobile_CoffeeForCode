@@ -163,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (sucesso){
                             Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
                             irparaprincipal.putExtra("emailuser", email);
+                            irparaprincipal.putExtra("statusavisoend", "ativado");
                             startActivity(irparaprincipal);
                             finish();
                         }else {
