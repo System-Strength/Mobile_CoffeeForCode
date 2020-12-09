@@ -3,10 +3,22 @@
 
     <!--Tools-->
     <string name="tamanho">Tamanho: </string>
+    <string name="sabor">Sabor: </string>
+    <string name="docedeleito">Doce de Leite</string>
     <string name="quinhentosml">500 ml</string>
+    <string name="seissentosml">600 ml</string>
 
     <!--Coffee Names-->
+    <string name="refreshers">Refreshers™</string>
+    <string name="cafes">Cafés</string>
+    <string name="unicornfrappuccino">Unicorn Frappuccino</string>
     <string name="mochafrappuccino">Mocha Frappuccino</string>
+    <string name="combohappy">Combo Happy</string>
+    <string name="refresherdemorangocomlimo">Refresher de Morango...</string>
+    <string name="desccombohapppy">Frappuccino de chocolate\nCroissant e Torada</string>
+    <string name="salgadosesanduiches">Salgados e sanduiches</string>
+    <string name="candys">Doces</string>
+    <string name="dunkindonuts">Dunkin Donuts</string>
 
     <!--Not Partner-->
     <string name="sejaparceiro">Sejá Parceiro</string>
@@ -30,7 +42,7 @@
     <string name="saibamais">Saiba Mais</string>
     <string name="acessar">Acessar</string>
     <string name="txtbemvindomenulogin"><u><b>Bem Vindo!!</b></u></string>
-    <string name="txtmenulogin" tools:ignore="TypographyEllipsis">Coffee For Code é uma empresa multinacional brasileira, com a maior cadeia de cafeterias do mundo. ... A companhia criou seu nome inspirada nso programados do pelo mundo, e seu logotipo é um entalhe escandinavo do século XVI de uma sereia com duas caudas.</string>
+    <string name="txtmenulogin" tools:ignore="TypographyEllipsis">Escolha a<u> Coffee For Code </u> o café para começar seu dia!!</string>
 
     <!--Login Screen-->
     <string name="login">Login</string>
@@ -64,8 +76,24 @@
     <string name="atalhos">Atalhos</string>
     <string name="popular">Popular</string>
     <string name="iconemais">+</string>
+    <string name="conferir">Conferir</string>
     <string name="topdasemana">Top da semana</string>
+    <string name="maisvendido">Mais Vendido</string>
+    <string name="promocaodasemana">Promoção da Semana</string>
+    <string name="combodasemana">Combo da Semana</string>
+    <string name="indicacaodacasa">Indicação da Casa</string>
+    <string name="todososprodutos">Todos os Produtos</string>
+    <string name="carrinhodecompras">Carrinho de compras</string>
+    <string name="cartoes">Cartões</string>
+    <string name="statuscartao">Não a nenhum cartão cadastrado</string>
     <string name="olavirgula">Olá, </string>
     <string name="qualseupedidohj">Qual o seu pedido hoje?</string>
+    <string name="desccafes">Veja nossa imensa variedade de cafés disponiveis</string>
+    <string name="descrefreshers">Bebidas extremamente refrescantes de diversos sabores</string>
+    <string name="desctodososprodutos">Veja todos os produtos disponível em nosso estoque</string>
+    <string name="txtavisosemendereco">Nenhum endereço associado a sua conta!!</string>
+    <string name="cadastraragora">Cadastrar Agora</string>
+    <string name="cadastrardepois">Cadastrar Depois</string>
+    <string name="descnenhumendencontrado">Precisamos de seu endereço caso você decida comprar algum pedido e a forma de retirado ser delivery sem o seu endereço não será possível lhe entregar o produto</string>
 
 </resources>
