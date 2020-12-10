@@ -36,6 +36,7 @@
 
     <!--Terms-->
     <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>CoffeeForCode</b></u>\nO presente instrumento estabelece os termos e as condições aplicáveis ao seu acesso e a participação no programa My CoffeeForCode Rewards™, operado pela CoffeeForCode Brasil Comércio de Cafés Ltda.- CNPJ Nº. 17.884.267/0001-00, com endereço na Avenida Paulista nº 900, Bela Vista São Paulo,(aqui denominada CoffeeForCode Brasil), suas subsidiárias, filiais licenciadas e empresas coligadas, e não reduz os termos e condições de qualquer outro acordo celebrado entre o cliente e a Starbucks, no que diz respeito a produtos e serviços oferecidos pela CoffeeForCode.\n\n<u><b>MIT License</b></u>\n<u>Copyright (c) 2020 System Strength</u>\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+    <string name="termosparaserparceiro"><u><b>Parceiro</b></u>\n\nEstou de acordo que será cobrado uma taxa de R$20 por mês de minha conta para que minha assinatura como parceiro seja renovada e estou de acordo que o cartão CFC apenas é valido para  compras em nosso site, aplicativo e loja não sendo valido para compras em outras lojas.</string>
     <string name="aceitoostermos">Eu aceito os Termos</string>
 
     <!--First Screen-->
@@ -95,5 +96,31 @@
     <string name="cadastraragora">Cadastrar Agora</string>
     <string name="cadastrardepois">Cadastrar Depois</string>
     <string name="descnenhumendencontrado">Precisamos de seu endereço caso você decida comprar algum pedido e a forma de retirado ser delivery sem o seu endereço não será possível lhe entregar o produto</string>
+
+    <!--Be Partner Screen-->
+    <string name="vantagemdeserparceiro">Sendo parceiro você terá acesso a promoção exclusivas,\ndescontos em suas compras,\nterá um cartão CFC, frete grátis e serviço de entrega Plus</string>
+    <string name="cartaocfc">Cartão CFC</string>
+    <string name="visa">visa</string>
+    <string name="validoate">Valido até: </string>
+    <string name="validadefake">xx/xxxx</string>
+    <string name="proprietario">Proprietário</string>
+    <string name="fulanodetal">Falano de Tal</string>
+    <string name="numerocardzero">0000 0000 0000 0000</string>
+    <string name="custo">Custo: </string>
+    <string name="pricetobepartner">R$20 por mês*</string>
+    <string name="melhoroportunidade">Melhor Oportunidade</string>
+    <string name="proximo">Proximo</string>
+    <string name="voltar">Voltar</string>
+    <string name="estoudeacordocomostermos">Estou de acordo com os termos</string>
+    <string name="dadospessoais">Dados Pessoais</string>
+    <string name="nome">Nome</string>
+    <string name="cpf">Cpf</string>
+    <string name="email">Email</string>
+    <string name="nenhumcartaoselecionado">Nenhum Cartão Selecionado</string>
+    <string name="finalcartao">Final: </string>
+    <string name="selecionarcartao"><u>Selecionar Cartão</u></string>
+    <string name="selecionaroutrocartao"><u>Selecionar Outro Cartão</u></string>
+    <string name="serparceiro">Ser Parceiro</string>
+    <string name="bandeira">Bandeira</string>
 
 </resources>

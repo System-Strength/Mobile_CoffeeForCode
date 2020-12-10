@@ -4,7 +4,436 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroung"
+    android:background="#FF7B16"
     tools:context=".SejaParceiroActivity">
+
+    <!--Base Show 01-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/primeirabasesejaparceito"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <!--Text Tittle-->
+        <TextView
+            android:id="@+id/txttittlebepartner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/sejaparceiro"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Text Melhor Oportunidade-->
+        <TextView
+            android:id="@+id/txtmelhoropotunidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/melhoroportunidade"
+            android:textColor="#D0FFE433"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txttittlebepartner" />
+
+        <!--Vantage to be Partner-->
+        <TextView
+            android:id="@+id/txtdescbeneficiosemserparceiro"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/vantagemdeserparceiro"
+            android:textColor="#E8FFFFFF"
+            android:textSize="13sp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtmelhoropotunidade" />
+
+        <!--Animation-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animacaosacola"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtdescbeneficiosemserparceiro"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/bagpartner" />
+
+        <!--Animation 02-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animacaobikedelivery"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="400dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtdescbeneficiosemserparceiro"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/bikedelivery" />
+
+        <!--Animation Plus-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animacaoplus"
+            android:layout_width="380dp"
+            android:visibility="gone"
+            android:layout_height="400dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtdescbeneficiosemserparceiro"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/plus" />
+
+        <!--Text Btn Next-->
+        <TextView
+            android:id="@+id/txtproximabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/proximo"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:textStyle="italic"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Base Show 02-->
+    <ScrollView
+        android:id="@+id/segundabasesejaparceito"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Check Terms-->
+            <CheckBox
+                android:id="@+id/checkboxtermosserparceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:buttonTint="#5DFF00"
+                android:textColor="#fff"
+                android:text="@string/estoudeacordocomostermos"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text Terms-->
+            <TextView
+                android:id="@+id/txttermosserparceito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termos"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text Tittle Dados Pessoais-->
+            <TextView
+                android:id="@+id/txttittledadospessoais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dadospessoais"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkboxtermosserparceiro" />
+
+            <!--Text Name-->
+            <TextView
+                android:id="@+id/txtnomeserparceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nome"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txttittledadospessoais" />
+
+            <!--EditText Name-->
+            <EditText
+                android:id="@+id/editnomeclienteserparceiro"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/edittextserparceiro"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#D3FFFFFF"
+                android:enabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnomeserparceiro"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <!--Text CPF-->
+            <TextView
+                android:id="@+id/txtcpfserparceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpf"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editnomeclienteserparceiro" />
+
+            <!--EditText CPF-->
+            <EditText
+                android:id="@+id/editcpfclienteserparceiro"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:background="@drawable/edittextserparceiro"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#D3FFFFFF"
+                android:enabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtcpfserparceiro"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <!--Text EMAIL-->
+            <TextView
+                android:id="@+id/txtemailserparceiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editcpfclienteserparceiro" />
+
+            <!--EditText EMAIL-->
+            <EditText
+                android:id="@+id/editemailclienteserparceiro"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:textColor="#D3FFFFFF"
+                android:background="@drawable/edittextserparceiro"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:enabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtemailserparceiro"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <!--Card-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cartaoslecionado"
+                android:layout_width="350dp"
+                android:layout_height="130dp"
+                android:background="@drawable/cartaocfc"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editemailclienteserparceiro">
+
+                <!--Base No one card select-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/basenenhumcartaoselecionado"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Text Nenhum Cartão Selecionado-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nenhumcartaoselecionado"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--Base Information of card-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/baseinformacaodocartao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Text Bandeira Card-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bandeira"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Final Number Card-->
+                    <TextView
+                        android:id="@+id/txtfinaldocartao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/finalcartao"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Nome do dono do cartão-->
+                    <TextView
+                        android:id="@+id/txtnomedodonodocartao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fulanodetal"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="6dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!--Text Validade do Cartão-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validadefake"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginEnd="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Select Card-->
+            <TextView
+                android:id="@+id/txtselecionarcartao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:text="@string/selecionarcartao"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cartaoslecionado" />
+
+            <!--Select Another Card-->
+            <TextView
+                android:id="@+id/txtselecionaroutrocartao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/selecionaroutrocartao"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cartaoslecionado" />
+
+            <!--Btn Be Partner-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnserparceiro"
+                android:layout_width="255dp"
+                android:layout_height="65dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtselecionarcartao" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="#FF7B16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/serparceiro"
+                                android:textColor="#fff"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Text Btn Go Back-->
+            <TextView
+                android:id="@+id/txtvoltar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/voltar"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnserparceiro" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
