@@ -127,4 +127,14 @@ public class DaoClientes extends SQLiteOpenHelper {
         }
         return dtoClientes;
     }
+
+    public int atualizarparceira(DtoClientes clientes){
+        ContentValues values = new ContentValues();
+        values.put("PARCEIRO", clientes.getParceiro());
+
+        String id = "id=?";
+        String[] args = {clientes.getId()+""};
+
+        return getWritableDatabase().update(TABELA,values,id,args);
+    }
 }
