@@ -13,7 +13,7 @@ public class CarrinhoDeCompraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrinho_de_compra);
 
-        // get some information
+        // get some information  
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         emaillogado = bundle.getString("emailuser");
