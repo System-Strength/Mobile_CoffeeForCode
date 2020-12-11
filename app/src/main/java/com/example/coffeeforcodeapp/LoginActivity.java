@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -70,9 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             edittextsenha.setText(bundle.getString("senhausu"));
         }
 
-        //  Dev Setting
-        edittextemail.setText("kauavitorioof@gmail.com");
-        edittextsenha.setText("kaua2004");
+        opcaodedevs();
 
         //  Set commands to start in real time
         edittextsenha.addTextChangedListener(new TextWatcher() {
@@ -176,6 +175,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void opcaodedevs() {
+        AlertDialog.Builder avisoquemestausando = new AlertDialog.Builder(LoginActivity.this);
+        avisoquemestausando.setTitle("Quem Esta usando?");
+        avisoquemestausando.setPositiveButton("Kaua", (dialogInterface, i) -> {
+            //  Dev Setting
+            edittextemail.setText("kauavitorioof@gmail.com");
+            edittextsenha.setText("kaua2004");
+        });
+        avisoquemestausando.setNeutralButton("Yuri", (dialogInterface, i) -> {
+            //  Dev Setting
+            edittextemail.setText("yuridantaassg@gmail.com");
+            edittextsenha.setText("Yuridantas17");
+        });
+
+        avisoquemestausando.show();
     }
 
     //  Method to show Alert for email and password is wrong
