@@ -102,7 +102,7 @@
     <string name="cartaocfc">Cartão CFC</string>
     <string name="visa">visa</string>
     <string name="validoate">Valido até: </string>
-    <string name="validadefake">xx/xxxx</string>
+    <string name="validadefake">xx/xx</string>
     <string name="proprietario">Proprietário</string>
     <string name="fulanodetal">Falano de Tal</string>
     <string name="numerocardzero">0000 0000 0000 0000</string>
@@ -124,5 +124,19 @@
     <string name="bandeira">Bandeira</string>
     <string name="bemvindoaotimecfc">Bem Vindo ao Time CFC</string>
     <string name="aproveiteseusbeneficios">Aproveite seus beneficios</string>
+
+
+    <!--Cartoes Screen-->
+    <string name="seuscartoes">Seus Cartões</string>
+    <string name="desccardcfc">Para compras com descontos em nosso site, aplicativo e loja</string>
+    <string name="setinhafeita">-></string>
+    <string name="nenhumcartaocadastrado">Nenhum Cartão cadastrado!!</string>
+    <string name="cadastarcartao">Cadastrar Novo Cartão</string>
+    <string name="numerodocartao">Numero do Cartão</string>
+    <string name="nomeempresonocartao">Nome Impresso no cartão</string>
+    <string name="validade">Validade</string>
+    <string name="ccc">CCC</string>
+    <string name="cadastar">Cadastrar</string>
+    <string name="treszero">000</string>
 
 </resources>

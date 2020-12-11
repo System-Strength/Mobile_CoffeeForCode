@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".SejaParceiroActivity"></activity>
+        <activity android:name=".CadastrarCartoesActivity"></activity>
+        <activity android:name=".CartoesActivity" />
+        <activity android:name=".SejaParceiroActivity" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".CriarContaActivity" />
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
