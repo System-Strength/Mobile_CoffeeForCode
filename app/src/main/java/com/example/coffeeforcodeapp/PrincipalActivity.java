@@ -19,7 +19,7 @@ import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 
 public class PrincipalActivity extends AppCompatActivity {
     TextView txtnomedocliente;
-    CardView cardviewnotpartner, cardbepartner, cardvercartoes;
+    CardView cardviewnotpartner, cardbepartner, cardvercartoes, cardvercarrinhodecompra;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog avisoendereco;
@@ -33,6 +33,7 @@ public class PrincipalActivity extends AppCompatActivity {
         cardviewnotpartner = findViewById(R.id.cardviewnotpartner);
         cardbepartner = findViewById(R.id.cardbepartner);
         cardvercartoes = findViewById(R.id.cardvercartoes);
+        cardvercarrinhodecompra = findViewById(R.id.cardvercarrinhodecompra);
         avisoendereco = new Dialog(this);
 
         //  Get information for login of client
@@ -63,6 +64,15 @@ public class PrincipalActivity extends AppCompatActivity {
             irparacartoes.putExtra("emailuser",emaillogado);
             startActivity(irparacartoes);
             finish();
+        });
+
+        //  When click in this card user will to cardvercarrinhodecompra
+        cardvercarrinhodecompra.setOnClickListener(v -> {
+            Intent vercarrinhodecompra = new Intent(PrincipalActivity.this,CarrinhoDeCompraActivity.class);
+            vercarrinhodecompra.putExtra("emailuser", emaillogado);
+            startActivity(vercarrinhodecompra);
+            finish();
+
         });
 
     }

@@ -21,8 +21,8 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     ConstraintLayout frentedocartao, primeirodadoscartao, segundodadoscartao;
     RelativeLayout costasdocartao;
     ConstraintLayout btnproximoparaccc, btnvoltaraoprimeirodados, btnfinalizar;
-    EditText editnumerocartao;
-    TextView txtbasenumerocard;
+    EditText editnumerocartao, editnomeproprietariocartao;
+    TextView txtbasenumerocard, txtexnomeproprietario;
     String emaillogado;
 
     @Override
@@ -36,6 +36,9 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         frentedocartao = findViewById(R.id.frentedocartao);
         costasdocartao = findViewById(R.id.costasdocartao);
         txtbasenumerocard = findViewById(R.id.txtbasenumerocard);
+        txtexnomeproprietario = findViewById(R.id.txtexnomeproprietario);
+        editnumerocartao = findViewById(R.id.editnumerocartao);
+        editnomeproprietariocartao = findViewById(R.id.editnomeproprietariocartao);
 
         //  Get some information
         Intent intent = getIntent();
@@ -64,6 +67,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
             segundodadoscartao.setVisibility(View.GONE);
         });
 
+        //  When put some text will do some comands in real time
         editnumerocartao.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,6 +87,23 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 } else {
                     txtbasenumerocard.setText(editnumerocartao.getText());
                 }
+            }
+        });
+
+        editnomeproprietariocartao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
