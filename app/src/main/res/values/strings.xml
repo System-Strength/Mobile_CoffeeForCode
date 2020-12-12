@@ -141,4 +141,10 @@
     <string name="outroscartoes">Outros Cartões</string>
     <string name="deletarcartao">Deletar Cartão</string>
 
+
+    <!--Register Screen Address-->
+    <string name="cadastroendereco">Cadastro de Endereço</string>
+    <string name="hintedittextcadastroendereco">Ex. Rua 00</string>
+    <string name="hintedtextcadastroenderecocomp">Ex. Ap 2 Bl 20</string>
+
 </resources>

@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 
+import java.security.Principal;
+
 public class PrincipalActivity extends AppCompatActivity {
     TextView txtnomedocliente;
     CardView cardviewnotpartner, cardbepartner, cardvercartoes, cardvercarrinhodecompra;
@@ -115,8 +117,10 @@ public class PrincipalActivity extends AppCompatActivity {
         btncadastrardepoisend = avisoendereco.findViewById(R.id.btncadastrardepoisend);
 
         btncadastraragoraend.setOnClickListener(v -> {
-            Toast.makeText(this, "Em Desenvolvimento!!", Toast.LENGTH_SHORT).show();
-            avisoendereco.dismiss();
+           Intent ircadastrarendereco = new Intent(PrincipalActivity.this,CadastrarenderecoActivity.class);
+           ircadastrarendereco.putExtra("emailuser",emaillogado);
+           startActivity(ircadastrarendereco);
+           finish();
         });
 
         btncadastrardepoisend.setOnClickListener(v -> avisoendereco.dismiss());
