@@ -139,5 +139,6 @@
     <string name="cadastar">Cadastrar</string>
     <string name="treszero">000</string>
     <string name="outroscartoes">Outros Cartões</string>
+    <string name="deletarcartao">Deletar Cartão</string>
 
 </resources>

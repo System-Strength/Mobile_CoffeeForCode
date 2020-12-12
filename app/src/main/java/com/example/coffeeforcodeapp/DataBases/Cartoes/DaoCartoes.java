@@ -23,6 +23,7 @@ public class DaoCartoes extends SQLiteOpenHelper {
         String comando = "CREATE TABLE " + TABELA + "(" +
                 "ID INTEGER PRIMARY KEY," +
                 "CPFPROPRIETARIO CHAR(14) NOT NULL," +
+                "BANDEIRA VARCHAR(20) ," +
                 "NUMERO CHAR(19) NOT NULL," +
                 "NOMETITULAR VARCHAR(100) NOT NULL," +
                 "VALIDADE CHA(5) ," +
@@ -41,8 +42,9 @@ public class DaoCartoes extends SQLiteOpenHelper {
     public long cadastrar_novo_cartao(DtoCartoes cartoes){
         ContentValues values = new ContentValues();
         values.put("CPFPROPRIETARIO", cartoes.getCpfproprietario());
-        values.put("NUMERO", cartoes.getNumrero());
-        values.put("NOMETITULAR", cartoes.getNomerotitular());
+        values.put("BANDEIRA", cartoes.getBandeira());
+        values.put("NUMERO", cartoes.getNumero());
+        values.put("NOMETITULAR", cartoes.getNomedotitular());
         values.put("VALIDADE", cartoes.getValidade());
         values.put("CCC", cartoes.getCcc());
 
@@ -54,19 +56,47 @@ public class DaoCartoes extends SQLiteOpenHelper {
         String comando = "SELECT * FROM " + TABELA + " WHERE CPFPROPRIETARIO=?";
         String[] parametros = {cpf};
         Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
-        ArrayList<DtoCartoes> agenda = new ArrayList<>();
+        ArrayList<DtoCartoes> cartoes = new ArrayList<>();
 
         while (cursor.moveToNext()){
             DtoCartoes dtoCartoes = new DtoCartoes();
             dtoCartoes.setId(cursor.getInt(0));
             dtoCartoes.setCpfproprietario(cursor.getString(1));
-            dtoCartoes.setNumrero(cursor.getString(2));
-            dtoCartoes.setNomerotitular(cursor.getString(3));
-            dtoCartoes.setValidade(cursor.getString(4));
-            dtoCartoes.setCcc(cursor.getString(5));
+            dtoCartoes.setBandeira(cursor.getString(2));
+            dtoCartoes.setNumero(cursor.getString(3));
+            dtoCartoes.setNomedotitular(cursor.getString(4));
+            dtoCartoes.setValidade(cursor.getString(5));
+            dtoCartoes.setCcc(cursor.getString(6));
 
-            agenda.add(dtoCartoes);
+            cartoes.add(dtoCartoes);
         }
-        return  agenda;
+        return  cartoes;
+    }
+
+    //  Method to Search for card by id of client
+    public DtoCartoes consultar_cartao_pelo_id(int id){
+        String comando = "SELECT * FROM " + TABELA + " WHERE  ID=?";
+        String[] parametros = {id+""};
+        Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
+        DtoCartoes dtoCartoes = new DtoCartoes();
+
+        while (cursor.moveToNext()){
+            dtoCartoes.setId(cursor.getInt(0));
+            dtoCartoes.setCpfproprietario(cursor.getString(1));
+            dtoCartoes.setBandeira(cursor.getString(2));
+            dtoCartoes.setNumero(cursor.getString(3));
+            dtoCartoes.setNomedotitular(cursor.getString(4));
+            dtoCartoes.setValidade(cursor.getString(5));
+            dtoCartoes.setCcc(cursor.getString(6));
+
+        }
+        return dtoCartoes;
+    }
+
+    //  Method to Search for delete card by id of client
+    public  int excluir_cartao(DtoCartoes cartoes){
+        String id = "id=?";
+        String[] args  = {cartoes.getId()+""};
+        return  getWritableDatabase().delete(TABELA,id,args);
     }
 }

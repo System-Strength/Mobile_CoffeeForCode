@@ -2,13 +2,14 @@ package com.example.coffeeforcodeapp.DataBases.Cartoes;
 
 public class DtoCartoes {
     int id;
-    String cpfproprietario, numrero, nomerotitular, validade, ccc;
+    String cpfproprietario, bandeira, numero, nomedotitular, validade, ccc;
 
-    public DtoCartoes(int id, String cpfproprietario, String numrero, String nomerotitular, String validade, String ccc) {
+    public DtoCartoes(int id, String cpfproprietario, String bandeira, String numero, String nomedotitular, String validade, String ccc) {
         this.id = id;
         this.cpfproprietario = cpfproprietario;
-        this.numrero = numrero;
-        this.nomerotitular = nomerotitular;
+        this.bandeira = bandeira;
+        this.numero = numero;
+        this.nomedotitular = nomedotitular;
         this.validade = validade;
         this.ccc = ccc;
     }
@@ -31,20 +32,28 @@ public class DtoCartoes {
         this.cpfproprietario = cpfproprietario;
     }
 
-    public String getNumrero() {
-        return numrero;
+    public String getBandeira() {
+        return bandeira;
     }
 
-    public void setNumrero(String numrero) {
-        this.numrero = numrero;
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
     }
 
-    public String getNomerotitular() {
-        return nomerotitular;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNomerotitular(String nomerotitular) {
-        this.nomerotitular = nomerotitular;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getNomedotitular() {
+        return nomedotitular;
+    }
+
+    public void setNomedotitular(String nomedotitular) {
+        this.nomedotitular = nomedotitular;
     }
 
     public String getValidade() {

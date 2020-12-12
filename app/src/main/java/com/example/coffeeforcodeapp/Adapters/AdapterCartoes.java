@@ -38,18 +38,18 @@ public class AdapterCartoes extends ArrayAdapter<DtoCartoes> {
 
         DtoCartoes dtoCartoes = mlist.get(position);
 
-        TextView numerocartaocliente, nomeproprietariocartaocliente, txtvalidadecartaocfc;
+        TextView numerocartaocliente, nomeproprietariocartaocliente, txtbandeiracardlista;
         numerocartaocliente = view.findViewById(R.id.numerocartaocliente);
         nomeproprietariocartaocliente = view.findViewById(R.id.nomeproprietariocartaocliente);
-        txtvalidadecartaocfc = view.findViewById(R.id.txtvalidadecartaocfc);
+        txtbandeiracardlista = view.findViewById(R.id.txtbandeiracardlista);
 
-        String numerodocartaocompleto = dtoCartoes.getNumrero();
+        String numerodocartaocompleto = dtoCartoes.getNumero() + " ";
         String[]  numerodocartao = numerodocartaocompleto.split(" ");
         String ultimonumero = numerodocartao[3];
 
         numerocartaocliente.setText("**** " + ultimonumero);
-        nomeproprietariocartaocliente.setText(dtoCartoes.getNomerotitular());
-        txtvalidadecartaocfc.setText(dtoCartoes.getValidade());
+        nomeproprietariocartaocliente.setText(dtoCartoes.getNomedotitular());
+        txtbandeiracardlista.setText(dtoCartoes.getBandeira());
 
         return view;
 

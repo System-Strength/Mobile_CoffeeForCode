@@ -259,10 +259,9 @@
                 android:id="@+id/listadecartoes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/cardcadastrarcartao"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="60dp"
                 android:divider="#616161"
                 android:dividerHeight="1dp"
                 android:visibility="visible" />

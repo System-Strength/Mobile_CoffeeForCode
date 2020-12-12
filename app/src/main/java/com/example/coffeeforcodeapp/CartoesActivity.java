@@ -51,9 +51,15 @@ public class CartoesActivity extends AppCompatActivity {
 
         atualizarlistview();
 
+        //  When do once click will go to Ver_e_Deletar_Cartao
         listadecartoes.setOnItemClickListener((parent, view, position, id) -> {
             cartaoselecionado = cartoes.get(position);
-
+            Intent irparadetalhesdocartao = new Intent(CartoesActivity.this,Ver_e_Deletar_CartaoActivity.class);
+            irparadetalhesdocartao.putExtra("iddocartao", cartaoselecionado.getId());
+            irparadetalhesdocartao.putExtra("emailuser",emaillogado);
+            irparadetalhesdocartao.putExtra("statusavisoend","desativado");
+            startActivity(irparadetalhesdocartao);
+            finish();
 
         });
 

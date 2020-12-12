@@ -37,13 +37,16 @@
                     android:visibility="visible">
 
                     <!--Img Chip-->
-                    <ImageView
-                        android:id="@+id/imgchipcardnewcard"
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
+                    <TextView
+                        android:id="@+id/txtbandeiracard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/chipcard"
+                        android:textSize="23sp"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:text="@string/bandeira"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ContentDescription" />
@@ -59,7 +62,7 @@
                         android:textColor="#000"
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgchipcardnewcard" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtbandeiracard" />
 
                     <!--Text Name Owner-->
                     <TextView
@@ -154,7 +157,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/primeirodadoscartao"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent">
 
             <!--Text Numero Cartao-->
@@ -238,6 +241,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtbasevalidadecard"
                 tools:ignore="Autofill,LabelFor,TextFields" />
 
+            <!--Text Validade Cartao-->
+            <TextView
+                android:id="@+id/txtbasebandeiraecard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/bandeira"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editvalidadecartao" />
+
+            <!--Edit Validade Card-->
+            <EditText
+                android:id="@+id/editbandeiracartao"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:textColor="#EB000000"
+                android:maxLength="20"
+                android:inputType="text"
+                android:background="@drawable/edittextserparceiro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtbasebandeiraecard"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
             <!--Btn Proximo-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnproximoparaccc"
@@ -247,7 +277,7 @@
                 android:background="@drawable/btntransparente"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editvalidadecartao" >
+                app:layout_constraintTop_toBottomOf="@+id/editbandeiracartao" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -267,7 +297,7 @@
         <!--Second Dados-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/segundodadoscartao"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

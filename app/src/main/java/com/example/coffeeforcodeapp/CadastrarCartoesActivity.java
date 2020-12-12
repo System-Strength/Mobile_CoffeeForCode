@@ -1,7 +1,6 @@
 package com.example.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.DefaultTaskExecutor;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
@@ -28,8 +27,8 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     ConstraintLayout frentedocartao, primeirodadoscartao, segundodadoscartao;
     RelativeLayout costasdocartao;
     ConstraintLayout btnproximoparaccc, btnvoltaraoprimeirodados, btnfinalizar;
-    EditText editnumerocartao, editnomeproprietariocartao, editvalidadecartao, editccccartao;
-    TextView txtexnumerocard, txtexnomeproprietario,  txtexvalidade, txtexccc;
+    EditText editnumerocartao, editnomeproprietariocartao, editvalidadecartao, editccccartao, editbandeiracartao;
+    TextView txtexnumerocard, txtexnomeproprietario,  txtexvalidade, txtexccc, txtbandeiracard;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     String emaillogado, cpfpararegistarocartao;
@@ -49,10 +48,12 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         txtexnomeproprietario = findViewById(R.id.txtexnomeproprietario);
         txtexvalidade = findViewById(R.id.txtexvalidade);
         txtexccc = findViewById(R.id.txtexccc);
+        txtbandeiracard = findViewById(R.id.txtbandeiracard);
         editnumerocartao = findViewById(R.id.editnumerocartao);
         editnomeproprietariocartao = findViewById(R.id.editnomeproprietariocartao);
         editvalidadecartao = findViewById(R.id.editvalidadecartao);
         editccccartao = findViewById(R.id.editccccartao);
+        editbandeiracartao = findViewById(R.id.editbandeiracartao);
         LoadingDialog loadingDialog = new LoadingDialog(CadastrarCartoesActivity.this);
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -87,10 +88,15 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                     Toast.makeText(this, "Preencha corretamente a validade do cartão!!", Toast.LENGTH_SHORT).show();
                     editvalidadecartao.requestFocus();
                     imm.showSoftInput(editvalidadecartao, InputMethodManager.SHOW_IMPLICIT);
+                }else if (editbandeiracartao.getText() == null || editvalidadecartao.getText().length() < 5){
+                    Toast.makeText(this, "Preencha corretamente a bandeira do cartão!!", Toast.LENGTH_SHORT).show();
+                    editbandeiracartao.requestFocus();
+                    imm.showSoftInput(editbandeiracartao, InputMethodManager.SHOW_IMPLICIT);
                 }else {
                     editnumerocartao.setEnabled(false);
                     editnomeproprietariocartao.setEnabled(false);
                     editvalidadecartao.setEnabled(false);
+                    editbandeiracartao.setEnabled(false);
                     editccccartao.setEnabled(true);
                     frentedocartao.setVisibility(View.GONE);
                     costasdocartao.setVisibility(View.VISIBLE);
@@ -104,6 +110,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
             editnumerocartao.setEnabled(true);
             editnomeproprietariocartao.setEnabled(true);
             editvalidadecartao.setEnabled(true);
+            editbandeiracartao.setEnabled(true);
             editccccartao.setEnabled(false);
             frentedocartao.setVisibility(View.VISIBLE);
             costasdocartao.setVisibility(View.GONE);
@@ -200,6 +207,28 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
             }
         });
 
+        //  When put some text will do some comands in real time
+        editbandeiracartao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editbandeiracartao.getText() == null){
+                    txtbandeiracard.setText(R.string.bandeira);
+                } else {
+                    txtbandeiracard.setText(editbandeiracartao.getText());
+                }
+            }
+        });
+
         //  When click in this button will try to register a new card
         btnfinalizar.setOnClickListener(v -> {
             if (editnumerocartao.getText().length() == 0 || editnumerocartao.getText().length() < 19){
@@ -210,14 +239,17 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 Toast.makeText(this, "Necessario preencher todos os dados", Toast.LENGTH_SHORT).show();
             }else if (editccccartao.getText() == null || editccccartao.getText().length() < 3){
                 Toast.makeText(this, "Necessario preencher todos os dados", Toast.LENGTH_SHORT).show();
+            }else if (editbandeiracartao.getText() == null || editbandeiracartao.getText().length() < 3){
+                Toast.makeText(this, "Necessario preencher todos os dados", Toast.LENGTH_SHORT).show();
             }else {
                 loadingDialog.startLoading();
                 try {
                     DtoCartoes dtoCartoes = new DtoCartoes();
-                    dtoCartoes.setNumrero(editnumerocartao.getText().toString());
-                    dtoCartoes.setNomerotitular(editnomeproprietariocartao.getText().toString());
+                    dtoCartoes.setNumero(editnumerocartao.getText().toString());
+                    dtoCartoes.setNomedotitular(editnomeproprietariocartao.getText().toString());
                     dtoCartoes.setValidade(editvalidadecartao.getText().toString());
                     dtoCartoes.setCcc(editccccartao.getText().toString());
+                    dtoCartoes.setBandeira(editbandeiracartao.getText().toString());
                     dtoCartoes.setCpfproprietario(cpfpararegistarocartao);
                     DaoCartoes daoCartoes = new DaoCartoes(CadastrarCartoesActivity.this);
                     long linhasinseridas = daoCartoes.cadastrar_novo_cartao(dtoCartoes);
