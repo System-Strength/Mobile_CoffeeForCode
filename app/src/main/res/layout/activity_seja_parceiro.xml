@@ -282,6 +282,7 @@
 
                     <!--Text Bandeira Card-->
                     <TextView
+                        android:id="@+id/txtbandeiracardselecionado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/bandeira"
@@ -300,7 +301,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/finalcartao"
                         android:textColor="#fff"
-                        android:textSize="20sp"
+                        android:textSize="23sp"
                         android:layout_marginTop="40dp"
                         android:layout_marginStart="20dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -315,12 +316,13 @@
                         android:textColor="#fff"
                         android:textSize="15sp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <!--Text Validade do Cartão-->
                     <TextView
+                        android:id="@+id/txtvalidadecartaoselecionado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validadefake"

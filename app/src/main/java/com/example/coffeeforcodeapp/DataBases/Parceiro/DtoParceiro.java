@@ -1,14 +1,13 @@
 package com.example.coffeeforcodeapp.DataBases.Parceiro;
 
-import java.util.Date;
 
 public class DtoParceiro {
     int id;
     String nomecliente, cpfcliente, emailcliente, numerocartao, termosaceito;
     String data_ativacao, data_cancelamento;
-    String nomeproprietariocartaocfc, numerocartaocfc, validadecartaocfc, ccccartaocfc;
+    String ccccartaocfc;
 
-    public DtoParceiro(int id, String nomecliente, String cpfcliente, String emailcliente, String numerocartao, String termosaceito, String data_ativacao, String data_cancelamento, String nomeproprietariocartaocfc, String numerocartaocfc, String validadecartaocfc, String ccccartaocfc) {
+    public DtoParceiro(int id, String nomecliente, String cpfcliente, String emailcliente, String numerocartao, String termosaceito, String data_ativacao, String data_cancelamento, String ccccartaocfc) {
         this.id = id;
         this.nomecliente = nomecliente;
         this.cpfcliente = cpfcliente;
@@ -17,9 +16,6 @@ public class DtoParceiro {
         this.termosaceito = termosaceito;
         this.data_ativacao = data_ativacao;
         this.data_cancelamento = data_cancelamento;
-        this.nomeproprietariocartaocfc = nomeproprietariocartaocfc;
-        this.numerocartaocfc = numerocartaocfc;
-        this.validadecartaocfc = validadecartaocfc;
         this.ccccartaocfc = ccccartaocfc;
     }
 
@@ -87,30 +83,6 @@ public class DtoParceiro {
 
     public void setData_cancelamento(String data_cancelamento) {
         this.data_cancelamento = data_cancelamento;
-    }
-
-    public String getNomeproprietariocartaocfc() {
-        return nomeproprietariocartaocfc;
-    }
-
-    public void setNomeproprietariocartaocfc(String nomeproprietariocartaocfc) {
-        this.nomeproprietariocartaocfc = nomeproprietariocartaocfc;
-    }
-
-    public String getNumerocartaocfc() {
-        return numerocartaocfc;
-    }
-
-    public void setNumerocartaocfc(String numerocartaocfc) {
-        this.numerocartaocfc = numerocartaocfc;
-    }
-
-    public String getValidadecartaocfc() {
-        return validadecartaocfc;
-    }
-
-    public void setValidadecartaocfc(String validadecartaocfc) {
-        this.validadecartaocfc = validadecartaocfc;
     }
 
     public String getCcccartaocfc() {

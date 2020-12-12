@@ -2,11 +2,12 @@ package com.example.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,21 +18,24 @@ import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.DataBases.Parceiro.DaoParceiro;
+import com.example.coffeeforcodeapp.DataBases.Parceiro.DtoParceiro;
 
 import java.util.ArrayList;
 
 public class CartoesActivity extends AppCompatActivity {
-    CardView cardcadastrarcartao;
+    ConstraintLayout basenaotemcartaocfc, basetenhocartaocfc;
+    CardView cardcadastrarcartao, btnvermaissobrecardcfc;
     LottieAnimationView btnvoltarcartoes;
     RelativeLayout avisonenhumcardcadastrado;
     ArrayList<DtoCartoes> cartoes;
     DtoCartoes cartaoselecionado;
     AdapterCartoes adapterCartoes;
     ListView listadecartoes;
-    TextView txtnumerocartaocfc, txtvalidadecartaocfc, txtnomeproprietariocartaocfc;
+    TextView txtnumerocartaocfc, txtnomeproprietariocartaocfc;
     String emaillogado;
     String cpfdousuario;
-    String numerocartaocfc, validadecartaocfc, nometitularcartaocfc;
+    String numerocartaocfc, nometitularcartaocfc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class CartoesActivity extends AppCompatActivity {
         avisonenhumcardcadastrado = findViewById(R.id.avisonenhumcardcadastrado);
         cardcadastrarcartao = findViewById(R.id.cardcadastrarcartao);
         listadecartoes = findViewById(R.id.listadecartoes);
+        basenaotemcartaocfc = findViewById(R.id.basenaotemcartaocfc);
+        basetenhocartaocfc = findViewById(R.id.basetenhocartaocfc);
+        txtnumerocartaocfc = findViewById(R.id.txtnumerocartaocfc);
+        btnvermaissobrecardcfc = findViewById(R.id.btnvermaissobrecardcfc);
+        txtnomeproprietariocartaocfc = findViewById(R.id.txtnomeproprietariocartaocfc);
 
         //  Get some information
         Intent intent = getIntent();
@@ -48,6 +57,8 @@ public class CartoesActivity extends AppCompatActivity {
         emaillogado  = bundle.getString("emailuser");
 
         receber_informacoes_do_cliente_e_receber_cartoes();
+
+        verificandocartaocfc();
 
         atualizarlistview();
 
@@ -80,6 +91,14 @@ public class CartoesActivity extends AppCompatActivity {
             startActivity(voltaraoprincipal);
             finish();
         });
+
+        //  When click here will to SejaParceiro
+        btnvermaissobrecardcfc.setOnClickListener(v -> {
+            Intent irparavirarparceiro = new Intent(CartoesActivity.this,SejaParceiroActivity.class);
+            irparavirarparceiro.putExtra("emailuser",emaillogado);
+            startActivity(irparavirarparceiro);
+            finish();
+        });
     }
 
     //  Create method for update  ListView
@@ -97,11 +116,33 @@ public class CartoesActivity extends AppCompatActivity {
         }
     }
 
+    //  Create method to get first information of client
+    @SuppressLint("SetTextI18n")
     private void receber_informacoes_do_cliente_e_receber_cartoes(){
         DaoClientes daoClientes = new DaoClientes(CartoesActivity.this);
         DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
         cpfdousuario = dtoClientes.getCpfcliente();
+    }
 
+    //  Create method to check if client have or not cfc card
+    @SuppressLint("SetTextI18n")
+    private void verificandocartaocfc() {
+        DaoParceiro daoParceiro = new DaoParceiro(CartoesActivity.this);
+        DtoParceiro dtoParceiro = daoParceiro.consultarclienteporcpf(cpfdousuario);
+        if (dtoParceiro.getNumerocartao() == null){
+            basenaotemcartaocfc.setVisibility(View.VISIBLE);
+            basetenhocartaocfc.setVisibility(View.GONE);
+        }else {
+            basenaotemcartaocfc.setVisibility(View.GONE);
+            basetenhocartaocfc.setVisibility(View.VISIBLE);
+            numerocartaocfc = dtoParceiro.getNumerocartao();
+            String numerodocartaocompleto = dtoParceiro.getNumerocartao() + " ";
+            String[]  numerodocartao = numerodocartaocompleto.split(" ");
+            String ultimonumero = numerodocartao[3];
+            txtnumerocartaocfc.setText("**** " +ultimonumero);
+            txtnomeproprietariocartaocfc.setText(dtoParceiro.getNomecliente());
+            nometitularcartaocfc = dtoParceiro.getNomecliente();
+        }
     }
 
     @Override

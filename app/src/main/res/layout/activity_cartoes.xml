@@ -93,7 +93,7 @@
                         android:id="@+id/basenaotemcartaocfc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <!--Img CFC-->
                         <ImageView
@@ -135,6 +135,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/txttittlevisanocardcfccartoes" />
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/btnvermaissobrecardcfc"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginEnd="24dp"
@@ -169,7 +170,18 @@
                         android:id="@+id/basetenhocartaocfc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="visible">
+                        android:visibility="gone">
+
+                        <!--Img Coffee-->
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/logocfcsembg"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
 
                         <!--Text Tittle Visa-->
                         <TextView
@@ -190,41 +202,26 @@
                             android:id="@+id/txtnumerocartaocfc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="20dp"
                             android:text="@string/numerocardzero"
                             android:textColor="#fff"
                             android:textSize="20sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txttittlevisaihavecard" />
 
-                        <!--Text Validade-->
-                        <TextView
-                            android:id="@+id/txtvalidadecartaocfc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/validadefake"
-                            android:textColor="#fff"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/txtnumerocartaocfc" />
-
                         <TextView
                             android:id="@+id/txtnomeproprietariocartaocfc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="10dp"
                             android:text="@string/proprietario"
                             android:textColor="#fff"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,18 +14,24 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.coffeeforcodeapp.Adapters.AdapterCartoes;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
+import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
+import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 import com.example.coffeeforcodeapp.DataBases.Parceiro.DaoParceiro;
 import com.example.coffeeforcodeapp.DataBases.Parceiro.DtoParceiro;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -35,15 +41,19 @@ public class SejaParceiroActivity extends AppCompatActivity {
     CardView btnserparceiro;
     ConstraintLayout primeirabasesejaparceito;
     ScrollView segundabasesejaparceito;
-    TextView txttermosserparceito, txtproximabase, txtvoltar;
+    TextView txttermosserparceito, txtproximabase, txtvoltar, txtselecionarcartao;
+    TextView txtfinaldocartao, txtnomedodonodocartao, txtbandeiracardselecionado, txtvalidadecartaoselecionado;
     EditText editnomeclienteserparceiro, editcpfclienteserparceiro, editemailclienteserparceiro;
     CheckBox checkboxtermosserparceiro;
     Dialog aviso;
-    String emaillogado;
+    ArrayList<DtoCartoes> cartoes;
+    DtoCartoes cartaoselecionado;
+    AdapterCartoes adapterCartoes;
+    String emaillogado, cpfdousuario;
     //  Dados do Cartão
     String bandeira, numerodocartao, nomedotitular, datadevalidade, ccc;
     //  Dados Cartao CFC
-    int numerodocartaocfc, nomedotitularcfc, datadevalidadecfc, ccccfc;
+    String  numerodocartaocfc, ccccfc;
     //  Dados Cliente
     int id;
     LoadingDialog loadingDialog = new LoadingDialog(SejaParceiroActivity.this);
@@ -62,6 +72,11 @@ public class SejaParceiroActivity extends AppCompatActivity {
         editnomeclienteserparceiro  = findViewById(R.id.editnomeclienteserparceiro);
         editcpfclienteserparceiro  = findViewById(R.id.editcpfclienteserparceiro);
         editemailclienteserparceiro  = findViewById(R.id.editemailclienteserparceiro);
+        txtselecionarcartao  = findViewById(R.id.txtselecionarcartao);
+        txtfinaldocartao  = findViewById(R.id.txtfinaldocartao);
+        txtnomedodonodocartao  = findViewById(R.id.txtnomedodonodocartao);
+        txtbandeiracardselecionado  = findViewById(R.id.txtbandeiracardselecionado);
+        txtvalidadecartaoselecionado  = findViewById(R.id.txtvalidadecartaoselecionado);
         aviso = new Dialog(this);
 
         //  Set Mask
@@ -79,7 +94,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
         animacaobaseum();
 
         //  When click here will show terms
-        txttermosserparceito.setOnClickListener(v -> gerarcartaocfc());
+        txttermosserparceito.setOnClickListener(v -> mostrartermosparaserparceiro());
 
         //  When click will show second base
         txtproximabase.setOnClickListener(v -> {
@@ -103,45 +118,95 @@ public class SejaParceiroActivity extends AppCompatActivity {
             }else if (editnomeclienteserparceiro.getText() == null){
                 Toast.makeText(this, "Seus dados pessoais não foram carregados tente reiniciar o aplicativo.", Toast.LENGTH_SHORT).show();
             }else {
-                Date dataHoraAtual = new Date();
-                @SuppressLint("SimpleDateFormat") String dataehora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataHoraAtual);
                 loadingDialog.startLoading();
-                DtoParceiro dtoParceiro = new DtoParceiro();
-                dtoParceiro.setTermosaceito("sim");
-                dtoParceiro.setNomecliente(editnomeclienteserparceiro.getText().toString());
-                dtoParceiro.setCpfcliente(editcpfclienteserparceiro.getText().toString());
-                dtoParceiro.setEmailcliente(editemailclienteserparceiro.getText().toString());
-                dtoParceiro.setNumerocartao(numerodocartao);
-                dtoParceiro.setData_ativacao(dataehora);
-                DaoParceiro daoParceiro = new DaoParceiro(SejaParceiroActivity.this);
-                try {
-                    long linhasinseridas = daoParceiro.gerarassinatura(dtoParceiro);
-                    if (linhasinseridas > 0){
-                        try {
-                            DtoClientes gerandoassinaturacliente = new DtoClientes();
-                            gerandoassinaturacliente.setParceiro("sim");
-                            gerandoassinaturacliente.setId(id);
-                            DaoClientes clientes = new DaoClientes(SejaParceiroActivity.this);
-                            long assinaturadefinida = clientes.atualizarparceira(gerandoassinaturacliente);
-                            if (assinaturadefinida > 0){
-                                timer.postDelayed(() -> {
-                                    loadingDialog.dimissDialog();
-                                    mostaravisoassinaturagaradocomsucesso();
-                                },600);
-                            }else {
-                                Toast.makeText(this, "Ouve um problema em gerar sua assinatura em sua conta, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Gerando cartão!!", Toast.LENGTH_SHORT).show();
+                timer.postDelayed(() -> {
+                    gerarcartaocfc();
+                    Date dataHoraAtual = new Date();
+                    @SuppressLint("SimpleDateFormat") String dataehora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dataHoraAtual);
+                    DtoParceiro dtoParceiro = new DtoParceiro();
+                    dtoParceiro.setTermosaceito("sim");
+                    dtoParceiro.setNomecliente(editnomeclienteserparceiro.getText().toString());
+                    dtoParceiro.setCpfcliente(editcpfclienteserparceiro.getText().toString());
+                    dtoParceiro.setEmailcliente(editemailclienteserparceiro.getText().toString());
+                    dtoParceiro.setNumerocartao(numerodocartaocfc);
+                    dtoParceiro.setCcccartaocfc(ccccfc);
+                    dtoParceiro.setData_ativacao(dataehora);
+                    DaoParceiro daoParceiro = new DaoParceiro(SejaParceiroActivity.this);
+                    try {
+                        long linhasinseridas = daoParceiro.gerarassinatura(dtoParceiro);
+                        if (linhasinseridas > 0){
+                            try {
+                                DtoClientes gerandoassinaturacliente = new DtoClientes();
+                                gerandoassinaturacliente.setParceiro("sim");
+                                gerandoassinaturacliente.setId(id);
+                                DaoClientes clientes = new DaoClientes(SejaParceiroActivity.this);
+                                long assinaturadefinida = clientes.atualizarparceira(gerandoassinaturacliente);
+                                if (assinaturadefinida > 0){
+                                    timer.postDelayed(() -> {
+                                        loadingDialog.dimissDialog();
+                                        mostaravisoassinaturagaradocomsucesso();
+                                    },1250);
+                                }else {
+                                    Toast.makeText(this, "Ouve um problema em gerar sua assinatura em sua conta, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
+                                }
+                            }catch (Exception ex){
+                                Toast.makeText(this, "Erro: "+ ex, Toast.LENGTH_SHORT).show();
                             }
-                        }catch (Exception ex){
-                            Toast.makeText(this, "Erro: "+ ex, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(this, "Ouve um problema em gerar sua assinatura, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
-                        Toast.makeText(this, "Ouve um problema em gerar sua assinatura, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
+                    }catch (Exception ex){
+                        Toast.makeText(this, "Erro em gerar assinatura: "+ ex, Toast.LENGTH_SHORT).show();
                     }
-                }catch (Exception ex){
-                    Toast.makeText(this, "Erro em gerar assinatura: "+ ex, Toast.LENGTH_SHORT).show();
-                }
+                },500);
             }
         });
+
+        txtselecionarcartao.setOnClickListener(v -> mostarlistadecartao());
+    }
+
+    //  Create method to generate new card of new partner
+    private void gerarcartaocfc() {
+        Random geradordenumero = new Random();
+
+        String gerandonumerobaseccc = geradordenumero.nextInt(1000)+"";
+        if (gerandonumerobaseccc.length() < 3){
+            String gerarmaisumnumero = geradordenumero.nextInt(10)+"";
+            gerandonumerobaseccc = gerarmaisumnumero+gerarmaisumnumero;
+
+        }
+        ccccfc = gerandonumerobaseccc;
+
+        String gerar_primeiros_numeros = geradordenumero.nextInt(10000)+"";
+        if (gerar_primeiros_numeros.length() < 4){
+            String gerandonumerobaseprimeiros = geradordenumero.nextInt(10)+"";
+
+            gerar_primeiros_numeros = gerar_primeiros_numeros + gerandonumerobaseprimeiros;
+        }
+
+        String gerar_segundo_numeros = geradordenumero.nextInt(10000)+"";
+        if (gerar_segundo_numeros.length() < 4){
+            String gerandomaisumbaseprimeiros = geradordenumero.nextInt(10)+"";
+
+            gerar_segundo_numeros = gerar_segundo_numeros + gerandomaisumbaseprimeiros;
+        }
+
+        String gerar_terceiro_numeros = geradordenumero.nextInt(10000)+"";
+        if (gerar_terceiro_numeros.length() < 4){
+            String gerandomaisumbaseprimeiros = geradordenumero.nextInt(10)+"";
+
+            gerar_terceiro_numeros = gerar_terceiro_numeros + gerandomaisumbaseprimeiros;
+        }
+
+        String gerar_quarto_numeros = geradordenumero.nextInt(10000)+"";
+        if (gerar_quarto_numeros.length() < 4){
+            String gerandomaisumbaseprimeiros = geradordenumero.nextInt(10)+"";
+
+            gerar_quarto_numeros = gerar_quarto_numeros + gerandomaisumbaseprimeiros;
+        }
+
+        numerodocartaocfc = gerar_primeiros_numeros + " " + gerar_segundo_numeros + " " + gerar_terceiro_numeros + " " + gerar_quarto_numeros;
     }
 
     //  Create method to get client information
@@ -245,11 +310,64 @@ public class SejaParceiroActivity extends AppCompatActivity {
         aviso.show();
     }
 
-    private void gerarcartaocfc(){
-        Random random = new Random();
-        numerodocartaocfc = random.nextInt(1000);
-        // if (numerodocartaocf.to < )
-        Toast.makeText(this, " "+ numerodocartaocfc, Toast.LENGTH_SHORT).show();
+    //  Create Method to show List of card
+    @SuppressLint("SetTextI18n")
+    private void mostarlistadecartao(){
+        LottieAnimationView btnfecharlistadecartoes;
+        ListView listadecartoespartner;
+        RelativeLayout avisonenhumcardcadastradopartner;
+        aviso.setContentView(R.layout.lista_de_cartoes);
+        btnfecharlistadecartoes = aviso.findViewById(R.id.btnfecharlistadecartoes);
+        listadecartoespartner = aviso.findViewById(R.id.listadecartoespartner);
+        avisonenhumcardcadastradopartner = aviso.findViewById(R.id.avisonenhumcardcadastradopartner);
+
+        btnfecharlistadecartoes.setOnClickListener(v -> aviso.dismiss());
+
+        DaoClientes daoClientes = new DaoClientes(SejaParceiroActivity.this);
+        DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
+        cpfdousuario = dtoClientes.getCpfcliente();
+
+        DaoCartoes daoCartoes = new DaoCartoes(SejaParceiroActivity.this);
+        cartoes = daoCartoes.consultar_cartao_porcpf(cpfdousuario);
+        if (cartoes.size() > 0){
+            adapterCartoes = new AdapterCartoes(SejaParceiroActivity.this, R.layout.modelo_cartoes, cartoes);
+            listadecartoespartner.setAdapter(adapterCartoes);
+            avisonenhumcardcadastradopartner.setVisibility(View.GONE);
+            listadecartoespartner.setVisibility(View.VISIBLE);
+        }else {
+            avisonenhumcardcadastradopartner.setVisibility(View.VISIBLE);
+            listadecartoespartner.setVisibility(View.GONE);
+        }
+
+        listadecartoespartner.setOnItemClickListener((parent, view, position, id) -> {
+            cartaoselecionado = cartoes.get(position);
+
+            bandeira = cartaoselecionado.getBandeira();
+            txtbandeiracardselecionado.setText(cartaoselecionado.getBandeira());
+
+            //  Get number on card
+            numerodocartao = cartaoselecionado.getNumero();
+            String numerodocartaocompleto = cartaoselecionado.getNumero() + " ";
+            String[]  numerodocartao = numerodocartaocompleto.split(" ");
+            String ultimonumero = numerodocartao[3];
+            txtfinaldocartao.setText("**** " + ultimonumero);
+
+            //  Get name on card
+            nomedotitular = cartaoselecionado.getNomedotitular();
+            txtnomedodonodocartao.setText(cartaoselecionado.getNomedotitular());
+
+            //  Get date on card
+            datadevalidade = cartaoselecionado.getValidade();
+            txtvalidadecartaoselecionado.setText(cartaoselecionado.getValidade());
+
+            //  Get ccc of card
+            ccc = cartaoselecionado.getCcc();
+
+            aviso.dismiss();
+        });
+
+        aviso.show();
+
     }
 
     @Override
