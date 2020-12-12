@@ -37,6 +37,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="24dp"
+                app:lottie_autoPlay="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_rawRes="@raw/arrowleftback" />
@@ -66,7 +67,7 @@
                     android:id="@+id/txttittlecardcfccartoes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/cartaocfc"
                     android:textColor="#000"
@@ -79,9 +80,10 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="350dp"
                     android:layout_height="110dp"
-                    android:background="@drawable/cartaocfc"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/cartaocfc"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txttittlecardcfccartoes">
@@ -90,16 +92,16 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/basenaotemcartaocfc"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
 
                         <!--Img CFC-->
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/logocfcsembg"
-                            android:layout_marginEnd="20dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/logocfcsembg"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
@@ -135,12 +137,12 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            app:cardBackgroundColor="#FF9F81"
-                            app:cardCornerRadius="30dp"
                             android:layout_marginEnd="24dp"
                             android:layout_marginBottom="16dp"
+                            app:cardBackgroundColor="#FF9F81"
+                            app:cardCornerRadius="30dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" >
+                            app:layout_constraintEnd_toEndOf="parent">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -149,12 +151,12 @@
                                 <com.airbnb.lottie.LottieAnimationView
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
-                                    app:lottie_autoPlay="true"
-                                    app:lottie_rawRes="@raw/setaright"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_rawRes="@raw/setaright" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -166,8 +168,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/basetenhocartaocfc"
                         android:layout_width="match_parent"
-                        android:visibility="visible"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:visibility="visible">
 
                         <!--Text Tittle Visa-->
                         <TextView
@@ -188,10 +190,10 @@
                             android:id="@+id/txtnumerocartaocfc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:text="@string/numerocardzero"
                             android:textColor="#fff"
                             android:textSize="20sp"
-                            android:layout_marginStart="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txttittlevisaihavecard" />
 
@@ -200,11 +202,11 @@
                             android:id="@+id/txtvalidadecartaocfc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/validadefake"
                             android:textColor="#fff"
                             android:textSize="16sp"
-                            android:layout_marginEnd="24dp"
-                            android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txtnumerocartaocfc" />
@@ -213,11 +215,11 @@
                             android:id="@+id/txtnomeproprietariocartaocfc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/proprietario"
                             android:textColor="#fff"
                             android:textSize="16sp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginStart="20dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
 
@@ -237,17 +239,39 @@
             android:padding="10dp"
             android:layout_height="wrap_content">
 
+            <!--Text CFC Card-->
+            <TextView
+                android:id="@+id/txttittleoutroscartoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:text="@string/outroscartoes"
+                android:textColor="#000"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <!--List of Cards-->
             <ListView
                 android:id="@+id/listadecartoes"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cardcadastrarcartao"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="6dp"
+                android:divider="#616161"
+                android:dividerHeight="1dp"
+                android:visibility="visible" />
 
             <!--Alert Don't Have Card-->
             <RelativeLayout
                 android:id="@+id/avisonenhumcardcadastrado"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <!--Text Nenhum Card-->

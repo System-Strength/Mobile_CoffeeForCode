@@ -5,19 +5,29 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.coffeeforcodeapp.Adapters.AdapterCartoes;
 import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 
+import java.util.ArrayList;
+
 public class CartoesActivity extends AppCompatActivity {
     CardView cardcadastrarcartao;
     LottieAnimationView btnvoltarcartoes;
     RelativeLayout avisonenhumcardcadastrado;
+    ArrayList<DtoCartoes> cartoes;
+    DtoCartoes cartaoselecionado;
+    AdapterCartoes adapterCartoes;
+    ListView listadecartoes;
     TextView txtnumerocartaocfc, txtvalidadecartaocfc, txtnomeproprietariocartaocfc;
     String emaillogado;
     String cpfdousuario;
@@ -30,6 +40,7 @@ public class CartoesActivity extends AppCompatActivity {
         btnvoltarcartoes = findViewById(R.id.btnvoltarcartoes);
         avisonenhumcardcadastrado = findViewById(R.id.avisonenhumcardcadastrado);
         cardcadastrarcartao = findViewById(R.id.cardcadastrarcartao);
+        listadecartoes = findViewById(R.id.listadecartoes);
 
         //  Get some information
         Intent intent = getIntent();
@@ -37,6 +48,14 @@ public class CartoesActivity extends AppCompatActivity {
         emaillogado  = bundle.getString("emailuser");
 
         receber_informacoes_do_cliente_e_receber_cartoes();
+
+        atualizarlistview();
+
+        listadecartoes.setOnItemClickListener((parent, view, position, id) -> {
+            cartaoselecionado = cartoes.get(position);
+
+
+        });
 
         //  When click here will to card register
         cardcadastrarcartao.setOnClickListener(v -> {
@@ -57,13 +76,26 @@ public class CartoesActivity extends AppCompatActivity {
         });
     }
 
+    //  Create method for update  ListView
+    private void atualizarlistview() {
+        DaoCartoes daoCartoes = new DaoCartoes(CartoesActivity.this);
+        cartoes = daoCartoes.consultar_cartao_porcpf(cpfdousuario);
+        if (cartoes.size() > 0){
+            adapterCartoes = new AdapterCartoes(CartoesActivity.this, R.layout.modelo_cartoes, cartoes);
+            listadecartoes.setAdapter(adapterCartoes);
+            avisonenhumcardcadastrado.setVisibility(View.GONE);
+            listadecartoes.setVisibility(View.VISIBLE);
+        }else {
+            avisonenhumcardcadastrado.setVisibility(View.VISIBLE);
+            listadecartoes.setVisibility(View.GONE);
+        }
+    }
+
     private void receber_informacoes_do_cliente_e_receber_cartoes(){
         DaoClientes daoClientes = new DaoClientes(CartoesActivity.this);
         DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
         cpfdousuario = dtoClientes.getCpfcliente();
 
-        DaoCartoes daoCartoes = new DaoCartoes(CartoesActivity.this);
-        DtoCartoes dtoCartoes = daoCartoes.consultar_cartao_porcpf(cpfdousuario);
     }
 
     @Override

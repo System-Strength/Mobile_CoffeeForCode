@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 
 public class DaoCartoes extends SQLiteOpenHelper {
     private final String TABELA = "TB_CARTOES";
@@ -24,7 +26,6 @@ public class DaoCartoes extends SQLiteOpenHelper {
                 "NUMERO CHAR(19) NOT NULL," +
                 "NOMETITULAR VARCHAR(100) NOT NULL," +
                 "VALIDADE CHA(5) ," +
-                "BANDEIRA VARCHAR(10) ," +
                 "CCC CHAR(3) NOT NULL)";
 
         db.execSQL(comando);
@@ -43,29 +44,29 @@ public class DaoCartoes extends SQLiteOpenHelper {
         values.put("NUMERO", cartoes.getNumrero());
         values.put("NOMETITULAR", cartoes.getNomerotitular());
         values.put("VALIDADE", cartoes.getValidade());
-        values.put("BANDEIRA", cartoes.getBandeira());
         values.put("CCC", cartoes.getCcc());
 
         return getWritableDatabase().insert(TABELA, null, values);
     }
 
     //  Method to Search for card by cpf of client
-    public DtoCartoes consultar_cartao_porcpf(String cpf){
-        String comando = "SELECT * FROM " + TABELA + " WHERE  CPFPROPRIETARIO=?";
+    public ArrayList<DtoCartoes> consultar_cartao_porcpf(String cpf){
+        String comando = "SELECT * FROM " + TABELA + " WHERE CPFPROPRIETARIO=?";
         String[] parametros = {cpf};
         Cursor cursor = getWritableDatabase().rawQuery(comando, parametros);
-        DtoCartoes dtoCartoes = new DtoCartoes();
+        ArrayList<DtoCartoes> agenda = new ArrayList<>();
 
         while (cursor.moveToNext()){
+            DtoCartoes dtoCartoes = new DtoCartoes();
             dtoCartoes.setId(cursor.getInt(0));
             dtoCartoes.setCpfproprietario(cursor.getString(1));
             dtoCartoes.setNumrero(cursor.getString(2));
             dtoCartoes.setNomerotitular(cursor.getString(3));
             dtoCartoes.setValidade(cursor.getString(4));
-            dtoCartoes.setBandeira(cursor.getString(5));
-            dtoCartoes.setCcc(cursor.getString(6));
+            dtoCartoes.setCcc(cursor.getString(5));
 
+            agenda.add(dtoCartoes);
         }
-        return dtoCartoes;
+        return  agenda;
     }
 }

@@ -14,7 +14,7 @@
     <string name="unicornfrappuccino">Unicorn Frappuccino</string>
     <string name="mochafrappuccino">Mocha Frappuccino</string>
     <string name="combohappy">Combo Happy</string>
-    <string name="refresherdemorangocomlimo">Refresher de Morango...</string>
+    <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
     <string name="desccombohapppy">Frappuccino de chocolate\nCroissant e Torada</string>
     <string name="salgadosesanduiches">Salgados e sanduiches</string>
     <string name="candys">Doces</string>
@@ -138,5 +138,6 @@
     <string name="ccc">CCC</string>
     <string name="cadastar">Cadastrar</string>
     <string name="treszero">000</string>
+    <string name="outroscartoes">Outros Cartões</string>
 
 </resources>

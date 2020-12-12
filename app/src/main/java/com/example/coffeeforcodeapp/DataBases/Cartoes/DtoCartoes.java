@@ -2,15 +2,14 @@ package com.example.coffeeforcodeapp.DataBases.Cartoes;
 
 public class DtoCartoes {
     int id;
-    String cpfproprietario, numrero, nomerotitular, validade, bandeira, ccc;
+    String cpfproprietario, numrero, nomerotitular, validade, ccc;
 
-    public DtoCartoes(int id, String cpfproprietario, String numrero, String nomerotitular, String validade, String bandeira, String ccc) {
+    public DtoCartoes(int id, String cpfproprietario, String numrero, String nomerotitular, String validade, String ccc) {
         this.id = id;
         this.cpfproprietario = cpfproprietario;
         this.numrero = numrero;
         this.nomerotitular = nomerotitular;
         this.validade = validade;
-        this.bandeira = bandeira;
         this.ccc = ccc;
     }
 
@@ -54,14 +53,6 @@ public class DtoCartoes {
 
     public void setValidade(String validade) {
         this.validade = validade;
-    }
-
-    public String getBandeira() {
-        return bandeira;
-    }
-
-    public void setBandeira(String bandeira) {
-        this.bandeira = bandeira;
     }
 
     public String getCcc() {

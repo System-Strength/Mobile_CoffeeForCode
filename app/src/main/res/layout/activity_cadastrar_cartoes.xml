@@ -32,35 +32,21 @@
                 <!--Front of card-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/frentedocartao"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
 
                     <!--Img Chip-->
                     <ImageView
                         android:id="@+id/imgchipcardnewcard"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/chipcard"
-                        android:layout_marginTop="16dp"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/chipcard"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ContentDescription" />
-
-                    <!--Text Flag-->
-                    <TextView
-                        android:id="@+id/txtexbandeira"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/bandeira"
-                        android:textColor="#000"
-                        android:textSize="21sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <!--Text Number-->
                     <TextView
@@ -80,11 +66,11 @@
                         android:id="@+id/txtexnomeproprietario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fulanodetal"
-                        android:textSize="15sp"
-                        android:textColor="#000"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
+                        android:text="@string/fulanodetal"
+                        android:textColor="#000"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtexnumerocard" />
@@ -94,11 +80,11 @@
                         android:id="@+id/txtexvalidade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/validadefake"
                         android:textColor="#000"
                         android:textSize="14sp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -107,6 +93,7 @@
                 <!--Back of card-->
                 <RelativeLayout
                     android:id="@+id/costasdocartao"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -117,7 +104,7 @@
                         android:background="@drawable/baracartao"
                         android:layout_alignParentTop="true"/>
 
-                    <!--Bara  BAse CCC-->
+                    <!--Bara BAse CCC-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="200dp"
                         android:layout_height="40dp"
@@ -127,6 +114,7 @@
 
                         <!--Text 000-->
                         <TextView
+                            android:id="@+id/txtexccc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/treszero"
@@ -188,6 +176,9 @@
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="16dp"
+                android:maxLength="19"
+                android:inputType="number"
+                android:textColor="#EB000000"
                 android:background="@drawable/edittextserparceiro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtbasenumerocard"
@@ -212,6 +203,9 @@
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="16dp"
+                android:textColor="#EB000000"
+                android:maxLength="100"
+                android:inputType="textPersonName"
                 android:background="@drawable/edittextserparceiro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtbasenomecard"
@@ -236,6 +230,9 @@
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="16dp"
+                android:textColor="#EB000000"
+                android:maxLength="5"
+                android:inputType="date"
                 android:background="@drawable/edittextserparceiro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtbasevalidadecard"
@@ -267,7 +264,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--Primeiros Dados-->
+        <!--Second Dados-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/segundodadoscartao"
             android:visibility="visible"
@@ -293,6 +290,9 @@
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="16dp"
+                android:textColor="#EB000000"
+                android:inputType="number"
+                android:maxLength="3"
                 android:background="@drawable/edittextserparceiro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtbaseccccard"
