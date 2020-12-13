@@ -6,26 +6,33 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.security.Principal;
 
 public class PrincipalActivity extends AppCompatActivity {
+    LottieAnimationView icone_perfil_principal;
     TextView txtnomedocliente;
     CardView cardviewnotpartner, cardbepartner, cardvercartoes, cardvercarrinhodecompra;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog avisoendereco;
-    String emaillogado, apareceravisoendereco;
+    private BottomSheetDialog bottomSheetDialog;
+    String emaillogado, apareceravisoendereco, nomedousuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,7 @@ public class PrincipalActivity extends AppCompatActivity {
         cardbepartner = findViewById(R.id.cardbepartner);
         cardvercartoes = findViewById(R.id.cardvercartoes);
         cardvercarrinhodecompra = findViewById(R.id.cardvercarrinhodecompra);
+        icone_perfil_principal = findViewById(R.id.icone_perfil_principal);
         avisoendereco = new Dialog(this);
 
         //  Get information for login of client
@@ -47,6 +55,8 @@ public class PrincipalActivity extends AppCompatActivity {
             emaillogado  = bundle.getString("emailuser");
             apareceravisoendereco = bundle.getString("statusavisoend");
         }
+
+        //  Set somethings with gone and visible
 
         recebendodadosiniciaisdocliente();
 
@@ -77,6 +87,41 @@ public class PrincipalActivity extends AppCompatActivity {
 
         });
 
+        //  When click here will show info_perfil
+        icone_perfil_principal.setOnClickListener(v -> {
+            bottomSheetDialog = new BottomSheetDialog(PrincipalActivity.this, R.style.BottomSheetTheme);
+
+            View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
+                    findViewById(R.id.menu_sheet_principal));
+
+            sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
+                Toast.makeText(PrincipalActivity.this, "Test", Toast.LENGTH_SHORT).show();
+                System.out.println();
+            });
+
+            sheetview.findViewById(R.id.btnlogout).setOnClickListener(v1 -> {
+                AlertDialog.Builder aviso = new AlertDialog.Builder(PrincipalActivity.this);
+                aviso.setTitle("Deslogar");
+                aviso.setMessage("Deseja realmente deletar");
+                aviso.setPositiveButton("Sim", (dialog, which) -> {
+                    Intent voltaraologin = new Intent(PrincipalActivity.this, LoginActivity.class);
+                    startActivity(voltaraologin);
+                    finish();
+                });
+                aviso.setNegativeButton("Não", null);
+                aviso.show();
+            });
+
+            TextView nomeusermenusheet;
+            nomeusermenusheet = sheetview.findViewById(R.id.nomeusermenusheet);
+            String[]  nomecliente = nomedousuario.split(" ");
+            String primeironome = nomecliente[0];
+            String segundonome = nomecliente[1];
+            nomeusermenusheet.setText(primeironome + " " + segundonome);
+
+            bottomSheetDialog.setContentView(sheetview);
+            bottomSheetDialog.show();
+        });
     }
 
     //  Create method to check customer first things
@@ -88,6 +133,7 @@ public class PrincipalActivity extends AppCompatActivity {
         String primeironome = nomecliente[0];
 
         //  Set first name of client
+        nomedousuario = dtoClientes.getNomecliente();
         txtnomedocliente.setText(primeironome);
 
         if (dtoClientes.getParceiro().equals("nao")){

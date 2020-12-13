@@ -137,4 +137,15 @@ public class DaoClientes extends SQLiteOpenHelper {
 
         return getWritableDatabase().update(TABELA,values,id,args);
     }
+
+    public int atualizarendereco(DtoClientes clientes){
+        ContentValues values = new ContentValues();
+        values.put("ENDERECOCLI", clientes.getEnderecocliente());
+        values.put("COMPLEMENTO", clientes.getComplementocliente());
+
+        String id = "id=?";
+        String[] args = {clientes.getId()+""};
+
+        return getWritableDatabase().update(TABELA,values,id,args);
+    }
 }

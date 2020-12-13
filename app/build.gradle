@@ -43,5 +43,12 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //  Dependence to crate animation flip in cards
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:3.0.0'
+
+    //  Material Designer
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+
+    //  Rounded Image View
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

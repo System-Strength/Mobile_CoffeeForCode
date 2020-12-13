@@ -96,6 +96,10 @@
     <string name="cadastraragora">Cadastrar Agora</string>
     <string name="cadastrardepois">Cadastrar Depois</string>
     <string name="descnenhumendencontrado">Precisamos de seu endereço caso você decida comprar algum pedido e a forma de retirado ser delivery sem o seu endereço não será possível lhe entregar o produto</string>
+    <string name="logout">Log Out</string>
+    <string name="configuracao">Configuraçoes</string>
+    <string name="perfil">Perfil</string>
+    <string name="appinfo">App Info</string>
 
     <!--Be Partner Screen-->
     <string name="vantagemdeserparceiro">Sendo parceiro você terá acesso a promoção exclusivas,\ndescontos em suas compras,\nterá um cartão CFC, frete grátis e serviço de entrega Plus</string>

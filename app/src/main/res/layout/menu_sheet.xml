@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_sheet_principal"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:background="@drawable/bottom_sheet"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        app:cardCornerRadius="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="#000"/>
+
+    <!--Text Name of client-->
+    <TextView
+        android:id="@+id/nomeusermenusheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/nome"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <!--Linear Profile-->
+    <LinearLayout
+        android:id="@+id/btnperfil"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Img Settings-->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/imgprofile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                app:lottie_rawRes="@raw/profileicon"
+                app:lottie_autoPlay="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text Settings-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perfil"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgprofile"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Linear App info-->
+    <LinearLayout
+        android:id="@+id/btninfoapp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Animation info-->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/imginfoapp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                app:lottie_rawRes="@raw/info"
+                app:lottie_autoPlay="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text Settings-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appinfo"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imginfoapp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Linear Settings-->
+    <LinearLayout
+        android:id="@+id/btnconfig"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Img Settings-->
+            <ImageView
+                android:id="@+id/imgsetting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <!--Text Settings-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/configuracao"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgsetting"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Linear Settings-->
+    <LinearLayout
+        android:id="@+id/btnconfig"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Img Settings-->
+            <ImageView
+                android:id="@+id/imgsetting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <!--Text Settings-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/configuracao"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgsetting"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Linear Settings-->
+    <LinearLayout
+        android:id="@+id/btnconfig"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Img Settings-->
+            <ImageView
+                android:id="@+id/imgsetting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <!--Text Settings-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/configuracao"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgsetting"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Linear Log Out-->
+    <LinearLayout
+        android:id="@+id/btnlogout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_height="50dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                app:cardBackgroundColor="#fd0000"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/logout"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
