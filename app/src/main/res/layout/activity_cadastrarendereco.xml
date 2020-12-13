@@ -67,7 +67,7 @@
 
         <!--confirm button-->
         <androidx.cardview.widget.CardView
-            android:id="@+id/edittextenderecoconfirmar"
+            android:id="@+id/cardviewenderecoconfirmar"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginTop="50dp"
@@ -112,14 +112,14 @@
 
         <!--register later button-->
         <androidx.cardview.widget.CardView
-            android:id="@+id/edittextenderecodepoisr"
+            android:id="@+id/cardviewenderecodepois"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_margin="30dp"
             app:cardBackgroundColor="#FFC75A"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittextenderecoconfirmar">
+            app:layout_constraintTop_toBottomOf="@+id/cardviewenderecoconfirmar">
 
             <!--Animation and text base-->
             <androidx.constraintlayout.widget.ConstraintLayout
