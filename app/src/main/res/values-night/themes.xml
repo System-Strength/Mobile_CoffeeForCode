@@ -14,4 +14,17 @@
         <item name="android:navigationBarColor" tools:targetApi="l">#221F1F</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
+
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
+
 </resources>
