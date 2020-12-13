@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+
 public class CadastrarenderecoActivity extends AppCompatActivity {
     EditText edittextenderecocliente, edittextenderecoclientecomp;
     CardView cardviewenderecoconfirmar, cardviewenderecodepois;
@@ -32,7 +34,20 @@ public class CadastrarenderecoActivity extends AppCompatActivity {
         cardviewenderecoconfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CadastrarenderecoActivity.this, "Ex", Toast.LENGTH_SHORT).show();
+
+                if (edittextenderecocliente.getText() == null ||edittextenderecocliente.getText().length() <3){
+                    Toast.makeText(CadastrarenderecoActivity.this, "Preencha corretamente o campo!", Toast.LENGTH_SHORT).show();
+                }else {
+                    try {
+
+                        DtoClientes dtoClientes = new DtoClientes();
+
+                    }catch (Exception ex){
+                        Toast.makeText(CadastrarenderecoActivity.this, "Erro: "+ex, Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
             }
         });
 
