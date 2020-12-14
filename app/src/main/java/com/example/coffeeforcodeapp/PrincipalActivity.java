@@ -6,15 +6,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +33,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private BottomSheetDialog bottomSheetDialog;
     String emaillogado, apareceravisoendereco, nomedousuario;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,15 +94,29 @@ public class PrincipalActivity extends AppCompatActivity {
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
                     findViewById(R.id.menu_sheet_principal));
 
+            //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
-                Toast.makeText(PrincipalActivity.this, "Test", Toast.LENGTH_SHORT).show();
-                System.out.println();
+                Toast.makeText(PrincipalActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
             });
 
+            //  When click in this linear will to app information
+            sheetview.findViewById(R.id.btninfoapp).setOnClickListener(v1 -> {
+                Toast.makeText(PrincipalActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
+            });
+
+            //  When click in this linear will to configuration of app
+            sheetview.findViewById(R.id.btnconfig).setOnClickListener(v1 -> {
+                Toast.makeText(PrincipalActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
+            });
+
+            //  When click in this linear will to LoginActivity
             sheetview.findViewById(R.id.btnlogout).setOnClickListener(v1 -> {
                 AlertDialog.Builder aviso = new AlertDialog.Builder(PrincipalActivity.this);
                 aviso.setTitle("Deslogar");
-                aviso.setMessage("Deseja realmente deletar");
+                aviso.setMessage("Deseja realmente deslogar?");
                 aviso.setPositiveButton("Sim", (dialog, which) -> {
                     Intent voltaraologin = new Intent(PrincipalActivity.this, LoginActivity.class);
                     startActivity(voltaraologin);
@@ -139,7 +153,6 @@ public class PrincipalActivity extends AppCompatActivity {
         if (dtoClientes.getParceiro().equals("nao")){
             animacaonotpartner();
         }else {
-            Toast.makeText(this, "Parceiro", Toast.LENGTH_SHORT).show();
             cardviewnotpartner.setVisibility(View.GONE);
         }
 
