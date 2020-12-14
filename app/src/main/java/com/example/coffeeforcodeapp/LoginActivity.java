@@ -177,18 +177,25 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void opcaodedevs() {
         AlertDialog.Builder avisoquemestausando = new AlertDialog.Builder(LoginActivity.this);
         avisoquemestausando.setTitle("Quem Esta usando?");
         avisoquemestausando.setPositiveButton("Kaua", (dialogInterface, i) -> {
-            //  Dev Setting
+            //  Dev Login
             edittextemail.setText("kauavitorioof@gmail.com");
             edittextsenha.setText("kaua2004");
         });
         avisoquemestausando.setNeutralButton("Yuri", (dialogInterface, i) -> {
-            //  Dev Setting
+            //  Dev Login
             edittextemail.setText("yuridantaassg@gmail.com");
             edittextsenha.setText("Yuridantas17");
+        });
+
+        avisoquemestausando.setNegativeButton("Test", (dialog, which) -> {
+            //  Dev Login
+            edittextemail.setText("test123456@gmail.com");
+            edittextsenha.setText("12345678");
         });
 
         avisoquemestausando.show();
