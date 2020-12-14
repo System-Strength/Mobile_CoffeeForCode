@@ -92,7 +92,7 @@
     <string name="desccafes">Veja nossa imensa variedade de cafés disponiveis</string>
     <string name="descrefreshers">Bebidas extremamente refrescantes de diversos sabores</string>
     <string name="desctodososprodutos">Veja todos os produtos disponível em nosso estoque</string>
-    <string name="txtavisosemendereco">Nenhum endereço associado a sua conta!!</string>
+    <string name="txtavisosemendereco">Nenhum endereço encontrado!!</string>
     <string name="cadastraragora">Cadastrar Agora</string>
     <string name="cadastrardepois">Cadastrar Depois</string>
     <string name="descnenhumendencontrado">Precisamos de seu endereço caso você decida comprar algum pedido e a forma de retirado ser delivery sem o seu endereço não será possível lhe entregar o produto</string>

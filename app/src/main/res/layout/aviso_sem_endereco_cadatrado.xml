@@ -3,75 +3,68 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@drawable/back_noback"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--Body-->
+    <!--Principal Contender-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="350dp"
-        android:layout_height="400dp"
-        android:background="@drawable/avisosemendereco"
+        android:layout_width="360dp"
+        android:layout_height="210dp"
+        android:background="@drawable/back_noback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--Text Tittle-->
-        <TextView
-            android:id="@+id/txttittlenoadressregister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txtavisosemendereco"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
+        <!--Body-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:background="@drawable/back_body_noaddress_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--Text Desc-->
+            <TextView
+                android:id="@+id/txtdescavisoend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/descnenhumendencontrado"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Header-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/avisosemendereco"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!--Text Desc-->
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/descnenhumendencontrado"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txttittlenoadressregister" />
-
-        <!--Animation-->
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:lottie_autoPlay="true"
-            android:layout_marginTop="2dp"
-            app:lottie_rawRes="@raw/deliveryaddress"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <!--Constraint Btn Register Now-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btncadastraragoraend"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:background="@drawable/btncadastraragoraend"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
-
-            <!--Text Register Now-->
             <TextView
-                android:layout_width="100dp"
+                android:id="@+id/txttittlenoadressregister"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cadastraragora"
+                android:text="@string/txtavisosemendereco"
                 android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="21sp"
                 android:textStyle="bold"
-                android:textColor="#AD000000"
-                android:textSize="16sp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,25 +72,53 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--Constraint Btn Register Latter-->
+        <!--Btn Register Now-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btncadastraragoraend"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/btncadastraragoraend"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cadastraragora"
+                android:textAlignment="center"
+                android:textColor="#AD000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Btn Register After-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btncadastrardepoisend"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/btncadastrardepoisend"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!--Text Register Latter-->
+            <!--Text Register after-->
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="@string/cadastrardepois"
                 android:textAlignment="center"
-                android:textStyle="bold"
                 android:textColor="#AD000000"
                 android:textSize="16sp"
-                android:layout_marginStart="8dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -107,4 +128,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
