@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".Ver_e_Deletar_CartaoActivity"/>
+        <activity android:name=".SaibaMaisActivity"></activity>
+        <activity android:name=".Ver_e_Deletar_CartaoActivity" />
         <activity android:name=".CadastrarenderecoActivity" />
         <activity android:name=".CarrinhoDeCompraActivity" />
         <activity android:name=".CadastrarCartoesActivity" />
