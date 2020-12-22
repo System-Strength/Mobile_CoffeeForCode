@@ -74,6 +74,10 @@ public class CartoesActivity extends AppCompatActivity {
 
         });
 
+        basetenhocartaocfc.setOnClickListener(v -> {
+
+        });
+
         //  When click here will to card register
         cardcadastrarcartao.setOnClickListener(v -> {
             Intent irparacadastramentodecartao = new Intent(CartoesActivity.this,CadastrarCartoesActivity.class);
