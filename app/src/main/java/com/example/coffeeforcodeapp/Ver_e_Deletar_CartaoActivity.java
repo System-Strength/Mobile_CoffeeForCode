@@ -4,26 +4,29 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
 import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.coffeeforcodeapp.DataBases.Parceiro.DaoParceiro;
+import com.example.coffeeforcodeapp.DataBases.Parceiro.DtoParceiro;
 
 public class Ver_e_Deletar_CartaoActivity extends AppCompatActivity {
-    CardView deletarcartao;
+    CardView deletarcartao, cancelarcartao, cartaonormal, excardcfc;
     DaoCartoes cartoes = new DaoCartoes(Ver_e_Deletar_CartaoActivity.this);
     DtoCartoes cartoaserapresentado;
-    @SuppressWarnings("deprecation")
+    DtoParceiro cartaocfcapresentado;
     Handler timer = new Handler();
     TextView txtexnomeproprietarioex, txtexnumerocardex, txtexvalidadeex, txtbandeiracardex;
-    String emaillogado;
+    TextView txtbandeiracardexcfc, txtexnumerocardexcfc, txtexnomeproprietarioexcfc, txtexvalidadeexcfc;
+    String emaillogado, cpfdoparceiro;
     int iddocartao;
 
     @Override
@@ -35,12 +38,24 @@ public class Ver_e_Deletar_CartaoActivity extends AppCompatActivity {
         txtexvalidadeex = findViewById(R.id.txtexvalidadeex);
         txtbandeiracardex = findViewById(R.id.txtbandeiracardex);
         deletarcartao = findViewById(R.id.deletarcartao);
+        cancelarcartao = findViewById(R.id.cancelarcartao);
+        cartaonormal = findViewById(R.id.cartaonormal);
+        excardcfc = findViewById(R.id.excardcfc);
+        txtbandeiracardexcfc = findViewById(R.id.txtbandeiracardexcfc);
+        txtexnumerocardexcfc = findViewById(R.id.txtexnumerocardexcfc);
+        txtexnomeproprietarioexcfc = findViewById(R.id.txtexnomeproprietarioexcfc);
+        txtexvalidadeexcfc = findViewById(R.id.txtexvalidadeexcfc);
 
         //  Get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         emaillogado  = bundle.getString("emailuser");
         iddocartao  = bundle.getInt("iddocartao");
+        if (bundle.getString("cpfparceiro") == null){
+            cpfdoparceiro = null;
+        }else {
+            cpfdoparceiro = bundle.getString("cpfparceiro");
+        }
 
         buscar_e_apresentar_o_cartao();
 
@@ -85,16 +100,45 @@ public class Ver_e_Deletar_CartaoActivity extends AppCompatActivity {
             aviso.show();
         });
 
+        //  When click here will go to cancel card
+        cancelarcartao.setOnClickListener(v -> {
+            //Intent irparacancelamento = new Intent(Ver_e_Deletar_CartaoActivity.this, Cancelamento.class);
+            Toast.makeText(this, "Em dev...", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
+    @SuppressLint("SetTextI18n")
     private void buscar_e_apresentar_o_cartao() {
-        DaoCartoes daoCartoes = new DaoCartoes(Ver_e_Deletar_CartaoActivity.this);
-        cartoaserapresentado = daoCartoes.consultar_cartao_pelo_id(iddocartao);
+        if (iddocartao != 9999){
+            DaoCartoes daoCartoes = new DaoCartoes(Ver_e_Deletar_CartaoActivity.this);
+            cartoaserapresentado = daoCartoes.consultar_cartao_pelo_id(iddocartao);
 
-        txtbandeiracardex.setText(cartoaserapresentado.getBandeira());
-        txtexnomeproprietarioex.setText(cartoaserapresentado.getNomedotitular());
-        txtexnumerocardex.setText(cartoaserapresentado.getNumero());
-        txtexvalidadeex.setText(cartoaserapresentado.getValidade());
+            txtbandeiracardex.setText(cartoaserapresentado.getBandeira());
+            txtexnomeproprietarioex.setText(cartoaserapresentado.getNomedotitular());
+            String numerodocartaocompleto = cartoaserapresentado.getNumero() + " ";
+            String[]  numerodocartao = numerodocartaocompleto.split(" ");
+            String ultimonumero = numerodocartao[3];
+            txtexnumerocardex.setText("**** " + ultimonumero);
+            txtexvalidadeex.setText(cartoaserapresentado.getValidade());
+            cartaonormal.setVisibility(View.VISIBLE);
+            excardcfc.setVisibility(View.GONE);
+            cancelarcartao.setVisibility(View.GONE);
+        }else {
+            DaoParceiro daoParceiro = new DaoParceiro(Ver_e_Deletar_CartaoActivity.this);
+            cartaocfcapresentado = daoParceiro.consultarclienteporcpf(cpfdoparceiro);
+
+            txtbandeiracardexcfc.setText("Visa");
+            txtexnomeproprietarioexcfc.setText(cartaocfcapresentado.getNomecliente());
+            String numerodocartaocompleto = cartaocfcapresentado.getNumerocartao() + " ";
+            String[]  numerodocartao = numerodocartaocompleto.split(" ");
+            String ultimonumero = numerodocartao[3];
+            txtexnumerocardexcfc.setText("**** " + ultimonumero);
+            txtexvalidadeexcfc.setText("Ativo");
+            deletarcartao.setVisibility(View.GONE);
+            cancelarcartao.setVisibility(View.VISIBLE);
+            cartaonormal.setVisibility(View.GONE);
+        }
     }
 
 

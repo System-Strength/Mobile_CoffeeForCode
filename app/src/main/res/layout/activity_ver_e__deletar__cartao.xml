@@ -20,9 +20,11 @@
 
             <!--Example Card-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cartaonormal"
                 android:layout_width="350dp"
                 android:layout_height="170dp"
                 app:cardCornerRadius="20dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#F2FFBD9C"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +97,84 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!--Example Card CFC-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/excardcfc"
+                android:layout_width="350dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="#F2151515"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <!--Front of card-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/frentedocartaocfc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+                    <!--Text Flag-->
+                    <TextView
+                        android:id="@+id/txtbandeiracardexcfc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bandeira"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:layout_marginTop="16sp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Number-->
+                    <TextView
+                        android:id="@+id/txtexnumerocardexcfc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/numerocardzero"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtbandeiracardexcfc" />
+
+                    <!--Text Name Owner-->
+                    <TextView
+                        android:id="@+id/txtexnomeproprietarioexcfc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/fulanodetal"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtexnumerocardexcfc" />
+
+                    <!--Text Validade-->
+                    <TextView
+                        android:id="@+id/txtexvalidadeexcfc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="32dp"
+                        android:text="@string/validadefake"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -125,6 +205,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/deletarcartao"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--Btn Cancelar Cartao-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cancelarcartao"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:cardBackgroundColor="#FFB888"
+            android:layout_marginBottom="24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:cardCornerRadius="15dp">
+
+            <!--Base-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Txt Delete Card-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancelarcartao"
                     android:textColor="#000"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"

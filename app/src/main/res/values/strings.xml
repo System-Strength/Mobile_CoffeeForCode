@@ -144,6 +144,7 @@
     <string name="treszero">000</string>
     <string name="outroscartoes">Outros Cartões</string>
     <string name="deletarcartao">Deletar Cartão</string>
+    <string name="cancelarcartao">Cancelar Cartão</string>
 
 
     <!--Register Screen Address-->

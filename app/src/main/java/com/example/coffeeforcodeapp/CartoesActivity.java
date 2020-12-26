@@ -75,7 +75,13 @@ public class CartoesActivity extends AppCompatActivity {
         });
 
         basetenhocartaocfc.setOnClickListener(v -> {
-
+            Intent irparadetalhesdocartao = new Intent(CartoesActivity.this,Ver_e_Deletar_CartaoActivity.class);
+            irparadetalhesdocartao.putExtra("iddocartao", 9999);
+            irparadetalhesdocartao.putExtra("cpfparceiro", cpfdousuario);
+            irparadetalhesdocartao.putExtra("emailuser",emaillogado);
+            irparadetalhesdocartao.putExtra("statusavisoend","desativado");
+            startActivity(irparadetalhesdocartao);
+            finish();
         });
 
         //  When click here will to card register
