@@ -15,6 +15,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Perfil" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:statusBarColor" tools:targetApi="l">#FF5500</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">#221F1F</item>
+
+    </style>
+
     <style name="BottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
 
         <item name="bottomSheetStyle">@style/BottomSheetStyle</item>

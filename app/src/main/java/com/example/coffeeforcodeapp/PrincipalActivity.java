@@ -96,7 +96,10 @@ public class PrincipalActivity extends AppCompatActivity {
 
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
-                Toast.makeText(PrincipalActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                Intent irpara_perfil = new Intent(PrincipalActivity.this, PerfilActivity.class);
+                irpara_perfil.putExtra("emailuser", emaillogado);
+                startActivity(irpara_perfil);
+                finish();
                 bottomSheetDialog.dismiss();
             });
 
