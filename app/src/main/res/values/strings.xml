@@ -146,12 +146,24 @@
     <string name="deletarcartao">Deletar Cartão</string>
     <string name="cancelarcartao">Cancelar Cartão</string>
 
-
     <!--Register Screen Address-->
     <string name="cadastroendereco">Cadastro de Endereço</string>
     <string name="hintedittextcadastroendereco">Ex. Rua 00</string>
     <string name="hintedtextcadastroenderecocomp">Ex. Ap 2 Bl 20</string>
     <string name="enderecocom_asterisco">Endereço*</string>
     <string name="complemento">Complemento</string>
+
+    <!--Profile Screen-->
+    <string name="editarperfil">Clique aqui para\neditar seu perfil</string>
+    <string name="cpfcadastrado">CPF Cadastrado</string>
+    <string name="celularcadastrado">Celular Cadastrado</string>
+    <string name="enderecocadastrado">Endereço Cadastrado</string>
+    <string name="complementocadastrado">Complemento Cadastrado</string>
+    <string name="semcelularcadastrado">Não a celular cadastrado</string>
+    <string name="semenderecocadastrado">Não a endereço cadastrado</string>
+    <string name="virarparceiro">Virar parceiro</string>
+    <string name="parceira">Parceria</string>
+    <string name="statuscardparceiro">Status Cartao</string>
+    <string name="ativacao">Ativacao</string>
 
 </resources>
