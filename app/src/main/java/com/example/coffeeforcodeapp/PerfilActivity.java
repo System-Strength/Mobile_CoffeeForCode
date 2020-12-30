@@ -73,24 +73,24 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         cardbtn_editarperfil.setOnClickListener(v -> {
-            /*Intent irpara_editarperfil = new Intent(PerfilActivity.this, EditarPefilActivity.class);
+            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
-            finish();*/
+            finish();
         });
 
         card_cadastarceluar_perfil.setOnClickListener(v -> {
-            /*Intent irpara_editarperfil = new Intent(PerfilActivity.this, EditarPefilActivity.class);
+            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
-            finish();*/
+            finish();
         });
 
         cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> {
-            /*Intent irpara_editarperfil = new Intent(PerfilActivity.this, EditarPefilActivity.class);
+            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
-            finish();*/
+            finish();
         });
 
     }
