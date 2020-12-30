@@ -166,4 +166,22 @@
     <string name="statuscardparceiro">Status Cartao</string>
     <string name="ativacao">Ativacao</string>
 
+    <!--Edit Profile-->
+    <string name="titulo_editarperfil">Editar Perfil</string>
+    <string name="celular">Celular</string>
+    <string name="endereco">Endereço</string>
+    <string name="hintnome">Insira seu nome aqui</string>
+    <string name="hitcpf">Insira seu cpf aqui</string>
+    <string name="hintemail">Insira seu email aqui</string>
+    <string name="hintcelular">Insira seu celular aqui</string>
+    <string name="hintendereco">Insira seu endereço aqui</string>
+    <string name="hintcomplemento">Insira seu complemento aqui</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="alter_senha"><u>Alterar Senha</u></string>
+    <string name="senhaantiga">Senha Antiga</string>
+    <string name="hintoldpassword">Confirme sua senha antiga</string>
+    <string name="txtnovasenha">Nova Senha</string>
+    <string name="hintnovasenha">Insira sua nova senha</string>
+    <string name="hintconfirmenovasenha">Confirme sua nova senha</string>
+
 </resources>

@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroung"
+    android:orientation="vertical"
+    tools:context=".Editar_PerfilActivity">
+
+    <!--Header-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+        <!--Base-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Btn Back-->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/btn_voltaraoperfil"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:lottie_autoPlay="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:lottie_rawRes="@raw/arrowleftback"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/titulo_editarperfil"
+                android:textColor="#000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!--Body-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <!--Primary Dates-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/base_dados_primarios"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+            <!--Text Name-->
+            <TextView
+                android:id="@+id/text_title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nome"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Edit Name-->
+            <EditText
+                android:id="@+id/edit_nome_edicaoperfil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:textColor="#000"
+                android:background="@drawable/editeditarperfil"
+                android:hint="@string/hintnome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_name"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Text CPF-->
+            <TextView
+                android:id="@+id/text_title_cpf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/cpf"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_nome_edicaoperfil" />
+
+            <!--Edit CPF-->
+            <EditText
+                android:id="@+id/edit_cpf_edicaoperfil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:hint="@string/hitcpf"
+                android:maxLength="14"
+                android:textColor="#000"
+                android:textColorHint="#92403D3D"
+                android:inputType="number"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_cpf"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Text EMAIL-->
+            <TextView
+                android:id="@+id/text_title_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/email"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_cpf_edicaoperfil" />
+
+            <!--Edit EMAIL-->
+            <EditText
+                android:id="@+id/edit_email_edicaopefil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:hint="@string/hintemail"
+                android:textColor="#000"
+                android:textColorHint="#92403D3D"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_email"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Text PHONE-->
+            <TextView
+                android:id="@+id/text_title_celualr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/celular"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_email_edicaopefil" />
+
+            <!--Edit PHONE-->
+            <EditText
+                android:id="@+id/edit_celular_edicaopefil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:maxLength="15"
+                android:textColor="#000"
+                android:hint="@string/hintcelular"
+                android:textColorHint="#92403D3D"
+                android:inputType="phone"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_celualr"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Text Address-->
+            <TextView
+                android:id="@+id/text_title_endereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/endereco"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_celular_edicaopefil" />
+
+            <!--Edit Address-->
+            <EditText
+                android:id="@+id/edit_endereco_edicaopefil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:hint="@string/hintendereco"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:textColor="#000"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_endereco"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Text Address Plus-->
+            <TextView
+                android:id="@+id/text_title_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/complemento"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_endereco_edicaopefil" />
+
+            <!--Edit Address Plus-->
+            <EditText
+                android:id="@+id/edit_complemento_edicaopefil"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:textColor="#000"
+                android:hint="@string/hintcomplemento"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_complemento"
+                tools:ignore="Autofill,TextFields" />
+
+            <!--Btn Register-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_confirmar_edicao"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#FFC75A"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_complemento_edicaopefil">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Animation Loading-->
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationloading_dados01"
+                        android:layout_width="200dp"
+                        app:lottie_loop="true"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/coffeeloading" />
+
+                    <!--Text Confirm-->
+                    <TextView
+                        android:id="@+id/txt_btn_confirmar01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/confirmar"
+                        android:textColor="#000"
+                        android:textSize="25sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txt_alter_senha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alter_senha"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_confirmar_edicao" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Secondary Dates -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/base_dados_secundarios"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent">
+
+            <!--Title Password-->
+            <TextView
+                android:id="@+id/text_title_oldpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/senhaantiga"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!--Edit old Password-->
+            <EditText
+                android:id="@+id/edit_antiga_senha"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:textColor="#000"
+                android:background="@drawable/editeditarperfil"
+                android:hint="@string/hintoldpassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_oldpassword"
+                tools:ignore="Autofill,TextFields"/>
+
+            <!--Title New 01 Password-->
+            <TextView
+                android:id="@+id/text_title_newpassword01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/txtnovasenha"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_goneMarginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_antiga_senha" />
+
+            <!--Edit New 01 Password-->
+            <EditText
+                android:id="@+id/edit_novasenha_senha01"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:textColor="#000"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:background="@drawable/editeditarperfil"
+                android:hint="@string/hintnovasenha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_newpassword01"
+                tools:ignore="Autofill,TextFields"/>
+
+            <!--Title New 02 Password-->
+            <TextView
+                android:id="@+id/text_title_newpassword02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/txtnovasenha"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_novasenha_senha01" />
+
+            <!--Edit New 02 Password-->
+            <EditText
+                android:id="@+id/edit_novasenha_senha02"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:textColor="#000"
+                android:textColorHint="#92403D3D"
+                android:inputType="text"
+                android:background="@drawable/editeditarperfil"
+                android:hint="@string/hintconfirmenovasenha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_newpassword02"
+                tools:ignore="Autofill,TextFields"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_alterar_senha"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#FFC75A"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_novasenha_senha02">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Animation Login-->
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationloading_senha"
+                        android:layout_width="200dp"
+                        app:lottie_loop="true"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/coffeeloading" />
+
+                    <!--Text Confirm-->
+                    <TextView
+                        android:id="@+id/txt_btn_confirmar02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/confirmar"
+                        android:textColor="#000"
+                        android:textSize="25sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
