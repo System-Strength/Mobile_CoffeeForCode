@@ -322,7 +322,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="3dp"
                 android:textColorHint="#92403D3D"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="#000"
                 android:background="@drawable/editeditarperfil"
                 android:hint="@string/hintoldpassword"
@@ -352,7 +352,7 @@
                 android:layout_marginTop="3dp"
                 android:textColor="#000"
                 android:textColorHint="#92403D3D"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:background="@drawable/editeditarperfil"
                 android:hint="@string/hintnovasenha"
                 app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +365,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/txtnovasenha"
+                android:text="@string/confirmenovasenha"
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -381,13 +381,14 @@
                 android:layout_marginTop="3dp"
                 android:textColor="#000"
                 android:textColorHint="#92403D3D"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:background="@drawable/editeditarperfil"
                 android:hint="@string/hintconfirmenovasenha"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_title_newpassword02"
                 tools:ignore="Autofill,TextFields"/>
 
+            <!--Btn register new password-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_alterar_senha"
                 android:layout_width="350dp"

@@ -183,5 +183,6 @@
     <string name="txtnovasenha">Nova Senha</string>
     <string name="hintnovasenha">Insira sua nova senha</string>
     <string name="hintconfirmenovasenha">Confirme sua nova senha</string>
+    <string name="confirmenovasenha">Confirme sua nova senha</string>
 
 </resources>

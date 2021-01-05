@@ -163,4 +163,14 @@ public class DaoClientes extends SQLiteOpenHelper {
 
         return getWritableDatabase().update(TABELA,values,id,args);
     }
+
+    public int atualizar_dados_secundario(DtoClientes clientes){
+        ContentValues values = new ContentValues();
+        values.put("SENHACLI", clientes.getSenhacliente());
+
+        String id = "id=?";
+        String[] args = {clientes.getId()+""};
+
+        return getWritableDatabase().update(TABELA,values,id,args);
+    }
 }
