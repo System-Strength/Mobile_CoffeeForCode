@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".Login_admActivity"></activity>
+        <activity android:name=".Principal_ADMActivity"></activity>
         <activity android:name=".Editar_PerfilActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".Todos_Os_produtosActivity" />

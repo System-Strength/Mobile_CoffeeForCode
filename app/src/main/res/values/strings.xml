@@ -185,4 +185,10 @@
     <string name="hintconfirmenovasenha">Confirme sua nova senha</string>
     <string name="confirmenovasenha">Confirme sua nova senha</string>
 
+
+    <!-- Tela de Adms-->
+    <string name="addproduto">Adicionar novo Produto</string>
+    <string name="alterproduto">Alterar Produto</string>
+    <string name="excluirproduto">Alterar Produto</string>
+
 </resources>
