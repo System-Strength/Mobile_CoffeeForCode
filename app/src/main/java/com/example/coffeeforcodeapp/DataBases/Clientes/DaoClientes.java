@@ -28,6 +28,7 @@ public class DaoClientes extends SQLiteOpenHelper {
                 "ENDERECOCLI VARCHAR(50) ," +
                 "COMPLEMENTO VARCHAR(50) ," +
                 "PARCEIRO CHAR(3) ," +
+                "ADM CHAR(3) NOT NULL," +
                 "SENHACLI VARCHAR(28) NOT NULL)";
 
         db.execSQL(comando);
@@ -58,6 +59,7 @@ public class DaoClientes extends SQLiteOpenHelper {
         values.put("ENDERECOCLI", clientes.getEnderecocliente());
         values.put("COMPLEMENTO", clientes.getComplementocliente());
         values.put("PARCEIRO", clientes.getParceiro());
+        values.put("ADM", clientes.getAdm());
         values.put("SENHACLI", clientes.getSenhacliente());
 
         return getWritableDatabase().insert(TABELA, null, values);
@@ -122,7 +124,8 @@ public class DaoClientes extends SQLiteOpenHelper {
             dtoClientes.setEnderecocliente(cursor.getString(5));
             dtoClientes.setComplementocliente(cursor.getString(6));
             dtoClientes.setParceiro(cursor.getString(7));
-            dtoClientes.setSenhacliente(cursor.getString(8));
+            dtoClientes.setAdm(cursor.getString(8));
+            dtoClientes.setSenhacliente(cursor.getString(9));
 
         }
         return dtoClientes;

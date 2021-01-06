@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
 
 public class LoginActivity extends AppCompatActivity {
     TextView txtcriarnovaconta, txtlogarlogin, txtenderecoemaillogin, txtenderecosenhalogin;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     CardView cardviewbtnlogar;
     EditText edittextemail, edittextsenha;
     Dialog avisoemailousenha;
-    @SuppressWarnings("deprecation")
+    DtoClientes adm_verificado = new DtoClientes();
     Handler timer = new Handler();
 
     @SuppressLint("SetTextI18n")
@@ -160,11 +161,34 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         boolean sucesso = daoClientes.onLogin(email,senha);
                         if (sucesso){
-                            Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
-                            irparaprincipal.putExtra("emailuser", email);
-                            irparaprincipal.putExtra("statusavisoend", "ativado");
-                            startActivity(irparaprincipal);
-                            finish();
+                            DaoClientes verificaradm = new DaoClientes(LoginActivity.this);
+                            adm_verificado = verificaradm.consultarclienteporemail(email);
+                            if (adm_verificado.getAdm().equals("SIM")){
+                                AlertDialog.Builder aviso_opcao = new AlertDialog.Builder(LoginActivity.this);
+                                aviso_opcao.setIcon(R.drawable.logocfcsembg);
+                                aviso_opcao.setTitle("Deseja Logar como?");
+                                aviso_opcao.setPositiveButton("Adm", (dialog, which) -> {
+                                    Intent irpara_admprincipal = new Intent(LoginActivity.this,Principal_ADMActivity.class);
+                                    irpara_admprincipal.putExtra("emailuser", email);
+                                    startActivity(irpara_admprincipal);
+                                    finish();
+                                });
+                                aviso_opcao.setNeutralButton("Cliente", (dialog, which) -> {
+                                    Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
+                                    irparaprincipal.putExtra("emailuser", email);
+                                    irparaprincipal.putExtra("statusavisoend", "ativado");
+                                    startActivity(irparaprincipal);
+                                    finish();
+                                });
+
+                                aviso_opcao.show();
+                            }else {
+                                Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
+                                irparaprincipal.putExtra("emailuser", email);
+                                irparaprincipal.putExtra("statusavisoend", "ativado");
+                                startActivity(irparaprincipal);
+                                finish();
+                            }
                         }else {
                             mostraravisoemailousenha();
                         }

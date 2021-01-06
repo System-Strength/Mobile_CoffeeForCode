@@ -2,9 +2,9 @@ package com.example.coffeeforcodeapp.DataBases.Clientes;
 
 public class DtoClientes {
     int id;
-    String nomecliente, cpfcliente, emailcliente, celularcliente, enderecocliente, complementocliente, parceiro, senhacliente;
+    String nomecliente, cpfcliente, emailcliente, celularcliente, enderecocliente, complementocliente, parceiro, adm, senhacliente;
 
-    public DtoClientes(int id, String nomecliente, String cpfcliente, String emailcliente, String celularcliente, String enderecocliente, String complementocliente, String parceiro, String senhacliente) {
+    public DtoClientes(int id, String nomecliente, String cpfcliente, String emailcliente, String celularcliente, String enderecocliente, String complementocliente, String parceiro, String adm, String senhacliente) {
         this.id = id;
         this.nomecliente = nomecliente;
         this.cpfcliente = cpfcliente;
@@ -13,6 +13,7 @@ public class DtoClientes {
         this.enderecocliente = enderecocliente;
         this.complementocliente = complementocliente;
         this.parceiro = parceiro;
+        this.adm = adm;
         this.senhacliente = senhacliente;
     }
 
@@ -80,6 +81,14 @@ public class DtoClientes {
 
     public void setParceiro(String parceiro) {
         this.parceiro = parceiro;
+    }
+
+    public String getAdm() {
+        return adm;
+    }
+
+    public void setAdm(String adm) {
+        this.adm = adm;
     }
 
     public String getSenhacliente() {
