@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
-import com.example.coffeeforcodeapp.DataBases.Parceiro.DaoParceiro;
-import com.example.coffeeforcodeapp.DataBases.Parceiro.DtoParceiro;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DaoParceiro;
+import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
 
 public class PerfilActivity extends AppCompatActivity {
     //  Text Header

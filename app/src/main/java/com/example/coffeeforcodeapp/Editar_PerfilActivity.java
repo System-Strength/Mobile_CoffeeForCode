@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 public class Editar_PerfilActivity extends AppCompatActivity {
     EditText edit_nome_edicaoperfil, edit_cpf_edicaoperfil, edit_email_edicaopefil, edit_celular_edicaopefil, edit_endereco_edicaopefil , edit_complemento_edicaopefil;

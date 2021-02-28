@@ -9,8 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 public class Principal_ADMActivity extends AppCompatActivity {
     TextView txt_olaadm;

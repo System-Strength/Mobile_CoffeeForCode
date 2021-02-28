@@ -18,10 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
-import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
-import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DaoCartoes;
+import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DtoCartoes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
     ConstraintLayout frentedocartao, primeirodadoscartao, segundodadoscartao;

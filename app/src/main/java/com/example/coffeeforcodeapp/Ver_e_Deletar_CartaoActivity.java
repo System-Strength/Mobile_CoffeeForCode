@@ -13,10 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
-import com.example.coffeeforcodeapp.DataBases.Cartoes.DaoCartoes;
-import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
-import com.example.coffeeforcodeapp.DataBases.Parceiro.DaoParceiro;
-import com.example.coffeeforcodeapp.DataBases.Parceiro.DtoParceiro;
+import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DaoCartoes;
+import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DtoCartoes;
+import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DaoParceiro;
+import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
 
 public class Ver_e_Deletar_CartaoActivity extends AppCompatActivity {
     CardView deletarcartao, cancelarcartao, cartaonormal, excardcfc;

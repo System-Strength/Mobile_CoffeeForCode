@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.coffeeforcodeapp.DataBases.Cartoes.DtoCartoes;
+import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DtoCartoes;
 import com.example.coffeeforcodeapp.R;
 
 import java.util.List;

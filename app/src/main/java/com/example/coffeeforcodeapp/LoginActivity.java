@@ -25,8 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.DataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 public class LoginActivity extends AppCompatActivity {
     TextView txtcriarnovaconta, txtlogarlogin, txtenderecoemaillogin, txtenderecosenhalogin;

@@ -1,4 +1,0 @@
-package com.example.coffeeforcodeapp.DataBases.Adms;
-
-public class DtoAdms {
-}
