@@ -45,7 +45,7 @@
             android:id="@+id/txtnomedocliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nomecriarconta"
+            android:text="@string/namecreateaccount"
             android:textColor="#000"
             android:textSize="27sp"
             android:textStyle="bold"

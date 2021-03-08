@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="32dp"
-                    android:text="@string/emailadress"
+                    android:text="@string/emailaddress"
                     android:textAlignment="center"
                     android:textColor="#D8393939"
                     android:textSize="12sp"
@@ -114,7 +114,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="2dp"
-                        android:text="@string/senha"
+                        android:text="@string/password"
                         android:textAlignment="center"
                         android:textColor="#D8393939"
                         android:textSize="12sp" />
@@ -165,6 +165,14 @@
 
                 </RelativeLayout>
 
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/remember_me"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/basesenha" />
+
                 <!--Text Forgot Password-->
                 <TextView
                     android:id="@+id/txtesqueceuasenha"
@@ -172,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="34dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/esqueceuasenha"
+                    android:text="@string/forgotyhepassword"
                     android:textColor="#A4000000"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +218,7 @@
                             android:id="@+id/txtlogarlogin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/logar"
+                            android:text="@string/loginto"
                             android:textColor="#fff"
                             android:textSize="30sp"
                             android:textStyle="bold"
@@ -228,7 +236,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sounovoaqui"
+                    android:text="@string/imnewhere"
                     android:layout_marginEnd="80dp"
                     android:layout_marginTop="40dp"
                     android:textSize="15sp"
@@ -243,7 +251,7 @@
                     android:id="@+id/txtcriarnovaconta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/criarconta"
+                    android:text="@string/createaccount"
                     android:layout_marginStart="2dp"
                     android:textColor="#FFB421"
                     android:textSize="15sp"

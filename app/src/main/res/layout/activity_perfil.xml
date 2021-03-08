@@ -51,7 +51,7 @@
                 android:id="@+id/txtemailuser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/emailadress"
+                android:text="@string/emailaddress"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:layout_marginBottom="40dp"
