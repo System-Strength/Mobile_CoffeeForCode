@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="282dp"
-                        android:text="@string/txtbemvindomenulogin"
+                        android:text="@string/txt_welcome"
                         android:textColor="#CD292929"
                         android:textSize="40sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/txtmenulogin"
+                        android:text="@string/txtChoosetheCfc"
                         android:layout_marginTop="8dp"
                         android:textSize="28sp"
                         android:textColor="#BA4C4C4C"
@@ -135,7 +135,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/saibamais"
+                        android:text="@string/knowmore"
                         android:textColor="#000"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -168,7 +168,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/acessar"
+                        android:text="@string/access"
                         android:textColor="#000"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"

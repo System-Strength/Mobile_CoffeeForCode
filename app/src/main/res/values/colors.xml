@@ -15,5 +15,5 @@
     <color name="medium">#ff8f00</color>
     <color name="strong">#FCCA3F</color>
     <color name="bulletproof">#00c853</color>
-    <string name="cardnormal">#5CFFB422</string>
+    <string name="cardnormal" translatable="false">#5CFFB422</string>
 </resources>
