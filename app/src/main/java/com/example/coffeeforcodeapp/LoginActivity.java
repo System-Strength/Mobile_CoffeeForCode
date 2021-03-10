@@ -25,8 +25,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.coffeeforcodeapp.Api.DtoUsers;
+import com.example.coffeeforcodeapp.Api.UsersService;
 import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     TextView txtcriarnovaconta, txtlogarlogin, txtenderecoemaillogin, txtenderecosenhalogin;
@@ -56,6 +65,11 @@ public class LoginActivity extends AppCompatActivity {
         txtenderecosenhalogin = findViewById(R.id.txtenderecosenhalogin);
         avisoemailousenha = new Dialog(this);
         InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        final Retrofit retrofitUser = new Retrofit.Builder()
+                .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         //  Set some thinks with gone
         imgolhoaberto.setVisibility(View.GONE);
@@ -151,7 +165,39 @@ public class LoginActivity extends AppCompatActivity {
                 edittextsenha.requestFocus();
                 imm.showSoftInput(edittextsenha, InputMethodManager.SHOW_IMPLICIT);
             }else {
-                DaoClientes daoClientes = new DaoClientes(LoginActivity.this);
+                String email = edittextemail.getText().toString();
+                String password = edittextsenha.getText().toString();
+                animationloadinglogin.setVisibility(View.VISIBLE);
+                animationloadinglogin.playAnimation();
+                txtlogarlogin.setVisibility(View.GONE);
+                UsersService usersService = retrofitUser.create(UsersService.class);
+                DtoUsers userData = new DtoUsers(email, password);
+                Call<DtoUsers> resultLogin = usersService.loginUser(userData);
+
+                resultLogin.enqueue(new Callback<DtoUsers>() {
+                    @Override
+                    public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                        if (response.code() == 200){
+                            Toast.makeText(LoginActivity.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                            /*Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
+                            irparaprincipal.putExtra("emailuser", email);
+                            irparaprincipal.putExtra("statusavisoend", "ativado");
+                            startActivity(irparaprincipal);
+                            finish();*/
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                            mostraravisoemailousenha();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DtoUsers> call, Throwable t) {
+
+                    }
+                });
+
+
+                /*DaoClientes daoClientes = new DaoClientes(LoginActivity.this);
                 String email = edittextemail.getText().toString();
                 String senha = edittextsenha.getText().toString();
                 animationloadinglogin.setVisibility(View.VISIBLE);
@@ -195,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
                     }catch (Exception ex){
                         Toast.makeText(this, "Erro ao logar: "+ex, Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                },2000);*/
             }
         });
 
@@ -208,7 +254,8 @@ public class LoginActivity extends AppCompatActivity {
         avisoquemestausando.setPositiveButton("Kaua", (dialogInterface, i) -> {
             //  Dev Login
             edittextemail.setText("kauavitorioof@gmail.com");
-            edittextsenha.setText("kaua2004");
+            edittextsenha.setText("@!Kaua2004" +
+                    "");
         });
         avisoquemestausando.setNeutralButton("Yuri", (dialogInterface, i) -> {
             //  Dev Login
