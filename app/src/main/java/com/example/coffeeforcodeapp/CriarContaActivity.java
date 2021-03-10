@@ -24,14 +24,22 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
+import com.example.coffeeforcodeapp.Api.DtoUsers;
+import com.example.coffeeforcodeapp.Api.UsersService;
 import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class CriarContaActivity extends AppCompatActivity {
     TextView txtlogar, txttermos;
     CheckBox checkboxaceitoostermos;
-    EditText edittextnomecriarconta, edittextcpfcriarconta, edittextemailcriarconta, edittextsenhacriarconta;
+    EditText edittextNameCreateAccount, edittextrg_userCreateAccount, edittextemailcriarconta, edittextPasswordCriarcontacriarconta;
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
@@ -49,10 +57,10 @@ public class CriarContaActivity extends AppCompatActivity {
         cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
         imgolhofechadocriarconta = findViewById(R.id.imgolhofechadocriarconta);
         imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
-        edittextsenhacriarconta = findViewById(R.id.edittextsenhacriarconta);
+        edittextPasswordCriarcontacriarconta = findViewById(R.id.edittextPasswordCriarconta);
         edittextemailcriarconta = findViewById(R.id.edittextemailcriarconta);
-        edittextnomecriarconta = findViewById(R.id.edittextnomecriarconta);
-        edittextcpfcriarconta = findViewById(R.id.edittextcpfcriarconta);
+        edittextNameCreateAccount = findViewById(R.id.edittextNameCreateAccount);
+        edittextrg_userCreateAccount = findViewById(R.id.edittextrg_userCreateAccount);
         checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
         txttermos = findViewById(R.id.txttermos);
         txtlogar = findViewById(R.id.txtlogar);
@@ -60,9 +68,14 @@ public class CriarContaActivity extends AppCompatActivity {
         avisoerro = new Dialog(this);
         LoadingDialog loadingDialog = new LoadingDialog(CriarContaActivity.this);
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        final Retrofit retrofitUser = new Retrofit.Builder()
+                .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         //  Set Mask
-        edittextcpfcriarconta.addTextChangedListener(MaskEditUtil.mask(edittextcpfcriarconta, MaskEditUtil.FORMAT_CPF));
+        edittextrg_userCreateAccount.addTextChangedListener(MaskEditUtil.mask(edittextrg_userCreateAccount, MaskEditUtil.FORMAT_RG));
 
         //  Set some thinks with gone
         certosenhacriarconta.setVisibility(View.GONE);
@@ -71,18 +84,18 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click in the eye closed will hide de password
         imgolhofechadocriarconta.setOnClickListener(v -> {
-            edittextsenhacriarconta.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            edittextPasswordCriarcontacriarconta.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             imgolhoabertocriarconta.setVisibility(View.VISIBLE);
             imgolhofechadocriarconta.setVisibility(View.GONE);
-            edittextsenhacriarconta.setSelection(edittextsenhacriarconta.getText().length());
+            edittextPasswordCriarcontacriarconta.setSelection(edittextPasswordCriarcontacriarconta.getText().length());
         });
 
         //  When click in the eye opened will show de password
         imgolhoabertocriarconta.setOnClickListener(v -> {
-            edittextsenhacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            edittextPasswordCriarcontacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
             imgolhoabertocriarconta.setVisibility(View.GONE);
             imgolhofechadocriarconta.setVisibility(View.VISIBLE);
-            edittextsenhacriarconta.setSelection(edittextsenhacriarconta.getText().length());
+            edittextPasswordCriarcontacriarconta.setSelection(edittextPasswordCriarcontacriarconta.getText().length());
         });
 
         //  When click here will go back to LoginActivity
@@ -94,15 +107,15 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click here will try to create a new account
         cardviewbtncriarconta.setOnClickListener(v -> {
-            if (edittextnomecriarconta.getText() == null || edittextnomecriarconta.getText().length() < 4){
+            if (edittextNameCreateAccount.getText() == null || edittextNameCreateAccount.getText().length() < 4){
                 Toast.makeText(this, "Necessário preencher corretamente o campo: NOME", Toast.LENGTH_SHORT).show();
-                edittextnomecriarconta.requestFocus();
-                imm.showSoftInput(edittextnomecriarconta, InputMethodManager.SHOW_IMPLICIT);
+                edittextNameCreateAccount.requestFocus();
+                imm.showSoftInput(edittextNameCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if(edittextcpfcriarconta.getText() == null || edittextcpfcriarconta.getText().length() < 14){
+            }else if(edittextrg_userCreateAccount.getText() == null || edittextrg_userCreateAccount.getText().length() < 12){
                 Toast.makeText(this, "CPF informado é invalido", Toast.LENGTH_SHORT).show();
-                edittextcpfcriarconta.requestFocus();
-                imm.showSoftInput(edittextcpfcriarconta, InputMethodManager.SHOW_IMPLICIT);
+                edittextrg_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextrg_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(edittextemailcriarconta.getText() == null || edittextemailcriarconta.getText().length() == 0){
                 Toast.makeText(this, "Necessário preencher o campo: EMAIL", Toast.LENGTH_SHORT).show();
@@ -114,35 +127,67 @@ public class CriarContaActivity extends AppCompatActivity {
                 edittextemailcriarconta.requestFocus();
                 imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if (edittextsenhacriarconta.getText() == null || edittextsenhacriarconta.getText().length() < 8){
+            }else if (edittextPasswordCriarcontacriarconta.getText() == null || edittextPasswordCriarcontacriarconta.getText().length() < 8){
                 Toast.makeText(this, "Necessário preencher corretamente o campo: SENHA\nMinimo 8 caracteres", Toast.LENGTH_SHORT).show();
-                edittextsenhacriarconta.requestFocus();
-                imm.showSoftInput(edittextsenhacriarconta, InputMethodManager.SHOW_IMPLICIT);
+                edittextPasswordCriarcontacriarconta.requestFocus();
+                imm.showSoftInput(edittextPasswordCriarcontacriarconta, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
-                String emailsendocadastrado = edittextemailcriarconta.getText().toString();
+                String email = edittextemailcriarconta.getText().toString();
+                String rg_user = edittextrg_userCreateAccount.getText().toString();
+                String password = edittextPasswordCriarcontacriarconta.getText().toString();
+                String nm_user = edittextNameCreateAccount.getText().toString();
+                UsersService usersService = retrofitUser.create(UsersService.class);
+                DtoUsers newuser = new DtoUsers(email, nm_user, rg_user, password);
+                Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
+                loadingDialog.startLoading();
+
+                clientesCall.enqueue(new Callback<DtoUsers>() {
+                    @Override
+                    public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                        if(response.code() == 201 || response.code() == 200){
+                            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+                            voltaraologin.putExtra("emailusu", email);
+                            voltaraologin.putExtra("senhausu", password);
+                            startActivity(voltaraologin);
+                            finish();
+                        }
+                        else if (response.code() == 409){
+                            loadingDialog.dimissDialog();
+                            showError();
+                        }else{
+                            loadingDialog.dimissDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DtoUsers> call, Throwable t) {
+
+                    }
+                });
+
+                /*String emailsendocadastrado = edittextemailcriarconta.getText().toString();
                 DaoClientes clientesconsultados = new DaoClientes(CriarContaActivity.this);
                 clientes = clientesconsultados.consultarclienteporemail(emailsendocadastrado);
                 if (clientes.getEmailcliente() == null){
                     if (edittextemailcriarconta.getText().toString().equals("kauavitorioof@gmail.com")){
                         DtoClientes dtoClientes = new DtoClientes();
-                        dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
-                        dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
+                        dtoClientes.setNomecliente(edittextNameCreateAccount.getText().toString());
+                        dtoClientes.setCpfcliente(edittextrg_userCreateAccount.getText().toString());
                         dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
                         dtoClientes.setParceiro("nao");
                         dtoClientes.setAdm("SIM");
-                        dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
+                        dtoClientes.setSenhacliente(edittextPasswordCriarcontacriarconta.getText().toString());
                         DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
-                        loadingDialog.startLoading();
                         timer.postDelayed(() -> {
                             try {
                                 long linhasafetadas = daoClientes.cadastrar(dtoClientes);
                                 if (linhasafetadas > 0){
                                     Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
                                     voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
-                                    voltaraologin.putExtra("senhausu",edittextsenhacriarconta.getText().toString());
+                                    voltaraologin.putExtra("senhausu",edittextPasswordCriarcontacriarconta.getText().toString());
                                     startActivity(voltaraologin);
                                     finish();
                                 }else {
@@ -156,12 +201,12 @@ public class CriarContaActivity extends AppCompatActivity {
 
                     }else {
                         DtoClientes dtoClientes = new DtoClientes();
-                        dtoClientes.setNomecliente(edittextnomecriarconta.getText().toString());
-                        dtoClientes.setCpfcliente(edittextcpfcriarconta.getText().toString());
+                        dtoClientes.setNomecliente(edittextNameCreateAccount.getText().toString());
+                        dtoClientes.setCpfcliente(edittextrg_userCreateAccount.getText().toString());
                         dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
                         dtoClientes.setParceiro("nao");
                         dtoClientes.setAdm("NAO");
-                        dtoClientes.setSenhacliente(edittextsenhacriarconta.getText().toString());
+                        dtoClientes.setSenhacliente(edittextPasswordCriarcontacriarconta.getText().toString());
                         DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
                         loadingDialog.startLoading();
                         timer.postDelayed(() -> {
@@ -170,7 +215,7 @@ public class CriarContaActivity extends AppCompatActivity {
                                 if (linhasafetadas > 0) {
                                     Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
                                     voltaraologin.putExtra("emailusu", edittextemailcriarconta.getText().toString());
-                                    voltaraologin.putExtra("senhausu", edittextsenhacriarconta.getText().toString());
+                                    voltaraologin.putExtra("senhausu", edittextPasswordCriarcontacriarconta.getText().toString());
                                     startActivity(voltaraologin);
                                     finish();
                                 } else {
@@ -187,7 +232,7 @@ public class CriarContaActivity extends AppCompatActivity {
                     Toast.makeText(this, "O email informado já está em uso!!", Toast.LENGTH_SHORT).show();
                     edittextemailcriarconta.requestFocus();
                     imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
-                }
+                }*/
             }
         });
 
@@ -199,7 +244,7 @@ public class CriarContaActivity extends AppCompatActivity {
         });
 
         //  Set commands to start in real time
-        edittextsenhacriarconta.addTextChangedListener(new TextWatcher() {
+        edittextPasswordCriarcontacriarconta.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -212,12 +257,12 @@ public class CriarContaActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (edittextsenhacriarconta.getText() == null || edittextsenhacriarconta.getText().length() == 0){
+                if (edittextPasswordCriarcontacriarconta.getText() == null || edittextPasswordCriarcontacriarconta.getText().length() == 0){
                     imgolhoabertocriarconta.setVisibility(View.GONE);
                     imgolhofechadocriarconta.setVisibility(View.GONE);
-                    edittextsenhacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    edittextPasswordCriarcontacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }else {
-                    if (edittextsenhacriarconta.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()) {
+                    if (edittextPasswordCriarcontacriarconta.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()) {
                         imgolhoabertocriarconta.setVisibility(View.VISIBLE);
                         imgolhofechadocriarconta.setVisibility(View.GONE);
                     }else{
@@ -225,7 +270,7 @@ public class CriarContaActivity extends AppCompatActivity {
                         imgolhoabertocriarconta.setVisibility(View.GONE);
                     }
                 }
-                if (edittextsenhacriarconta.getText().length() >= 8){
+                if (edittextPasswordCriarcontacriarconta.getText().length() >= 8){
                     certosenhacriarconta.setVisibility(View.VISIBLE);
                     certosenhacriarconta.playAnimation();
                 }else {
@@ -259,7 +304,7 @@ public class CriarContaActivity extends AppCompatActivity {
     }
 
     //  Create method to see the error
-    private void mostrarerro(){
+    private void showError(){
         CardView cardokavisoerro;
         avisoerro.setContentView(R.layout.aviso_erro_criarconta);
         cardokavisoerro = avisoerro.findViewById(R.id.cardokavisoerro);

@@ -12,6 +12,7 @@ import android.widget.EditText;
 abstract class MaskEditUtil {
 
     public static final String FORMAT_CPF = "###.###.###-##";
+    public static final String FORMAT_RG = "##.###.###-#";
     public static final String FORMAT_FONE = "(##) #####-####";
     public static final String FORMAT_CNPJ = "##.###.###/####-##";
     public static final String FORMAT_CEP = "#####-###";
