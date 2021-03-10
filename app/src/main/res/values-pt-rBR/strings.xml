@@ -127,4 +127,5 @@
     <string name="excluirproduto">Alterar Produto</string>
     <string name="remember_me">Lembre de mim</string>
     <string name="desccombohapppy">Frappuccino de chocolate Croissant e Torada</string>
+    <string name="wehaveaproblem">Estamos com problema em nosso servidor.\\nTente mais tarde</string>
 </resources>

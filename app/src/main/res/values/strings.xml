@@ -53,6 +53,7 @@
     <string name="loginto">Log into</string>
     <string name="imnewhere">I\'m new here.</string>
     <string name="createaccount">Create account</string>
+    <string name="wehaveaproblem">We have a problem with our server.\nTry later</string>
     <string name="wrongemailandpassword">EMAIL OR PASSWORD informed are not correct or are not registered Check EMAIL and PASSWORD!</string>
 
     <!--Create Account Screen-->

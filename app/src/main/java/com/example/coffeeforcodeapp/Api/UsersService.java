@@ -4,15 +4,16 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UsersService {
 
     @POST("register")
-    public Call<DtoUsers> registerNewUse(@Body DtoUsers users);
+    Call<DtoUsers> registerNewUse(@Body DtoUsers users);
 
-    @POST("login")
-    public Call<DtoUsers> loginUser(@Body DtoUsers users);
+    @GET("login/{email}/{password}")
+    Call<DtoUsers> loginUser(@Path("email") String email, @Path("password") String password);
 
     @GET("/info/{email}")
-    public Call<DtoUsers> infoUser(@Body DtoUsers users);
+    Call<DtoUsers> infoUser(@Body DtoUsers users);
 }

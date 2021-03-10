@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.UsersService;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
 import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 import retrofit2.Call;
@@ -171,22 +170,23 @@ public class LoginActivity extends AppCompatActivity {
                 animationloadinglogin.playAnimation();
                 txtlogarlogin.setVisibility(View.GONE);
                 UsersService usersService = retrofitUser.create(UsersService.class);
-                DtoUsers userData = new DtoUsers(email, password);
-                Call<DtoUsers> resultLogin = usersService.loginUser(userData);
+                Call<DtoUsers> resultLogin = usersService.loginUser(email, password);
 
                 resultLogin.enqueue(new Callback<DtoUsers>() {
                     @Override
                     public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                         if (response.code() == 200){
-                            Toast.makeText(LoginActivity.this, "" + response.body(), Toast.LENGTH_SHORT).show();
-                            /*Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
-                            irparaprincipal.putExtra("emailuser", email);
-                            irparaprincipal.putExtra("statusavisoend", "ativado");
+                            Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
+                            irparaprincipal.putExtra("id_user", response.body().getId_user());
+                            irparaprincipal.putExtra("email_user", response.body().getEmail());
+                            irparaprincipal.putExtra("phone_user", response.body().getPhone_user());
+                            irparaprincipal.putExtra("rg_user", response.body().getRg_user());
                             startActivity(irparaprincipal);
-                            finish();*/
+                            finish();
+                        }else if(response.code() == 401){;
+                            ShowWarning_Email_Password();
                         }else{
                             Toast.makeText(LoginActivity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
-                            mostraravisoemailousenha();
                         }
                     }
 
@@ -195,53 +195,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-                /*DaoClientes daoClientes = new DaoClientes(LoginActivity.this);
-                String email = edittextemail.getText().toString();
-                String senha = edittextsenha.getText().toString();
-                animationloadinglogin.setVisibility(View.VISIBLE);
-                animationloadinglogin.playAnimation();
-                txtlogarlogin.setVisibility(View.GONE);
-                timer.postDelayed(() -> {
-                    try {
-                        boolean sucesso = daoClientes.onLogin(email,senha);
-                        if (sucesso){
-                            DaoClientes verificaradm = new DaoClientes(LoginActivity.this);
-                            adm_verificado = verificaradm.consultarclienteporemail(email);
-                            if (adm_verificado.getAdm().equals("SIM")){
-                                AlertDialog.Builder aviso_opcao = new AlertDialog.Builder(LoginActivity.this);
-                                aviso_opcao.setIcon(R.drawable.logocfcsembg);
-                                aviso_opcao.setTitle("Deseja Logar como?");
-                                aviso_opcao.setPositiveButton("Adm", (dialog, which) -> {
-                                    Intent irpara_admprincipal = new Intent(LoginActivity.this,Principal_ADMActivity.class);
-                                    irpara_admprincipal.putExtra("emailuser", email);
-                                    startActivity(irpara_admprincipal);
-                                    finish();
-                                });
-                                aviso_opcao.setNeutralButton("Cliente", (dialog, which) -> {
-                                    Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
-                                    irparaprincipal.putExtra("emailuser", email);
-                                    irparaprincipal.putExtra("statusavisoend", "ativado");
-                                    startActivity(irparaprincipal);
-                                    finish();
-                                });
-
-                                aviso_opcao.show();
-                            }else {
-                                Intent irparaprincipal = new Intent(LoginActivity.this,PrincipalActivity.class);
-                                irparaprincipal.putExtra("emailuser", email);
-                                irparaprincipal.putExtra("statusavisoend", "ativado");
-                                startActivity(irparaprincipal);
-                                finish();
-                            }
-                        }else {
-                            mostraravisoemailousenha();
-                        }
-                    }catch (Exception ex){
-                        Toast.makeText(this, "Erro ao logar: "+ex, Toast.LENGTH_SHORT).show();
-                    }
-                },2000);*/
             }
         });
 
@@ -273,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //  Method to show Alert for email and password is wrong
-    private void mostraravisoemailousenha(){
+    private void ShowWarning_Email_Password(){
         CardView btnokavisoemailousenhaerrado;
         avisoemailousenha.setContentView(R.layout.aviso_emailousenhaerrodo);
         btnokavisoemailousenhaerrado = avisoemailousenha.findViewById(R.id.btnokavisoemailousenhaerrado);

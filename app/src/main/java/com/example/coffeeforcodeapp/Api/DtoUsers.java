@@ -96,6 +96,6 @@ public class DtoUsers {
 
     @Override
     public String toString() {
-        return "Email: " + email + "\nSenha: " + password;
+        return id_user + "\n" + email + "\n" + "\n" + rg_user + "\n" +  nm_user + "\n" + password;
     }
 }
