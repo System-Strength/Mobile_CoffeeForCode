@@ -19,7 +19,7 @@ import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
 
 public class ProfileActivity extends AppCompatActivity {
     //  Text Header
-    TextView txtnomeuser, txtemailuser;
+    TextView txtName_user, txtEmail_user;
     //  Text Body
     TextView txtcpfperfil, txtcelularperfil, txtenderecoperfil, txtcomplementoperfil, txtstatuscard_perfil, data_ativacaoparceiro_perfil;
     //  Bases
@@ -38,8 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         setTheme(R.style.Perfil);
 
-        txtnomeuser = findViewById(R.id.txtnomeuser);
-        txtemailuser = findViewById(R.id.txtemailuser);
+        txtName_user = findViewById(R.id.txtName_user);
+        txtEmail_user = findViewById(R.id.txtEmail_user);
         txtcpfperfil = findViewById(R.id.txtcpfperfil);
         base_nao_tem_celular_cadastrado = findViewById(R.id.base_nao_tem_celular_cadastrado);
         base_tem_celular_cadastrado = findViewById(R.id.base_tem_celular_cadastrado);
@@ -99,8 +99,8 @@ public class ProfileActivity extends AppCompatActivity {
     private void carregar_info_user(){
         DaoClientes daoClientes = new DaoClientes(ProfileActivity.this);
         clientelogado = daoClientes.consultarclienteporemail(emaillogado);
-        txtnomeuser.setText(clientelogado.getNomecliente());
-        txtemailuser.setText(clientelogado.getEmailcliente());
+        txtName_user.setText(clientelogado.getNomecliente());
+        txtEmail_user.setText(clientelogado.getEmailcliente());
         txtcpfperfil.setText(clientelogado.getCpfcliente());
         if (clientelogado.getCelularcliente() == null || clientelogado.getCelularcliente().equals("")){
             base_nao_tem_celular_cadastrado.setVisibility(View.VISIBLE);
