@@ -17,9 +17,9 @@ import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DaoParceiro;
 import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
 
-public class PerfilActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
     //  Text Header
-    TextView txtnomeuser, txtemailuser;
+    TextView txtName_user, txtEmail_user;
     //  Text Body
     TextView txtcpfperfil, txtcelularperfil, txtenderecoperfil, txtcomplementoperfil, txtstatuscard_perfil, data_ativacaoparceiro_perfil;
     //  Bases
@@ -35,11 +35,11 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_profile);
         setTheme(R.style.Perfil);
 
-        txtnomeuser = findViewById(R.id.txtnomeuser);
-        txtemailuser = findViewById(R.id.txtemailuser);
+        txtName_user = findViewById(R.id.txtName_user);
+        txtEmail_user = findViewById(R.id.txtEmail_user);
         txtcpfperfil = findViewById(R.id.txtcpfperfil);
         base_nao_tem_celular_cadastrado = findViewById(R.id.base_nao_tem_celular_cadastrado);
         base_tem_celular_cadastrado = findViewById(R.id.base_tem_celular_cadastrado);
@@ -66,28 +66,28 @@ public class PerfilActivity extends AppCompatActivity {
         carregar_info_user();
 
         btnvirarparceiro_perfil.setOnClickListener(v -> {
-            Intent irpara_sejaparceira = new Intent(PerfilActivity.this, SejaParceiroActivity.class);
+            Intent irpara_sejaparceira = new Intent(ProfileActivity.this, SejaParceiroActivity.class);
             irpara_sejaparceira.putExtra("emailuser", emaillogado);
             startActivity(irpara_sejaparceira);
             finish();
         });
 
         cardbtn_editarperfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
+            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
             finish();
         });
 
         card_cadastarceluar_perfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
+            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
             finish();
         });
 
         cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(PerfilActivity.this, Editar_PerfilActivity.class);
+            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
             irpara_editarperfil.putExtra("emailuser", emaillogado);
             startActivity(irpara_editarperfil);
             finish();
@@ -97,10 +97,10 @@ public class PerfilActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void carregar_info_user(){
-        DaoClientes daoClientes = new DaoClientes(PerfilActivity.this);
+        DaoClientes daoClientes = new DaoClientes(ProfileActivity.this);
         clientelogado = daoClientes.consultarclienteporemail(emaillogado);
-        txtnomeuser.setText(clientelogado.getNomecliente());
-        txtemailuser.setText(clientelogado.getEmailcliente());
+        txtName_user.setText(clientelogado.getNomecliente());
+        txtEmail_user.setText(clientelogado.getEmailcliente());
         txtcpfperfil.setText(clientelogado.getCpfcliente());
         if (clientelogado.getCelularcliente() == null || clientelogado.getCelularcliente().equals("")){
             base_nao_tem_celular_cadastrado.setVisibility(View.VISIBLE);
@@ -130,7 +130,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void info_parceiro(){
-        DaoClientes daoClientes = new DaoClientes(PerfilActivity.this);
+        DaoClientes daoClientes = new DaoClientes(ProfileActivity.this);
         clientelogado = daoClientes.consultarclienteporemail(emaillogado);
         cpfcliente = clientelogado.getCpfcliente();
 
@@ -145,7 +145,7 @@ public class PerfilActivity extends AppCompatActivity {
                 base_desc_parceiro_perfil.setVisibility(View.VISIBLE);
             },2950);
         }else {
-            DaoParceiro daoParceiro = new DaoParceiro(PerfilActivity.this);
+            DaoParceiro daoParceiro = new DaoParceiro(ProfileActivity.this);
             dados_do_parceiro = daoParceiro.consultarclienteporcpf(cpfcliente);
 
             cliente_eparceiro.setVisibility(View.VISIBLE);
@@ -157,7 +157,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(PerfilActivity.this, MainActivity.class);
+        Intent voltaraoprincipal = new Intent(ProfileActivity.this, MainActivity.class);
         voltaraoprincipal.putExtra("emailuser",emaillogado);
         voltaraoprincipal.putExtra("statusavisoend","desativado");
         startActivity(voltaraoprincipal);

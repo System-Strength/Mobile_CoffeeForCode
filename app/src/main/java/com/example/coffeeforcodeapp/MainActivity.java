@@ -5,12 +5,16 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -19,52 +23,78 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
+import com.example.coffeeforcodeapp.Api.DtoMenu;
+import com.example.coffeeforcodeapp.Api.MenuService;
+import com.example.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
-    LottieAnimationView icone_perfil_principal;
-    TextView txtnomedocliente;
-    CardView cardviewnotpartner, cardbepartner, cardvercartoes, cardvercarrinhodecompra;
+    LottieAnimationView icon_Profile_principal;
+    TextView txt_Name_user;
+    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
-    Dialog avisoendereco;
+    Dialog warning_address;
+    ArrayList<DtoMenu> popularProdutctsarrayList;
+    RecyclerView recyclerPopularProducts;
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
     int id_user, partner;
-    String nm_user, email_user, phone_user, address_user, rg_user, apareceravisoendereco, nomedousuario;
+    String nm_user, email_user, phone_user, address_user, cpf_user, Show_warning_address;
+    final Retrofit Productsretrofit = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/products/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
+    TopProducts_Adapter topProducts_adapter = null;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txtnomedocliente = findViewById(R.id.txtnomedocliente);
-        cardviewnotpartner = findViewById(R.id.cardviewnotpartner);
-        cardbepartner = findViewById(R.id.cardbepartner);
-        cardvercartoes = findViewById(R.id.cardvercartoes);
-        cardvercarrinhodecompra = findViewById(R.id.cardvercarrinhodecompra);
-        icone_perfil_principal = findViewById(R.id.icone_perfil_principal);
-        avisoendereco = new Dialog(this);
+        txt_Name_user = findViewById(R.id.txt_Name_user);
+        recyclerPopularProducts = findViewById(R.id.recyclerPopularProducts);
+        cardview_notPartner = findViewById(R.id.cardview_notPartner);
+        card_Be_Partner = findViewById(R.id.card_Be_Partner);
+        card_See_Cards = findViewById(R.id.card_See_Cards);
+        card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
+        icon_Profile_principal = findViewById(R.id.icon_Profile_principal);
+        warning_address = new Dialog(this);
+
 
         //  Get information for login of client
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle == null){
-            apareceravisoendereco = "ativado";
+            Show_warning_address = "ativado";
         }else {
             id_user  = bundle.getInt("id_user");
             nm_user  = bundle.getString("nm_user");
             email_user  = bundle.getString("email_user");
             phone_user  = bundle.getString("phone_user");
             address_user  = bundle.getString("address_user");
-            rg_user  = bundle.getString("rg_user");
+            cpf_user  = bundle.getString("cpf_user");
             partner  = bundle.getInt("partner");
-            apareceravisoendereco = bundle.getString("statusavisoend");
+            Show_warning_address = bundle.getString("statusavisoend");
         }
+
+        loadPopularProducts();
 
         mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
@@ -74,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //  When click in this card user will to SejaParceiroActivity
-        cardbepartner.setOnClickListener(v -> {
+        card_Be_Partner.setOnClickListener(v -> {
             Intent irparavirarparceiro = new Intent(MainActivity.this,SejaParceiroActivity.class);
             //irparavirarparceiro.putExtra("emailuser",emaillogado);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
@@ -83,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //  When click in this card user will to CartoesActivity
-        cardvercartoes.setOnClickListener(v -> {
+        card_See_Cards.setOnClickListener(v -> {
             Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
             //irparacartoes.putExtra("emailuser",emaillogado);
             startActivity(irparacartoes);
@@ -91,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //  When click in this card user will to cardvercarrinhodecompra
-        cardvercarrinhodecompra.setOnClickListener(v -> {
+        card_Shopping_Cart.setOnClickListener(v -> {
             Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
             //vercarrinhodecompra.putExtra("emailuser", emaillogado);
             startActivity(vercarrinhodecompra);
@@ -100,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //  When click here will show info_perfil
-        icone_perfil_principal.setOnClickListener(v -> {
+        icon_Profile_principal.setOnClickListener(v -> {
             bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
 
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
@@ -108,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
-                Intent irpara_perfil = new Intent(MainActivity.this, PerfilActivity.class);
+                Intent irpara_perfil = new Intent(MainActivity.this, ProfileActivity.class);
+                irpara_perfil.putExtra("id_user", id_user);
                 //irpara_perfil.putExtra("emailuser", emaillogado);
                 startActivity(irpara_perfil);
                 finish();
@@ -129,29 +160,72 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to LoginActivity
             sheetview.findViewById(R.id.btnlogout).setOnClickListener(v1 -> {
-                AlertDialog.Builder aviso = new AlertDialog.Builder(MainActivity.this);
-                aviso.setTitle("Deslogar");
-                aviso.setMessage("Deseja realmente deslogar?");
-                aviso.setPositiveButton("Sim", (dialog, which) -> {
+                AlertDialog.Builder warning_alert = new AlertDialog.Builder(MainActivity.this);
+                warning_alert.setTitle("Deslogar");
+                warning_alert.setMessage("Deseja realmente deslogar?");
+                warning_alert.setPositiveButton("Sim", (dialog, which) -> {
                     mPrefs.edit().clear().apply();
                     Intent voltaraologin = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(voltaraologin);
                     finish();
                 });
-                aviso.setNegativeButton("Não", null);
-                aviso.show();
+                warning_alert.setNegativeButton("Não", null);
+                warning_alert.show();
             });
 
-            TextView nomeusermenusheet;
-            nomeusermenusheet = sheetview.findViewById(R.id.nomeusermenusheet);
-            String[]  nomecliente = nm_user.split(" ");
-            String primeironome = nomecliente[0];
-            String segundonome = nomecliente[1];
-            nomeusermenusheet.setText(primeironome + " " + segundonome);
+            TextView name_user_menuSheet;
+            name_user_menuSheet = sheetview.findViewById(R.id.name_user_menuSheet);
+            String[]  UserName = nm_user.split(" ");
+            String firstName = UserName[0];
+            String secondName = UserName[1];
+            name_user_menuSheet.setText(firstName + " " + secondName);
 
             bottomSheetDialog.setContentView(sheetview);
             bottomSheetDialog.show();
         });
+    }
+
+    private void loadPopularProducts() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerPopularProducts.setLayoutManager(layoutManager);
+
+        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, MainActivity.this);
+        asyncPopularProducts.execute();
+
+        /*MenuService menuService = Productsretrofit.create(MenuService.class);
+        Call<ArrayList<DtoMenu>> resultProducts = menuService.getPopularProducts();
+
+        resultProducts.enqueue(new Callback<ArrayList<DtoMenu>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DtoMenu>> call, Response<ArrayList<DtoMenu>> response) {
+                if (response.code() == 200){
+                    TopProducts_Adapter topProducts_adapter = null;
+                    popularProdutctsarrayList = new ArrayList<>();
+                    for (int i = 0; i < response.body().size(); i++) {
+                        try {
+                            DtoMenu dtoMenuResult = new DtoMenu();
+                            dtoMenuResult.setNm_prod(response.body().get(i).getNm_prod());
+                            URL url= new URL(response.body().get(i).getImg_prod().toString());
+                            Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                            dtoMenuResult.setImg_prod(image);
+                            popularProdutctsarrayList.add(dtoMenuResult);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        topProducts_adapter = new TopProducts_Adapter(popularProdutctsarrayList);
+                        recyclerPopularProducts.setAdapter(topProducts_adapter);
+                        //Toast.makeText(MainActivity.this, ""+ resultado, Toast.LENGTH_SHORT).show();
+                    };
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<DtoMenu>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
     }
 
     //  Create method to check customer first things
@@ -161,32 +235,32 @@ public class MainActivity extends AppCompatActivity {
         String firstName_user = Name_user[0];
 
         //  Set first name of client
-        txtnomedocliente.setText(firstName_user);
+        txt_Name_user.setText(firstName_user);
 
         if (partner == 0){
-            animacaonotpartner();
+            animationNotPartner();
         }else {
-            cardviewnotpartner.setVisibility(View.GONE);
+            cardview_notPartner.setVisibility(View.GONE);
         }
 
         if (address_user == null || address_user.equals("")){
-            if (apareceravisoendereco.equals("desativado")){
-                avisoendereco.dismiss();
+            if (Show_warning_address.equals("desativado")){
+                //warning_address.dismiss();
             }else {
-                mostraavisoend();
+                //mostraavisoend();
             }
         }else{
-            avisoendereco.dismiss();
+            //warning_address.dismiss();
         }
     }
 
     //  Create Method for show alert of no adress register
     private void mostraavisoend(){
         ConstraintLayout btncadastraragoraend, btncadastrardepoisend;
-        avisoendereco.setContentView(R.layout.aviso_sem_endereco_cadatrado);
-        avisoendereco.setCancelable(false);
-        btncadastraragoraend = avisoendereco.findViewById(R.id.btncadastraragoraend);
-        btncadastrardepoisend = avisoendereco.findViewById(R.id.btncadastrardepoisend);
+        warning_address.setContentView(R.layout.aviso_sem_endereco_cadatrado);
+        warning_address.setCancelable(false);
+        btncadastraragoraend = warning_address.findViewById(R.id.btncadastraragoraend);
+        btncadastrardepoisend = warning_address.findViewById(R.id.btncadastrardepoisend);
 
         btncadastraragoraend.setOnClickListener(v -> {
            Intent ircadastrarendereco = new Intent(MainActivity.this,CadastrarenderecoActivity.class);
@@ -195,18 +269,18 @@ public class MainActivity extends AppCompatActivity {
            finish();
         });
 
-        btncadastrardepoisend.setOnClickListener(v -> avisoendereco.dismiss());
+        btncadastrardepoisend.setOnClickListener(v -> warning_address.dismiss());
 
-        avisoendereco.show();
+        warning_address.show();
     }
 
     //  Create Method for do animation in Not Partner Card
-    private void  animacaonotpartner(){
+    private void animationNotPartner(){
         ConstraintLayout animationnotpartner, constraintdescnotpartner;
         animationnotpartner = findViewById(R.id.animationnotpartner);
         constraintdescnotpartner = findViewById(R.id.constraintdescnotpartner);
 
-        cardviewnotpartner.setVisibility(View.VISIBLE);
+        cardview_notPartner.setVisibility(View.VISIBLE);
         animationnotpartner.setVisibility(View.VISIBLE);
         constraintdescnotpartner.setVisibility(View.GONE);
         timer.postDelayed(() -> {

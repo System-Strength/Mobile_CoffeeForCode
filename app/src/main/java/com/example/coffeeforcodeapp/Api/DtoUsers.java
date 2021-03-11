@@ -1,26 +1,22 @@
 package com.example.coffeeforcodeapp.Api;
 
-import retrofit2.Call;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
-
 public class DtoUsers {
     int id_user;
-    String email, nm_user, rg_user, phone_user, address_user,password, partner, message;
+    String email, nm_user, cpf_user, phone_user, address_user,password, partner, message;
 
-    public DtoUsers(String email, String nm_user, String rg_user, String password){
+    public DtoUsers(String email, String nm_user, String cpf_user, String password){
         this.email = email;
         this.nm_user = nm_user;
-        this.rg_user = rg_user;
+        this.cpf_user = cpf_user;
         this.password = password;
 
     }
 
-    public DtoUsers(int id_user, String email, String nm_user, String rg_user, String phone_user, String password, String partner) {
+    public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, String partner) {
         this.id_user = id_user;
         this.email = email;
         this.nm_user = nm_user;
-        this.rg_user = rg_user;
+        this.cpf_user = cpf_user;
         this.phone_user = phone_user;
         this.password = password;
     }
@@ -62,12 +58,12 @@ public class DtoUsers {
         this.nm_user = nm_user;
     }
 
-    public String getRg_user() {
-        return rg_user;
+    public String getCpf_user() {
+        return cpf_user;
     }
 
-    public void setRg_user(String rg_user) {
-        this.rg_user = rg_user;
+    public void setCpf_user(String cpf_user) {
+        this.cpf_user = cpf_user;
     }
 
     public String getPhone_user() {
@@ -104,6 +100,6 @@ public class DtoUsers {
 
     @Override
     public String toString() {
-        return id_user + "\n" + email + "\n" + "\n" + rg_user + "\n" +  nm_user + "\n" + password;
+        return id_user + "\n" + email + "\n" + "\n" + cpf_user + "\n" +  nm_user + "\n" + password;
     }
 }

@@ -211,13 +211,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200){
                     assert response.body() != null;
                     int id_user;
-                    String nm_user, email_user, phone_user, address_user,rg_user, partner;
+                    String nm_user, email_user, phone_user, address_user,cpf_user, partner;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     email_user = response.body().getEmail();
                     phone_user = response.body().getPhone_user();
                     address_user = response.body().getAddress_user();
-                    rg_user = response.body().getRg_user();
+                    cpf_user = response.body().getCpf_user();
                     partner = response.body().getPartner();
 
                     if (checkbox_rememberMe.isChecked()){
@@ -227,10 +227,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("pref_password", password);
                         editor.putBoolean("pref_check", boollsChecked);
                         editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, rg_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, cpf_user, partner);
                     }else{
                         mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, rg_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, cpf_user, partner);
                     }
 
                 }else if(response.code() == 401){;
@@ -250,14 +250,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user,String rg_user, String partner) {
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user,String cpf_user, String partner) {
         Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
         GoTo_Main.putExtra("id_user", id_user);
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("email_user", email_user);
         GoTo_Main.putExtra("phone_user", phone_user);
         GoTo_Main.putExtra("address_user", address_user);
-        GoTo_Main.putExtra("rg_user", rg_user);
+        GoTo_Main.putExtra("cpf_user", cpf_user);
         GoTo_Main.putExtra("partner", partner);
         GoTo_Main.putExtra("statusavisoend", "ativado");
         startActivity(GoTo_Main);

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CoffeeForCodeApp">
         <activity android:name=".Principal_ADMActivity"></activity>
         <activity android:name=".Editar_PerfilActivity" />
-        <activity android:name=".PerfilActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".Todos_Os_produtosActivity" />
         <activity android:name=".SaibaMaisActivity" />
         <activity android:name=".Ver_e_Deletar_CartaoActivity" />

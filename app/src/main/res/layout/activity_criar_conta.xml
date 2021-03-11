@@ -98,18 +98,18 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="10dp"
                     android:textColor="#95000000"
-                    android:text="@string/rgcreateaccount"
+                    android:text="@string/cpfcreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edittextName_userCreateAccount" />
 
                 <!--Edit text CPF-->
                 <EditText
-                    android:id="@+id/edittextrg_userCreateAccount"
+                    android:id="@+id/edittextcpf_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/edittextcriarconta"
-                    android:hint="@string/mascararg"
+                    android:hint="@string/masckcpf"
                     android:inputType="number"
                     android:textColor="#000"
                     android:textColorHint="#27000000"
@@ -129,7 +129,7 @@
                     android:textColor="#95000000"
                     android:text="@string/emailcreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextrg_userCreateAccount" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittextcpf_userCreateAccount" />
 
                 <!--Edit text Email-->
                 <EditText
