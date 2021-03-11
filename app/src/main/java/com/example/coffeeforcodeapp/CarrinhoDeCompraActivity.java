@@ -22,7 +22,7 @@ public class CarrinhoDeCompraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(CarrinhoDeCompraActivity.this,PrincipalActivity.class);
+        Intent voltaraoprincipal = new Intent(CarrinhoDeCompraActivity.this, MainActivity.class);
         voltaraoprincipal.putExtra("emailuser",emaillogado);
         voltaraoprincipal.putExtra("statusavisoend","desativado");
         startActivity(voltaraoprincipal);

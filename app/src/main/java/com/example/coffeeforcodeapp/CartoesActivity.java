@@ -95,7 +95,7 @@ public class CartoesActivity extends AppCompatActivity {
 
         //  When click here will back to PrincipalActivity
         btnvoltarcartoes.setOnClickListener(v -> {
-            Intent voltaraoprincipal = new Intent(CartoesActivity.this,PrincipalActivity.class);
+            Intent voltaraoprincipal = new Intent(CartoesActivity.this, MainActivity.class);
             voltaraoprincipal.putExtra("emailuser",emaillogado);
             voltaraoprincipal.putExtra("statusavisoend","desativado");
             startActivity(voltaraoprincipal);
@@ -157,7 +157,7 @@ public class CartoesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(CartoesActivity.this,PrincipalActivity.class);
+        Intent voltaraoprincipal = new Intent(CartoesActivity.this, MainActivity.class);
         voltaraoprincipal.putExtra("emailuser",emaillogado);
         voltaraoprincipal.putExtra("statusavisoend","desativado");
         startActivity(voltaraoprincipal);

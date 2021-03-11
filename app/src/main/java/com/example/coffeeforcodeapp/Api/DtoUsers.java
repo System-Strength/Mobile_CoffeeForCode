@@ -1,0 +1,105 @@
+package com.example.coffeeforcodeapp.Api;
+
+public class DtoUsers {
+    int id_user;
+    String email, nm_user, cpf_user, phone_user, address_user,password, partner, message;
+
+    public DtoUsers(String email, String nm_user, String cpf_user, String password){
+        this.email = email;
+        this.nm_user = nm_user;
+        this.cpf_user = cpf_user;
+        this.password = password;
+
+    }
+
+    public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, String partner) {
+        this.id_user = id_user;
+        this.email = email;
+        this.nm_user = nm_user;
+        this.cpf_user = cpf_user;
+        this.phone_user = phone_user;
+        this.password = password;
+    }
+
+    public DtoUsers(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getAddress_user() {
+        return address_user;
+    }
+
+    public void setAddress_user(String address_user) {
+        this.address_user = address_user;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNm_user() {
+        return nm_user;
+    }
+
+    public void setNm_user(String nm_user) {
+        this.nm_user = nm_user;
+    }
+
+    public String getCpf_user() {
+        return cpf_user;
+    }
+
+    public void setCpf_user(String cpf_user) {
+        this.cpf_user = cpf_user;
+    }
+
+    public String getPhone_user() {
+        return phone_user;
+    }
+
+    public void setPhone_user(String phone_user) {
+        this.phone_user = phone_user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return id_user + "\n" + email + "\n" + "\n" + cpf_user + "\n" +  nm_user + "\n" + password;
+    }
+}

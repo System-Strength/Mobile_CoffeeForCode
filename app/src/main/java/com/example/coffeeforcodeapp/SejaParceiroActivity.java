@@ -219,7 +219,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
                 if (dtoClientes == null){
                     Toast.makeText(this, "Ouve algum problema em carregar seus dados, tente reiniciar o aplicativo e tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                     timer.postDelayed(() -> {
-                        Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this,PrincipalActivity.class);
+                        Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
                         voltaraoprincipal.putExtra("emailuser",emaillogado);
                         voltaraoprincipal.putExtra("statusavisoend","desativado");
                         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
@@ -235,7 +235,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
             }catch (Exception ex){
                 Toast.makeText(this, "Ouve algum problema em carregar seus dados, tente reiniciar o aplicativo e tente novamente mais tarde. erro: "+ ex, Toast.LENGTH_LONG).show();
                 timer.postDelayed(() -> {
-                    Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this,PrincipalActivity.class);
+                    Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
                     voltaraoprincipal.putExtra("emailuser",emaillogado);
                     voltaraoprincipal.putExtra("statusavisoend","desativado");
                     ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
@@ -298,7 +298,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
         aviso.setCancelable(false);
 
         timer.postDelayed(() -> {
-            Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this,PrincipalActivity.class);
+            Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
             voltaraoprincipal.putExtra("emailuser",emaillogado);
             voltaraoprincipal.putExtra("statusavisoend","desativado");
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
@@ -373,7 +373,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (primeirabasesejaparceito.getVisibility() == View.VISIBLE){
-            Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this,PrincipalActivity.class);
+            Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
             voltaraoprincipal.putExtra("emailuser",emaillogado);
             voltaraoprincipal.putExtra("statusavisoend","desativado");
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);

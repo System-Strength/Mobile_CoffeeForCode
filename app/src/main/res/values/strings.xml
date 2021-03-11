@@ -5,190 +5,201 @@
     <string name="tamanho">Tamanho: </string>
     <string name="sabor">Sabor: </string>
     <string name="docedeleito">Doce de Leite</string>
-    <string name="quinhentosml">500 ml</string>
-    <string name="seissentosml">600 ml</string>
+    <string name="quinhentosml" translatable="false">500 ml</string>
+    <string name="seissentosml" translatable="false">600 ml</string>
 
     <!--Coffee Names-->
-    <string name="refreshers">Refreshers™</string>
-    <string name="cafes">Cafés</string>
-    <string name="unicornfrappuccino">Unicorn Frappuccino</string>
-    <string name="mochafrappuccino">Mocha Frappuccino</string>
-    <string name="combohappy">Combo Happy</string>
+    <string name="refreshers" translatable="false">Refreshers™</string>
+    <string name="cafes">Coffees</string>
+    <string name="unicornfrappuccino" translatable="false">Unicorn Frappuccino</string>
+    <string name="mochafrappuccino" translatable="false">Mocha Frappuccino</string>
+    <string name="combohappy" translatable="false">Combo Happy</string>
     <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
-    <string name="desccombohapppy">Frappuccino de chocolate\nCroissant e Torada</string>
-    <string name="salgadosesanduiches">Salgados e sanduiches</string>
-    <string name="candys">Doces</string>
-    <string name="dunkindonuts">Dunkin Donuts</string>
+    <string name="desccombohapppy">Chocolate Frappuccino Croissant and Torada</string>
+    <string name="salgadosesanduiches">Savory and sandwichesuiches</string>
+    <string name="candys">Candy</string>
+    <string name="dunkindonuts" translatable="false">Dunkin Donuts</string>
 
     <!--Not Partner-->
-    <string name="sejaparceiro">Sejá Parceiro</string>
-    <string name="descpartner">Descontos exclusivos, cartão fidelidade,  frete grátis, premiações mensais</string>
+    <string name="sejaparceiro">Be partner</string>
+    <string name="descpartner">Exclusive discounts, loyalty card, free shipping, monthly awards</string>
 
 
     <!--Hints / Mask-->
-    <string name="mascaracpf" tools:ignore="TypographyDashes">000.000.000-00</string>
-    <string name="mascaraphone" tools:ignore="TypographyDashes">(00) 00000-0000</string>
-    <string name="mascaraemail">exemplo@gmail.com</string>
-    <string name="exnome">Ex. Fulano de tal</string>
+    <string name="masckcpf" tools:ignore="TypographyDashes" translatable="false">000.000.000-00</string>
+    <string name="mascaraphone" tools:ignore="TypographyDashes" translatable="false">(00) 00000-0000</string>
+    <string name="mascaraemail">example@gmail.com</string>
+    <string name="exnome" translatable="false">Ex. Fulano de tal</string>
 
     <!--Loading-->
-    <string name="carregando" tools:ignore="TypographyEllipsis">Carregando...</string>
+    <string name="carregando" tools:ignore="TypographyEllipsis">Loading...</string>
 
     <!--Terms-->
-    <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>CoffeeForCode</b></u>\nO presente instrumento estabelece os termos e as condições aplicáveis ao seu acesso e a participação no programa My CoffeeForCode Rewards™, operado pela CoffeeForCode Brasil Comércio de Cafés Ltda.- CNPJ Nº. 17.884.267/0001-00, com endereço na Avenida Paulista nº 900, Bela Vista São Paulo,(aqui denominada CoffeeForCode Brasil), suas subsidiárias, filiais licenciadas e empresas coligadas, e não reduz os termos e condições de qualquer outro acordo celebrado entre o cliente e a Starbucks, no que diz respeito a produtos e serviços oferecidos pela CoffeeForCode.\n\n<u><b>MIT License</b></u>\n<u>Copyright (c) 2020 System Strength</u>\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
-    <string name="termosparaserparceiro"><u><b>Parceiro</b></u>\n\nEstou de acordo que será cobrado uma taxa de R$20 por mês de minha conta para que minha assinatura como parceiro seja renovada e estou de acordo que o cartão CFC apenas é valido para  compras em nosso site, aplicativo e loja não sendo valido para compras em outras lojas.</string>
-    <string name="aceitoostermos">Eu aceito os Termos</string>
+    <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>CoffeeForCode</b></u>\nThis instrument establishes the terms and conditions applicable to your access and participation in the My CoffeeForCode Rewards ™ program, operated by CoffeeForCode Brasil Comércio de Cafés Ltda.- CNPJ Nº. 17.884.267 / 0001-00, with address at Avenida Paulista nº 900, Bela Vista São Paulo, (hereinafter CoffeeForCode Brasil), its subsidiaries, licensed branches and related companies, and does not reduce the terms and conditions of any other agreement entered into between the customer and Starbucks, with respect to products and services offered by CoffeeForCode. \ n \ n <u> <b> MIT License </b> </u> \ n <u> Copyright (c) 2020 System Strength </u> \ nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: \ n \ nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. \ n \ nTHE S OFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+    <string name="termosparaserparceiro"><u><b>Partner</b></u>\n\nI agree that my account will be charged a fee of R $ 20 per month for my subscription as a partner to be renewed and I agree that the CFC card is only valid for purchases on our website, application and store and is not valid for purchases on other stores.</string>
+    <string name="aceitoostermos">I accept the Terms</string>
 
     <!--First Screen-->
-    <string name="saibamais">Saiba Mais</string>
-    <string name="acessar">Acessar</string>
-    <string name="txtbemvindomenulogin"><u><b>Bem Vindo!!</b></u></string>
-    <string name="txtmenulogin" tools:ignore="TypographyEllipsis">Escolha a<u> Coffee For Code </u> o café para começar seu dia!!</string>
+    <string name="knowmore">Know more</string>
+    <string name="access">Access</string>
+    <string name="txt_welcome"><u><b>Welcome!!</b></u></string>
+    <string name="txtChoosetheCfc" tools:ignore="TypographyEllipsis">Choose the<u> Coffee For Code </u> the coffee to start your day !!</string>
 
     <!--Login Screen-->
-    <string name="login">Login</string>
-    <string name="emailadress">Endereço de Email</string>
-    <string name="senha">Senha</string>
-    <string name="esqueceuasenha">Esqueceu sua senha?</string>
-    <string name="logar">Logar</string>
-    <string name="sounovoaqui">Sou novo aqui.</string>
-    <string name="criarconta">Criar Conta</string>
-    <string name="avisoemailousenhaerrado">EMAIL OU SENHA informados não estão corretos ou não estão cadastrados\nVerifique o EMAIL e a SENHA!</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="emailaddress">Email address</string>
+    <string name="password">Password</string>
+    <string name="forgotyhepassword">Forgot your password?</string>
+    <string name="loginto">Log into</string>
+    <string name="imnewhere">I\'m new here.</string>
+    <string name="createaccount">Create account</string>
+    <string name="wehaveaproblem">We have a problem with our server.\nTry again later</string>
+    <string name="wrongemailandpassword">EMAIL OR PASSWORD informed are not correct or are not registered Check EMAIL and PASSWORD!</string>
+    <!--Warning Login Screen-->
+    <string name="fill_correctly_email">Fill in correctly: EMAIL</string>
 
     <!--Create Account Screen-->
-    <string name="nomecriarconta">Nome*</string>
-    <string name="emailcriarconta">Email*</string>
-    <string name="senhacriarconta">Senha*</string>
-    <string name="criarcontabtn"><u>Criar Conta</u></string>
-    <string name="lowercase_letters">Lowercase Letters</string>
-    <string name="uppercase_letters">Uppercase Letters</string>
+    <string name="namecreateaccount">Name*</string>
+    <string name="emailcreateaccount" translatable="false">Email*</string>
+    <string name="createaccountbtn"><u>Create account</u></string>
+    <string name="lowercase_letters" translatable="false">Lowercase Letters</string>
+    <string name="uppercase_letters" translatable="false">Uppercase Letters</string>
     <string name="digits">Digits</string>
     <string name="special_characters">Special Characters</string>
-    <string name="logaragora">Logar Agora</string>
-    <string name="jatenhoconta">Já tenho conta. </string>
-    <string name="cpfcriarconta">Cpf*</string>
-    <string name="eceitoostermos">Eu aceito os termos de CoffeeForCode</string>
-    <string name="termos"><u>Termos</u></string>
-    <string name="explicacaoesteristico">* - Obrigatório</string>
-    <string name="criarcontaerro" tools:ignore="TypographyEllipsis">Não foi possivel realizar o cadastro...\nTente novamente mais tarde</string>
-    <string name="ok">OK</string>
+    <string name="lognow">Login Now</string>
+    <string name="imalredyhaveaccount">I already have an account.</string>
+    <string name="cpfcreateaccount" translatable="false">CPF*</string>
+    <string name="accepttheterms">I accept the terms of CoffeeForCode</string>
+    <string name="terms"><u>Terms</u></string>
+    <string name="ApplicationErrorTryLater">Application error please try again later !!</string>
+    <string name="explicacaoesteristico">* - Mandatory</string>
+    <string name="createaccounterror" tools:ignore="TypographyEllipsis">It was not possible to register ...</string>
+    <string name="tryagainlater">Try again later</string>
+    <!--Warning Account Screen-->
+    <string name="necessary_fill_name">Necessary to fill in the field correctly: NAME</string>
+    <string name="cpf_informed_is_invalid">CPF informed is invalid</string>
+    <string name="required_fill_email">Required to fill in the field: EMAIL</string>
+    <string name="fill_email_correctly">Fill in your email correctly</string>
+    <string name="necessary_fill_correctly_password">Necessary to fill the field correctly: PASSWORD\nMinimum 8 characters</string>
 
     <!--Principal Screen-->
-    <string name="atalhos">Atalhos</string>
-    <string name="popular">Popular</string>
-    <string name="iconemais">+</string>
-    <string name="conferir">Conferir</string>
-    <string name="topdasemana">Top da semana</string>
-    <string name="maisvendido">Mais Vendido</string>
-    <string name="promocaodasemana">Promoção da Semana</string>
-    <string name="combodasemana">Combo da Semana</string>
-    <string name="indicacaodacasa">Indicação da Casa</string>
-    <string name="todososprodutos">Todos os Produtos</string>
-    <string name="carrinhodecompras">Carrinho de compras</string>
-    <string name="cartoes">Cartões</string>
-    <string name="statuscartao">Não a nenhum cartão cadastrado</string>
-    <string name="olavirgula">Olá, </string>
-    <string name="qualseupedidohj">Qual o seu pedido hoje?</string>
-    <string name="desccafes">Veja nossa imensa variedade de cafés disponiveis</string>
-    <string name="descrefreshers">Bebidas extremamente refrescantes de diversos sabores</string>
-    <string name="desctodososprodutos">Veja todos os produtos disponível em nosso estoque</string>
-    <string name="txtavisosemendereco">Nenhum endereço encontrado!!</string>
-    <string name="cadastraragora">Cadastrar Agora</string>
-    <string name="cadastrardepois">Cadastrar Depois</string>
+    <string name="atalhos">Shortcuts</string>
+    <string name="popular" translatable="false">Popular</string>
+    <string name="iconemais" translatable="false">+</string>
+    <string name="conferir">Check</string>
+    <string name="topdasemana">Top of the week</string>
+    <string name="maisvendido">Best seller</string>
+    <string name="promocaodasemana">Promotion of the Week</string>
+    <string name="combodasemana">Combo of the Week</string>
+    <string name="indicacaodacasa">House indication</string>
+    <string name="todososprodutos">All the products</string>
+    <string name="carrinhodecompras">Shopping cart</string>
+    <string name="cartoes">Cards</string>
+    <string name="statuscartao">No to any registered card</string>
+    <string name="olavirgula">Hello,</string>
+    <string name="qualseupedidohj">What is your order today?</string>
+    <string name="desccafes">See our huge variety of coffees available</string>
+    <string name="descrefreshers">Extremely refreshing drinks of various flavors</string>
+    <string name="desctodososprodutos">See all products available in our stock</string>
+    <string name="txtavisosemendereco">No address found !!</string>
+    <string name="cadastraragora">Sign Up Now</string>
+    <string name="cadastrardepois">Register Later</string>
     <string name="descnenhumendencontrado">Precisamos de seu endereço caso você decida comprar algum pedido e a forma de retirado ser delivery sem o seu endereço não será possível lhe entregar o produto</string>
     <string name="logout">Log Out</string>
-    <string name="configuracao">Configuraçoes</string>
-    <string name="perfil">Perfil</string>
+    <string name="configuracao">Settings</string>
+    <string name="perfil">Profile</string>
     <string name="appinfo">App Info</string>
 
     <!--Be Partner Screen-->
     <string name="vantagemdeserparceiro">Sendo parceiro você terá acesso a promoção exclusivas,\ndescontos em suas compras,\nterá um cartão CFC, frete grátis e serviço de entrega Plus</string>
-    <string name="cartaocfc">Cartão CFC</string>
-    <string name="visa">Visa</string>
-    <string name="validoate">Valido até: </string>
-    <string name="validadefake">xx/xx</string>
-    <string name="proprietario">Proprietário</string>
-    <string name="fulanodetal">Falano de Tal</string>
-    <string name="numerocardzero">0000 0000 0000 0000</string>
-    <string name="custo">Custo: </string>
-    <string name="pricetobepartner">R$20 por mês*</string>
-    <string name="melhoroportunidade">Melhor Oportunidade</string>
-    <string name="proximo">Proximo</string>
-    <string name="voltar">Voltar</string>
-    <string name="estoudeacordocomostermos">Estou de acordo com os termos</string>
-    <string name="dadospessoais">Dados Pessoais</string>
+    <string name="cartaocfc" translatable="false">CFC Card</string>
+    <string name="visa" translatable="false">Visa</string>
+    <string name="validoate">Valid until:</string>
+    <string name="validadefake" translatable="false">xx/xx</string>
+    <string name="proprietario">Owner</string>
+    <string name="fulanodetal" translatable="false">Falano de Tal</string>
+    <string name="numerocardzero" translatable="false">0000 0000 0000 0000</string>
+    <string name="custo">Cost:</string>
+    <string name="pricetobepartner">R $ 20 per month *</string>
+    <string name="melhoroportunidade">Best Opportunity</string>
+    <string name="proximo">Next</string>
+    <string name="voltar">Come back</string>
+    <string name="estoudeacordocomostermos">I agree with the terms</string>
+    <string name="dadospessoais">Personal data</string>
     <string name="nome">Nome</string>
-    <string name="cpf">Cpf</string>
-    <string name="email">Email</string>
-    <string name="nenhumcartaoselecionado">Nenhum Cartão Selecionado</string>
-    <string name="finalcartao">Final: </string>
-    <string name="selecionarcartao"><u>Selecionar Cartão</u></string>
-    <string name="selecionaroutrocartao"><u>Selecionar Outro Cartão</u></string>
-    <string name="serparceiro">Ser Parceiro</string>
-    <string name="bandeira">Bandeira</string>
-    <string name="bemvindoaotimecfc">Bem Vindo ao Time CFC</string>
-    <string name="aproveiteseusbeneficios">Aproveite seus beneficios</string>
+    <string name="cpf" translatable="false">Cpf</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="nenhumcartaoselecionado">No Card Selected</string>
+    <string name="finalcartao" translatable="false">Final: </string>
+    <string name="selecionarcartao"><u> Select Card </u></string>
+    <string name="selecionaroutrocartao"><u> Select Another Card </u></string>
+    <string name="serparceiro">Become a Partner</string>
+    <string name="bandeira">Flag</string>
+    <string name="bemvindoaotimecfc">Welcome to the CFC Team</string>
+    <string name="aproveiteseusbeneficios">Enjoy your benefits</string>
 
 
     <!--Cartoes Screen-->
-    <string name="seuscartoes">Seus Cartões</string>
-    <string name="desccardcfc">Para compras com descontos em nosso site, aplicativo e loja</string>
-    <string name="setinhafeita">-></string>
-    <string name="nenhumcartaocadastrado">Nenhum Cartão cadastrado!!</string>
-    <string name="cadastarcartao">Cadastrar Novo Cartão</string>
-    <string name="numerodocartao">Numero do Cartão</string>
-    <string name="nomeempresonocartao">Nome Impresso no cartão</string>
-    <string name="validade">Validade</string>
-    <string name="ccc">CCC</string>
+    <string name="seuscartoes">Your Cards</string>
+    <string name="desccardcfc">For discounted purchases on our website, app and store</string>
+    <string name="setinhafeita" translatable="false">-></string>
+    <string name="nenhumcartaocadastrado">No Card registered !!</string>
+    <string name="cadastarcartao">Register New Card</string>
+    <string name="numerodocartao">Card number</string>
+    <string name="nomeempresonocartao">Name Printed on the card</string>
+    <string name="validade">Shelf life</string>
+    <string name="ccc" translatable="false">CCC</string>
     <string name="cadastar">Cadastrar</string>
-    <string name="treszero">000</string>
-    <string name="outroscartoes">Outros Cartões</string>
-    <string name="deletarcartao">Deletar Cartão</string>
-    <string name="cancelarcartao">Cancelar Cartão</string>
+    <string name="treszero" translatable="false">000</string>
+    <string name="outroscartoes">Other Cards</string>
+    <string name="deletarcartao">Delete Card</string>
+    <string name="cancelarcartao">Cancel Card</string>
 
     <!--Register Screen Address-->
-    <string name="cadastroendereco">Cadastro de Endereço</string>
-    <string name="hintedittextcadastroendereco">Ex. Rua 00</string>
-    <string name="hintedtextcadastroenderecocomp">Ex. Ap 2 Bl 20</string>
-    <string name="enderecocom_asterisco">Endereço*</string>
-    <string name="complemento">Complemento</string>
+    <string name="cadastroendereco">Address Registration</string>
+    <string name="hintedittextcadastroendereco" translatable="false">Ex. Rua 00</string>
+    <string name="hintedtextcadastroenderecocomp" translatable="false">Ex. Ap 2 Bl 20</string>
+    <string name="enderecocom_asterisco">Address*</string>
+    <string name="complemento">Complement</string>
 
     <!--Profile Screen-->
-    <string name="editarperfil">Clique aqui para\neditar seu perfil</string>
-    <string name="cpfcadastrado">CPF Cadastrado</string>
-    <string name="celularcadastrado">Celular Cadastrado</string>
-    <string name="enderecocadastrado">Endereço Cadastrado</string>
-    <string name="complementocadastrado">Complemento Cadastrado</string>
-    <string name="semcelularcadastrado">Não a celular cadastrado</string>
-    <string name="semenderecocadastrado">Não a endereço cadastrado</string>
-    <string name="virarparceiro">Virar parceiro</string>
-    <string name="parceira">Parceria</string>
-    <string name="statuscardparceiro">Status Cartao</string>
-    <string name="ativacao">Ativacao</string>
+    <string name="editarperfil">Click here to edit your profile</string>
+    <string name="cpfcadastrado">Registered CPF</string>
+    <string name="celularcadastrado">Registered Cell Phone</string>
+    <string name="enderecocadastrado">Registered Address</string>
+    <string name="complementocadastrado">Registered Complement</string>
+    <string name="semcelularcadastrado">No registered cell phone</string>
+    <string name="semenderecocadastrado">No to registered address</string>
+    <string name="virarparceiro">Become a partner</string>
+    <string name="parceira">Partnership</string>
+    <string name="statuscardparceiro">Status Card</string>
+    <string name="ativacao">Activation</string>
 
     <!--Edit Profile-->
-    <string name="titulo_editarperfil">Editar Perfil</string>
-    <string name="celular">Celular</string>
-    <string name="endereco">Endereço</string>
-    <string name="hintnome">Insira seu nome aqui</string>
-    <string name="hitcpf">Insira seu cpf aqui</string>
-    <string name="hintemail">Insira seu email aqui</string>
-    <string name="hintcelular">Insira seu celular aqui</string>
-    <string name="hintendereco">Insira seu endereço aqui</string>
-    <string name="hintcomplemento">Insira seu complemento aqui</string>
-    <string name="confirmar">Confirmar</string>
-    <string name="alter_senha"><u>Alterar Senha</u></string>
-    <string name="senhaantiga">Senha Antiga</string>
-    <string name="hintoldpassword">Confirme sua senha antiga</string>
-    <string name="txtnovasenha">Nova Senha</string>
-    <string name="hintnovasenha">Insira sua nova senha</string>
-    <string name="hintconfirmenovasenha">Confirme sua nova senha</string>
-    <string name="confirmenovasenha">Confirme sua nova senha</string>
+    <string name="title_editProfile">Edit profile</string>
+    <string name="celular">Cell</string>
+    <string name="endereco">Address</string>
+    <string name="hintnome">Enter your name here</string>
+    <string name="hitcpf">Enter your CPF here</string>
+    <string name="hintemail">Enter your email here</string>
+    <string name="hintcelular">Insert your phone here</string>
+    <string name="hintendereco">Enter your address here</string>
+    <string name="hintcomplemento">Insert your add-on here</string>
+    <string name="confirm">Confirm</string>
+    <string name="alter_senha"><u> Change Password </u></string>
+    <string name="oldPassword">Old password</string>
+    <string name="hintoldpassword">Confirm your old password</string>
+    <string name="txt_newpassword">New password</string>
+    <string name="hintnewpassword">Enter your new password</string>
+    <string name="hintconfirmnrepassword">Confirm your new password</string>
+    <string name="confirmnewpassword">Confirm your new password</string>
 
 
     <!-- Tela de Adms-->
-    <string name="addproduto">Adicionar novo Produto</string>
-    <string name="alterproduto">Alterar Produto</string>
-    <string name="excluirproduto">Alterar Produto</string>
+    <string name="addproduto">Add New Product</string>
+    <string name="alterproduto">Change Product</string>
+    <string name="excluirproduto">Delete Product</string>
+    <string name="remember_me">Remember me</string>
+    <string name="passwordcreateaccount">Password</string>
 
 </resources>

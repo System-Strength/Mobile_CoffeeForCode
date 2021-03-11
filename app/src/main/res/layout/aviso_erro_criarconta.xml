@@ -23,7 +23,7 @@
         android:id="@+id/txavisoerro"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="@string/criarcontaerro"
+        android:text="@string/createaccounterror"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="24sp"
@@ -34,8 +34,8 @@
     <!--Card Ok-->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardokavisoerro"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ok"
+                android:text="@string/tryagainlater"
                 android:textColor="#000"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"

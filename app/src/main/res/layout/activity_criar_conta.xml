@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/criarconta"
+                    android:text="@string/createaccount"
                     android:textColor="#000"
                     android:textSize="32sp"
                     android:textStyle="bold"
@@ -70,13 +70,13 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:textColor="#95000000"
-                    android:text="@string/nomecriarconta"
+                    android:text="@string/namecreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txttittlecriarconta" />
 
                 <!--Edit text Name-->
                 <EditText
-                    android:id="@+id/edittextnomecriarconta"
+                    android:id="@+id/edittextName_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
@@ -98,18 +98,18 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="10dp"
                     android:textColor="#95000000"
-                    android:text="@string/cpfcriarconta"
+                    android:text="@string/cpfcreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextnomecriarconta" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittextName_userCreateAccount" />
 
                 <!--Edit text CPF-->
                 <EditText
-                    android:id="@+id/edittextcpfcriarconta"
+                    android:id="@+id/edittextcpf_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/edittextcriarconta"
-                    android:hint="@string/mascaracpf"
+                    android:hint="@string/masckcpf"
                     android:inputType="number"
                     android:textColor="#000"
                     android:textColorHint="#27000000"
@@ -127,13 +127,13 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="10dp"
                     android:textColor="#95000000"
-                    android:text="@string/emailcriarconta"
+                    android:text="@string/emailcreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextcpfcriarconta" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittextcpf_userCreateAccount" />
 
                 <!--Edit text Email-->
                 <EditText
-                    android:id="@+id/edittextemailcriarconta"
+                    android:id="@+id/edittextEmail_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
@@ -154,7 +154,7 @@
                     android:layout_height="80dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextemailcriarconta">
+                    app:layout_constraintTop_toBottomOf="@+id/edittextEmail_userCreateAccount">
 
                     <!--Text PassWord-->
                     <TextView
@@ -162,13 +162,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="@string/senhacriarconta"
+                        android:text="@string/passwordcreateaccount"
                         android:textColor="#95000000"
                         android:layout_alignParentStart="true"/>
 
                     <!--Edit text passWord-->
                     <EditText
-                        android:id="@+id/edittextsenhacriarconta"
+                        android:id="@+id/edittextPassword_userCreateAccount"
                         android:layout_width="350dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="2dp"
@@ -237,7 +237,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/criarcontabtn"
+                            android:text="@string/createaccountbtn"
                             android:textSize="24sp"
                             android:textColor="#000"
                             android:textStyle="bold"
@@ -258,7 +258,7 @@
                     android:textColor="#000"
                     android:buttonTint="#FF5800"
                     android:layout_marginStart="16dp"
-                    android:text="@string/eceitoostermos"
+                    android:text="@string/accepttheterms"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardviewbtncriarconta" />
 
@@ -267,7 +267,7 @@
                     android:id="@+id/txttenhoconta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jatenhoconta"
+                    android:text="@string/imalredyhaveaccount"
                     android:layout_marginEnd="80dp"
                     android:textSize="15sp"
                     android:textColor="#000"
@@ -279,10 +279,10 @@
 
                 <!--Text Criar Conta-->
                 <TextView
-                    android:id="@+id/txtlogar"
+                    android:id="@+id/txtLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/logaragora"
+                    android:text="@string/lognow"
                     android:layout_marginStart="2dp"
                     android:textColor="#FFB421"
                     android:textSize="15sp"
@@ -296,10 +296,10 @@
 
                 <!--Text Terms-->
                 <TextView
-                    android:id="@+id/txttermos"
+                    android:id="@+id/txtTerms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/termos"
+                    android:text="@string/terms"
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="#FF9900"

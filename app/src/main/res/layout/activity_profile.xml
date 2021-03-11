@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/backgroung"
-    tools:context=".PerfilActivity">
+    tools:context=".ProfileActivity">
 
     <!--Header-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtnomeuser"
+                app:layout_constraintBottom_toTopOf="@+id/txtName_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
 
             <!--Text Name of client-->
             <TextView
-                android:id="@+id/txtnomeuser"
+                android:id="@+id/txtName_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nome"
@@ -42,16 +42,16 @@
                 android:textSize="23sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtemailuser"
+                app:layout_constraintBottom_toTopOf="@+id/txtEmail_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <!--Text Email of client-->
             <TextView
-                android:id="@+id/txtemailuser"
+                android:id="@+id/txtEmail_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/emailadress"
+                android:text="@string/emailaddress"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:layout_marginBottom="40dp"
