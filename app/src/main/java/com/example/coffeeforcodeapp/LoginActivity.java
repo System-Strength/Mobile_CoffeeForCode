@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
         if (sp.contains("pref_email") && sp.contains("pref_password")){
             String emailPref = sp.getString("pref_email", "not found");
             String PassPref = sp.getString("pref_password", "not found");
+            checkbox_rememberMe.setChecked(sp.getBoolean("pref_check", true));
             DoLogin(retrofitUser, emailPref, PassPref);
         }else {
             loading.dimissDialog();
