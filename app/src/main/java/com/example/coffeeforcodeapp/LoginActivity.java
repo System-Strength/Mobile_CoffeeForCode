@@ -6,10 +6,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +20,14 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.UsersService;
 
@@ -42,32 +44,25 @@ public class LoginActivity extends AppCompatActivity {
     ImageView img_closed_eye, img_opened_eye;
     CardView cardviewbtnlogar;
     EditText edittextEmail_userLogin, edittexPassword_userLogin;
-    Dialog avisoemailousenha;
+    CheckBox checkbox_rememberMe;
+    Dialog Warning_Email_Password;
     Handler timer = new Handler();
+    private SharedPreferences mPrefs;
+    private static final String PREFS_NAME = "PrefsFile";
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnvoltarlogin = findViewById(R.id.btnvoltarlogin);
-        edittextEmail_userLogin = findViewById(R.id.edittextEmail_userLogin);
-        edittexPassword_userLogin = findViewById(R.id.edittexPassword_userLogin);
-        txtcriarnovaconta = findViewById(R.id.txtcriarnovaconta);
-        img_closed_eye = findViewById(R.id.img_closed_eye);
-        img_opened_eye = findViewById(R.id.img_opened_eye);
-        cardviewbtnlogar = findViewById(R.id.cardviewbtnlogar);
-        animation_loadingLogin = findViewById(R.id.animationloadinglogin);
-        txtlogarlogin = findViewById(R.id.txtlogarlogin);
-        txtenderecoemaillogin = findViewById(R.id.txtenderecoemaillogin);
-        txtenderecosenhalogin = findViewById(R.id.txtenderecosenhalogin);
-        avisoemailousenha = new Dialog(this);
-        InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        final Retrofit retrofitUser = new Retrofit.Builder()
-                .baseUrl("https://coffeeforcode.herokuapp.com/user/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        getIds();
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //  Set some thinks with gone
         img_opened_eye.setVisibility(View.GONE);
@@ -84,7 +79,8 @@ public class LoginActivity extends AppCompatActivity {
             edittexPassword_userLogin.setText(bundle.getString("password_user"));
         }
 
-        DevOptions();
+        mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        getPreferencesData();
 
         //  Set commands to start in real time
         edittexPassword_userLogin.addTextChangedListener(new TextWatcher() {
@@ -164,84 +160,123 @@ public class LoginActivity extends AppCompatActivity {
                 edittexPassword_userLogin.requestFocus();
                 imm.showSoftInput(edittexPassword_userLogin, InputMethodManager.SHOW_IMPLICIT);
             }else {
+
                 String email = edittextEmail_userLogin.getText().toString();
                 String password = edittexPassword_userLogin.getText().toString();
                 animation_loadingLogin.setVisibility(View.VISIBLE);
                 animation_loadingLogin.playAnimation();
                 txtlogarlogin.setVisibility(View.GONE);
-                UsersService usersService = retrofitUser.create(UsersService.class);
-                Call<DtoUsers> resultLogin = usersService.loginUser(email, password);
-
-                resultLogin.enqueue(new Callback<DtoUsers>() {
-                    @Override
-                    public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
-                        if (response.code() == 200){
-                            Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
-                            assert response.body() != null;
-                            GoTo_Main.putExtra("id_user", response.body().getId_user());
-                            GoTo_Main.putExtra("email_user", response.body().getEmail());
-                            GoTo_Main.putExtra("phone_user", response.body().getPhone_user());
-                            GoTo_Main.putExtra("rg_user", response.body().getRg_user());
-                            startActivity(GoTo_Main);
-                            finish();
-                        }else if(response.code() == 401){;
-                            ShowWarning_Email_Password();
-                        }else{
-                            Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
-                            Log.d("NetWorkError", response.message());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<DtoUsers> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
-                        Log.d("NetWorkError", t.getMessage());
-
-                    }
-                });
+                DoLogin(retrofitUser, email, password);
             }
         });
-
     }
 
-    @SuppressLint("SetTextI18n")
-    private void DevOptions() {
-        AlertDialog.Builder Warning_who_is_using = new AlertDialog.Builder(LoginActivity.this);
-        Warning_who_is_using.setTitle("Quem Esta usando?");
-        Warning_who_is_using.setPositiveButton("Kaua", (dialogInterface, i) -> {
-            //  Dev Login
-            edittextEmail_userLogin.setText("kauavitorioof@gmail.com");
-            edittexPassword_userLogin.setText("@!Kaua2004");
-        });
-        Warning_who_is_using.setNeutralButton("Yuri", (dialogInterface, i) -> {
-            //  Dev Login
-            edittextEmail_userLogin.setText("yuridantaassg@gmail.com");
-            edittexPassword_userLogin.setText("Yuridantas17");
-        });
+    private void getIds() {
+        btnvoltarlogin = findViewById(R.id.btnvoltarlogin);
+        edittextEmail_userLogin = findViewById(R.id.edittextEmail_userLogin);
+        edittexPassword_userLogin = findViewById(R.id.edittexPassword_userLogin);
+        checkbox_rememberMe = findViewById(R.id.checkbox_rememberMe);
+        txtcriarnovaconta = findViewById(R.id.txtcriarnovaconta);
+        img_closed_eye = findViewById(R.id.img_closed_eye);
+        img_opened_eye = findViewById(R.id.img_opened_eye);
+        cardviewbtnlogar = findViewById(R.id.cardviewbtnlogar);
+        animation_loadingLogin = findViewById(R.id.animationloadinglogin);
+        txtlogarlogin = findViewById(R.id.txtlogarlogin);
+        txtenderecoemaillogin = findViewById(R.id.txtenderecoemaillogin);
+        txtenderecosenhalogin = findViewById(R.id.txtenderecosenhalogin);
+        Warning_Email_Password = new Dialog(this);
+    }
 
-        Warning_who_is_using.setNegativeButton("Test", (dialog, which) -> {
-            //  Dev Login
-            edittextEmail_userLogin.setText("test123456@gmail.com");
-            edittexPassword_userLogin.setText("12345678");
-        });
+    private void getPreferencesData() {
+        LoadingDialog loading = new LoadingDialog(LoginActivity.this);
+        loading.startLoading();
+        SharedPreferences sp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (sp.contains("pref_email") && sp.contains("pref_password")){
+            String emailPref = sp.getString("pref_email", "not found");
+            String PassPref = sp.getString("pref_password", "not found");
+            DoLogin(retrofitUser, emailPref, PassPref);
+        }else {
+            loading.dimissDialog();
+        }
+    }
 
-        Warning_who_is_using.show();
+    private void DoLogin(Retrofit retrofitUser, String email, String password) {
+        UsersService usersService = retrofitUser.create(UsersService.class);
+        Call<DtoUsers> resultLogin = usersService.loginUser(email, password);
+
+        resultLogin.enqueue(new Callback<DtoUsers>() {
+            @Override
+            public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                if (response.code() == 200){
+                    assert response.body() != null;
+                    int id_user;
+                    String nm_user, email_user, phone_user, address_user,rg_user, partner;
+                    id_user = response.body().getId_user();
+                    nm_user = response.body().getNm_user();
+                    email_user = response.body().getEmail();
+                    phone_user = response.body().getPhone_user();
+                    address_user = response.body().getAddress_user();
+                    rg_user = response.body().getRg_user();
+                    partner = response.body().getPartner();
+
+                    if (checkbox_rememberMe.isChecked()){
+                        boolean boollsChecked = checkbox_rememberMe.isChecked();
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putString("pref_email", email);
+                        editor.putString("pref_password", password);
+                        editor.putBoolean("pref_check", boollsChecked);
+                        editor.apply();
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, rg_user, partner);
+                    }else{
+                        mPrefs.edit().clear().apply();
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, rg_user, partner);
+                    }
+
+                }else if(response.code() == 401){;
+                    ShowWarning_Email_Password();
+                }else{
+                    Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                    Log.d("NetWorkError", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DtoUsers> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
+                Log.d("NetWorkError", t.getMessage());
+
+            }
+        });
+    }
+
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user,String rg_user, String partner) {
+        Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
+        GoTo_Main.putExtra("id_user", id_user);
+        GoTo_Main.putExtra("nm_user", nm_user);
+        GoTo_Main.putExtra("email_user", email_user);
+        GoTo_Main.putExtra("phone_user", phone_user);
+        GoTo_Main.putExtra("address_user", address_user);
+        GoTo_Main.putExtra("rg_user", rg_user);
+        GoTo_Main.putExtra("partner", partner);
+        GoTo_Main.putExtra("statusavisoend", "ativado");
+        startActivity(GoTo_Main);
+        finish();
     }
 
     //  Method to show Alert for email and password is wrong
     private void ShowWarning_Email_Password(){
         CardView btnokavisoemailousenhaerrado;
-        avisoemailousenha.setContentView(R.layout.aviso_emailousenhaerrodo);
-        btnokavisoemailousenhaerrado = avisoemailousenha.findViewById(R.id.btnokavisoemailousenhaerrado);
+        Warning_Email_Password.setContentView(R.layout.aviso_emailousenhaerrodo);
+        btnokavisoemailousenhaerrado = Warning_Email_Password.findViewById(R.id.btnokavisoemailousenhaerrado);
 
         animation_loadingLogin.setVisibility(View.GONE);
         animation_loadingLogin.pauseAnimation();
         txtlogarlogin.setVisibility(View.VISIBLE);
         edittexPassword_userLogin.setText(null);
 
-        btnokavisoemailousenhaerrado.setOnClickListener(v -> avisoemailousenha.dismiss());
+        btnokavisoemailousenhaerrado.setOnClickListener(v -> Warning_Email_Password.dismiss());
 
-        avisoemailousenha.show();
+        Warning_Email_Password.show();
 
     }
 

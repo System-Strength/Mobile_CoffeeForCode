@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -31,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
     Handler timer = new Handler();
     Dialog avisoendereco;
     private BottomSheetDialog bottomSheetDialog;
-    String emaillogado, apareceravisoendereco, nomedousuario;
+    private SharedPreferences mPrefs;
+    private static final String PREFS_NAME = "PrefsFile";
+    int id_user, partner;
+    String nm_user, email_user, phone_user, address_user, rg_user, apareceravisoendereco, nomedousuario;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -52,9 +56,17 @@ public class MainActivity extends AppCompatActivity {
         if (bundle == null){
             apareceravisoendereco = "ativado";
         }else {
-            emaillogado  = bundle.getString("emailuser");
+            id_user  = bundle.getInt("id_user");
+            nm_user  = bundle.getString("nm_user");
+            email_user  = bundle.getString("email_user");
+            phone_user  = bundle.getString("phone_user");
+            address_user  = bundle.getString("address_user");
+            rg_user  = bundle.getString("rg_user");
+            partner  = bundle.getInt("partner");
             apareceravisoendereco = bundle.getString("statusavisoend");
         }
+
+        mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         //  Set somethings with gone and visible
 
@@ -64,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         //  When click in this card user will to SejaParceiroActivity
         cardbepartner.setOnClickListener(v -> {
             Intent irparavirarparceiro = new Intent(MainActivity.this,SejaParceiroActivity.class);
-            irparavirarparceiro.putExtra("emailuser",emaillogado);
+            //irparavirarparceiro.putExtra("emailuser",emaillogado);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
             ActivityCompat.startActivity(MainActivity.this,irparavirarparceiro, activityOptionsCompat.toBundle());
             finish();
@@ -73,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //  When click in this card user will to CartoesActivity
         cardvercartoes.setOnClickListener(v -> {
             Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
-            irparacartoes.putExtra("emailuser",emaillogado);
+            //irparacartoes.putExtra("emailuser",emaillogado);
             startActivity(irparacartoes);
             finish();
         });
@@ -81,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         //  When click in this card user will to cardvercarrinhodecompra
         cardvercarrinhodecompra.setOnClickListener(v -> {
             Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
-            vercarrinhodecompra.putExtra("emailuser", emaillogado);
+            //vercarrinhodecompra.putExtra("emailuser", emaillogado);
             startActivity(vercarrinhodecompra);
             finish();
 
@@ -97,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
                 Intent irpara_perfil = new Intent(MainActivity.this, PerfilActivity.class);
-                irpara_perfil.putExtra("emailuser", emaillogado);
+                //irpara_perfil.putExtra("emailuser", emaillogado);
                 startActivity(irpara_perfil);
                 finish();
                 bottomSheetDialog.dismiss();
@@ -121,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 aviso.setTitle("Deslogar");
                 aviso.setMessage("Deseja realmente deslogar?");
                 aviso.setPositiveButton("Sim", (dialog, which) -> {
+                    mPrefs.edit().clear().apply();
                     Intent voltaraologin = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(voltaraologin);
                     finish();
@@ -131,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView nomeusermenusheet;
             nomeusermenusheet = sheetview.findViewById(R.id.nomeusermenusheet);
-            String[]  nomecliente = nomedousuario.split(" ");
+            String[]  nomecliente = nm_user.split(" ");
             String primeironome = nomecliente[0];
             String segundonome = nomecliente[1];
             nomeusermenusheet.setText(primeironome + " " + segundonome);
@@ -143,23 +156,20 @@ public class MainActivity extends AppCompatActivity {
 
     //  Create method to check customer first things
     private void recebendodadosiniciaisdocliente() {
-        DaoClientes daoClientes = new DaoClientes(MainActivity.this);
-        DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
-        String nomeclientecompleto = dtoClientes.getNomecliente();
-        String[]  nomecliente = nomeclientecompleto.split(" ");
-        String primeironome = nomecliente[0];
+        String completeName_user = nm_user;
+        String[]  Name_user = completeName_user.split(" ");
+        String firstName_user = Name_user[0];
 
         //  Set first name of client
-        nomedousuario = dtoClientes.getNomecliente();
-        txtnomedocliente.setText(primeironome);
+        txtnomedocliente.setText(firstName_user);
 
-        if (dtoClientes.getParceiro().equals("nao")){
+        if (partner == 0){
             animacaonotpartner();
         }else {
             cardviewnotpartner.setVisibility(View.GONE);
         }
 
-        if (dtoClientes.getEnderecocliente() == null || dtoClientes.getEnderecocliente().equals("")){
+        if (address_user == null || address_user.equals("")){
             if (apareceravisoendereco.equals("desativado")){
                 avisoendereco.dismiss();
             }else {
@@ -180,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         btncadastraragoraend.setOnClickListener(v -> {
            Intent ircadastrarendereco = new Intent(MainActivity.this,CadastrarenderecoActivity.class);
-           ircadastrarendereco.putExtra("emailuser",emaillogado);
+           //ircadastrarendereco.putExtra("emailuser",emaillogado);
            startActivity(ircadastrarendereco);
            finish();
         });

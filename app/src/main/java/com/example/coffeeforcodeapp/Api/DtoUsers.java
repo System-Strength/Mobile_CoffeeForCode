@@ -6,7 +6,7 @@ import retrofit2.http.Query;
 
 public class DtoUsers {
     int id_user;
-    String email, nm_user, rg_user, phone_user, password, partner, message;
+    String email, nm_user, rg_user, phone_user, address_user,password, partner, message;
 
     public DtoUsers(String email, String nm_user, String rg_user, String password){
         this.email = email;
@@ -28,6 +28,14 @@ public class DtoUsers {
     public DtoUsers(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public String getAddress_user() {
+        return address_user;
+    }
+
+    public void setAddress_user(String address_user) {
+        this.address_user = address_user;
     }
 
     public int getId_user() {
