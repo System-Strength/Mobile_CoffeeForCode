@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +22,8 @@ public class SplashActivity extends AppCompatActivity{
     LottieAnimationView animationcoffee, animationcoffeeconstant;
     int TIME_STARTLOADING;
     int TIMER_SHOWOPTION;
+    private SharedPreferences mPrefs;
+    private static final String PREFS_NAME = "PrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,12 @@ public class SplashActivity extends AppCompatActivity{
             TIME_STARTLOADING = bundle.getInt("novotimerstart");
             TIMER_SHOWOPTION = bundle.getInt("novotimershowoption");
         }
+
+        //  Checking user information on preferences
+        mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (sp.contains("pref_email") && sp.contains("pref_password"))
+            GoToLogin();
 
         //  Set some thinks with gone and set background color
         navbarmain.setVisibility(View.GONE);
@@ -71,11 +80,13 @@ public class SplashActivity extends AppCompatActivity{
         });
 
         //  When click here will go to LoginActivity
-        cardviewlogin.setOnClickListener(v -> {
-            Intent irparalogin = new Intent(SplashActivity.this,LoginActivity.class);
-            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
-            ActivityCompat.startActivity(SplashActivity.this,irparalogin, activityOptionsCompat.toBundle());
-            finish();
-        });
+        cardviewlogin.setOnClickListener(v -> GoToLogin());
+    }
+
+    private void GoToLogin() {
+        Intent irparalogin = new Intent(SplashActivity.this, LoginActivity.class);
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
+        ActivityCompat.startActivity(SplashActivity.this,irparalogin, activityOptionsCompat.toBundle());
+        finish();
     }
 }
