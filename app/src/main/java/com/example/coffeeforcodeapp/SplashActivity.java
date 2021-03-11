@@ -47,7 +47,7 @@ public class SplashActivity extends AppCompatActivity{
             TIMER_SHOWOPTION = bundle.getInt("novotimershowoption");
         }
 
-        //  Checking user information on preferences
+        //  Verification of user preference information
         mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences sp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         if (sp.contains("pref_email") && sp.contains("pref_password"))
