@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
         navbarmain = findViewById(R.id.navbarmain);
         bodymain = findViewById(R.id.bodymain);
         animationcoffee = findViewById(R.id.animationcoffee);

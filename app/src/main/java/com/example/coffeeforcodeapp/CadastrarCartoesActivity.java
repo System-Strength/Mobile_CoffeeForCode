@@ -282,7 +282,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         }catch (Exception ex){
             Toast.makeText(this, "Erro em carregar seus dados: "+ ex, Toast.LENGTH_SHORT).show();
             timer.postDelayed(() -> {
-                Intent voltaraoscartoes = new Intent(CadastrarCartoesActivity.this,PrincipalActivity.class);
+                Intent voltaraoscartoes = new Intent(CadastrarCartoesActivity.this, MainActivity.class);
                 voltaraoscartoes.putExtra("emailuser",emaillogado);
                 voltaraoscartoes.putExtra("statusavisoend","desativado");
                 startActivity(voltaraoscartoes);

@@ -4,177 +4,1463 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEDCB"
-    android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
+    android:background="@color/backgroung"
+    tools:context=".MainActivity">
 
+    <!--Header-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <!--Avatar-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/icone_perfil_principal"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/personprofile" />
+
+        <!--Text Hello-->
+        <TextView
+            android:id="@+id/txtolavirgula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/olavirgula"
+            android:textColor="#000"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Text Name of Client-->
+        <TextView
+            android:id="@+id/txtnomedocliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/namecreateaccount"
+            android:textColor="#000"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/txtolavirgula"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Text How your order today-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qualseupedidohj"
+            android:layout_marginStart="40dp"
+            android:textStyle="bold"
+            android:textColor="#83151515"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtolavirgula" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--Body-->
-    <LinearLayout
-        android:id="@+id/bodymain"
-        android:layout_weight="1"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!--Animation Splash-->
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationcoffee"
-                android:layout_width="260dp"
-                android:layout_height="300dp"
-                android:visibility="gone"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+            <!--Text Atalhos-->
+            <TextView
+                android:id="@+id/txttittleatalhos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/atalhos"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/coffeemenu" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Animation Constant-->
-            <LinearLayout
-                android:id="@+id/linearanimationcoffeeconstant"
-                android:orientation="vertical"
+            <!--Base Contender Mini Info-->
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollViewatalhos"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:scrollbarSize="1dp"
+                android:scrollbarThumbHorizontal="@drawable/custom_scroll_style_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/txttittleatalhos">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!--Card Not Partner-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardviewnotpartner"
+                        android:visibility="visible"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:outlineProvider="none"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FFB422"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <!--Contender Animation-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/animationnotpartner"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="match_parent">
+
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:lottie_rawRes="@raw/cardgift"
+                                app:lottie_autoPlay="true"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--Contender Not Partner-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintdescnotpartner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="3dp"
+                            android:outlineProvider="none">
+
+                            <!--Text Be Partner-->
+                            <TextView
+                                android:id="@+id/txtsejaparceiro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sejaparceiro"
+                                android:layout_marginTop="8dp"
+                                android:textSize="17sp"
+                                android:textColor="#ED000000"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc Partner-->
+                            <TextView
+                                android:id="@+id/txtdescpartner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/descpartner"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="12sp"
+                                app:layout_constraintTop_toBottomOf="@+id/txtsejaparceiro"
+                                tools:layout_editor_absoluteX="2dp" />
+
+                            <!--Card Be Partner-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardbepartner"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardBackgroundColor="#fff"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdescpartner" >
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/iconemais"
+                                        android:textSize="30sp"
+                                        android:textColor="#000"
+                                        android:textStyle="bold"
+                                        android:layout_marginBottom="4dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card Coffee-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardshopcafe"
+                        android:visibility="visible"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:outlineProvider="none"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardviewnotpartner"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Contender Coffes-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:padding="3dp"
+                            android:layout_height="match_parent">
+
+                            <!--Text Coffees-->
+                            <TextView
+                                android:id="@+id/txtcafesprincipal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cafes"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc Coffees-->
+                            <TextView
+                                android:id="@+id/txtdesccafesprincipal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/desccafes"
+                                android:layout_marginTop="4dp"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtcafesprincipal" />
+
+                            <!--Card More Coffee-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnvercafes"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdesccafesprincipal">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Img Coffee-->
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        android:layout_marginBottom="4dp"
+                                        app:lottie_autoPlay="true"
+                                        app:lottie_rawRes="@raw/coffee1" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card Juices-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardsucosprincipal"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardshopcafe"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <!--Base Contender-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Text Tittle Refreshers-->
+                            <TextView
+                                android:id="@+id/txttittlerefreshers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/refreshers"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc Refreshers-->
+                            <TextView
+                                android:id="@+id/txtdescrefreshers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/descrefreshers"
+                                android:layout_marginTop="4dp"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="13sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlerefreshers"/>
+
+                            <!--Card More Refreshers-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnverrefreshers"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginBottom="4dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdescrefreshers">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Img Refreshers-->
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:layout_width="130dp"
+                                        android:layout_height="70dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:lottie_autoPlay="true"
+                                        app:lottie_rawRes="@raw/drink" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card  Hamburger and Sandwiches-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardhamburguerandsandwiches"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        app:cardCornerRadius="20dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardsucosprincipal"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Base Contender-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Text  and sandwiches-->
+                            <TextView
+                                android:id="@+id/txttittlesavoryandsandwiches"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/salgadosesanduiches"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Animation  Hamburger-->
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:id="@+id/animationdescsavoryandsandwiches"
+                                android:layout_width="70dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="70dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.02"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
+                                app:lottie_autoPlay="true"
+                                app:lottie_rawRes="@raw/chipssalsa" />
+
+                            <!--Animation  Hamburger 2-->
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:id="@+id/animationdescsavoryandsandwiches2"
+                                android:layout_width="70dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="24dp"
+                                app:layout_constraintBottom_toTopOf="@+id/btnverhamburger"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/animationdescsavoryandsandwiches"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
+                                app:lottie_autoPlay="true"
+                                app:lottie_rawRes="@raw/burgeranimation" />
+
+                            <!--Card More Hamburger-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnverhamburger"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginBottom="4dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/animationdescsavoryandsandwiches">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Img Burguer-->
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:layout_width="130dp"
+                                        android:layout_height="70dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:lottie_autoPlay="true"
+                                        app:lottie_rawRes="@raw/burgerburger" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card Candy-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardcandys"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        app:cardCornerRadius="20dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardhamburguerandsandwiches"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Base Contender-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Text Candy-->
+                            <TextView
+                                android:id="@+id/txttittlecandys"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/candys"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Animation Donuts-->
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:id="@+id/animationdesccandys"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:layout_marginBottom="75dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.02"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlecandys"
+                                app:lottie_autoPlay="true"
+                                app:lottie_rawRes="@raw/donuts" />
+
+                            <!--Card More Cadys-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnvercandys"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginBottom="16dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/animationdesccandys">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Img Yummy Donut-->
+                                    <com.airbnb.lottie.LottieAnimationView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:lottie_autoPlay="true"
+                                        app:lottie_rawRes="@raw/yummydonut" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card  All Products-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardallproducts"
+                        android:layout_width="145dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        app:cardCornerRadius="20dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardcandys"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:padding="3dp"
+                            android:layout_height="match_parent">
+
+                            <!--Text All Products-->
+                            <TextView
+                                android:id="@+id/txttittletodososprodutos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/todososprodutos"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc All Products-->
+                            <TextView
+                                android:id="@+id/txtdescreallproducts"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/desctodososprodutos"
+                                android:layout_marginTop="4dp"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="13sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittletodososprodutos"/>
+
+                            <!--Card More Coffee-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnvertodososprodutos"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdescreallproducts">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/conferir"
+                                        android:textSize="17sp"
+                                        android:textColor="#000"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card Shopping cart-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardshoppingcart"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        app:cardCornerRadius="20dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardallproducts"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Base-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Text Shopping cart-->
+                            <TextView
+                                android:id="@+id/txttittlecart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/carrinhodecompras"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:id="@+id/animationcart"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlecart"
+                                app:lottie_autoPlay="true"
+                                app:lottie_rawRes="@raw/shoppingcart" />
+
+                            <!--Card Shopping cart-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardvercarrinhodecompra"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/animationcart">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/iconemais"
+                                        android:textSize="30sp"
+                                        android:textColor="#000"
+                                        android:textStyle="bold"
+                                        android:layout_marginBottom="4dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Card Credit Cards-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardcreditcards"
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginEnd="45dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardshoppingcart"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Base-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Text Cards-->
+                            <TextView
+                                android:id="@+id/txttittlecards"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/cartoes"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Status Card-->
+                            <TextView
+                                android:id="@+id/txtstatuscartoes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/statuscartao"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="15sp"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlecards" />
+
+                            <!--Card See more Cards-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardvercartoes"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="16dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtstatuscartoes">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="4dp"
+                                        android:text="@string/iconemais"
+                                        android:textColor="#000"
+                                        android:textSize="30sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </HorizontalScrollView>
+
+            <!--Text Most Popular-->
+            <TextView
+                android:id="@+id/txtpopular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/popular"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewatalhos" />
+
+            <!--Card Top of week-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtopdasemana"
                 android:layout_width="350dp"
-                android:layout_height="600dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="220dp"
+                app:cardBackgroundColor="#fff"
+                android:visibility="visible"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/txtpopular">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!--Animation-->
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animationcoffeeconstant"
-                        android:layout_width="350dp"
-                        android:layout_height="200dp"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgstarmaispopular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Top of week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/topdasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgstarmaispopular"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Vampire Frappuccino-->
+                    <TextView
+                        android:id="@+id/txtnomeprodutotopdasemana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/mochafrappuccino"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgstarmaispopular" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtnomeprodutotopdasemana" />
+
+                    <!--Text Size of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/quinhentosml"
+                        android:textColor="#52000000"
+                        android:layout_marginStart="2dp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintTop_toBottomOf="@+id/txtnomeprodutotopdasemana" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_vampirefrappuccino"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.29000002"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/littlecoffee" />
+                        tools:ignore="ContentDescription" />
 
-                    <!--Txt Wellcome-->
-                    <TextView
-                        android:id="@+id/txtbemvindo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="282dp"
-                        android:text="@string/txt_welcome"
-                        android:textColor="#CD292929"
-                        android:textSize="40sp"
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/txtChoosetheCfc"
-                        android:layout_marginTop="8dp"
-                        android:textSize="28sp"
-                        android:textColor="#BA4C4C4C"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtbemvindo" />
+                        tools:ignore="TooManyViews">
 
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </LinearLayout>
-
-    <!--NavBar-->
-    <LinearLayout
-        android:id="@+id/navbarmain"
-        android:orientation="horizontal"
-        android:layout_weight="6"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--Btn know more-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardviewseemore"
-                android:layout_width="150dp"
-                android:layout_height="55dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
-                app:cardBackgroundColor="#fff"
-                app:cardCornerRadius="20dp"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/cardsaibamais"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/knowmore"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <!--Btn Login-->
+            <!--Card Most Sale-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardviewlogin"
-                android:layout_width="150dp"
-                android:layout_height="55dp"
+                android:id="@+id/cardmaisvendido"
+                android:layout_width="350dp"
+                android:visibility="visible"
+                android:layout_height="220dp"
                 app:cardBackgroundColor="#fff"
-                android:layout_marginEnd="24dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardtopdasemana">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgtest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Most Sale-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/maisvendido"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgtest"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Unicorn Frappuccino-->
+                    <TextView
+                        android:id="@+id/txtfrappuccinounicornio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/unicornfrappuccino"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgtest"
+                        tools:ignore="TooManyViews" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/txttext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtfrappuccinounicornio" />
+
+                    <!--Text Size of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/seissentosml"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/txttext"
+                        app:layout_constraintTop_toBottomOf="@+id/txtfrappuccinounicornio" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:layout_marginTop="8dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_frappuccinounicornio"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Card Promotion of the week-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtest222"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:visibility="visible"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardmaisvendido">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgtest2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Promotion of the week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/promocaodasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgtest2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Dunkin' Donuts-->
+                    <TextView
+                        android:id="@+id/txttest2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/dunkindonuts"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgtest2" />
+
+                    <!--Text Flavor-->
+                    <TextView
+                        android:id="@+id/txttext2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/sabor"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest2" />
+
+                    <!--Text Flavor of product-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="2dp"
+                        android:text="@string/docedeleito"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/txttext2"
+                        app:layout_constraintTop_toBottomOf="@+id/txttest2" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="240dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="180dp"
+                        android:layout_marginTop="15dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_dunkindonuts"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="TooManyViews">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Card Combo of week-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardcomboofweek"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardtest222">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgstarcomboofweek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Promotion of the week-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/combodasemana"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgstarcomboofweek"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Combo Happy-->
+                    <TextView
+                        android:id="@+id/txttittlecombohappy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/combohappy"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgstarcomboofweek" />
+
+                    <!--Text Desc Combo-->
+                    <TextView
+                        android:id="@+id/txtdesccombohappy"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/desccombohapppy"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttittlecombohappy" />
+
+                    <!--Image Toast-->
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="140dp"
+                        android:layout_marginTop="50dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_toastdepeitodeperu"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Image Frappuccino-->
+                    <ImageView
+                        android:layout_width="240dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="220dp"
+                        android:layout_marginTop="15dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_frappuccinochocolate"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Image Croissant-->
+                    <ImageView
+                        android:layout_width="240dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="15dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_croissant"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Card House indication-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardhouseindication"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardcomboofweek"
+                tools:ignore="TooManyViews">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:background="@drawable/cardlogar"
                     android:layout_height="match_parent">
 
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/imgstarhouseindication"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Img Star-->
+                    <ImageView
+                        android:id="@+id/secondimgstarhouseindication"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_star"
+                        app:layout_constraintStart_toEndOf="@+id/txtindicacaodacadas"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Text Promotion of the week-->
+                    <TextView
+                        android:id="@+id/txtindicacaodacadas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/indicacaodacasa"
+                        android:textColor="#AE000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imgstarhouseindication"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Combo Happy-->
+                    <TextView
+                        android:id="@+id/txttittleindicacaodacasa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/refresherdemorangocomlimo"
+                        android:textColor="#000"
+                        android:textSize="19sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgstarhouseindication" />
+
+                    <!--Text Size-->
+                    <TextView
+                        android:id="@+id/txttamanhorefreshermorango"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tamanho"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttittleindicacaodacasa" />
+
+                    <!--Text Size of product-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/access"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/quinhentosml"
+                        android:textColor="#52000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/txttamanhorefreshermorango"
+                        app:layout_constraintTop_toBottomOf="@+id/txttittleindicacaodacasa" />
+
+                    <!--Image Refresher-->
+                    <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="220dp"
+                        android:layout_marginStart="210dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/img_refresherdemorango"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Btn See more-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btnofmoreinprincipal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--Text More-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/iconemais"
+                            android:textColor="#000"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,7 +1468,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

@@ -157,7 +157,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(PerfilActivity.this,PrincipalActivity.class);
+        Intent voltaraoprincipal = new Intent(PerfilActivity.this, MainActivity.class);
         voltaraoprincipal.putExtra("emailuser",emaillogado);
         voltaraoprincipal.putExtra("statusavisoend","desativado");
         startActivity(voltaraoprincipal);

@@ -75,7 +75,7 @@ public class CadastrarenderecoActivity extends AppCompatActivity {
                         long linhasinseridas = daoClientes.atualizarendereco(dtoClientes);
                         if (linhasinseridas > 0){
                             Toast.makeText(this, "Endereço cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                            Intent voltarcadastrarendereco = new Intent(CadastrarenderecoActivity.this,PrincipalActivity.class);
+                            Intent voltarcadastrarendereco = new Intent(CadastrarenderecoActivity.this, MainActivity.class);
                             voltarcadastrarendereco.putExtra("emailuser",emaillogado);
                             voltarcadastrarendereco.putExtra("statusavisoend","desativado");
                             startActivity(voltarcadastrarendereco);
@@ -98,7 +98,7 @@ public class CadastrarenderecoActivity extends AppCompatActivity {
         //  When click here will to PrincipalActivity
         cardviewenderecodepois.setOnClickListener(v -> {
 
-            Intent voltandoparaprincipal = new Intent(CadastrarenderecoActivity.this,PrincipalActivity.class);
+            Intent voltandoparaprincipal = new Intent(CadastrarenderecoActivity.this, MainActivity.class);
             voltandoparaprincipal.putExtra("emailuser",emaillogado);
             voltandoparaprincipal.putExtra("statusavisoend","desativado");
             startActivity(voltandoparaprincipal);
@@ -116,7 +116,7 @@ public class CadastrarenderecoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltarcadastrarendereco = new Intent(CadastrarenderecoActivity.this,PrincipalActivity.class);
+        Intent voltarcadastrarendereco = new Intent(CadastrarenderecoActivity.this, MainActivity.class);
         voltarcadastrarendereco.putExtra("emailuser",emaillogado);
         voltarcadastrarendereco.putExtra("statusavisoend","desativado");
         startActivity(voltarcadastrarendereco);

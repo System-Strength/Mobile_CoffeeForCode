@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_main);
         txtnomedocliente = findViewById(R.id.txtnomedocliente);
         cardviewnotpartner = findViewById(R.id.cardviewnotpartner);
         cardbepartner = findViewById(R.id.cardbepartner);
