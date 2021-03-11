@@ -53,8 +53,10 @@
     <string name="loginto">Log into</string>
     <string name="imnewhere">I\'m new here.</string>
     <string name="createaccount">Create account</string>
-    <string name="wehaveaproblem">We have a problem with our server.\nTry later</string>
+    <string name="wehaveaproblem">We have a problem with our server.\nTry again later</string>
     <string name="wrongemailandpassword">EMAIL OR PASSWORD informed are not correct or are not registered Check EMAIL and PASSWORD!</string>
+    <!--Warning Login Screen-->
+    <string name="fill_correctly_email">Fill in correctly: EMAIL</string>
 
     <!--Create Account Screen-->
     <string name="namecreateaccount">Name*</string>
@@ -69,9 +71,16 @@
     <string name="rgcreateaccount" translatable="false">RG*</string>
     <string name="accepttheterms">I accept the terms of CoffeeForCode</string>
     <string name="terms"><u>Terms</u></string>
+    <string name="ApplicationErrorTryLater">Application error please try again later !!</string>
     <string name="explicacaoesteristico">* - Mandatory</string>
     <string name="createaccounterror" tools:ignore="TypographyEllipsis">It was not possible to register ...</string>
     <string name="tryagainlater">Try again later</string>
+    <!--Warning Account Screen-->
+    <string name="necessary_fill_name">Necessary to fill in the field correctly: NAME</string>
+    <string name="rg_informed_is_invalid">RG informed is invalid</string>
+    <string name="required_fill_email">Required to fill in the field: EMAIL</string>
+    <string name="fill_email_correctly">Fill in your email correctly</string>
+    <string name="necessary_fill_correctly_password">Necessary to fill the field correctly: PASSWORD\nMinimum 8 characters</string>
 
     <!--Principal Screen-->
     <string name="atalhos">Shortcuts</string>

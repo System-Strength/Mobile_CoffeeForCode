@@ -82,7 +82,7 @@
 
                 <!--Edit Email-->
                 <EditText
-                    android:id="@+id/edittextemail"
+                    android:id="@+id/edittextEmail_userLogin"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
@@ -103,7 +103,7 @@
                     android:layout_marginTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextemail">
+                    app:layout_constraintTop_toBottomOf="@+id/edittextEmail_userLogin">
 
                     <!--Text Senha Address-->
                     <TextView
@@ -121,7 +121,7 @@
 
                     <!--Edit Senha-->
                     <EditText
-                        android:id="@+id/edittextsenha"
+                        android:id="@+id/edittexPassword_userLogin"
                         android:layout_width="350dp"
                         android:layout_height="50dp"
                         android:layout_alignParentStart="true"
@@ -139,7 +139,7 @@
 
                     <!--Img Eye Closed-->
                     <ImageView
-                        android:id="@+id/imgolhofechado"
+                        android:id="@+id/img_closed_eye"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:visibility="visible"
@@ -152,7 +152,7 @@
 
                     <!--Img Eye Opened-->
                     <ImageView
-                        android:id="@+id/imgolhoaberto"
+                        android:id="@+id/img_opened_eye"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:visibility="gone"

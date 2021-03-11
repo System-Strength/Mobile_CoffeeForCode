@@ -7,7 +7,7 @@
     android:background="#FFEDCB"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SplashActivity">
 
 
     <!--Body-->
