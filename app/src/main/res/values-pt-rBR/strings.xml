@@ -6,7 +6,7 @@
     <string name="docedeleito">Milk Cream</string>
     <string name="cafes">Cafés</string>
     <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
-    <string name="salgadosesanduiches">Salgados e sanduiches marinhas e sanduíches</string>
+    <string name="salgadosesanduiches">Salgados e sanduíches</string>
     <string name="candys">Doces</string>
     <string name="sejaparceiro">Sejá Parceiro</string>
     <string name="descpartner">Descontos exclusivos, cartão fidelidade,  frete grátis, premiações mensais</string>
@@ -50,7 +50,7 @@
     <string name="cartoes">Cartões</string>
     <string name="perfil">Perfil</string>
     <string name="statuscartao">Não a nenhum cartão cadastrado</string>
-    <string name="olavirgula">No to any rOlá, egistered card</string>
+    <string name="olavirgula">Olá,</string>
     <string name="qualseupedidohj">Qual o seu pedido hoje?</string>
     <string name="desccafes">Veja nossa imensa variedade de cafés disponéveis</string>
     <string name="descrefreshers">Bebidas extremamente refrescantes de diversos sabores</string>
@@ -127,4 +127,12 @@
     <string name="excluirproduto">Alterar Produto</string>
     <string name="remember_me">Lembre de mim</string>
     <string name="desccombohapppy">Frappuccino de chocolate Croissant e Torada</string>
+    <string name="wehaveaproblem">Estamos com problema em nosso servidor.\\nTente mais tarde</string>
+    <string name="ApplicationErrorTryLater">Erro na aplicação tente novamente mais tarde !!</string>
+    <string name="necessary_fill_name">Necessário preencher corretamente o campo: NOME</string>
+    <string name="rg_informed_is_invalid">RG informado é invalido</string>
+    <string name="required_fill_email">Necessário preencher o campo: EMAIL</string>
+    <string name="fill_email_correctly">Preencha corretamente seu email</string>
+    <string name="necessary_fill_correctly_password">Necessário preencher corretamente o campo: SENHA Minimo 8 caracteres</string>
+    <string name="fill_correctly_email">Preencha corretamente: EMAIL</string>
 </resources>

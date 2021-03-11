@@ -76,7 +76,7 @@
 
                 <!--Edit text Name-->
                 <EditText
-                    android:id="@+id/edittextNameCreateAccount"
+                    android:id="@+id/edittextName_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
@@ -100,7 +100,7 @@
                     android:textColor="#95000000"
                     android:text="@string/rgcreateaccount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextNameCreateAccount" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittextName_userCreateAccount" />
 
                 <!--Edit text CPF-->
                 <EditText
@@ -133,7 +133,7 @@
 
                 <!--Edit text Email-->
                 <EditText
-                    android:id="@+id/edittextemailcriarconta"
+                    android:id="@+id/edittextEmail_userCreateAccount"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
@@ -154,7 +154,7 @@
                     android:layout_height="80dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edittextemailcriarconta">
+                    app:layout_constraintTop_toBottomOf="@+id/edittextEmail_userCreateAccount">
 
                     <!--Text PassWord-->
                     <TextView
@@ -168,7 +168,7 @@
 
                     <!--Edit text passWord-->
                     <EditText
-                        android:id="@+id/edittextPasswordCriarconta"
+                        android:id="@+id/edittextPassword_userCreateAccount"
                         android:layout_width="350dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="2dp"
@@ -279,7 +279,7 @@
 
                 <!--Text Criar Conta-->
                 <TextView
-                    android:id="@+id/txtlogar"
+                    android:id="@+id/txtLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lognow"
@@ -296,7 +296,7 @@
 
                 <!--Text Terms-->
                 <TextView
-                    android:id="@+id/txttermos"
+                    android:id="@+id/txtTerms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/terms"

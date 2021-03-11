@@ -9,7 +9,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -26,7 +25,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.UsersService;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,16 +35,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class CriarContaActivity extends AppCompatActivity {
-    TextView txtlogar, txttermos;
+    TextView txtLogin, txtTerms;
     CheckBox checkboxaceitoostermos;
-    EditText edittextNameCreateAccount, edittextrg_userCreateAccount, edittextemailcriarconta, edittextPasswordCriarcontacriarconta;
+    EditText edittextName_userCreateAccount, edittextrg_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
-    DtoClientes clientes = new DtoClientes();
     Dialog termos, avisoerro;
-    @SuppressWarnings("deprecation")
-    Handler timer = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +52,13 @@ public class CriarContaActivity extends AppCompatActivity {
         cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
         imgolhofechadocriarconta = findViewById(R.id.imgolhofechadocriarconta);
         imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
-        edittextPasswordCriarcontacriarconta = findViewById(R.id.edittextPasswordCriarconta);
-        edittextemailcriarconta = findViewById(R.id.edittextemailcriarconta);
-        edittextNameCreateAccount = findViewById(R.id.edittextNameCreateAccount);
+        edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);
+        edittextEmail_userCreateAccount = findViewById(R.id.edittextEmail_userCreateAccount);
+        edittextName_userCreateAccount = findViewById(R.id.edittextName_userCreateAccount);
         edittextrg_userCreateAccount = findViewById(R.id.edittextrg_userCreateAccount);
         checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
-        txttermos = findViewById(R.id.txttermos);
-        txtlogar = findViewById(R.id.txtlogar);
+        txtTerms = findViewById(R.id.txtTerms);
+        txtLogin = findViewById(R.id.txtLogin);
         termos = new Dialog(this);
         avisoerro = new Dialog(this);
         LoadingDialog loadingDialog = new LoadingDialog(CriarContaActivity.this);
@@ -84,18 +79,18 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click in the eye closed will hide de password
         imgolhofechadocriarconta.setOnClickListener(v -> {
-            edittextPasswordCriarcontacriarconta.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            edittextPassword_userCreateAccount.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             imgolhoabertocriarconta.setVisibility(View.VISIBLE);
             imgolhofechadocriarconta.setVisibility(View.GONE);
-            edittextPasswordCriarcontacriarconta.setSelection(edittextPasswordCriarcontacriarconta.getText().length());
+            edittextPassword_userCreateAccount.setSelection(edittextPassword_userCreateAccount.getText().length());
         });
 
         //  When click in the eye opened will show de password
         imgolhoabertocriarconta.setOnClickListener(v -> {
-            edittextPasswordCriarcontacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            edittextPassword_userCreateAccount.setTransformationMethod(PasswordTransformationMethod.getInstance());
             imgolhoabertocriarconta.setVisibility(View.GONE);
             imgolhofechadocriarconta.setVisibility(View.VISIBLE);
-            edittextPasswordCriarcontacriarconta.setSelection(edittextPasswordCriarcontacriarconta.getText().length());
+            edittextPassword_userCreateAccount.setSelection(edittextPassword_userCreateAccount.getText().length());
         });
 
         //  When click here will go back to LoginActivity
@@ -107,38 +102,45 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click here will try to create a new account
         cardviewbtncriarconta.setOnClickListener(v -> {
-            if (edittextNameCreateAccount.getText() == null || edittextNameCreateAccount.getText().length() < 4){
-                Toast.makeText(this, "Necessário preencher corretamente o campo: NOME", Toast.LENGTH_SHORT).show();
-                edittextNameCreateAccount.requestFocus();
-                imm.showSoftInput(edittextNameCreateAccount, InputMethodManager.SHOW_IMPLICIT);
+            if (edittextName_userCreateAccount.getText() == null || edittextName_userCreateAccount.getText().length() < 4){
+                edittextName_userCreateAccount.setError("Necessary to fill in the field correctly: NAME" + "\n" +
+                        "Necessário preencher corretamente o campo: NOME");
+                //Toast.makeText(this, R.string.necessary_fill_name, Toast.LENGTH_SHORT).show();
+                edittextName_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(edittextrg_userCreateAccount.getText() == null || edittextrg_userCreateAccount.getText().length() < 12){
-                Toast.makeText(this, "CPF informado é invalido", Toast.LENGTH_SHORT).show();
+                edittextrg_userCreateAccount.setError("RG informed is invalid" + "\n"  + "RG informado é invalido");
+                //Toast.makeText(this, R.string.cpf_informed_is_invalid, Toast.LENGTH_SHORT).show();
                 edittextrg_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextrg_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if(edittextemailcriarconta.getText() == null || edittextemailcriarconta.getText().length() == 0){
-                Toast.makeText(this, "Necessário preencher o campo: EMAIL", Toast.LENGTH_SHORT).show();
-                edittextemailcriarconta.requestFocus();
-                imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
+            }else if(edittextEmail_userCreateAccount.getText() == null || edittextEmail_userCreateAccount.getText().length() == 0){
+                edittextEmail_userCreateAccount.setError("Required to fill in the field: EMAIL" + "\n" + "Necessário preencher o campo: EMAIL");
+                //Toast.makeText(this, R.string.required_fill_email, Toast.LENGTH_SHORT).show();
+                edittextEmail_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextEmail_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(edittextemailcriarconta.getText()).matches()){
-                Toast.makeText(this, "Preencha corretamente seu email", Toast.LENGTH_SHORT).show();
-                edittextemailcriarconta.requestFocus();
-                imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
+            }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(edittextEmail_userCreateAccount.getText()).matches()){
+                edittextEmail_userCreateAccount.setError("Fill in your email correctly" + "\n" + "Preencha corretamente seu email");
+                //Toast.makeText(this, R.string.fill_email_correctly, Toast.LENGTH_SHORT).show();
+                edittextEmail_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextEmail_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if (edittextPasswordCriarcontacriarconta.getText() == null || edittextPasswordCriarcontacriarconta.getText().length() < 8){
-                Toast.makeText(this, "Necessário preencher corretamente o campo: SENHA\nMinimo 8 caracteres", Toast.LENGTH_SHORT).show();
-                edittextPasswordCriarcontacriarconta.requestFocus();
-                imm.showSoftInput(edittextPasswordCriarcontacriarconta, InputMethodManager.SHOW_IMPLICIT);
+            }else if (edittextPassword_userCreateAccount.getText() == null || edittextPassword_userCreateAccount.getText().length() < 8){
+                edittextPassword_userCreateAccount.setError("Necessary to fill the field correctly: PASSWORD\n" +
+                        "Minimum 8 characters" + "\n" + "Necessário preencher corretamente o campo: SENHA\n" +  "Minimo 8 caracteres");
+                //Toast.makeText(this, R.string.necessary_fill_correctly_password, Toast.LENGTH_SHORT).show();
+                edittextPassword_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextPassword_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
-                String email = edittextemailcriarconta.getText().toString();
+                String email = edittextEmail_userCreateAccount.getText().toString();
                 String rg_user = edittextrg_userCreateAccount.getText().toString();
-                String password = edittextPasswordCriarcontacriarconta.getText().toString();
-                String nm_user = edittextNameCreateAccount.getText().toString();
+                String password = edittextPassword_userCreateAccount.getText().toString();
+                String nm_user = edittextName_userCreateAccount.getText().toString();
                 UsersService usersService = retrofitUser.create(UsersService.class);
                 DtoUsers newuser = new DtoUsers(email, nm_user, rg_user, password);
                 Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
@@ -149,8 +151,8 @@ public class CriarContaActivity extends AppCompatActivity {
                     public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                         if(response.code() == 201 || response.code() == 200){
                             Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                            voltaraologin.putExtra("emailusu", email);
-                            voltaraologin.putExtra("senhausu", password);
+                            voltaraologin.putExtra("email_user", email);
+                            voltaraologin.putExtra("password_user", password);
                             startActivity(voltaraologin);
                             finish();
                         }
@@ -158,93 +160,28 @@ public class CriarContaActivity extends AppCompatActivity {
                             loadingDialog.dimissDialog();
                             showError();
                         }else{
+                            Toast.makeText(CriarContaActivity.this, R.string.wehaveaproblem, Toast.LENGTH_LONG).show();
                             loadingDialog.dimissDialog();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<DtoUsers> call, Throwable t) {
-
+                        Toast.makeText(CriarContaActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_LONG).show();
+                        loadingDialog.dimissDialog();
                     }
                 });
-
-                /*String emailsendocadastrado = edittextemailcriarconta.getText().toString();
-                DaoClientes clientesconsultados = new DaoClientes(CriarContaActivity.this);
-                clientes = clientesconsultados.consultarclienteporemail(emailsendocadastrado);
-                if (clientes.getEmailcliente() == null){
-                    if (edittextemailcriarconta.getText().toString().equals("kauavitorioof@gmail.com")){
-                        DtoClientes dtoClientes = new DtoClientes();
-                        dtoClientes.setNomecliente(edittextNameCreateAccount.getText().toString());
-                        dtoClientes.setCpfcliente(edittextrg_userCreateAccount.getText().toString());
-                        dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
-                        dtoClientes.setParceiro("nao");
-                        dtoClientes.setAdm("SIM");
-                        dtoClientes.setSenhacliente(edittextPasswordCriarcontacriarconta.getText().toString());
-                        DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
-                        timer.postDelayed(() -> {
-                            try {
-                                long linhasafetadas = daoClientes.cadastrar(dtoClientes);
-                                if (linhasafetadas > 0){
-                                    Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                                    voltaraologin.putExtra("emailusu",edittextemailcriarconta.getText().toString());
-                                    voltaraologin.putExtra("senhausu",edittextPasswordCriarcontacriarconta.getText().toString());
-                                    startActivity(voltaraologin);
-                                    finish();
-                                }else {
-                                    loadingDialog.dimissDialog();
-                                    mostrarerro();
-                                }
-                            }catch (Exception ex){
-                                Toast.makeText(this, "Erro ao criar conta: "+ ex, Toast.LENGTH_SHORT).show();
-                            }
-                        },2000);
-
-                    }else {
-                        DtoClientes dtoClientes = new DtoClientes();
-                        dtoClientes.setNomecliente(edittextNameCreateAccount.getText().toString());
-                        dtoClientes.setCpfcliente(edittextrg_userCreateAccount.getText().toString());
-                        dtoClientes.setEmailcliente(edittextemailcriarconta.getText().toString());
-                        dtoClientes.setParceiro("nao");
-                        dtoClientes.setAdm("NAO");
-                        dtoClientes.setSenhacliente(edittextPasswordCriarcontacriarconta.getText().toString());
-                        DaoClientes daoClientes = new DaoClientes(CriarContaActivity.this);
-                        loadingDialog.startLoading();
-                        timer.postDelayed(() -> {
-                            try {
-                                long linhasafetadas = daoClientes.cadastrar(dtoClientes);
-                                if (linhasafetadas > 0) {
-                                    Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                                    voltaraologin.putExtra("emailusu", edittextemailcriarconta.getText().toString());
-                                    voltaraologin.putExtra("senhausu", edittextPasswordCriarcontacriarconta.getText().toString());
-                                    startActivity(voltaraologin);
-                                    finish();
-                                } else {
-                                    loadingDialog.dimissDialog();
-                                    mostrarerro();
-                                }
-                            } catch (Exception ex) {
-                                Toast.makeText(this, "Erro ao criar conta: " + ex, Toast.LENGTH_SHORT).show();
-                            }
-                        }, 2000);
-
-                    }
-                } else if (clientes.getEmailcliente().equals(edittextemailcriarconta.getText().toString())){
-                    Toast.makeText(this, "O email informado já está em uso!!", Toast.LENGTH_SHORT).show();
-                    edittextemailcriarconta.requestFocus();
-                    imm.showSoftInput(edittextemailcriarconta, InputMethodManager.SHOW_IMPLICIT);
-                }*/
             }
         });
 
         //  When click will go back to LoginActivity
-        txtlogar.setOnClickListener(v -> {
+        txtLogin.setOnClickListener(v -> {
             Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
             startActivity(voltaraologin);
             finish();
         });
 
         //  Set commands to start in real time
-        edittextPasswordCriarcontacriarconta.addTextChangedListener(new TextWatcher() {
+        edittextPassword_userCreateAccount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -257,12 +194,12 @@ public class CriarContaActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (edittextPasswordCriarcontacriarconta.getText() == null || edittextPasswordCriarcontacriarconta.getText().length() == 0){
+                if (edittextPassword_userCreateAccount.getText() == null || edittextPassword_userCreateAccount.getText().length() == 0){
                     imgolhoabertocriarconta.setVisibility(View.GONE);
                     imgolhofechadocriarconta.setVisibility(View.GONE);
-                    edittextPasswordCriarcontacriarconta.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    edittextPassword_userCreateAccount.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }else {
-                    if (edittextPasswordCriarcontacriarconta.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()) {
+                    if (edittextPassword_userCreateAccount.getTransformationMethod() == HideReturnsTransformationMethod.getInstance()) {
                         imgolhoabertocriarconta.setVisibility(View.VISIBLE);
                         imgolhofechadocriarconta.setVisibility(View.GONE);
                     }else{
@@ -270,7 +207,7 @@ public class CriarContaActivity extends AppCompatActivity {
                         imgolhoabertocriarconta.setVisibility(View.GONE);
                     }
                 }
-                if (edittextPasswordCriarcontacriarconta.getText().length() >= 8){
+                if (edittextPassword_userCreateAccount.getText().length() >= 8){
                     certosenhacriarconta.setVisibility(View.VISIBLE);
                     certosenhacriarconta.playAnimation();
                 }else {
@@ -280,11 +217,11 @@ public class CriarContaActivity extends AppCompatActivity {
         });
 
         //  When click here will show the terms of user
-        txttermos.setOnClickListener(v -> mostrartermos());
+        txtTerms.setOnClickListener(v -> ShowTerms());
     }
 
     //  Create method to see the terms
-    private void mostrartermos() {
+    private void ShowTerms() {
         LottieAnimationView btnfechartermos;
         CardView cardviewaceitoostermos;
         termos.setContentView(R.layout.termoscfc);
@@ -311,10 +248,10 @@ public class CriarContaActivity extends AppCompatActivity {
         avisoerro.setCancelable(false);
 
         cardokavisoerro.setOnClickListener(v -> {
-            Intent voltaramain = new Intent(CriarContaActivity.this,MainActivity.class);
-            voltaramain.putExtra("novotimerstart",1);
-            voltaramain.putExtra("novotimershowoption",200);
-            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerda, R.anim.mover_direita);
+            Intent voltaramain = new Intent(CriarContaActivity.this, SplashActivity.class);
+            voltaramain.putExtra("new_time_to_start",1);
+            voltaramain.putExtra("new_time_to_showOptions",200);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
             ActivityCompat.startActivity(CriarContaActivity.this,voltaramain, activityOptionsCompat.toBundle());
             finish();
         });
