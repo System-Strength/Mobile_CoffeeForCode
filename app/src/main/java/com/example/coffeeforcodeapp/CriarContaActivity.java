@@ -37,7 +37,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class CriarContaActivity extends AppCompatActivity {
     TextView txtLogin, txtTerms;
     CheckBox checkboxaceitoostermos;
-    EditText edittextName_userCreateAccount, edittextrg_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
+    EditText edittextName_userCreateAccount, edittextcpf_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
@@ -55,7 +55,7 @@ public class CriarContaActivity extends AppCompatActivity {
         edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);
         edittextEmail_userCreateAccount = findViewById(R.id.edittextEmail_userCreateAccount);
         edittextName_userCreateAccount = findViewById(R.id.edittextName_userCreateAccount);
-        edittextrg_userCreateAccount = findViewById(R.id.edittextrg_userCreateAccount);
+        edittextcpf_userCreateAccount = findViewById(R.id.edittextcpf_userCreateAccount);
         checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
         txtTerms = findViewById(R.id.txtTerms);
         txtLogin = findViewById(R.id.txtLogin);
@@ -70,7 +70,7 @@ public class CriarContaActivity extends AppCompatActivity {
                 .build();
 
         //  Set Mask
-        edittextrg_userCreateAccount.addTextChangedListener(MaskEditUtil.mask(edittextrg_userCreateAccount, MaskEditUtil.FORMAT_RG));
+        edittextcpf_userCreateAccount.addTextChangedListener(MaskEditUtil.mask(edittextcpf_userCreateAccount, MaskEditUtil.FORMAT_CPF));
 
         //  Set some thinks with gone
         certosenhacriarconta.setVisibility(View.GONE);
@@ -109,11 +109,11 @@ public class CriarContaActivity extends AppCompatActivity {
                 edittextName_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if(edittextrg_userCreateAccount.getText() == null || edittextrg_userCreateAccount.getText().length() < 12){
-                edittextrg_userCreateAccount.setError("RG informed is invalid" + "\n"  + "RG informado é invalido");
+            }else if(edittextcpf_userCreateAccount.getText() == null || edittextcpf_userCreateAccount.getText().length() < 14){
+                edittextcpf_userCreateAccount.setError("CPF informed is invalid" + "\n"  + "CPF informado é invalido");
                 //Toast.makeText(this, R.string.cpf_informed_is_invalid, Toast.LENGTH_SHORT).show();
-                edittextrg_userCreateAccount.requestFocus();
-                imm.showSoftInput(edittextrg_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
+                edittextcpf_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextcpf_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(edittextEmail_userCreateAccount.getText() == null || edittextEmail_userCreateAccount.getText().length() == 0){
                 edittextEmail_userCreateAccount.setError("Required to fill in the field: EMAIL" + "\n" + "Necessário preencher o campo: EMAIL");
@@ -138,11 +138,11 @@ public class CriarContaActivity extends AppCompatActivity {
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
                 String email = edittextEmail_userCreateAccount.getText().toString();
-                String rg_user = edittextrg_userCreateAccount.getText().toString();
+                String cpf_user = edittextcpf_userCreateAccount.getText().toString();
                 String password = edittextPassword_userCreateAccount.getText().toString();
                 String nm_user = edittextName_userCreateAccount.getText().toString();
                 UsersService usersService = retrofitUser.create(UsersService.class);
-                DtoUsers newuser = new DtoUsers(email, nm_user, rg_user, password);
+                DtoUsers newuser = new DtoUsers(email, nm_user, cpf_user, password);
                 Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
                 loadingDialog.startLoading();
 

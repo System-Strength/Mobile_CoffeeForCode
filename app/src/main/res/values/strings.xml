@@ -26,7 +26,7 @@
 
 
     <!--Hints / Mask-->
-    <string name="mascararg" tools:ignore="TypographyDashes" translatable="false">00.000.000-0</string>
+    <string name="masckcpf" tools:ignore="TypographyDashes" translatable="false">000.000.000-00</string>
     <string name="mascaraphone" tools:ignore="TypographyDashes" translatable="false">(00) 00000-0000</string>
     <string name="mascaraemail">example@gmail.com</string>
     <string name="exnome" translatable="false">Ex. Fulano de tal</string>
@@ -68,7 +68,7 @@
     <string name="special_characters">Special Characters</string>
     <string name="lognow">Login Now</string>
     <string name="imalredyhaveaccount">I already have an account.</string>
-    <string name="rgcreateaccount" translatable="false">RG*</string>
+    <string name="cpfcreateaccount" translatable="false">CPF*</string>
     <string name="accepttheterms">I accept the terms of CoffeeForCode</string>
     <string name="terms"><u>Terms</u></string>
     <string name="ApplicationErrorTryLater">Application error please try again later !!</string>
@@ -77,7 +77,7 @@
     <string name="tryagainlater">Try again later</string>
     <!--Warning Account Screen-->
     <string name="necessary_fill_name">Necessary to fill in the field correctly: NAME</string>
-    <string name="rg_informed_is_invalid">RG informed is invalid</string>
+    <string name="cpf_informed_is_invalid">CPF informed is invalid</string>
     <string name="required_fill_email">Required to fill in the field: EMAIL</string>
     <string name="fill_email_correctly">Fill in your email correctly</string>
     <string name="necessary_fill_correctly_password">Necessary to fill the field correctly: PASSWORD\nMinimum 8 characters</string>

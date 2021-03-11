@@ -219,7 +219,7 @@ public class Editar_PerfilActivity extends AppCompatActivity {
     }
 
     public void voltar_ao_perfil(){
-        Intent voltar_ao_perfil = new Intent(Editar_PerfilActivity.this, PerfilActivity.class);
+        Intent voltar_ao_perfil = new Intent(Editar_PerfilActivity.this, ProfileActivity.class);
         voltar_ao_perfil.putExtra("emailuser", emaillogado);
         startActivity(voltar_ao_perfil);
         finish();

@@ -130,7 +130,7 @@
     <string name="wehaveaproblem">Estamos com problema em nosso servidor.\\nTente mais tarde</string>
     <string name="ApplicationErrorTryLater">Erro na aplicação tente novamente mais tarde !!</string>
     <string name="necessary_fill_name">Necessário preencher corretamente o campo: NOME</string>
-    <string name="rg_informed_is_invalid">RG informado é invalido</string>
+    <string name="cpf_informed_is_invalid">RG informado é invalido</string>
     <string name="required_fill_email">Necessário preencher o campo: EMAIL</string>
     <string name="fill_email_correctly">Preencha corretamente seu email</string>
     <string name="necessary_fill_correctly_password">Necessário preencher corretamente o campo: SENHA Minimo 8 caracteres</string>
