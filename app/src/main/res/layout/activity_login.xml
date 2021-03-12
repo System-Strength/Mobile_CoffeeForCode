@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,17 +29,24 @@
         <!--Coffee Animation-->
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="290dp"
             app:lottie_rawRes="@raw/coffeelove"
             app:lottie_autoPlay="true"/>
 
     </RelativeLayout>
 
     <!--Body Login-->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:layout_width="320dp"
+        android:layout_height="390dp"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:cardCornerRadius="30dp"
+        android:layout_marginTop="80dp"
+        app:cardBackgroundColor="#FFE1A7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,7 +54,6 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/designerlogin"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -66,41 +72,30 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!--Text Email Address-->
-                <TextView
-                    android:id="@+id/txtenderecoemaillogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/emailaddress"
-                    android:textAlignment="center"
-                    android:textColor="#D8393939"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txttiulelogin" />
-
                 <!--Edit Email-->
                 <EditText
                     android:id="@+id/edittextEmail_userLogin"
-                    android:layout_width="350dp"
+                    android:layout_width="280dp"
                     android:layout_height="50dp"
-                    android:textColor="#000"
-                    android:textAlignment="textStart"
-                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/edittextpersologin"
-                    android:layout_marginTop="2dp"
+                    android:inputType="textEmailAddress"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:hint="@string/hintEmailAddressLogin"
+                    android:textColorHint="#707070"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtenderecoemaillogin"
+                    app:layout_constraintTop_toBottomOf="@+id/txttiulelogin"
                     tools:ignore="Autofill,LabelFor" />
 
                 <!--Base PassWord-->
                 <RelativeLayout
                     android:id="@+id/basesenha"
-                    android:layout_width="350dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edittextEmail_userLogin">
@@ -122,13 +117,15 @@
                     <!--Edit Senha-->
                     <EditText
                         android:id="@+id/edittexPassword_userLogin"
-                        android:layout_width="350dp"
-                        android:layout_height="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/edittextpersologin"
+                        android:hint="@string/HintpasswordLogin"
+                        android:textColorHint="#707070"
                         android:inputType="textPassword"
                         android:textAlignment="textStart"
                         android:textColor="#000"
@@ -142,12 +139,12 @@
                         android:id="@+id/img_closed_eye"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:visibility="visible"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/olhofechado"
+                        android:visibility="visible"
                         tools:ignore="ContentDescription" />
 
                     <!--Img Eye Opened-->
@@ -155,23 +152,28 @@
                         android:id="@+id/img_opened_eye"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:visibility="gone"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/olhoaberto"
+                        android:visibility="gone"
                         tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/checkbox_rememberMe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:text="@string/remember_me"
+
+                <!--Text Create Account-->
+                <TextView
+                    android:id="@+id/txtcriarnovaconta"
+                    android:layout_width="102dp"
+                    android:layout_height="18dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/createaccount"
+                    android:textColor="#DF000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/basesenha" />
 
@@ -180,25 +182,39 @@
                     android:id="@+id/txtesqueceuasenha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="34dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="20dp"
                     android:text="@string/forgotyhepassword"
-                    android:textColor="#A4000000"
+                    android:textColor="#C6000000"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/basesenha" />
 
-                <!--CardView Btn Logar-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardviewbtnlogar"
-                    android:layout_width="350dp"
-                    android:layout_height="60dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardBackgroundColor="#FFC75A"
-                    android:layout_marginTop="20dp"
+
+                <!--CheckBox Remember Me-->
+                <CheckBox
+                    android:id="@+id/checkbox_rememberMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/remember_me"
+                    android:layout_marginTop="25dp"
+                    android:buttonTint="#FFB421"
+                    android:textColor="#000"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtesqueceuasenha">
+                    app:layout_constraintTop_toBottomOf="@+id/txtesqueceuasenha" />
+
+                <!--CardView Btn Logar-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewbtnlogin"
+                    android:layout_width="270dp"
+                    android:layout_height="55dp"
+                    app:cardBackgroundColor="#FFC75A"
+                    app:cardCornerRadius="10dp"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_rememberMe">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -208,11 +224,11 @@
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/animationloadinglogin"
                             android:layout_width="200dp"
-                            app:lottie_loop="true"
                             android:layout_height="match_parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
                             app:lottie_rawRes="@raw/coffeeloading" />
 
                         <!--Text Logar-->
@@ -220,7 +236,7 @@
                             android:id="@+id/txtlogarlogin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/loginto"
+                            android:text="@string/logininto"
                             android:textColor="#fff"
                             android:textSize="30sp"
                             android:textStyle="bold"
@@ -233,42 +249,10 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <!--Text New User-->
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/imnewhere"
-                    android:layout_marginEnd="80dp"
-                    android:layout_marginTop="40dp"
-                    android:textSize="15sp"
-                    android:textColor="#000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtnlogar" />
-
-                <!--Text Criar Conta-->
-                <TextView
-                    android:id="@+id/txtcriarnovaconta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/createaccount"
-                    android:layout_marginStart="2dp"
-                    android:textColor="#FFB421"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="40dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtnlogar" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -39,14 +37,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView txtcriarnovaconta, txtlogarlogin, txtenderecoemaillogin, txtenderecosenhalogin;
-    LottieAnimationView btnvoltarlogin, animation_loadingLogin;
+    TextView txtcriarnovaconta, txtlogarlogin;
+    LottieAnimationView cardviewbtnlogin, animation_loadingLogin;
     ImageView img_closed_eye, img_opened_eye;
     CardView cardviewbtnlogar;
     EditText edittextEmail_userLogin, edittexPassword_userLogin;
     CheckBox checkbox_rememberMe;
     Dialog Warning_Email_Password;
-    Handler timer = new Handler();
+    LoadingDialog loading = new LoadingDialog(LoginActivity.this);
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
     final Retrofit retrofitUser = new Retrofit.Builder()
@@ -127,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //  When click here will go back to MainActivity
-        btnvoltarlogin.setOnClickListener(v -> {
+        cardviewbtnlogin.setOnClickListener(v -> {
             Intent voltaramain = new Intent(LoginActivity.this, SplashActivity.class);
             voltaramain.putExtra("new_time_to_start",200);
             voltaramain.putExtra("new_time_to_showOptions",200);
@@ -147,15 +145,11 @@ public class LoginActivity extends AppCompatActivity {
         //  When click here will login and go to PrincipalActivity
         cardviewbtnlogar.setOnClickListener(v -> {
             if (edittextEmail_userLogin.getText() == null || edittextEmail_userLogin.getText().length() == 0){
-                txtenderecoemaillogin.setTextColor(Color.RED);
-                timer.postDelayed(() -> txtenderecoemaillogin.setTextColor(Color.BLACK),300);
                 edittextEmail_userLogin.setError("Fill in correctly: EMAIL" + "\n" + "Preencha corretamente: EMAIL");
                 //Toast.makeText(this, R.string.fill_correctly_email, Toast.LENGTH_SHORT).show();
                 edittextEmail_userLogin.requestFocus();
                 imm.showSoftInput(edittextEmail_userLogin, InputMethodManager.SHOW_IMPLICIT);
             }else if (edittexPassword_userLogin.getText() == null || edittexPassword_userLogin.getText().length() == 0){
-                txtenderecosenhalogin.setTextColor(Color.RED);
-                timer.postDelayed(() -> txtenderecosenhalogin.setTextColor(Color.BLACK),300);
                 Toast.makeText(this, "Preencha corretamente: SENHA", Toast.LENGTH_SHORT).show();
                 edittexPassword_userLogin.requestFocus();
                 imm.showSoftInput(edittexPassword_userLogin, InputMethodManager.SHOW_IMPLICIT);
@@ -172,23 +166,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getIds() {
-        btnvoltarlogin = findViewById(R.id.btnvoltarlogin);
+        cardviewbtnlogin = findViewById(R.id.btnvoltarlogin);
         edittextEmail_userLogin = findViewById(R.id.edittextEmail_userLogin);
         edittexPassword_userLogin = findViewById(R.id.edittexPassword_userLogin);
         checkbox_rememberMe = findViewById(R.id.checkbox_rememberMe);
         txtcriarnovaconta = findViewById(R.id.txtcriarnovaconta);
         img_closed_eye = findViewById(R.id.img_closed_eye);
         img_opened_eye = findViewById(R.id.img_opened_eye);
-        cardviewbtnlogar = findViewById(R.id.cardviewbtnlogar);
+        cardviewbtnlogar = findViewById(R.id.cardviewbtnlogin);
         animation_loadingLogin = findViewById(R.id.animationloadinglogin);
         txtlogarlogin = findViewById(R.id.txtlogarlogin);
-        txtenderecoemaillogin = findViewById(R.id.txtenderecoemaillogin);
-        txtenderecosenhalogin = findViewById(R.id.txtenderecosenhalogin);
         Warning_Email_Password = new Dialog(this);
     }
 
     private void getPreferencesData() {
-        LoadingDialog loading = new LoadingDialog(LoginActivity.this);
         loading.startLoading();
         SharedPreferences sp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         if (sp.contains("pref_email") && sp.contains("pref_password")){
@@ -211,26 +202,28 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200){
                     assert response.body() != null;
                     int id_user;
-                    String nm_user, email_user, phone_user, address_user,cpf_user, partner;
+                    String nm_user, email_user, phone_user, address_user, img_user, cpf_user, partner;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     email_user = response.body().getEmail();
                     phone_user = response.body().getPhone_user();
                     address_user = response.body().getAddress_user();
+                    img_user = response.body().getImg_user();
                     cpf_user = response.body().getCpf_user();
                     partner = response.body().getPartner();
 
                     if (checkbox_rememberMe.isChecked()){
+                        mPrefs.edit().clear().apply();
                         boolean boollsChecked = checkbox_rememberMe.isChecked();
                         SharedPreferences.Editor editor = mPrefs.edit();
                         editor.putString("pref_email", email);
                         editor.putString("pref_password", password);
                         editor.putBoolean("pref_check", boollsChecked);
                         editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, cpf_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, img_user, cpf_user, partner);
                     }else{
                         mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, cpf_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, img_user, cpf_user, partner);
                     }
 
                 }else if(response.code() == 401){;
@@ -250,13 +243,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user,String cpf_user, String partner) {
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user, String img_user, String cpf_user, String partner) {
         Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
         GoTo_Main.putExtra("id_user", id_user);
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("email_user", email_user);
         GoTo_Main.putExtra("phone_user", phone_user);
         GoTo_Main.putExtra("address_user", address_user);
+        GoTo_Main.putExtra("img_user", img_user);
         GoTo_Main.putExtra("cpf_user", cpf_user);
         GoTo_Main.putExtra("partner", partner);
         GoTo_Main.putExtra("statusavisoend", "ativado");
@@ -274,6 +268,8 @@ public class LoginActivity extends AppCompatActivity {
         animation_loadingLogin.pauseAnimation();
         txtlogarlogin.setVisibility(View.VISIBLE);
         edittexPassword_userLogin.setText(null);
+
+        loading.dimissDialog();
 
         btnokavisoemailousenhaerrado.setOnClickListener(v -> Warning_Email_Password.dismiss());
 
