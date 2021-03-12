@@ -12,10 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DaoParceiro;
-import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
 
 public class ProfileActivity extends AppCompatActivity {
     //  Text Header
@@ -27,10 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
             nao_sou_parceiro_perfil, cliente_eparceiro, base_desc_parceiro_perfil;
     LottieAnimationView animacaogiftcardperfil;
     CardView btnvirarparceiro_perfil, card_cadastarceluar_perfil, cardbtn_cadastrarendereco_perfil, cardbtn_editarperfil;
-    DtoClientes clientelogado;
-    DtoParceiro dados_do_parceiro;
     Handler timer = new Handler();
-    String cpfcliente, emaillogado;
+    int id_user, partner;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,67 +56,83 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        emaillogado = bundle.getString("emailuser");
+        id_user = bundle.getInt("id_user");
+        email_user = bundle.getString("email_user");
+        nm_user = bundle.getString("nm_user");
+        cpf_user = bundle.getString("cpf_user");
+        phone_user = bundle.getString("phone_user");
+        address_user = bundle.getString("address_user");
+        complement = bundle.getString("complement");
+        img_user = bundle.getString("img_user");
+        partner = bundle.getInt("partner");
+        partner_Startdate = bundle.getString("partner_Startdate");
 
         carregar_info_user();
 
         btnvirarparceiro_perfil.setOnClickListener(v -> {
             Intent irpara_sejaparceira = new Intent(ProfileActivity.this, SejaParceiroActivity.class);
-            irpara_sejaparceira.putExtra("emailuser", emaillogado);
+            irpara_sejaparceira.putExtra("id_user", id_user);
+            irpara_sejaparceira.putExtra("email_user", email_user);
+            irpara_sejaparceira.putExtra("nm_user", nm_user);
+            irpara_sejaparceira.putExtra("cpf_user", cpf_user);
+            irpara_sejaparceira.putExtra("phone_user", phone_user);
+            irpara_sejaparceira.putExtra("address_user", address_user);
+            irpara_sejaparceira.putExtra("complement", complement);
+            irpara_sejaparceira.putExtra("img_user", img_user);
+            irpara_sejaparceira.putExtra("partner", partner);
+            irpara_sejaparceira.putExtra("partner_Startdate", partner_Startdate);
             startActivity(irpara_sejaparceira);
             finish();
         });
 
-        cardbtn_editarperfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
-            irpara_editarperfil.putExtra("emailuser", emaillogado);
-            startActivity(irpara_editarperfil);
-            finish();
-        });
+        cardbtn_editarperfil.setOnClickListener(v -> GoTo_EditProfile());
 
-        card_cadastarceluar_perfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
-            irpara_editarperfil.putExtra("emailuser", emaillogado);
-            startActivity(irpara_editarperfil);
-            finish();
-        });
+        card_cadastarceluar_perfil.setOnClickListener(v -> GoTo_EditProfile());
 
-        cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> {
-            Intent irpara_editarperfil = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
-            irpara_editarperfil.putExtra("emailuser", emaillogado);
-            startActivity(irpara_editarperfil);
-            finish();
-        });
+        cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> GoTo_EditProfile());
 
+    }
+
+    private void GoTo_EditProfile() {
+        Intent GoTo_EditPofile = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
+        GoTo_EditPofile.putExtra("id_user", id_user);
+        GoTo_EditPofile.putExtra("email_user", email_user);
+        GoTo_EditPofile.putExtra("nm_user", nm_user);
+        GoTo_EditPofile.putExtra("cpf_user", cpf_user);
+        GoTo_EditPofile.putExtra("phone_user", phone_user);
+        GoTo_EditPofile.putExtra("address_user", address_user);
+        GoTo_EditPofile.putExtra("complement", complement);
+        GoTo_EditPofile.putExtra("img_user", img_user);
+        GoTo_EditPofile.putExtra("partner", partner);
+        startActivity(GoTo_EditPofile);
+        finish();
     }
 
     @SuppressLint("SetTextI18n")
     private void carregar_info_user(){
-        DaoClientes daoClientes = new DaoClientes(ProfileActivity.this);
-        clientelogado = daoClientes.consultarclienteporemail(emaillogado);
-        txtName_user.setText(clientelogado.getNomecliente());
-        txtEmail_user.setText(clientelogado.getEmailcliente());
-        txtcpfperfil.setText(clientelogado.getCpfcliente());
-        if (clientelogado.getCelularcliente() == null || clientelogado.getCelularcliente().equals("")){
+        txtName_user.setText(nm_user);
+        txtEmail_user.setText(email_user);
+        txtcpfperfil.setText(cpf_user);
+        if (phone_user == null || phone_user.equals(" ")){
             base_nao_tem_celular_cadastrado.setVisibility(View.VISIBLE);
             base_tem_celular_cadastrado.setVisibility(View.GONE);
         }else {
-            txtcelularperfil.setText(clientelogado.getCelularcliente());
+            txtcelularperfil.setText(phone_user);
             base_nao_tem_celular_cadastrado.setVisibility(View.GONE);
             base_tem_celular_cadastrado.setVisibility(View.VISIBLE);
         }
-        if (clientelogado.getEnderecocliente() == null || clientelogado.getComplementocliente() == null){
+        if (address_user == null || address_user.equals(" ")){
             base_tem_endereco_cadastrado.setVisibility(View.GONE);
             base_nao_tem_endereco_cadastrado.setVisibility(View.VISIBLE);
 
         }else {
             base_tem_endereco_cadastrado.setVisibility(View.VISIBLE);
             base_nao_tem_endereco_cadastrado.setVisibility(View.GONE);
-            txtenderecoperfil.setText(clientelogado.getEnderecocliente());
-            if (clientelogado.getComplementocliente() == null){
+            txtenderecoperfil.setText(address_user);
+            if (complement == null){
                 txtcomplementoperfil.setText("Complemento não cadastrado");
             }else {
-                txtcomplementoperfil.setText(clientelogado.getComplementocliente());
+                txtcomplementoperfil.setText(complement);
             }
         }
         info_parceiro();
@@ -130,11 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void info_parceiro(){
-        DaoClientes daoClientes = new DaoClientes(ProfileActivity.this);
-        clientelogado = daoClientes.consultarclienteporemail(emaillogado);
-        cpfcliente = clientelogado.getCpfcliente();
-
-        if (clientelogado.getParceiro().equals("nao")){
+        if (partner == 0){
             cliente_eparceiro.setVisibility(View.GONE);
             base_desc_parceiro_perfil.setVisibility(View.GONE);
             nao_sou_parceiro_perfil.setVisibility(View.VISIBLE);
@@ -145,22 +152,30 @@ public class ProfileActivity extends AppCompatActivity {
                 base_desc_parceiro_perfil.setVisibility(View.VISIBLE);
             },2950);
         }else {
-            DaoParceiro daoParceiro = new DaoParceiro(ProfileActivity.this);
-            dados_do_parceiro = daoParceiro.consultarclienteporcpf(cpfcliente);
 
             cliente_eparceiro.setVisibility(View.VISIBLE);
             nao_sou_parceiro_perfil.setVisibility(View.GONE);
             txtstatuscard_perfil.setText("A um cartao ativado!!");
-            data_ativacaoparceiro_perfil.setText("Assinatura gerada em: " + dados_do_parceiro.getData_ativacao());
+            data_ativacaoparceiro_perfil.setText("Assinatura gerada em: " + partner_Startdate);
         }
     }
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(ProfileActivity.this, MainActivity.class);
-        voltaraoprincipal.putExtra("emailuser",emaillogado);
-        voltaraoprincipal.putExtra("statusavisoend","desativado");
-        startActivity(voltaraoprincipal);
+        Intent GoBack_ToMain = new Intent(ProfileActivity.this, MainActivity.class);
+        GoBack_ToMain.putExtra("id_user", id_user);
+        GoBack_ToMain.putExtra("nm_user", nm_user);
+        GoBack_ToMain.putExtra("email_user", email_user);
+        GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("complement", complement);
+        GoBack_ToMain.putExtra("img_user", img_user);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("cpf_user", cpf_user);
+        GoBack_ToMain.putExtra("partner", partner);
+        GoBack_ToMain.putExtra("partner_Startdate", partner_Startdate);
+        GoBack_ToMain.putExtra("statusavisoend","desativado");
+        startActivity(GoBack_ToMain);
         finish();
     }
 }
