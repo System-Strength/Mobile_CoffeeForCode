@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
         icon_ProfileUser_principal.setVisibility(View.VISIBLE);
 
-        if (img_user.length() > 1){
+        if (img_user == null){
             loadPopularProducts();
-            loadProfileImage();
         }else {
             loadPopularProducts();
+            loadProfileImage();
         }
 
 

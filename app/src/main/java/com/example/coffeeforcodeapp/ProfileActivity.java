@@ -72,11 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
         partner = bundle.getInt("partner");
         partner_Startdate = bundle.getString("partner_Startdate");
 
-        if (img_user.length() > 1){
-            loadProfileImage();
+        if (img_user == null){
             carregar_info_user();
         }else{
             carregar_info_user();
+            loadProfileImage();
         }
 
 
