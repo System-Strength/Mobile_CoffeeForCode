@@ -157,12 +157,13 @@
     <string name="deletarcartao">Delete Card</string>
     <string name="cancelarcartao">Cancel Card</string>
 
-    <!--Register Screen Address-->
+    <!--Register Address Screen-->
     <string name="cadastroendereco">Address Registration</string>
     <string name="hintedittextcadastroendereco" translatable="false">Ex. Rua 00</string>
     <string name="hintedtextcadastroenderecocomp" translatable="false">Ex. Ap 2 Bl 20</string>
     <string name="enderecocom_asterisco">Address*</string>
     <string name="complemento">Complement</string>
+    <string name="register_later">Register Later</string>
 
     <!--Profile Screen-->
     <string name="editarperfil">Click here to edit your profile</string>

@@ -2,7 +2,7 @@ package com.example.coffeeforcodeapp.Api;
 
 public class DtoUsers {
     int id_user;
-    String email, nm_user, cpf_user, phone_user, address_user,password, partner, message;
+    String email, nm_user, cpf_user, phone_user, address_user,complement, img_user, password, partner, message;
 
     public DtoUsers(String email, String nm_user, String cpf_user, String password){
         this.email = email;
@@ -10,6 +10,11 @@ public class DtoUsers {
         this.cpf_user = cpf_user;
         this.password = password;
 
+    }
+
+    public DtoUsers(String address_user, String complement){
+        this.address_user = address_user;
+        this.complement = complement;
     }
 
     public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, String partner) {
@@ -20,12 +25,6 @@ public class DtoUsers {
         this.phone_user = phone_user;
         this.password = password;
     }
-
-    public DtoUsers(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     public String getAddress_user() {
         return address_user;
     }
@@ -96,6 +95,22 @@ public class DtoUsers {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getImg_user() {
+        return img_user;
+    }
+
+    public void setImg_user(String img_user) {
+        this.img_user = img_user;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
     }
 
     @Override

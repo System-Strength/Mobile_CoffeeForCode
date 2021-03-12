@@ -17,7 +17,7 @@
         <activity android:name=".Todos_Os_produtosActivity" />
         <activity android:name=".SaibaMaisActivity" />
         <activity android:name=".Ver_e_Deletar_CartaoActivity" />
-        <activity android:name=".CadastrarenderecoActivity" />
+        <activity android:name=".RegisterAddresssActivity" />
         <activity android:name=".CarrinhoDeCompraActivity" />
         <activity android:name=".CadastrarCartoesActivity" />
         <activity android:name=".CartoesActivity" />

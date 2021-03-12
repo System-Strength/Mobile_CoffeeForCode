@@ -138,4 +138,5 @@
     <string name="Lastnamecreateaccount">Último Nome*</string>
     <string name="hintEmailAddressLogin">Endereço de Email</string>
     <string name="HintpasswordLogin">Senha</string>
+    <string name="register_later">Cadastrar Depois</string>
 </resources>

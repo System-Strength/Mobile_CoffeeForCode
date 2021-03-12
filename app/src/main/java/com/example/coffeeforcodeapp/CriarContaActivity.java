@@ -37,7 +37,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class CriarContaActivity extends AppCompatActivity {
     TextView txtLogin, txtTerms;
     CheckBox checkboxaceitoostermos;
-    EditText edittextName_userCreateAccount, edittextcpf_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
+    EditText edittextFirstName_userCreateAccount, edittextLastName_userCreateAccount, edittextcpf_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
@@ -46,7 +46,7 @@ public class CriarContaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_criar_conta);
+        setContentView(R.layout.activity_create_account);
         btnvoltarcriarconta = findViewById(R.id.btnvoltarcriarconta);
         certosenhacriarconta = findViewById(R.id.certosenhacriarconta);
         cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
@@ -54,7 +54,8 @@ public class CriarContaActivity extends AppCompatActivity {
         imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
         edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);
         edittextEmail_userCreateAccount = findViewById(R.id.edittextEmail_userCreateAccount);
-        edittextName_userCreateAccount = findViewById(R.id.edittextName_userCreateAccount);
+        edittextFirstName_userCreateAccount = findViewById(R.id.edittextFirstName_userCreateAccount);
+        edittextLastName_userCreateAccount = findViewById(R.id.edittextLastName_userCreateAccount);
         edittextcpf_userCreateAccount = findViewById(R.id.edittextcpf_userCreateAccount);
         checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
         txtTerms = findViewById(R.id.txtTerms);
@@ -102,12 +103,19 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click here will try to create a new account
         cardviewbtncriarconta.setOnClickListener(v -> {
-            if (edittextName_userCreateAccount.getText() == null || edittextName_userCreateAccount.getText().length() < 4){
-                edittextName_userCreateAccount.setError("Necessary to fill in the field correctly: NAME" + "\n" +
-                        "Necessário preencher corretamente o campo: NOME");
+            if (edittextFirstName_userCreateAccount.getText() == null || edittextFirstName_userCreateAccount.getText().length() < 4){
+                edittextFirstName_userCreateAccount.setError("Necessary to fill in the field correctly: FIRST NAME" + "\n" +
+                        "Necessário preencher corretamente o campo: PRIMEIRO NOME");
                 //Toast.makeText(this, R.string.necessary_fill_name, Toast.LENGTH_SHORT).show();
-                edittextName_userCreateAccount.requestFocus();
-                imm.showSoftInput(edittextName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
+                edittextFirstName_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextFirstName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
+
+            }else if(edittextLastName_userCreateAccount.getText() == null || edittextLastName_userCreateAccount.getText().length() < 2){
+                edittextLastName_userCreateAccount.setError("Necessary to fill in the field correctly: LAST NAME" + "\n" +
+                        "Necessário preencher corretamente o campo: ULTIMO NOME");
+                //Toast.makeText(this, R.string.necessary_fill_name, Toast.LENGTH_SHORT).show();
+                edittextLastName_userCreateAccount.requestFocus();
+                imm.showSoftInput(edittextLastName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
             }else if(edittextcpf_userCreateAccount.getText() == null || edittextcpf_userCreateAccount.getText().length() < 14){
                 edittextcpf_userCreateAccount.setError("CPF informed is invalid" + "\n"  + "CPF informado é invalido");
@@ -137,10 +145,12 @@ public class CriarContaActivity extends AppCompatActivity {
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
             }else {
+                String First_name = edittextFirstName_userCreateAccount.getText().toString();
+                String Last_Name = edittextLastName_userCreateAccount.getText().toString();
+                String nm_user = First_name + " " + Last_Name;
                 String email = edittextEmail_userCreateAccount.getText().toString();
                 String cpf_user = edittextcpf_userCreateAccount.getText().toString();
                 String password = edittextPassword_userCreateAccount.getText().toString();
-                String nm_user = edittextName_userCreateAccount.getText().toString();
                 UsersService usersService = retrofitUser.create(UsersService.class);
                 DtoUsers newuser = new DtoUsers(email, nm_user, cpf_user, password);
                 Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
