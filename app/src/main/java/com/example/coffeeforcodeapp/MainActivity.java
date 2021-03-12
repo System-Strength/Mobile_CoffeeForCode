@@ -23,11 +23,16 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
 import com.example.coffeeforcodeapp.Api.DtoMenu;
+import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
+import com.example.coffeeforcodeapp.Api.UsersService;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -46,9 +51,15 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
     int id_user, partner;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, Show_warning_address;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
     final Retrofit Productsretrofit = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/products/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -76,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         if (bundle == null){
             Show_warning_address = "ativado";
         }else {
+            Show_warning_address = bundle.getString("statusavisoend");
+            email_user  = bundle.getString("email_user");
             id_user  = bundle.getInt("id_user");
             nm_user  = bundle.getString("nm_user");
             email_user  = bundle.getString("email_user");
@@ -85,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             img_user  = bundle.getString("img_user");
             cpf_user  = bundle.getString("cpf_user");
             partner  = bundle.getInt("partner");
-            Show_warning_address = bundle.getString("statusavisoend");
+            partner_Startdate  = bundle.getString("partner_Startdate");
         }
 
         loadPopularProducts();
@@ -132,17 +145,18 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
-                Intent irpara_perfil = new Intent(MainActivity.this, ProfileActivity.class);
-                irpara_perfil.putExtra("id_user", id_user);
-                irpara_perfil.putExtra("email", email_user);
-                irpara_perfil.putExtra("nm_user", nm_user);
-                irpara_perfil.putExtra("cpf_user", cpf_user);
-                irpara_perfil.putExtra("phone_user", phone_user);
-                irpara_perfil.putExtra("address_user", address_user);
-                irpara_perfil.putExtra("img_user", img_user);
-                irpara_perfil.putExtra("partner", partner);
-                //irpara_perfil.putExtra("emailuser", emaillogado);
-                startActivity(irpara_perfil);
+                Intent GoTo_profile = new Intent(MainActivity.this, ProfileActivity.class);
+                GoTo_profile.putExtra("id_user", id_user);
+                GoTo_profile.putExtra("email_user", email_user);
+                GoTo_profile.putExtra("nm_user", nm_user);
+                GoTo_profile.putExtra("cpf_user", cpf_user);
+                GoTo_profile.putExtra("phone_user", phone_user);
+                GoTo_profile.putExtra("address_user", address_user);
+                GoTo_profile.putExtra("complement", complement);
+                GoTo_profile.putExtra("img_user", img_user);
+                GoTo_profile.putExtra("partner", partner);
+                GoTo_profile.putExtra("partner_Startdate", partner_Startdate);
+                startActivity(GoTo_profile);
                 finish();
                 bottomSheetDialog.dismiss();
             });
@@ -224,21 +238,21 @@ public class MainActivity extends AppCompatActivity {
     private void mostraavisoend(){
         ConstraintLayout btncadastraragoraend, btncadastrardepoisend;
         warning_address.setContentView(R.layout.aviso_sem_endereco_cadatrado);
-        warning_address.setCancelable(false);
+        warning_address.setCancelable(true);
         btncadastraragoraend = warning_address.findViewById(R.id.btncadastraragoraend);
         btncadastrardepoisend = warning_address.findViewById(R.id.btncadastrardepoisend);
 
         btncadastraragoraend.setOnClickListener(v -> {
             Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddresssActivity.class);
             irpara_perfil.putExtra("id_user", id_user);
-            irpara_perfil.putExtra("email", email_user);
+            irpara_perfil.putExtra("email_user", email_user);
             irpara_perfil.putExtra("nm_user", nm_user);
             irpara_perfil.putExtra("cpf_user", cpf_user);
             irpara_perfil.putExtra("phone_user", phone_user);
             irpara_perfil.putExtra("address_user", address_user);
             irpara_perfil.putExtra("img_user", img_user);
             irpara_perfil.putExtra("partner", partner);
-            //irpara_perfil.putExtra("emailuser", emaillogado);
+            irpara_perfil.putExtra("partner_Startdate", partner_Startdate);
             startActivity(irpara_perfil);
             finish();
         });

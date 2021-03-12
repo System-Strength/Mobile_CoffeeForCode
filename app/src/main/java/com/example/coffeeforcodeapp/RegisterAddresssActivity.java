@@ -35,7 +35,7 @@ public class RegisterAddresssActivity extends AppCompatActivity {
     EditText edittextenderecocliente, edittextenderecoclientecomp;
     CardView cardviewenderecoconfirmar, cardviewenderecodepois;
     int id_user, partner;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
     final Retrofit retrofitUserUpdate = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/user/")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -57,18 +57,7 @@ public class RegisterAddresssActivity extends AppCompatActivity {
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //  Get some information
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        id_user = bundle.getInt("id_user");
-        nm_user = bundle.getString("nm_user");
-        email_user = bundle.getString("email_user");
-        phone_user = bundle.getString("phone_user");
-        address_user = bundle.getString("address_user");
-        complement = bundle.getString("complement");
-        img_user = bundle.getString("img_user");
-        cpf_user = bundle.getString("cpf_user");
-        complement = bundle.getString("complement");
-        complement = bundle.getString("complement");
+        GetSomeInformation();
 
         //  Set somethings with gone and visible
         animationenderecoconfirm.setVisibility(View.GONE);
@@ -87,10 +76,10 @@ public class RegisterAddresssActivity extends AppCompatActivity {
                 animationenderecoconfirm.playAnimation();
                 edittextenderecocliente.setEnabled(false);
                 edittextenderecoclientecomp.setEnabled(false);
-                String address = edittextenderecocliente.getText().toString();
+                address_user = edittextenderecocliente.getText().toString();
                 String complement = edittextenderecoclientecomp.getText().toString();
                 UsersService usersService = retrofitUserUpdate.create(UsersService.class);
-                DtoUsers newAddress = new DtoUsers(address, complement);
+                DtoUsers newAddress = new DtoUsers(address_user, complement);
                 Call<DtoUsers> resultUpdate = usersService.UpdateAddress(id_user, newAddress);
 
                 resultUpdate.enqueue(new Callback<DtoUsers>() {
@@ -103,12 +92,13 @@ public class RegisterAddresssActivity extends AppCompatActivity {
                             voltarcadastrarendereco.putExtra("nm_user", nm_user);
                             voltarcadastrarendereco.putExtra("email_user", email_user);
                             voltarcadastrarendereco.putExtra("phone_user", phone_user);
-                            voltarcadastrarendereco.putExtra("address_user", response.body().getAddress_user());
-                            voltarcadastrarendereco.putExtra("complement", response.body().getComplement());
+                            voltarcadastrarendereco.putExtra("address_user", address_user);
+                            voltarcadastrarendereco.putExtra("complement", complement);
                             voltarcadastrarendereco.putExtra("img_user", img_user);
                             voltarcadastrarendereco.putExtra("address_user", address_user);
                             voltarcadastrarendereco.putExtra("cpf_user", cpf_user);
                             voltarcadastrarendereco.putExtra("partner", partner);
+                            voltarcadastrarendereco.putExtra("partner_Startdate", partner_Startdate);
                             voltarcadastrarendereco.putExtra("statusavisoend","desativado");
                             startActivity(voltarcadastrarendereco);
                             finish();
@@ -133,20 +123,36 @@ public class RegisterAddresssActivity extends AppCompatActivity {
 
     }
 
+    private void GetSomeInformation() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        id_user = bundle.getInt("id_user");
+        email_user = bundle.getString("email_user");
+        nm_user = bundle.getString("nm_user");
+        cpf_user = bundle.getString("cpf_user");
+        phone_user = bundle.getString("phone_user");
+        address_user = bundle.getString("address_user");
+        complement = bundle.getString("complement");
+        img_user = bundle.getString("img_user");
+        partner = bundle.getInt("partner");
+        partner_Startdate = bundle.getString("partner_Startdate");
+    }
+
     private void GoBack_toMain(){
-        Intent voltandoparaprincipal = new Intent(RegisterAddresssActivity.this, MainActivity.class);
-        voltandoparaprincipal.putExtra("id_user", id_user);
-        voltandoparaprincipal.putExtra("nm_user", nm_user);
-        voltandoparaprincipal.putExtra("email_user", email_user);
-        voltandoparaprincipal.putExtra("phone_user", phone_user);
-        voltandoparaprincipal.putExtra("address_user", address_user);
-        voltandoparaprincipal.putExtra("complement", complement);
-        voltandoparaprincipal.putExtra("img_user", img_user);
-        voltandoparaprincipal.putExtra("address_user", address_user);
-        voltandoparaprincipal.putExtra("cpf_user", cpf_user);
-        voltandoparaprincipal.putExtra("partner", partner);
-        voltandoparaprincipal.putExtra("statusavisoend","desativado");
-        startActivity(voltandoparaprincipal);
+        Intent GoBack_ToMain = new Intent(RegisterAddresssActivity.this, MainActivity.class);
+        GoBack_ToMain.putExtra("id_user", id_user);
+        GoBack_ToMain.putExtra("nm_user", nm_user);
+        GoBack_ToMain.putExtra("email_user", email_user);
+        GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("complement", complement);
+        GoBack_ToMain.putExtra("img_user", img_user);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("cpf_user", cpf_user);
+        GoBack_ToMain.putExtra("partner", partner);
+        GoBack_ToMain.putExtra("partner_Startdate", partner_Startdate);
+        GoBack_ToMain.putExtra("statusavisoend","desativado");
+        startActivity(GoBack_ToMain);
         finish();
     }
 

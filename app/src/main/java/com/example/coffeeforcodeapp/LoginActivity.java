@@ -201,8 +201,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                 if (response.code() == 200){
                     assert response.body() != null;
-                    int id_user;
-                    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner;
+                    int id_user, partner;
+                    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     email_user = response.body().getEmail();
@@ -212,6 +212,7 @@ public class LoginActivity extends AppCompatActivity {
                     img_user = response.body().getImg_user();
                     cpf_user = response.body().getCpf_user();
                     partner = response.body().getPartner();
+                    partner_Startdate = response.body().getPartner_Startdate();
 
                     if (checkbox_rememberMe.isChecked()){
                         mPrefs.edit().clear().apply();
@@ -221,10 +222,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("pref_password", password);
                         editor.putBoolean("pref_check", boollsChecked);
                         editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }else{
                         mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }
 
                 }else if(response.code() == 401){;
@@ -244,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user, String complement, String img_user, String cpf_user, String partner) {
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {
         Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
         GoTo_Main.putExtra("id_user", id_user);
         GoTo_Main.putExtra("nm_user", nm_user);
@@ -255,6 +256,7 @@ public class LoginActivity extends AppCompatActivity {
         GoTo_Main.putExtra("img_user", img_user);
         GoTo_Main.putExtra("cpf_user", cpf_user);
         GoTo_Main.putExtra("partner", partner);
+        GoTo_Main.putExtra("partner_Startdate", partner_Startdate);
         GoTo_Main.putExtra("statusavisoend", "ativado");
         startActivity(GoTo_Main);
         finish();
