@@ -4,6 +4,14 @@ public class DtoUsers {
     int id_user, partner;
     String email, nm_user, cpf_user, phone_user, address_user,complement, img_user, password, partner_Startdate, message;
 
+
+
+    public DtoUsers(String address_user, String complement){
+        this.address_user = address_user;
+        this.complement = complement;
+
+    }
+
     public DtoUsers(String email, String nm_user, String cpf_user, String password){
         this.email = email;
         this.nm_user = nm_user;
@@ -12,7 +20,10 @@ public class DtoUsers {
 
     }
 
-    public DtoUsers(String address_user, String complement){
+    public DtoUsers(String nm_user, String cpf_user, String phone_user, String address_user, String complement){
+        this.nm_user = nm_user;
+        this.cpf_user = cpf_user;
+        this.phone_user = phone_user;
         this.address_user = address_user;
         this.complement = complement;
     }

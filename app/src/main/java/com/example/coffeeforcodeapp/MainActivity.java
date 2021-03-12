@@ -20,32 +20,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
-import com.example.coffeeforcodeapp.Api.DtoMenu;
-import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
-import com.example.coffeeforcodeapp.Api.UsersService;
+import com.example.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
-    LottieAnimationView icon_Profile_principal;
+    //  User img
+    CircleImageView icon_ProfileUser_principal;
     TextView txt_Name_user;
     CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog warning_address;
-    ArrayList<DtoMenu> popularProdutctsarrayList;
     RecyclerView recyclerPopularProducts;
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferences mPrefs;
@@ -64,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    TopProducts_Adapter topProducts_adapter = null;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         card_Be_Partner = findViewById(R.id.card_Be_Partner);
         card_See_Cards = findViewById(R.id.card_See_Cards);
         card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
-        icon_Profile_principal = findViewById(R.id.icon_Profile_principal);
+        icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
         warning_address = new Dialog(this);
 
 
@@ -101,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
             partner_Startdate  = bundle.getString("partner_Startdate");
         }
 
-        loadPopularProducts();
+        icon_ProfileUser_principal.setVisibility(View.VISIBLE);
+
+        if (img_user.length() > 1){
+            loadPopularProducts();
+            loadProfileImage();
+        }else {
+            loadPopularProducts();
+        }
+
 
         mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //  When click here will show info_perfil
-        icon_Profile_principal.setOnClickListener(v -> {
+        icon_ProfileUser_principal.setOnClickListener(v -> {
             bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
 
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
@@ -198,6 +198,11 @@ public class MainActivity extends AppCompatActivity {
             bottomSheetDialog.setContentView(sheetview);
             bottomSheetDialog.show();
         });
+    }
+
+    private void loadProfileImage() {
+        AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
+        loadimage.execute();
     }
 
     private void loadPopularProducts() {

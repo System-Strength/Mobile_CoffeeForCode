@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
     //  Text Header
@@ -23,6 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
             nao_sou_parceiro_perfil, cliente_eparceiro, base_desc_parceiro_perfil;
     LottieAnimationView animacaogiftcardperfil;
     CardView btnvirarparceiro_perfil, card_cadastarceluar_perfil, cardbtn_cadastrarendereco_perfil, cardbtn_editarperfil;
+    CircleImageView Profile_image;
     Handler timer = new Handler();
     int id_user, partner;
     String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
@@ -53,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         card_cadastarceluar_perfil = findViewById(R.id.card_cadastarceluar_perfil);
         cardbtn_cadastrarendereco_perfil = findViewById(R.id.cardbtn_cadastrarendereco_perfil);
         cardbtn_editarperfil = findViewById(R.id.cardbtn_editarperfil);
+        Profile_image = findViewById(R.id.Profile_image);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -67,7 +72,13 @@ public class ProfileActivity extends AppCompatActivity {
         partner = bundle.getInt("partner");
         partner_Startdate = bundle.getString("partner_Startdate");
 
-        carregar_info_user();
+        if (img_user.length() > 1){
+            loadProfileImage();
+            carregar_info_user();
+        }else{
+            carregar_info_user();
+        }
+
 
         btnvirarparceiro_perfil.setOnClickListener(v -> {
             Intent irpara_sejaparceira = new Intent(ProfileActivity.this, SejaParceiroActivity.class);
@@ -91,6 +102,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> GoTo_EditProfile());
 
+    }
+
+    private void loadProfileImage() {
+        AsyncUserImage loadimage = new AsyncUserImage(img_user, Profile_image);
+        loadimage.execute();
     }
 
     private void GoTo_EditProfile() {
