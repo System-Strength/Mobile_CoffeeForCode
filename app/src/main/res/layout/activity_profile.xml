@@ -24,9 +24,9 @@
                 android:background="@drawable/designer_profile"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!--Animation Avatar-->
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animacoavatarprofile"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Profile_image"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_marginTop="5dp"
@@ -34,8 +34,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    app:lottie_rawRes="@raw/profileicon" />
+                    android:visibility="visible"
+                    android:src="@drawable/no_profile_image"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    tools:ignore="RedundantNamespace" />
 
                 <!--Text Name of client-->
                 <TextView

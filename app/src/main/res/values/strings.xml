@@ -206,5 +206,6 @@
     <string name="passwordcreateaccount">Password</string>
     <string name="hintEmailAddressLogin">Email address</string>
     <string name="HintpasswordLogin">Password</string>
+    <string name="change_profile_image"><u>Change profile image</u></string>
 
 </resources>
