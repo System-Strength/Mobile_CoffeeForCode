@@ -6,8 +6,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,46 +17,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
+import com.example.coffeeforcodeapp.Api.DtoUsers;
+import com.example.coffeeforcodeapp.Api.UsersService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Editar_PerfilActivity extends AppCompatActivity {
     EditText edit_nome_edicaoperfil, edit_cpf_edicaoperfil, edit_email_edicaopefil, edit_celular_edicaopefil, edit_endereco_edicaopefil , edit_complemento_edicaopefil;
-    //  Aterar Senha
-    EditText edit_antiga_senha, edit_novasenha_senha01, edit_novasenha_senha02;
-    ConstraintLayout base_dados_primarios, base_dados_secundarios;
-    TextView txt_alter_senha, txt_btn_confirmar01, txt_btn_confirmar02;
-    CardView card_confirmar_edicao, btn_alterar_senha;
-    LottieAnimationView btn_voltaraoperfil, animationloading_dados01, animationloading_senha;
-    DtoClientes cliente;
+    ConstraintLayout base_dados_primarios;
+    TextView txt_alter_senha, txt_btn_confirmar01, txtChangeProfileImage;
+    CardView card_confirmar_edicao;
+    LottieAnimationView btn_voltaraoperfil, animationloading_dados01;
     Handler timer = new Handler();
-    String emaillogado;
-    String senha_antiga;
-    int id_user;
-
+    int id_user, partner;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+    private SharedPreferences mPrefs;
+    private static final String PREFS_NAME = "PrefsFile";
+    final Retrofit retrofitUserUpdate = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar__perfil);
         btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
-        edit_nome_edicaoperfil = findViewById(R.id.edit_nome_edicaoperfil);
-        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_edicaoperfil);
-        edit_email_edicaopefil = findViewById(R.id.edit_email_edicaopefil);
-        edit_celular_edicaopefil = findViewById(R.id.edit_celular_edicaopefil);
-        edit_endereco_edicaopefil = findViewById(R.id.edit_endereco_edicaopefil);
-        edit_complemento_edicaopefil = findViewById(R.id.edit_complemento_edicaopefil);
+        edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
+        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
+        edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
+        edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
+        edit_endereco_edicaopefil = findViewById(R.id.edit_address_profileEditing);
+        edit_complemento_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
         card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
         txt_alter_senha = findViewById(R.id.txt_alter_senha);
+        txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
         base_dados_primarios = findViewById(R.id.base_dados_primarios);
-        base_dados_secundarios = findViewById(R.id.base_dados_secundarios);
         animationloading_dados01 = findViewById(R.id.animationloading_dados01);
         txt_btn_confirmar01 = findViewById(R.id.txt_btn_confirmar01);
-        btn_alterar_senha = findViewById(R.id.btn_alterar_senha);
-        edit_antiga_senha = findViewById(R.id.edit_antiga_senha);
-        edit_novasenha_senha01 = findViewById(R.id.edit_novasenha_senha01);
-        edit_novasenha_senha02 = findViewById(R.id.edit_novasenha_senha02);
-        animationloading_senha = findViewById(R.id.animationloading_senha);
-        txt_btn_confirmar02 = findViewById(R.id.txt_btn_confirmar02);
         InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //  Set Mask
@@ -64,19 +69,32 @@ public class Editar_PerfilActivity extends AppCompatActivity {
         //  Get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        emaillogado = bundle.getString("emailuser");
+        id_user = bundle.getInt("id_user");
+        email_user = bundle.getString("email_user");
+        nm_user = bundle.getString("nm_user");
+        cpf_user = bundle.getString("cpf_user");
+        phone_user = bundle.getString("phone_user");
+        address_user = bundle.getString("address_user");
+        complement = bundle.getString("complement");
+        img_user = bundle.getString("img_user");
+        partner = bundle.getInt("partner");
+        partner_Startdate = bundle.getString("partner_Startdate");
 
         //  Set somethings with gone or visible
         base_dados_primarios.setVisibility(View.VISIBLE);
-        base_dados_secundarios.setVisibility(View.GONE);
         animationloading_dados01.pauseAnimation();
         animationloading_dados01.setVisibility(View.GONE);
-        animationloading_senha.setVisibility(View.GONE);
+
+        //  Verification of user preference information
+        /*mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (sp.contains("pref_email") && sp.contains("pref_password"))
+            Toast.makeText(this, ""+ sp.getString("pref_password", "password"), Toast.LENGTH_SHORT).show();*/
 
         buscar_informacoes();
 
         //  Btn go Back
-        btn_voltaraoperfil.setOnClickListener(v -> voltar_ao_perfil());
+        btn_voltaraoperfil.setOnClickListener(v -> GoBack_to_Profile());
 
         //  Card to confirm edit
         card_confirmar_edicao.setOnClickListener(v -> {
@@ -101,131 +119,106 @@ public class Editar_PerfilActivity extends AppCompatActivity {
                 animationloading_dados01.setVisibility(View.VISIBLE);
                 txt_btn_confirmar01.setVisibility(View.GONE);
                 animationloading_dados01.playAnimation();
-                desabilitar_edit();
-                timer.postDelayed(() -> {
-                    try {
-                        DtoClientes dados_aser_alterados = new DtoClientes();
-                        dados_aser_alterados.setNomecliente(edit_nome_edicaoperfil.getText().toString());
-                        dados_aser_alterados.setCpfcliente(edit_cpf_edicaoperfil.getText().toString());
-                        dados_aser_alterados.setEmailcliente(edit_email_edicaopefil.getText().toString());
-                        dados_aser_alterados.setComplementocliente(edit_complemento_edicaopefil.getText().toString());
-                        dados_aser_alterados.setId(id_user);
-                        if (edit_endereco_edicaopefil.getText().length() < 4){
-                            dados_aser_alterados.setEnderecocliente(null);
-                        }else {
-                            dados_aser_alterados.setEnderecocliente(edit_endereco_edicaopefil.getText().toString());
+                desable_edit();
+                String newNm_user = edit_nome_edicaoperfil.getText().toString();
+                String newCpf_user = edit_cpf_edicaoperfil.getText().toString();
+                String newPhone_User = edit_celular_edicaopefil.getText().toString();
+                String newAddress_User = edit_endereco_edicaopefil.getText().toString();
+                String newComplement_User = edit_complemento_edicaopefil.getText().toString();
+                UsersService usersService = retrofitUserUpdate.create(UsersService.class);
+                DtoUsers newUserInfo = new DtoUsers(newNm_user, newCpf_user, newPhone_User, newAddress_User, newComplement_User);
+                Call<DtoUsers> resultUpdate = usersService.UpdateUser(id_user, newUserInfo);
+
+                resultUpdate.enqueue(new Callback<DtoUsers>() {
+                    @Override
+                    public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                        if (response.code() == 202){
+                            Toast.makeText(Editar_PerfilActivity.this, "Updated successfully\nAtualizado com sucesso", Toast.LENGTH_SHORT).show();
+                            nm_user = newNm_user;
+                            cpf_user = newCpf_user;
+                            phone_user = newPhone_User;
+                            address_user = newAddress_User;
+                            complement = newComplement_User;
+                            GoBack_to_Profile();
+                        }else{
+                            Toast.makeText(Editar_PerfilActivity.this, "Error try later\nCode: " + response.code(), Toast.LENGTH_SHORT).show();
+                            GoBack_to_Profile();
+                            Log.d("NetWorkError", String.valueOf(response.body()));
                         }
-                        if (edit_celular_edicaopefil.getText().length() < 15){
-                            dados_aser_alterados.setCelularcliente(null);
-                        }else {
-                            dados_aser_alterados.setCelularcliente(edit_celular_edicaopefil.getText().toString());
-                        }
-                        DaoClientes daoClientes = new DaoClientes(Editar_PerfilActivity.this);
-                        long linhasalteradas = daoClientes.atualizar_dados_primario(dados_aser_alterados);
-                        if (linhasalteradas > 0){
-                            Toast.makeText(this, "Dados atualizado!!", Toast.LENGTH_SHORT).show();
-                            emaillogado = edit_email_edicaopefil.getText().toString();
-                            voltar_ao_perfil();
-                        }else {
-                            Toast.makeText(this, "Nao foi possivel alterar seus dados!!\nTente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                            voltar_ao_perfil();
-                        }
-                    }catch (Exception ex){
-                        Toast.makeText(this, "Erro ao atualizar: " + ex, Toast.LENGTH_LONG).show();
-                        voltar_ao_perfil();
                     }
-                },1500);
+
+                    @Override
+                    public void onFailure(Call<DtoUsers> call, Throwable t) {
+                        Toast.makeText(Editar_PerfilActivity.this, "Error try later\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
         });
 
         //  Text to start seconds dates edit
         txt_alter_senha.setOnClickListener(v -> {
-            base_dados_primarios.setVisibility(View.GONE);
-            base_dados_secundarios.setVisibility(View.VISIBLE);
-            card_confirmar_edicao.setEnabled(false);
+            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
         });
 
-        //  When click here will try to register new password
-        btn_alterar_senha.setOnClickListener(v -> {
-            if (edit_antiga_senha.getText() == null || edit_antiga_senha.getText().length() == 0){
-                Toast.makeText(this, "Necessario informar sua senha antiga!!", Toast.LENGTH_SHORT).show();
-                edit_antiga_senha.requestFocus();
-                imm.showSoftInput(edit_antiga_senha, InputMethodManager.SHOW_IMPLICIT);
-            }else if (edit_novasenha_senha01.getText() == null || edit_novasenha_senha01.getText().length() == 0){
-                Toast.makeText(this, "Necessario informar sua nova senha!!", Toast.LENGTH_SHORT).show();
-                edit_novasenha_senha01.requestFocus();
-                imm.showSoftInput(edit_novasenha_senha01, InputMethodManager.SHOW_IMPLICIT);
-            }else if (edit_novasenha_senha02.getText() == null || edit_novasenha_senha02.getText().length() == 0){
-                Toast.makeText(this, "Necessario confirmar sua nova senha!!", Toast.LENGTH_SHORT).show();
-                edit_novasenha_senha01.requestFocus();
-                imm.showSoftInput(edit_novasenha_senha01, InputMethodManager.SHOW_IMPLICIT);
-            }else {
-                if (edit_novasenha_senha01.getText().toString().equals(edit_novasenha_senha02.getText().toString())){
-                    if (edit_antiga_senha.getText().toString().equals(senha_antiga)){
-                        animationloading_senha.setVisibility(View.VISIBLE);
-                        txt_btn_confirmar02.setVisibility(View.GONE);
-                        timer.postDelayed(() -> {
-                            try {
-                                DtoClientes dtoClientes = new DtoClientes();
-                                dtoClientes.setSenhacliente(edit_novasenha_senha01.getText().toString());
-                                dtoClientes.setId(id_user);
-
-                                DaoClientes daoClientes = new DaoClientes(Editar_PerfilActivity.this);
-                                long linhas_alteradas = daoClientes.atualizar_dados_secundario(dtoClientes);
-                                if (linhas_alteradas > 0){
-                                    Toast.makeText(this, "Senha alterada!!", Toast.LENGTH_SHORT).show();
-                                    voltar_ao_perfil();
-                                }else {
-                                    Toast.makeText(this, "Nao foi possivel alterar sua senha!!\nTente novamente mais tarde", Toast.LENGTH_SHORT).show();
-                                    voltar_ao_perfil();
-                                }
-                            }catch (Exception ex){
-                                Toast.makeText(this, "Erro ao cadastrar nova senha: " + ex + "\nContate um adm!!", Toast.LENGTH_SHORT).show();
-                                voltar_ao_perfil();
-                            }
-                        },1500);
-                    }else {
-                        Toast.makeText(this, "Senha antiga nao confere!!", Toast.LENGTH_SHORT).show();
-                        edit_antiga_senha.requestFocus();
-                        imm.showSoftInput(edit_antiga_senha, InputMethodManager.SHOW_IMPLICIT);
-                    }
-                }else {
-                    Toast.makeText(this, "Senha nao confere!!", Toast.LENGTH_SHORT).show();
-                    edit_novasenha_senha02.requestFocus();
-                    imm.showSoftInput(edit_novasenha_senha02, InputMethodManager.SHOW_IMPLICIT);
-                }
-            }
+        txtChangeProfileImage.setOnClickListener(v ->{
+            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
         });
+
 
     }
 
+    /*public void uploadImage(){
+        android.app.AlertDialog.Builder selectImage = new AlertDialog.Builder(Editar_PerfilActivity.this);
+        selectImage.setTitle("Origem da foto");
+        selectImage.setMessage("Por favor, selecione a origem da foto!");
+        selectImage.setPositiveButton("Galeria", (dialog, which) -> {
+            Intent galeria = new Intent(Intent.ACTION_GET_CONTENT);
+            galeria.setType("image/*");
+            startActivityForResult(galeria, 2);
+        });
+        selectImage.setNegativeButton("Camera", (dialog, which) -> {
+            Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera, 1);
+
+        });
+        selectImage.show();
+    }*/
+
     public void buscar_informacoes(){
         try {
-            DaoClientes daoClientes = new DaoClientes(Editar_PerfilActivity.this);
-            cliente = daoClientes.consultarclienteporemail(emaillogado);
-            edit_nome_edicaoperfil.setText(cliente.getNomecliente());
-            edit_cpf_edicaoperfil.setText(cliente.getCpfcliente());
-            edit_email_edicaopefil.setText(cliente.getEmailcliente());
-            edit_celular_edicaopefil.setText(cliente.getCelularcliente());
-            edit_endereco_edicaopefil.setText(cliente.getEnderecocliente());
-            edit_complemento_edicaopefil.setText(cliente.getComplementocliente());
-            id_user = cliente.getId();
-            senha_antiga = cliente.getSenhacliente();
+            edit_nome_edicaoperfil.setText(nm_user);
+            edit_cpf_edicaoperfil.setText(cpf_user);
+            edit_email_edicaopefil.setText(email_user);
+            edit_celular_edicaopefil.setText(phone_user);
+            edit_endereco_edicaopefil.setText(address_user);
+            edit_complemento_edicaopefil.setText(complement);
         }catch (Exception ex){
             Toast.makeText(this, "Erro ao buscar informaçoes: " + ex , Toast.LENGTH_SHORT).show();
-            voltar_ao_perfil();
+            GoBack_to_Profile();
 
         }
     }
 
-    public void voltar_ao_perfil(){
-        Intent voltar_ao_perfil = new Intent(Editar_PerfilActivity.this, ProfileActivity.class);
-        voltar_ao_perfil.putExtra("emailuser", emaillogado);
-        startActivity(voltar_ao_perfil);
+    public void GoBack_to_Profile(){
+        Intent GoTo_profile = new Intent(Editar_PerfilActivity.this, ProfileActivity.class);
+        GoTo_profile.putExtra("id_user", id_user);
+        GoTo_profile.putExtra("email_user", email_user);
+        GoTo_profile.putExtra("nm_user", nm_user);
+        GoTo_profile.putExtra("cpf_user", cpf_user);
+        GoTo_profile.putExtra("phone_user", phone_user);
+        GoTo_profile.putExtra("address_user", address_user);
+        GoTo_profile.putExtra("complement", complement);
+        GoTo_profile.putExtra("img_user", img_user);
+        GoTo_profile.putExtra("partner", partner);
+        GoTo_profile.putExtra("partner_Startdate", partner_Startdate);
+        startActivity(GoTo_profile);
         finish();
     }
 
-    public void desabilitar_edit(){
+    public void desable_edit(){
+        card_confirmar_edicao.setEnabled(false);
         edit_nome_edicaoperfil.setEnabled(false);
         edit_cpf_edicaoperfil.setEnabled(false);
         edit_email_edicaopefil.setEnabled(false);
@@ -236,6 +229,6 @@ public class Editar_PerfilActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        voltar_ao_perfil();
+        GoBack_to_Profile();
     }
 }

@@ -31,16 +31,30 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/title_editProfile"
                 android:textColor="#000"
                 android:textSize="32sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtChangeProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_profile_image"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,7 +70,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/base_dados_primarios"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent">
 
             <!--Text Name-->
@@ -74,7 +88,7 @@
 
             <!--Edit Name-->
             <EditText
-                android:id="@+id/edit_nome_edicaoperfil"
+                android:id="@+id/edit_name_profileEditing"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -99,11 +113,11 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_nome_edicaoperfil" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_name_profileEditing" />
 
             <!--Edit CPF-->
             <EditText
-                android:id="@+id/edit_cpf_edicaoperfil"
+                android:id="@+id/edit_cpf_profileEditing"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -129,15 +143,16 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_cpf_edicaoperfil" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_cpf_profileEditing" />
 
             <!--Edit EMAIL-->
             <EditText
-                android:id="@+id/edit_email_edicaopefil"
+                android:id="@+id/edit_email_profileEditing"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="3dp"
+                android:enabled="false"
                 android:hint="@string/hintemail"
                 android:textColor="#000"
                 android:textColorHint="#92403D3D"
@@ -158,11 +173,11 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_email_edicaopefil" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_email_profileEditing" />
 
             <!--Edit PHONE-->
             <EditText
-                android:id="@+id/edit_celular_edicaopefil"
+                android:id="@+id/edit_phone_profileEditing"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -188,11 +203,11 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_celular_edicaopefil" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_profileEditing" />
 
             <!--Edit Address-->
             <EditText
-                android:id="@+id/edit_endereco_edicaopefil"
+                android:id="@+id/edit_address_profileEditing"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -217,11 +232,11 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_endereco_edicaopefil" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_address_profileEditing" />
 
             <!--Edit Address Plus-->
             <EditText
-                android:id="@+id/edit_complemento_edicaopefil"
+                android:id="@+id/edit_complement_edicaopefil"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -245,7 +260,7 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_complemento_edicaopefil">
+                app:layout_constraintTop_toBottomOf="@+id/edit_complement_edicaopefil">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -291,146 +306,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_confirmar_edicao" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--Secondary Dates -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/base_dados_secundarios"
-            android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="match_parent">
-
-            <!--Title Password-->
-            <TextView
-                android:id="@+id/text_title_oldpassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/oldPassword"
-                android:textColor="#EE000000"
-                android:textSize="20sp"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <!--Edit old Password-->
-            <EditText
-                android:id="@+id/edit_antiga_senha"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="3dp"
-                android:textColorHint="#92403D3D"
-                android:inputType="textPassword"
-                android:textColor="#000"
-                android:background="@drawable/editeditarperfil"
-                android:hint="@string/hintoldpassword"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_title_oldpassword"
-                tools:ignore="Autofill,TextFields"/>
-
-            <!--Title New 01 Password-->
-            <TextView
-                android:id="@+id/text_title_newpassword01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/txt_newpassword"
-                android:textColor="#EE000000"
-                android:textSize="20sp"
-                app:layout_goneMarginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_antiga_senha" />
-
-            <!--Edit New 01 Password-->
-            <EditText
-                android:id="@+id/edit_novasenha_senha01"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="3dp"
-                android:textColor="#000"
-                android:textColorHint="#92403D3D"
-                android:inputType="textPassword"
-                android:background="@drawable/editeditarperfil"
-                android:hint="@string/hintnewpassword"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_title_newpassword01"
-                tools:ignore="Autofill,TextFields"/>
-
-            <!--Title New 02 Password-->
-            <TextView
-                android:id="@+id/text_title_newpassword02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/confirmnewpassword"
-                android:textColor="#EE000000"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_novasenha_senha01" />
-
-            <!--Edit New 02 Password-->
-            <EditText
-                android:id="@+id/edit_novasenha_senha02"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="3dp"
-                android:textColor="#000"
-                android:textColorHint="#92403D3D"
-                android:inputType="textPassword"
-                android:background="@drawable/editeditarperfil"
-                android:hint="@string/hintconfirmnrepassword"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_title_newpassword02"
-                tools:ignore="Autofill,TextFields"/>
-
-            <!--Btn register new password-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btn_alterar_senha"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="#FFC75A"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_novasenha_senha02">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <!--Animation Login-->
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animationloading_senha"
-                        android:layout_width="200dp"
-                        app:lottie_loop="true"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_rawRes="@raw/coffeeloading" />
-
-                    <!--Text Confirm-->
-                    <TextView
-                        android:id="@+id/txt_btn_confirmar02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/confirm"
-                        android:textColor="#000"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

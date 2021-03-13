@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,25 +13,12 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.Adapters.AdapterCartoes;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
-import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DaoCartoes;
-import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DtoCartoes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DaoParceiro;
-import com.example.coffeeforcodeapp.LocalDataBases.Parceiro.DtoParceiro;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 public class SejaParceiroActivity extends AppCompatActivity {
@@ -46,17 +32,14 @@ public class SejaParceiroActivity extends AppCompatActivity {
     EditText editnomeclienteserparceiro, editcpfclienteserparceiro, editemailclienteserparceiro;
     CheckBox checkboxtermosserparceiro;
     Dialog aviso;
-    ArrayList<DtoCartoes> cartoes;
-    DtoCartoes cartaoselecionado;
-    AdapterCartoes adapterCartoes;
-    String emaillogado, cpfdousuario;
     //  Dados do Cartão
     String bandeira, numerodocartao, nomedotitular, datadevalidade, ccc;
     //  Dados Cartao CFC
     String  numerodocartaocfc, ccccfc;
     //  Dados Cliente
-    int id;
-    LoadingDialog loadingDialog = new LoadingDialog(SejaParceiroActivity.this);
+    int id_user, partner;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+    //LoadingDialog loadingDialog = new LoadingDialog(SejaParceiroActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +72,16 @@ public class SejaParceiroActivity extends AppCompatActivity {
         //  Get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        emaillogado  = bundle.getString("emailuser");
-
+        id_user = bundle.getInt("id_user");
+        email_user = bundle.getString("email_user");
+        nm_user = bundle.getString("nm_user");
+        cpf_user = bundle.getString("cpf_user");
+        phone_user = bundle.getString("phone_user");
+        address_user = bundle.getString("address_user");
+        complement = bundle.getString("complement");
+        img_user = bundle.getString("img_user");
+        partner = bundle.getInt("partner");
+        partner_Startdate = bundle.getString("partner_Startdate");
         animacaobaseum();
 
         //  When click here will show terms
@@ -98,9 +89,10 @@ public class SejaParceiroActivity extends AppCompatActivity {
 
         //  When click will show second base
         txtproximabase.setOnClickListener(v -> {
-            primeirabasesejaparceito.setVisibility(View.GONE);
+            Toast.makeText(this, "Under Development!!\nEm desenvolvimento!!", Toast.LENGTH_SHORT).show();
+            /*primeirabasesejaparceito.setVisibility(View.GONE);
             segundabasesejaparceito.setVisibility(View.VISIBLE);
-            carregardadoscliente();
+            carregardadoscliente();*/
         });
 
         //  When click will go back to first base
@@ -118,7 +110,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
             }else if (editnomeclienteserparceiro.getText() == null){
                 Toast.makeText(this, "Seus dados pessoais não foram carregados tente reiniciar o aplicativo.", Toast.LENGTH_SHORT).show();
             }else {
-                loadingDialog.startLoading();
+                /*loadingDialog.startLoading();
                 Toast.makeText(this, "Gerando cartão!!", Toast.LENGTH_SHORT).show();
                 timer.postDelayed(() -> {
                     gerarcartaocfc();
@@ -159,11 +151,11 @@ public class SejaParceiroActivity extends AppCompatActivity {
                     }catch (Exception ex){
                         Toast.makeText(this, "Erro em gerar assinatura: "+ ex, Toast.LENGTH_SHORT).show();
                     }
-                },500);
+                },500);*/
             }
         });
 
-        txtselecionarcartao.setOnClickListener(v -> mostarlistadecartao());
+        txtselecionarcartao.setOnClickListener(v -> {});
     }
 
     //  Create method to generate new card of new partner
@@ -211,7 +203,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
 
     //  Create method to get client information
     private void carregardadoscliente(){
-        if (editnomeclienteserparceiro.getText() == null || editnomeclienteserparceiro.getText().length() == 0 || editcpfclienteserparceiro.getText() == null || editcpfclienteserparceiro.getText().length() == 0 || editemailclienteserparceiro.getText() == null || editemailclienteserparceiro.getText().length() == 0){
+        /*if (editnomeclienteserparceiro.getText() == null || editnomeclienteserparceiro.getText().length() == 0 || editcpfclienteserparceiro.getText() == null || editcpfclienteserparceiro.getText().length() == 0 || editemailclienteserparceiro.getText() == null || editemailclienteserparceiro.getText().length() == 0){
             loadingDialog.startLoading();
             try {
                 DaoClientes daoClientes = new DaoClientes(SejaParceiroActivity.this);
@@ -246,7 +238,7 @@ public class SejaParceiroActivity extends AppCompatActivity {
             timer.postDelayed(() -> loadingDialog.dimissDialog(),500);
         }else {
             loadingDialog.dimissDialog();
-        }
+        }*/
     }
     
     //  Method to control animation
@@ -299,7 +291,6 @@ public class SejaParceiroActivity extends AppCompatActivity {
 
         timer.postDelayed(() -> {
             Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
-            voltaraoprincipal.putExtra("emailuser",emaillogado);
             voltaraoprincipal.putExtra("statusavisoend","desativado");
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
             ActivityCompat.startActivity(SejaParceiroActivity.this,voltaraoprincipal, activityOptionsCompat.toBundle());
@@ -310,74 +301,21 @@ public class SejaParceiroActivity extends AppCompatActivity {
         aviso.show();
     }
 
-    //  Create Method to show List of card
-    @SuppressLint("SetTextI18n")
-    private void mostarlistadecartao(){
-        LottieAnimationView btnfecharlistadecartoes;
-        ListView listadecartoespartner;
-        RelativeLayout avisonenhumcardcadastradopartner;
-        aviso.setContentView(R.layout.lista_de_cartoes);
-        btnfecharlistadecartoes = aviso.findViewById(R.id.btnfecharlistadecartoes);
-        listadecartoespartner = aviso.findViewById(R.id.listadecartoespartner);
-        avisonenhumcardcadastradopartner = aviso.findViewById(R.id.avisonenhumcardcadastradopartner);
-
-        btnfecharlistadecartoes.setOnClickListener(v -> aviso.dismiss());
-
-        DaoClientes daoClientes = new DaoClientes(SejaParceiroActivity.this);
-        DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
-        cpfdousuario = dtoClientes.getCpfcliente();
-
-        DaoCartoes daoCartoes = new DaoCartoes(SejaParceiroActivity.this);
-        cartoes = daoCartoes.consultar_cartao_porcpf(cpfdousuario);
-        if (cartoes.size() > 0){
-            adapterCartoes = new AdapterCartoes(SejaParceiroActivity.this, R.layout.modelo_cartoes, cartoes);
-            listadecartoespartner.setAdapter(adapterCartoes);
-            avisonenhumcardcadastradopartner.setVisibility(View.GONE);
-            listadecartoespartner.setVisibility(View.VISIBLE);
-        }else {
-            avisonenhumcardcadastradopartner.setVisibility(View.VISIBLE);
-            listadecartoespartner.setVisibility(View.GONE);
-        }
-
-        listadecartoespartner.setOnItemClickListener((parent, view, position, id) -> {
-            cartaoselecionado = cartoes.get(position);
-
-            bandeira = cartaoselecionado.getBandeira();
-            txtbandeiracardselecionado.setText(cartaoselecionado.getBandeira());
-
-            //  Get number on card
-            numerodocartao = cartaoselecionado.getNumero();
-            String numerodocartaocompleto = cartaoselecionado.getNumero() + " ";
-            String[]  numerodocartao = numerodocartaocompleto.split(" ");
-            String ultimonumero = numerodocartao[3];
-            txtfinaldocartao.setText("**** " + ultimonumero);
-
-            //  Get name on card
-            nomedotitular = cartaoselecionado.getNomedotitular();
-            txtnomedodonodocartao.setText(cartaoselecionado.getNomedotitular());
-
-            //  Get date on card
-            datadevalidade = cartaoselecionado.getValidade();
-            txtvalidadecartaoselecionado.setText(cartaoselecionado.getValidade());
-
-            //  Get ccc of card
-            ccc = cartaoselecionado.getCcc();
-
-            aviso.dismiss();
-        });
-
-        aviso.show();
-
-    }
-
     @Override
     public void onBackPressed() {
         if (primeirabasesejaparceito.getVisibility() == View.VISIBLE){
-            Intent voltaraoprincipal = new Intent(SejaParceiroActivity.this, MainActivity.class);
-            voltaraoprincipal.putExtra("emailuser",emaillogado);
-            voltaraoprincipal.putExtra("statusavisoend","desativado");
-            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
-            ActivityCompat.startActivity(SejaParceiroActivity.this,voltaraoprincipal, activityOptionsCompat.toBundle());
+            Intent GoTo_Main = new Intent(SejaParceiroActivity.this, MainActivity.class);
+            GoTo_Main.putExtra("id_user", id_user);
+            GoTo_Main.putExtra("email_user", email_user);
+            GoTo_Main.putExtra("nm_user", nm_user);
+            GoTo_Main.putExtra("cpf_user", cpf_user);
+            GoTo_Main.putExtra("phone_user", phone_user);
+            GoTo_Main.putExtra("address_user", address_user);
+            GoTo_Main.putExtra("complement", complement);
+            GoTo_Main.putExtra("img_user", img_user);
+            GoTo_Main.putExtra("partner", partner);
+            GoTo_Main.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(GoTo_Main);
             finish();
         }else {
             primeirabasesejaparceito.setVisibility(View.VISIBLE);

@@ -13,8 +13,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -22,47 +20,43 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
-import com.example.coffeeforcodeapp.Api.DtoMenu;
-import com.example.coffeeforcodeapp.Api.MenuService;
 import com.example.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
+import com.example.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
-    LottieAnimationView icon_Profile_principal;
+    //  User img
+    CircleImageView icon_ProfileUser_principal;
     TextView txt_Name_user;
-    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart;
+    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog warning_address;
-    ArrayList<DtoMenu> popularProdutctsarrayList;
     RecyclerView recyclerPopularProducts;
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
     int id_user, partner;
-    String nm_user, email_user, phone_user, address_user, cpf_user, Show_warning_address;
+    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
     final Retrofit Productsretrofit = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/products/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    TopProducts_Adapter topProducts_adapter = null;
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +64,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txt_Name_user = findViewById(R.id.txt_Name_user);
         recyclerPopularProducts = findViewById(R.id.recyclerPopularProducts);
+        AnimationLoading_PopularProducts = findViewById(R.id.AnimationLoading_PopularProducts);
         cardview_notPartner = findViewById(R.id.cardview_notPartner);
         card_Be_Partner = findViewById(R.id.card_Be_Partner);
         card_See_Cards = findViewById(R.id.card_See_Cards);
         card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
-        icon_Profile_principal = findViewById(R.id.icon_Profile_principal);
+        icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
         warning_address = new Dialog(this);
 
 
@@ -84,53 +79,74 @@ public class MainActivity extends AppCompatActivity {
         if (bundle == null){
             Show_warning_address = "ativado";
         }else {
+            Show_warning_address = bundle.getString("statusavisoend");
+            email_user  = bundle.getString("email_user");
             id_user  = bundle.getInt("id_user");
             nm_user  = bundle.getString("nm_user");
             email_user  = bundle.getString("email_user");
             phone_user  = bundle.getString("phone_user");
             address_user  = bundle.getString("address_user");
+            complement  = bundle.getString("complement");
+            img_user  = bundle.getString("img_user");
             cpf_user  = bundle.getString("cpf_user");
             partner  = bundle.getInt("partner");
-            Show_warning_address = bundle.getString("statusavisoend");
+            partner_Startdate  = bundle.getString("partner_Startdate");
         }
 
-        loadPopularProducts();
+        icon_ProfileUser_principal.setVisibility(View.VISIBLE);
+
+        if (img_user == null){
+            loadPopularProducts();
+        }else {
+            loadPopularProducts();
+            loadProfileImage();
+        }
+
 
         mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         //  Set somethings with gone and visible
 
-        recebendodadosiniciaisdocliente();
+        Get_UserInformation();
 
 
         //  When click in this card user will to SejaParceiroActivity
         card_Be_Partner.setOnClickListener(v -> {
-            Intent irparavirarparceiro = new Intent(MainActivity.this,SejaParceiroActivity.class);
-            //irparavirarparceiro.putExtra("emailuser",emaillogado);
+            Intent GoTo_BePartner = new Intent(MainActivity.this,SejaParceiroActivity.class);
+            GoTo_BePartner.putExtra("id_user", id_user);
+            GoTo_BePartner.putExtra("email_user", email_user);
+            GoTo_BePartner.putExtra("nm_user", nm_user);
+            GoTo_BePartner.putExtra("cpf_user", cpf_user);
+            GoTo_BePartner.putExtra("phone_user", phone_user);
+            GoTo_BePartner.putExtra("address_user", address_user);
+            GoTo_BePartner.putExtra("complement", complement);
+            GoTo_BePartner.putExtra("img_user", img_user);
+            GoTo_BePartner.putExtra("partner", partner);
+            GoTo_BePartner.putExtra("partner_Startdate", partner_Startdate);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
-            ActivityCompat.startActivity(MainActivity.this,irparavirarparceiro, activityOptionsCompat.toBundle());
+            ActivityCompat.startActivity(MainActivity.this,GoTo_BePartner, activityOptionsCompat.toBundle());
             finish();
         });
 
         //  When click in this card user will to CartoesActivity
         card_See_Cards.setOnClickListener(v -> {
-            Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
-            //irparacartoes.putExtra("emailuser",emaillogado);
+            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
+            /*Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
             startActivity(irparacartoes);
-            finish();
+            finish();*/
         });
 
         //  When click in this card user will to cardvercarrinhodecompra
         card_Shopping_Cart.setOnClickListener(v -> {
-            Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
-            //vercarrinhodecompra.putExtra("emailuser", emaillogado);
+            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
+            /*Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
             startActivity(vercarrinhodecompra);
-            finish();
+            finish();*/
 
         });
 
         //  When click here will show info_perfil
-        icon_Profile_principal.setOnClickListener(v -> {
+        icon_ProfileUser_principal.setOnClickListener(v -> {
             bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
 
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
@@ -138,10 +154,18 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
-                Intent irpara_perfil = new Intent(MainActivity.this, ProfileActivity.class);
-                irpara_perfil.putExtra("id_user", id_user);
-                //irpara_perfil.putExtra("emailuser", emaillogado);
-                startActivity(irpara_perfil);
+                Intent GoTo_profile = new Intent(MainActivity.this, ProfileActivity.class);
+                GoTo_profile.putExtra("id_user", id_user);
+                GoTo_profile.putExtra("email_user", email_user);
+                GoTo_profile.putExtra("nm_user", nm_user);
+                GoTo_profile.putExtra("cpf_user", cpf_user);
+                GoTo_profile.putExtra("phone_user", phone_user);
+                GoTo_profile.putExtra("address_user", address_user);
+                GoTo_profile.putExtra("complement", complement);
+                GoTo_profile.putExtra("img_user", img_user);
+                GoTo_profile.putExtra("partner", partner);
+                GoTo_profile.putExtra("partner_Startdate", partner_Startdate);
+                startActivity(GoTo_profile);
                 finish();
                 bottomSheetDialog.dismiss();
             });
@@ -185,51 +209,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void loadProfileImage() {
+        AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
+        loadimage.execute();
+    }
+
     private void loadPopularProducts() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerPopularProducts.setLayoutManager(layoutManager);
 
-        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, MainActivity.this);
+        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, MainActivity.this);
         asyncPopularProducts.execute();
-
-        /*MenuService menuService = Productsretrofit.create(MenuService.class);
-        Call<ArrayList<DtoMenu>> resultProducts = menuService.getPopularProducts();
-
-        resultProducts.enqueue(new Callback<ArrayList<DtoMenu>>() {
-            @Override
-            public void onResponse(Call<ArrayList<DtoMenu>> call, Response<ArrayList<DtoMenu>> response) {
-                if (response.code() == 200){
-                    TopProducts_Adapter topProducts_adapter = null;
-                    popularProdutctsarrayList = new ArrayList<>();
-                    for (int i = 0; i < response.body().size(); i++) {
-                        try {
-                            DtoMenu dtoMenuResult = new DtoMenu();
-                            dtoMenuResult.setNm_prod(response.body().get(i).getNm_prod());
-                            URL url= new URL(response.body().get(i).getImg_prod().toString());
-                            Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            dtoMenuResult.setImg_prod(image);
-                            popularProdutctsarrayList.add(dtoMenuResult);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        topProducts_adapter = new TopProducts_Adapter(popularProdutctsarrayList);
-                        recyclerPopularProducts.setAdapter(topProducts_adapter);
-                        //Toast.makeText(MainActivity.this, ""+ resultado, Toast.LENGTH_SHORT).show();
-                    };
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<DtoMenu>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
     }
 
     //  Create method to check customer first things
-    private void recebendodadosiniciaisdocliente() {
+    private void Get_UserInformation() {
         String completeName_user = nm_user;
         String[]  Name_user = completeName_user.split(" ");
         String firstName_user = Name_user[0];
@@ -245,31 +239,39 @@ public class MainActivity extends AppCompatActivity {
 
         if (address_user == null || address_user.equals("")){
             if (Show_warning_address.equals("desativado")){
-                //warning_address.dismiss();
+                warning_address.dismiss();
             }else {
-                //mostraavisoend();
+                Show_AddressWarning();
             }
         }else{
-            //warning_address.dismiss();
+            warning_address.dismiss();
         }
     }
 
     //  Create Method for show alert of no adress register
-    private void mostraavisoend(){
-        ConstraintLayout btncadastraragoraend, btncadastrardepoisend;
+    private void Show_AddressWarning(){
+        ConstraintLayout btnRegisterAddressNow, btnRegisterAddressLater;
         warning_address.setContentView(R.layout.aviso_sem_endereco_cadatrado);
-        warning_address.setCancelable(false);
-        btncadastraragoraend = warning_address.findViewById(R.id.btncadastraragoraend);
-        btncadastrardepoisend = warning_address.findViewById(R.id.btncadastrardepoisend);
+        warning_address.setCancelable(true);
+        btnRegisterAddressNow = warning_address.findViewById(R.id.btnRegisterAddressNow);
+        btnRegisterAddressLater = warning_address.findViewById(R.id.btnRegisterAddressLater);
 
-        btncadastraragoraend.setOnClickListener(v -> {
-           Intent ircadastrarendereco = new Intent(MainActivity.this,CadastrarenderecoActivity.class);
-           //ircadastrarendereco.putExtra("emailuser",emaillogado);
-           startActivity(ircadastrarendereco);
-           finish();
+        btnRegisterAddressNow.setOnClickListener(v -> {
+            Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddresssActivity.class);
+            irpara_perfil.putExtra("id_user", id_user);
+            irpara_perfil.putExtra("email_user", email_user);
+            irpara_perfil.putExtra("nm_user", nm_user);
+            irpara_perfil.putExtra("cpf_user", cpf_user);
+            irpara_perfil.putExtra("phone_user", phone_user);
+            irpara_perfil.putExtra("address_user", address_user);
+            irpara_perfil.putExtra("img_user", img_user);
+            irpara_perfil.putExtra("partner", partner);
+            irpara_perfil.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(irpara_perfil);
+            finish();
         });
 
-        btncadastrardepoisend.setOnClickListener(v -> warning_address.dismiss());
+        btnRegisterAddressLater.setOnClickListener(v -> warning_address.dismiss());
 
         warning_address.show();
     }

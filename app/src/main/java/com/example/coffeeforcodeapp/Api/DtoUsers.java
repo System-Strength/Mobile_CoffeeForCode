@@ -1,8 +1,16 @@
 package com.example.coffeeforcodeapp.Api;
 
 public class DtoUsers {
-    int id_user;
-    String email, nm_user, cpf_user, phone_user, address_user,password, partner, message;
+    int id_user, partner;
+    String email, nm_user, cpf_user, phone_user, address_user,complement, img_user, password, partner_Startdate, message;
+
+
+
+    public DtoUsers(String address_user, String complement){
+        this.address_user = address_user;
+        this.complement = complement;
+
+    }
 
     public DtoUsers(String email, String nm_user, String cpf_user, String password){
         this.email = email;
@@ -12,7 +20,15 @@ public class DtoUsers {
 
     }
 
-    public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, String partner) {
+    public DtoUsers(String nm_user, String cpf_user, String phone_user, String address_user, String complement){
+        this.nm_user = nm_user;
+        this.cpf_user = cpf_user;
+        this.phone_user = phone_user;
+        this.address_user = address_user;
+        this.complement = complement;
+    }
+
+    public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, int partner) {
         this.id_user = id_user;
         this.email = email;
         this.nm_user = nm_user;
@@ -20,12 +36,6 @@ public class DtoUsers {
         this.phone_user = phone_user;
         this.password = password;
     }
-
-    public DtoUsers(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     public String getAddress_user() {
         return address_user;
     }
@@ -82,11 +92,11 @@ public class DtoUsers {
         this.password = password;
     }
 
-    public String getPartner() {
+    public int getPartner() {
         return partner;
     }
 
-    public void setPartner(String partner) {
+    public void setPartner(int partner) {
         this.partner = partner;
     }
 
@@ -96,6 +106,30 @@ public class DtoUsers {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getImg_user() {
+        return img_user;
+    }
+
+    public void setImg_user(String img_user) {
+        this.img_user = img_user;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
+    public String getPartner_Startdate() {
+        return partner_Startdate;
+    }
+
+    public void setPartner_Startdate(String partner_Startdate) {
+        this.partner_Startdate = partner_Startdate;
     }
 
     @Override

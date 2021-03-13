@@ -4,19 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
 import com.example.coffeeforcodeapp.Api.DtoMenu;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,16 +29,20 @@ public class AsyncPopularProducts extends AsyncTask {
     Activity contexto;
     RecyclerView recyclerPopularProducts;
     LoadingDialog loadingDialog;
+    CardView AnimationLoading_PopularProducts;
 
-    public AsyncPopularProducts(RecyclerView recyclerPopularProducts, Activity contexto) {
+    public AsyncPopularProducts(RecyclerView recyclerPopularProducts, CardView AnimationLoading_PopularProducts, Activity contexto) {
         this.recyclerPopularProducts = recyclerPopularProducts;
         this.contexto = contexto;
+        this.AnimationLoading_PopularProducts = AnimationLoading_PopularProducts;
         loadingDialog = new LoadingDialog(contexto);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        AnimationLoading_PopularProducts.setVisibility(View.VISIBLE);
+        recyclerPopularProducts.setVisibility(View.GONE);
         //loadingDialog.startLoading();
     }
 
@@ -82,6 +83,7 @@ public class AsyncPopularProducts extends AsyncTask {
     protected void onPostExecute(Object topProducts_adapter) {
         super.onPostExecute(topProducts_adapter);
         recyclerPopularProducts.setVisibility(View.VISIBLE);
+        AnimationLoading_PopularProducts.setVisibility(View.GONE);
         recyclerPopularProducts.setAdapter((RecyclerView.Adapter) topProducts_adapter);
         //loadingDialog.dimissDialog();
 
