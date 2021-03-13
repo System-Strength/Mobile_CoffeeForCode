@@ -80,12 +80,12 @@
                 android:id="@+id/ImgPopularProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
+                android:layout_marginStart="185dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/img_vampirefrappuccino"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
             <!--Btn See more-->

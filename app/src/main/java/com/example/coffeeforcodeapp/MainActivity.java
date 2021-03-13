@@ -107,32 +107,41 @@ public class MainActivity extends AppCompatActivity {
 
         //  Set somethings with gone and visible
 
-        recebendodadosiniciaisdocliente();
+        Get_UserInformation();
 
 
         //  When click in this card user will to SejaParceiroActivity
         card_Be_Partner.setOnClickListener(v -> {
-            Intent irparavirarparceiro = new Intent(MainActivity.this,SejaParceiroActivity.class);
-            //irparavirarparceiro.putExtra("emailuser",emaillogado);
+            Intent GoTo_BePartner = new Intent(MainActivity.this,SejaParceiroActivity.class);
+            GoTo_BePartner.putExtra("id_user", id_user);
+            GoTo_BePartner.putExtra("email_user", email_user);
+            GoTo_BePartner.putExtra("nm_user", nm_user);
+            GoTo_BePartner.putExtra("cpf_user", cpf_user);
+            GoTo_BePartner.putExtra("phone_user", phone_user);
+            GoTo_BePartner.putExtra("address_user", address_user);
+            GoTo_BePartner.putExtra("complement", complement);
+            GoTo_BePartner.putExtra("img_user", img_user);
+            GoTo_BePartner.putExtra("partner", partner);
+            GoTo_BePartner.putExtra("partner_Startdate", partner_Startdate);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
-            ActivityCompat.startActivity(MainActivity.this,irparavirarparceiro, activityOptionsCompat.toBundle());
+            ActivityCompat.startActivity(MainActivity.this,GoTo_BePartner, activityOptionsCompat.toBundle());
             finish();
         });
 
         //  When click in this card user will to CartoesActivity
         card_See_Cards.setOnClickListener(v -> {
-            Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
-            //irparacartoes.putExtra("emailuser",emaillogado);
+            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
+            /*Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
             startActivity(irparacartoes);
-            finish();
+            finish();*/
         });
 
         //  When click in this card user will to cardvercarrinhodecompra
         card_Shopping_Cart.setOnClickListener(v -> {
-            Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
-            //vercarrinhodecompra.putExtra("emailuser", emaillogado);
+            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
+            /*Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
             startActivity(vercarrinhodecompra);
-            finish();
+            finish();*/
 
         });
 
@@ -214,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //  Create method to check customer first things
-    private void recebendodadosiniciaisdocliente() {
+    private void Get_UserInformation() {
         String completeName_user = nm_user;
         String[]  Name_user = completeName_user.split(" ");
         String firstName_user = Name_user[0];
@@ -232,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             if (Show_warning_address.equals("desativado")){
                 warning_address.dismiss();
             }else {
-                mostraavisoend();
+                Show_AddressWarning();
             }
         }else{
             warning_address.dismiss();
@@ -240,14 +249,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //  Create Method for show alert of no adress register
-    private void mostraavisoend(){
-        ConstraintLayout btncadastraragoraend, btncadastrardepoisend;
+    private void Show_AddressWarning(){
+        ConstraintLayout btnRegisterAddressNow, btnRegisterAddressLater;
         warning_address.setContentView(R.layout.aviso_sem_endereco_cadatrado);
         warning_address.setCancelable(true);
-        btncadastraragoraend = warning_address.findViewById(R.id.btncadastraragoraend);
-        btncadastrardepoisend = warning_address.findViewById(R.id.btncadastrardepoisend);
+        btnRegisterAddressNow = warning_address.findViewById(R.id.btnRegisterAddressNow);
+        btnRegisterAddressLater = warning_address.findViewById(R.id.btnRegisterAddressLater);
 
-        btncadastraragoraend.setOnClickListener(v -> {
+        btnRegisterAddressNow.setOnClickListener(v -> {
             Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddresssActivity.class);
             irpara_perfil.putExtra("id_user", id_user);
             irpara_perfil.putExtra("email_user", email_user);
@@ -262,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        btncadastrardepoisend.setOnClickListener(v -> warning_address.dismiss());
+        btnRegisterAddressLater.setOnClickListener(v -> warning_address.dismiss());
 
         warning_address.show();
     }
