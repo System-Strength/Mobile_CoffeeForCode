@@ -1,13 +1,11 @@
-package com.example.coffeeforcodeapp.Api.PopularProducts;
+package com.example.coffeeforcodeapp.HandlerJson;
 
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class JsonHandler {
@@ -25,11 +23,7 @@ public class JsonHandler {
                 textojson += "\n"+linha;
             }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e){
+        }catch (Exception e){
             Log.d("ErroNetwork", e.toString());
         }
         return textojson;

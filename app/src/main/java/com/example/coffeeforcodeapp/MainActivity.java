@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     //  User img
     CircleImageView icon_ProfileUser_principal;
     TextView txt_Name_user;
-    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts;
+    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
+            btnSee_AllProducts;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog warning_address;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         card_Be_Partner = findViewById(R.id.card_Be_Partner);
         card_See_Cards = findViewById(R.id.card_See_Cards);
         card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
+        btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
         icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
         warning_address = new Dialog(this);
 
@@ -125,6 +127,22 @@ public class MainActivity extends AppCompatActivity {
             GoTo_BePartner.putExtra("partner_Startdate", partner_Startdate);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
             ActivityCompat.startActivity(MainActivity.this,GoTo_BePartner, activityOptionsCompat.toBundle());
+            finish();
+        });
+
+        btnSee_AllProducts.setOnClickListener(v -> {
+            Intent GoTo_AllProducts = new Intent(MainActivity.this,AllProductsActivity.class);
+            GoTo_AllProducts.putExtra("id_user", id_user);
+            GoTo_AllProducts.putExtra("email_user", email_user);
+            GoTo_AllProducts.putExtra("nm_user", nm_user);
+            GoTo_AllProducts.putExtra("cpf_user", cpf_user);
+            GoTo_AllProducts.putExtra("phone_user", phone_user);
+            GoTo_AllProducts.putExtra("address_user", address_user);
+            GoTo_AllProducts.putExtra("complement", complement);
+            GoTo_AllProducts.putExtra("img_user", img_user);
+            GoTo_AllProducts.putExtra("partner", partner);
+            GoTo_AllProducts.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(GoTo_AllProducts);
             finish();
         });
 

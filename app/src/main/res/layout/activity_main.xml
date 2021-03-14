@@ -617,7 +617,7 @@
 
                             <!--Card More Coffee-->
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/btnvertodososprodutos"
+                                android:id="@+id/btnSee_AllProducts"
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 app:cardBackgroundColor="#fff"

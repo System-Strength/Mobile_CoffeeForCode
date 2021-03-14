@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroung"
+    android:orientation="vertical"
+    tools:context=".AllProductsActivity">
+
+    <!--Header Products-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFE5B4"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+
+    <!-- Body Recycler Category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#FFE5B4"
+        android:layout_height="155dp">
+
+        <!-- Category Loading Animation -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/AnimationcategoryLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/coffeelove_loading"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <!-- Recycler Category -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerCategory"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <!-- Body Recycler Products -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/AnimationProductsLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:lottie_rawRes="@raw/donuts_loading"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
