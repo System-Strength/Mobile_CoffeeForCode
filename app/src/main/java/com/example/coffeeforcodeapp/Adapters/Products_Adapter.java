@@ -34,7 +34,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHo
     public void onBindViewHolder(@NonNull MyHolderProducts holder, int position) {
         holder.ImgProd.setImageBitmap(dtoMenuArrayList.get(position).getImg_prod());
         holder.txtNm_prod.setText(dtoMenuArrayList.get(position).getNm_prod());
-        holder.txtSize_Prod.setText(dtoMenuArrayList.get(position).getSize());
+        //holder.txtSize_Prod.setText(dtoMenuArrayList.get(position).getSize());
         holder.txtPrice_Prod.setText("R$ " + (int) dtoMenuArrayList.get(position).getPrice_prod());
 
     }
@@ -51,7 +51,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHo
         public MyHolderProducts(@NonNull View itemView) {
             super(itemView);
             txtNm_prod = itemView.findViewById(R.id.txtNm_prod);
-            txtSize_Prod = itemView.findViewById(R.id.txtSize_Prod);
+            //txtSize_Prod = itemView.findViewById(R.id.txtSize_Prod);
             txtPrice_Prod = itemView.findViewById(R.id.txtPrice_Prod);
             ImgProd = itemView.findViewById(R.id.ImgProd);
         }

@@ -7,9 +7,12 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Adapters.Category_Adapter;
@@ -17,6 +20,8 @@ import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
 import com.example.coffeeforcodeapp.Api.DtoCategorys;
 import com.example.coffeeforcodeapp.Api.DtoMenu;
+import com.example.coffeeforcodeapp.Api.Products.AsyncProdCategory;
+import com.example.coffeeforcodeapp.Api.Products.RecyclerItemClickListener;
 import com.example.coffeeforcodeapp.HandlerJson.JsonHandler;
 
 import org.json.JSONArray;
@@ -32,10 +37,19 @@ public class AsyncCategory extends AsyncTask {
     RecyclerView recyclerCategorys;
     LottieAnimationView AnimationcategoryLoading;
 
-    public AsyncCategory(RecyclerView recyclerCategorys,LottieAnimationView AnimationcategoryLoading, Activity contexto) {
+    //  Products
+    RecyclerView recyclerProducts;
+    LottieAnimationView AnimationproductsLoading;
+    SwipeRefreshLayout SwipeRefreshProducts;
+
+    public AsyncCategory(RecyclerView recyclerCategorys, LottieAnimationView AnimationcategoryLoading, Activity contexto, RecyclerView recyclerProducts, LottieAnimationView AnimationproductsLoading, SwipeRefreshLayout SwipeRefreshProducts) {
         this.recyclerCategorys = recyclerCategorys;
         this.contexto = contexto;
         this.AnimationcategoryLoading =  AnimationcategoryLoading;
+
+        this.recyclerProducts = recyclerProducts;
+        this.AnimationproductsLoading = AnimationproductsLoading;
+        this.SwipeRefreshProducts = SwipeRefreshProducts;
     }
 
     @Override
@@ -55,6 +69,7 @@ public class AsyncCategory extends AsyncTask {
             arrayListDto = new ArrayList<>();
             for (int i = 0; i < jsonArray.length() ; i++) {
                 DtoCategorys dtoCategorys = new DtoCategorys();
+                dtoCategorys.setCd_cat(jsonArray.getJSONObject(i).getInt("cd_cat"));
                 dtoCategorys.setNm_cat(jsonArray.getJSONObject(i).getString("nm_cat"));
                 URL url = new URL(jsonArray.getJSONObject(i).getString("img_cat"));
                 Bitmap img_cat = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -76,7 +91,26 @@ public class AsyncCategory extends AsyncTask {
         recyclerCategorys.setVisibility(View.VISIBLE);
         AnimationcategoryLoading.setVisibility(View.GONE);
         recyclerCategorys.setAdapter((RecyclerView.Adapter) category_adapter);
-        //loadingDialog.dimissDialog();
+
+        recyclerCategorys.addOnItemTouchListener(new RecyclerItemClickListener(contexto, recyclerCategorys,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        int cd_cat = arrayListDto.get(position).getCd_cat();
+                        AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, SwipeRefreshProducts, cd_cat, contexto);
+                        asyncProdCategory.execute();
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }));
 
 
     }

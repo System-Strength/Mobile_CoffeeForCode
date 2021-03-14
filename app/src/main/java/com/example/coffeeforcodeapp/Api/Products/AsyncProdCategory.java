@@ -1,5 +1,6 @@
 package com.example.coffeeforcodeapp.Api.Products;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -26,19 +28,21 @@ import java.net.URL;
 import java.util.ArrayList;
 
 @SuppressLint("StaticFieldLeak")
-public class AsyncProducts extends AsyncTask {
+public class AsyncProdCategory extends AsyncTask {
     ArrayList<DtoMenu> arrayListDto;
     Activity contexto;
     RecyclerView recyclerProducts;
     SwipeRefreshLayout SwipeRefreshProducts;
     LottieAnimationView AnimationProductsLoading;
-    private Object DtoMenu;
+    int cd_cat;
 
-    public AsyncProducts(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts, Activity contexto) {
+    public AsyncProdCategory(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts,
+                             int cd_cat, Activity contexto) {
         this.recyclerProducts = recyclerProducts;
         this.contexto = contexto;
         this.AnimationProductsLoading = AnimationProductsLoading;
         this.SwipeRefreshProducts = SwipeRefreshProducts;
+        this.cd_cat = cd_cat;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class AsyncProducts extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] objects) {
-        String json =  JsonHandler.getJson("https://coffeeforcode.herokuapp.com/products");
+        String json =  JsonHandler.getJson("https://coffeeforcode.herokuapp.com/products/category/" + cd_cat);
         Products_Adapter products_adapter = null;
         try {
             JSONObject jsonObject = new JSONObject(json);
@@ -82,6 +86,8 @@ public class AsyncProducts extends AsyncTask {
         recyclerProducts.setVisibility(View.VISIBLE);
         AnimationProductsLoading.setVisibility(View.GONE);
         AnimationProductsLoading.pauseAnimation();
+        GridLayoutManager layoutManager = new GridLayoutManager(contexto, 2);
+        recyclerProducts.setLayoutManager(layoutManager);
         recyclerProducts.setAdapter((RecyclerView.Adapter) products_adapter);
         ((RecyclerView.Adapter) products_adapter).notifyDataSetChanged();
         SwipeRefreshProducts.setRefreshing(false);

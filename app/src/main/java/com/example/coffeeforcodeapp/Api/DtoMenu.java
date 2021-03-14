@@ -5,13 +5,13 @@ import android.net.Uri;
 
 public class DtoMenu {
     int cd_prod, qntd_prod, cd_cat, popular;
-    double price_prod;
+    float price_prod;
     private String  nm_prod, date_prod, size, bonusDesc;
     private Bitmap img_prod;
 
     public DtoMenu(){}
 
-    public DtoMenu(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, double price_prod, Bitmap img_prod, String nm_prod, String date_prod) {
+    public DtoMenu(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, float price_prod, Bitmap img_prod, String nm_prod, String date_prod) {
         this.cd_prod = cd_prod;
         this.qntd_prod = qntd_prod;
         this.size = size;
@@ -72,11 +72,11 @@ public class DtoMenu {
         this.popular = popular;
     }
 
-    public double getPrice_prod() {
+    public float getPrice_prod() {
         return price_prod;
     }
 
-    public void setPrice_prod(double price_prod) {
+    public void setPrice_prod(float price_prod) {
         this.price_prod = price_prod;
     }
 

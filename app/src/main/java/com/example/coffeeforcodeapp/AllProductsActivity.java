@@ -1,19 +1,30 @@
 package com.example.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Api.Category.AsyncCategory;
+import com.example.coffeeforcodeapp.Api.DtoMenu;
 import com.example.coffeeforcodeapp.Api.Products.AsyncProducts;
+import com.example.coffeeforcodeapp.Api.Products.RecyclerItemClickListener;
+
+import java.util.ArrayList;
 
 public class AllProductsActivity extends AppCompatActivity {
+    ArrayList<DtoMenu> arrayListDto;
     RecyclerView RecyclerCategory, RecyclerProducts;
     LottieAnimationView AnimationcategoryLoading, AnimationProductsLoading;
+    SwipeRefreshLayout SwipeRefreshProducts;
     int id_user, partner;
     String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
 
@@ -23,8 +34,10 @@ public class AllProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_products);
         RecyclerCategory = findViewById(R.id.RecyclerCategory);
         RecyclerProducts = findViewById(R.id.RecyclerProducts);
+        SwipeRefreshProducts = findViewById(R.id.SwipeRefreshProducts);
         AnimationcategoryLoading = findViewById(R.id.AnimationcategoryLoading);
         AnimationProductsLoading = findViewById(R.id.AnimationProductsLoading);
+
 
         //  Get some information
         Intent intent = getIntent();
@@ -42,13 +55,18 @@ public class AllProductsActivity extends AppCompatActivity {
 
         loadProducts();
         loadCategorys();
+
+        SwipeRefreshProducts.setOnRefreshListener(() -> {
+            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+            asyncProducts.execute();
+        });
     }
 
     private void loadProducts() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AllProductsActivity.this);
+        GridLayoutManager layoutManager = new GridLayoutManager(AllProductsActivity.this, 2);
         RecyclerProducts.setLayoutManager(layoutManager);
 
-        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, AllProductsActivity.this);
+        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
         asyncProducts.execute();
 
     }
@@ -57,7 +75,7 @@ public class AllProductsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         RecyclerCategory.setLayoutManager(layoutManager);
 
-        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this);
+        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this, RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts);
         asyncCategory.execute();
     }
 
