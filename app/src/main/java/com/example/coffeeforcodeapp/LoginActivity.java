@@ -146,15 +146,13 @@ public class LoginActivity extends AppCompatActivity {
         cardviewbtnlogar.setOnClickListener(v -> {
             if (edittextEmail_userLogin.getText() == null || edittextEmail_userLogin.getText().length() == 0){
                 edittextEmail_userLogin.setError("Fill in correctly: EMAIL" + "\n" + "Preencha corretamente: EMAIL");
-                //Toast.makeText(this, R.string.fill_correctly_email, Toast.LENGTH_SHORT).show();
                 edittextEmail_userLogin.requestFocus();
                 imm.showSoftInput(edittextEmail_userLogin, InputMethodManager.SHOW_IMPLICIT);
             }else if (edittexPassword_userLogin.getText() == null || edittexPassword_userLogin.getText().length() == 0){
-                Toast.makeText(this, "Preencha corretamente: SENHA", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Fill in correctly: PASSWOR!!\nPreencha corretamente: SENHA!!", Toast.LENGTH_SHORT).show();
                 edittexPassword_userLogin.requestFocus();
                 imm.showSoftInput(edittexPassword_userLogin, InputMethodManager.SHOW_IMPLICIT);
             }else {
-
                 String email = edittextEmail_userLogin.getText().toString();
                 String password = edittexPassword_userLogin.getText().toString();
                 animation_loadingLogin.setVisibility(View.VISIBLE);
@@ -227,11 +225,11 @@ public class LoginActivity extends AppCompatActivity {
                         mPrefs.edit().clear().apply();
                         GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }
-
                 }else if(response.code() == 401){;
                     ShowWarning_Email_Password();
                 }else{
                     Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                    loading.dimissDialog();
                     Log.d("NetWorkError", response.message());
                 }
             }
@@ -240,7 +238,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<DtoUsers> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
                 Log.d("NetWorkError", t.getMessage());
-
+                loading.dimissDialog();
             }
         });
     }
