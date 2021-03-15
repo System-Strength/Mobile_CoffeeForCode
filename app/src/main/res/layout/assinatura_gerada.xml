@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
                 app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/happystar"
+                app:lottie_rawRes="@raw/happystar_animation"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!--Text Bem Vindo ao Time-->

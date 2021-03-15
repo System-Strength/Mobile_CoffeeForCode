@@ -26,7 +26,7 @@
                 app:lottie_autoPlay="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                app:lottie_rawRes="@raw/arrowleftback"
+                app:lottie_rawRes="@raw/arrowleftback_animation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -275,7 +275,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:lottie_autoPlay="true"
-                        app:lottie_rawRes="@raw/coffeeloading" />
+                        app:lottie_rawRes="@raw/coffeeloading_animation" />
 
                     <!--Text Confirm-->
                     <TextView

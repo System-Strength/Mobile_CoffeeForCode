@@ -24,13 +24,13 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/arrowleftback"/>
+            app:lottie_rawRes="@raw/arrowleftback_animation"/>
 
         <!--Coffee Animation-->
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
             android:layout_height="290dp"
-            app:lottie_rawRes="@raw/coffeelove"
+            app:lottie_rawRes="@raw/coffeelove_animation"
             app:lottie_autoPlay="true"/>
 
     </RelativeLayout>
@@ -229,7 +229,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:lottie_autoPlay="true"
                             app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/coffeeloading" />
+                            app:lottie_rawRes="@raw/coffeeloading_animation" />
 
                         <!--Text Logar-->
                         <TextView

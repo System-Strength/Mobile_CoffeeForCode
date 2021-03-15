@@ -134,7 +134,7 @@
                             <com.airbnb.lottie.LottieAnimationView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/cardgift"
+                                app:lottie_rawRes="@raw/cardgift_animation"
                                 app:lottie_autoPlay="true"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -289,7 +289,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         android:layout_marginBottom="4dp"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/coffee1" />
+                                        app:lottie_rawRes="@raw/coffee1_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -374,7 +374,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/drink" />
+                                        app:lottie_rawRes="@raw/drink_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -432,7 +432,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/chipssalsa" />
+                                app:lottie_rawRes="@raw/chipssalsa_animation" />
 
                             <!--Animation  Hamburger 2-->
                             <com.airbnb.lottie.LottieAnimationView
@@ -445,7 +445,7 @@
                                 app:layout_constraintStart_toEndOf="@+id/animationdescsavoryandsandwiches"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/burgeranimation" />
+                                app:lottie_rawRes="@raw/burgeranimation_animation" />
 
                             <!--Card More Hamburger-->
                             <androidx.cardview.widget.CardView
@@ -473,7 +473,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/burgerburger" />
+                                        app:lottie_rawRes="@raw/burgerburger_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -529,7 +529,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlecandys"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/donuts" />
+                                app:lottie_rawRes="@raw/donuts_animation" />
 
                             <!--Card More Cadys-->
                             <androidx.cardview.widget.CardView
@@ -557,7 +557,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/yummydonut" />
+                                        app:lottie_rawRes="@raw/yummydonut_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -695,7 +695,7 @@
                                 android:layout_height="50dp"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlecart"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/shoppingcart" />
+                                app:lottie_rawRes="@raw/shoppingcart_animation" />
 
                             <!--Card Shopping cart-->
                             <androidx.cardview.widget.CardView
@@ -872,7 +872,7 @@
                             app:lottie_autoPlay="true"
                             app:lottie_loop="true"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:lottie_rawRes="@raw/coffeemachine" />
+                            app:lottie_rawRes="@raw/coffeemachine_animation" />
 
                         <TextView
                             android:layout_width="wrap_content"

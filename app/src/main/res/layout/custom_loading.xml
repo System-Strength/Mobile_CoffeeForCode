@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:background="#fff"
@@ -11,7 +10,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="160dp"
         android:indeterminateDrawable="@drawable/cpb_2"
         android:indeterminateDuration="@android:integer/config_longAnimTime"
@@ -25,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/carregando"
-        android:textColor="#000"
+        android:textColor="#040303"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
