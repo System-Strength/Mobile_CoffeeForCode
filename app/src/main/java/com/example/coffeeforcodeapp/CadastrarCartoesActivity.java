@@ -18,10 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
-import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DaoCartoes;
-import com.example.coffeeforcodeapp.LocalDataBases.Cartoes.DtoCartoes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
     ConstraintLayout frentedocartao, primeirodadoscartao, segundodadoscartao;
@@ -243,7 +239,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 Toast.makeText(this, "Necessario preencher todos os dados", Toast.LENGTH_SHORT).show();
             }else {
                 loadingDialog.startLoading();
-                try {
+                /*try {
                     DtoCartoes dtoCartoes = new DtoCartoes();
                     dtoCartoes.setNumero(editnumerocartao.getText().toString());
                     dtoCartoes.setNomedotitular(editnomeproprietariocartao.getText().toString());
@@ -268,14 +264,14 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 }catch (Exception ex){
                     loadingDialog.dimissDialog();
                     Toast.makeText(this, "Erro ao cadastrar cartão: "+ ex + "\nTente novamente mais tarde!!", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
     }
 
     //  Create method to get first information of client
     private void recebendoprimeirosdadosdousuarios() {
-        try {
+        /*try {
             DaoClientes daoClientes = new DaoClientes(CadastrarCartoesActivity.this);
             DtoClientes dtoClientes = daoClientes.consultarclienteporemail(emaillogado);
             cpfpararegistarocartao = dtoClientes.getCpfcliente();
@@ -288,7 +284,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 startActivity(voltaraoscartoes);
                 finish();
             },500);
-        }
+        }*/
     }
 
     @Override

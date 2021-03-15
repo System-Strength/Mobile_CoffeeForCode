@@ -17,8 +17,6 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Api.DtoUsers;
 import com.example.coffeeforcodeapp.Api.UsersService;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DaoClientes;
-import com.example.coffeeforcodeapp.LocalDataBases.Clientes.DtoClientes;
 
 import retrofit2.Call;
 import retrofit2.Callback;
