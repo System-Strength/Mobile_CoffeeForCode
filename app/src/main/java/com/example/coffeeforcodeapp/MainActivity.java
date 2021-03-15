@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     //  User img
     CircleImageView icon_ProfileUser_principal;
     TextView txt_Name_user;
-    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts;
+    CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
+            btnSee_AllProducts;
     @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog warning_address;
@@ -43,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
-    int id_user, partner;
+
+    // Shortcuts Cards
+    CardView cardshopcafe, cardRefreshersMain, cardhamburguerandsandwiches, cardcandys ;
+
+    int id_user, partner, cd_cat;
     String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
     final Retrofit Productsretrofit = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/products/")
@@ -62,14 +67,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txt_Name_user = findViewById(R.id.txt_Name_user);
-        recyclerPopularProducts = findViewById(R.id.recyclerPopularProducts);
-        AnimationLoading_PopularProducts = findViewById(R.id.AnimationLoading_PopularProducts);
-        cardview_notPartner = findViewById(R.id.cardview_notPartner);
-        card_Be_Partner = findViewById(R.id.card_Be_Partner);
-        card_See_Cards = findViewById(R.id.card_See_Cards);
-        card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
-        icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
+        Finds_Ids();
         warning_address = new Dialog(this);
 
 
@@ -109,6 +107,26 @@ public class MainActivity extends AppCompatActivity {
 
         Get_UserInformation();
 
+        cardshopcafe.setOnClickListener(v -> {
+            cd_cat = 34;
+            GoTo_AllProductsWithCDCAT(cd_cat);
+        });
+
+        cardRefreshersMain.setOnClickListener(v -> {
+            cd_cat = 44;
+            GoTo_AllProductsWithCDCAT(cd_cat);
+        });
+
+        cardhamburguerandsandwiches.setOnClickListener(v -> {
+            cd_cat = 74;
+            GoTo_AllProductsWithCDCAT(cd_cat);
+        });
+
+        cardcandys.setOnClickListener(v -> {
+            cd_cat = 84;
+            GoTo_AllProductsWithCDCAT(cd_cat);
+        });
+
 
         //  When click in this card user will to SejaParceiroActivity
         card_Be_Partner.setOnClickListener(v -> {
@@ -125,6 +143,22 @@ public class MainActivity extends AppCompatActivity {
             GoTo_BePartner.putExtra("partner_Startdate", partner_Startdate);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_esquerdarapido, R.anim.mover_direitarapido);
             ActivityCompat.startActivity(MainActivity.this,GoTo_BePartner, activityOptionsCompat.toBundle());
+            finish();
+        });
+
+        btnSee_AllProducts.setOnClickListener(v -> {
+            Intent GoTo_AllProducts = new Intent(MainActivity.this,AllProductsActivity.class);
+            GoTo_AllProducts.putExtra("id_user", id_user);
+            GoTo_AllProducts.putExtra("email_user", email_user);
+            GoTo_AllProducts.putExtra("nm_user", nm_user);
+            GoTo_AllProducts.putExtra("cpf_user", cpf_user);
+            GoTo_AllProducts.putExtra("phone_user", phone_user);
+            GoTo_AllProducts.putExtra("address_user", address_user);
+            GoTo_AllProducts.putExtra("complement", complement);
+            GoTo_AllProducts.putExtra("img_user", img_user);
+            GoTo_AllProducts.putExtra("partner", partner);
+            GoTo_AllProducts.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(GoTo_AllProducts);
             finish();
         });
 
@@ -207,6 +241,41 @@ public class MainActivity extends AppCompatActivity {
             bottomSheetDialog.setContentView(sheetview);
             bottomSheetDialog.show();
         });
+    }
+
+    private void GoTo_AllProductsWithCDCAT(int cd_cat) {
+        Intent GoToAllProducts_With_CatCd = new Intent(MainActivity.this, AllProductsActivity.class);
+        GoToAllProducts_With_CatCd.putExtra("cd_cat", cd_cat);
+        GoToAllProducts_With_CatCd.putExtra("id_user", id_user);
+        GoToAllProducts_With_CatCd.putExtra("email_user", email_user);
+        GoToAllProducts_With_CatCd.putExtra("nm_user", nm_user);
+        GoToAllProducts_With_CatCd.putExtra("cpf_user", cpf_user);
+        GoToAllProducts_With_CatCd.putExtra("phone_user", phone_user);
+        GoToAllProducts_With_CatCd.putExtra("address_user", address_user);
+        GoToAllProducts_With_CatCd.putExtra("complement", complement);
+        GoToAllProducts_With_CatCd.putExtra("img_user", img_user);
+        GoToAllProducts_With_CatCd.putExtra("partner", partner);
+        GoToAllProducts_With_CatCd.putExtra("partner_Startdate", partner_Startdate);
+        startActivity(GoToAllProducts_With_CatCd);
+        finish();
+    }
+
+    private void Finds_Ids() {
+        txt_Name_user = findViewById(R.id.txt_Name_user);
+        recyclerPopularProducts = findViewById(R.id.recyclerPopularProducts);
+        AnimationLoading_PopularProducts = findViewById(R.id.AnimationLoading_PopularProducts);
+        cardview_notPartner = findViewById(R.id.cardview_notPartner);
+        card_Be_Partner = findViewById(R.id.card_Be_Partner);
+        card_See_Cards = findViewById(R.id.card_See_Cards);
+        card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
+        btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
+        icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
+
+        //  Shortcuts Ids
+        cardshopcafe = findViewById(R.id.cardshopcafe);
+        cardRefreshersMain = findViewById(R.id.cardRefreshersMain);
+        cardhamburguerandsandwiches = findViewById(R.id.cardhamburguerandsandwiches);
+        cardcandys = findViewById(R.id.cardcandys);
     }
 
     private void loadProfileImage() {

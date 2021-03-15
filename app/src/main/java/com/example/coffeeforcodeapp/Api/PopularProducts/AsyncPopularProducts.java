@@ -14,14 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coffeeforcodeapp.Adapters.LoadingDialog;
 import com.example.coffeeforcodeapp.Adapters.TopProducts_Adapter;
 import com.example.coffeeforcodeapp.Api.DtoMenu;
+import com.example.coffeeforcodeapp.HandlerJson.JsonHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
-
-import retrofit2.http.Url;
 
 @SuppressLint("StaticFieldLeak")
 public class AsyncPopularProducts extends AsyncTask {

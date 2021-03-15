@@ -6,7 +6,7 @@
     <string name="docedeleito">Milk Cream</string>
     <string name="cafes">Cafés</string>
     <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
-    <string name="salgadosesanduiches">Salgados e sanduíches</string>
+    <string name="salgadosesanduiches">Salgados e Sanduíches</string>
     <string name="candys">Doces</string>
     <string name="sejaparceiro">Sejá Parceiro</string>
     <string name="descpartner">Descontos exclusivos, cartão fidelidade,  frete grátis, premiações mensais</string>
@@ -140,4 +140,6 @@
     <string name="HintpasswordLogin">Senha</string>
     <string name="register_later">Cadastrar Depois</string>
     <string name="change_profile_image"><u>Trocar imagem de perfil</u></string>
+    <string name="products">Produtos</string>
+    <string name="category">Categoria</string>
 </resources>

@@ -16,7 +16,7 @@
     <string name="combohappy" translatable="false">Combo Happy</string>
     <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
     <string name="desccombohapppy">Chocolate Frappuccino Croissant and Torada</string>
-    <string name="salgadosesanduiches">Savory and sandwichesuiches</string>
+    <string name="salgadosesanduiches">Savory and Sandwiches</string>
     <string name="candys">Candy</string>
     <string name="dunkindonuts" translatable="false">Dunkin Donuts</string>
 
@@ -207,5 +207,7 @@
     <string name="hintEmailAddressLogin">Email address</string>
     <string name="HintpasswordLogin">Password</string>
     <string name="change_profile_image"><u>Change profile image</u></string>
+    <string name="products">Products</string>
+    <string name="category">Category</string>
 
 </resources>
