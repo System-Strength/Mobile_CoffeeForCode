@@ -4,28 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.coffeeforcodeapp.Api.Category.AsyncCategory;
-import com.example.coffeeforcodeapp.Api.DtoMenu;
+import com.example.coffeeforcodeapp.Api.Products.AsyncProdCategory;
 import com.example.coffeeforcodeapp.Api.Products.AsyncProducts;
-import com.example.coffeeforcodeapp.Api.Products.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
 public class AllProductsActivity extends AppCompatActivity {
-    ArrayList<DtoMenu> arrayListDto;
     RecyclerView RecyclerCategory, RecyclerProducts;
     LottieAnimationView AnimationcategoryLoading, AnimationProductsLoading;
     SwipeRefreshLayout SwipeRefreshProducts;
-    int id_user, partner;
+    int id_user, partner, cd_cat;
     String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     @Override
@@ -42,6 +38,28 @@ public class AllProductsActivity extends AppCompatActivity {
         //  Get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        cd_cat = bundle.getInt("cd_cat");
+        if (cd_cat == 0){
+            GetUserInformation(bundle);
+            loadProducts();
+            loadCategorys();
+        }else {
+            GetUserInformation(bundle);
+            AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
+            asyncProdCategory.execute();
+            loadCategorys();
+        }
+
+
+        SwipeRefreshProducts.setOnRefreshListener(() -> {
+            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
+            RecyclerProducts.setLayoutManager(layoutManager);
+            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+            asyncProducts.execute();
+        });
+    }
+
+    private void GetUserInformation(Bundle bundle) {
         id_user = bundle.getInt("id_user");
         email_user = bundle.getString("email_user");
         nm_user = bundle.getString("nm_user");
@@ -52,18 +70,10 @@ public class AllProductsActivity extends AppCompatActivity {
         img_user = bundle.getString("img_user");
         partner = bundle.getInt("partner");
         partner_Startdate = bundle.getString("partner_Startdate");
-
-        loadProducts();
-        loadCategorys();
-
-        SwipeRefreshProducts.setOnRefreshListener(() -> {
-            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
-            asyncProducts.execute();
-        });
     }
 
     private void loadProducts() {
-        GridLayoutManager layoutManager = new GridLayoutManager(AllProductsActivity.this, 2);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
         RecyclerProducts.setLayoutManager(layoutManager);
 
         AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);

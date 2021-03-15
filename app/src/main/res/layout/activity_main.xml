@@ -302,7 +302,7 @@
 
                     <!--Card Juices-->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardsucosprincipal"
+                        android:id="@+id/cardRefreshersMain"
                         android:layout_width="130dp"
                         android:layout_height="150dp"
                         android:visibility="visible"
@@ -397,7 +397,7 @@
                         android:outlineProvider="none"
                         app:cardBackgroundColor="#6AFFB422"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/cardsucosprincipal"
+                        app:layout_constraintStart_toEndOf="@+id/cardRefreshersMain"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <!--Base Contender-->

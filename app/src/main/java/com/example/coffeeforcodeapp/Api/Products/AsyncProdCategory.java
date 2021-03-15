@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -86,7 +87,7 @@ public class AsyncProdCategory extends AsyncTask {
         recyclerProducts.setVisibility(View.VISIBLE);
         AnimationProductsLoading.setVisibility(View.GONE);
         AnimationProductsLoading.pauseAnimation();
-        GridLayoutManager layoutManager = new GridLayoutManager(contexto, 2);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
         recyclerProducts.setLayoutManager(layoutManager);
         recyclerProducts.setAdapter((RecyclerView.Adapter) products_adapter);
         ((RecyclerView.Adapter) products_adapter).notifyDataSetChanged();

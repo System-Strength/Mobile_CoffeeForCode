@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -97,6 +98,8 @@ public class AsyncCategory extends AsyncTask {
                     @Override
                     public void onItemClick(View view, int position) {
                         int cd_cat = arrayListDto.get(position).getCd_cat();
+                        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
+                        recyclerProducts.setLayoutManager(layoutManager);
                         AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, SwipeRefreshProducts, cd_cat, contexto);
                         asyncProdCategory.execute();
                     }
