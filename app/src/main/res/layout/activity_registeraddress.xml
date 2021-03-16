@@ -13,7 +13,7 @@
         android:layout_height="220dp"
         app:lottie_autoPlay="true"
         android:layout_marginTop="20dp"
-        app:lottie_rawRes="@raw/enderecoac"
+        app:lottie_rawRes="@raw/enderecoac_animation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -130,7 +130,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:lottie_loop="true"
                             app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/coffeeloading"/>
+                            app:lottie_rawRes="@raw/coffeeloading_animation"/>
 
                         <TextView
                             android:id="@+id/txtbtnconfirmar"
@@ -177,7 +177,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:lottie_loop="true"
                             app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/coffeeloading"/>
+                            app:lottie_rawRes="@raw/coffeeloading_animation"/>
 
                         <TextView
                             android:id="@+id/txtbtncadastrardepois"

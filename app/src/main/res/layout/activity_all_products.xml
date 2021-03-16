@@ -39,7 +39,7 @@
             android:id="@+id/AnimationcategoryLoading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:lottie_rawRes="@raw/coffeelove_loading"
+            app:lottie_rawRes="@raw/coffeelove_loading_animation"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
 
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
-            app:lottie_rawRes="@raw/donuts_loading"
+            app:lottie_rawRes="@raw/donuts_loading_animation"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
 

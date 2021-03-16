@@ -112,7 +112,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/arrowleftback" />
+                            app:lottie_rawRes="@raw/arrowleftback_animation" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -394,7 +394,7 @@
                                 android:layout_height="match_parent"
                                 app:lottie_autoPlay="true"
                                 android:visibility="visible"
-                                app:lottie_rawRes="@raw/cardgift"/>
+                                app:lottie_rawRes="@raw/cardgift_animation"/>
 
                             <!--Base Desc-->
                             <androidx.constraintlayout.widget.ConstraintLayout
