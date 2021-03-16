@@ -13,18 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
-        <!--Avatar-->
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/icon_Profile_principal"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon_ProfileUser_principal"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:visibility="visible"
+            android:src="@drawable/no_profile_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/personprofile" />
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            tools:ignore="RedundantNamespace" />
 
         <!--Text Hello-->
         <TextView
@@ -45,7 +48,7 @@
             android:id="@+id/txt_Name_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/namecreateaccount"
+            android:text="@string/Firstnamecreateaccount"
             android:textColor="#000"
             android:textSize="27sp"
             android:textStyle="bold"
@@ -131,7 +134,7 @@
                             <com.airbnb.lottie.LottieAnimationView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                app:lottie_rawRes="@raw/cardgift"
+                                app:lottie_rawRes="@raw/cardgift_animation"
                                 app:lottie_autoPlay="true"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -286,7 +289,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         android:layout_marginBottom="4dp"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/coffee1" />
+                                        app:lottie_rawRes="@raw/coffee1_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -299,7 +302,7 @@
 
                     <!--Card Juices-->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardsucosprincipal"
+                        android:id="@+id/cardRefreshersMain"
                         android:layout_width="130dp"
                         android:layout_height="150dp"
                         android:visibility="visible"
@@ -371,7 +374,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/drink" />
+                                        app:lottie_rawRes="@raw/drink_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -394,7 +397,7 @@
                         android:outlineProvider="none"
                         app:cardBackgroundColor="#6AFFB422"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/cardsucosprincipal"
+                        app:layout_constraintStart_toEndOf="@+id/cardRefreshersMain"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <!--Base Contender-->
@@ -429,7 +432,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/chipssalsa" />
+                                app:lottie_rawRes="@raw/chipssalsa_animation" />
 
                             <!--Animation  Hamburger 2-->
                             <com.airbnb.lottie.LottieAnimationView
@@ -442,7 +445,7 @@
                                 app:layout_constraintStart_toEndOf="@+id/animationdescsavoryandsandwiches"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlesavoryandsandwiches"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/burgeranimation" />
+                                app:lottie_rawRes="@raw/burgeranimation_animation" />
 
                             <!--Card More Hamburger-->
                             <androidx.cardview.widget.CardView
@@ -470,7 +473,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/burgerburger" />
+                                        app:lottie_rawRes="@raw/burgerburger_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -526,7 +529,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlecandys"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/donuts" />
+                                app:lottie_rawRes="@raw/donuts_animation" />
 
                             <!--Card More Cadys-->
                             <androidx.cardview.widget.CardView
@@ -554,7 +557,7 @@
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:lottie_autoPlay="true"
-                                        app:lottie_rawRes="@raw/yummydonut" />
+                                        app:lottie_rawRes="@raw/yummydonut_animation" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -614,7 +617,7 @@
 
                             <!--Card More Coffee-->
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/btnvertodososprodutos"
+                                android:id="@+id/btnSee_AllProducts"
                                 android:layout_width="100dp"
                                 android:layout_height="40dp"
                                 app:cardBackgroundColor="#fff"
@@ -692,7 +695,7 @@
                                 android:layout_height="50dp"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlecart"
                                 app:lottie_autoPlay="true"
-                                app:lottie_rawRes="@raw/shoppingcart" />
+                                app:lottie_rawRes="@raw/shoppingcart_animation" />
 
                             <!--Card Shopping cart-->
                             <androidx.cardview.widget.CardView
@@ -839,13 +842,65 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewatalhos" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerPopularProducts"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtpopular">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/AnimationLoading_PopularProducts"
+                    android:layout_width="290dp"
+                    android:layout_height="270dp"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#fff"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie_coffeeMachine"
+                            android:layout_width="match_parent"
+                            android:layout_height="210dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:lottie_rawRes="@raw/coffeemachine_animation" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/carregando"
+                            android:textSize="30sp"
+                            android:textColor="#000"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/lottie_coffeeMachine" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerPopularProducts"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

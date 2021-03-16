@@ -40,7 +40,7 @@
                 app:lottie_autoPlay="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:lottie_rawRes="@raw/arrowleftback" />
+                app:lottie_rawRes="@raw/arrowleftback_animation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -157,7 +157,7 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:lottie_autoPlay="true"
-                                    app:lottie_rawRes="@raw/setaright" />
+                                    app:lottie_rawRes="@raw/setaright_animation" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -285,7 +285,7 @@
                 <!--Animation-->
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
-                    app:lottie_rawRes="@raw/cards"
+                    app:lottie_rawRes="@raw/cards_animation"
                     app:lottie_autoPlay="true"
                     android:layout_height="match_parent"/>
 

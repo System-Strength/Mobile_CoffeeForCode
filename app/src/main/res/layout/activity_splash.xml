@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".SplashActivity">
 
-
     <!--Body-->
     <LinearLayout
         android:id="@+id/bodymain"
@@ -33,7 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/coffeemenu" />
+                app:lottie_rawRes="@raw/coffeemenu_animation" />
 
             <!--Animation Constant-->
             <LinearLayout
@@ -63,7 +62,7 @@
                         app:layout_constraintVertical_bias="0.29000002"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/littlecoffee" />
+                        app:lottie_rawRes="@raw/littlecoffee_animation" />
 
                     <!--Txt Wellcome-->
                     <TextView

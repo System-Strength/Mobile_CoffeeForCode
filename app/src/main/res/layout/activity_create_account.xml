@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroung"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context=".CriarContaActivity">
+
+    <!--Animation Delivery-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        app:lottie_rawRes="@raw/delivery_animation"
+        app:lottie_autoPlay="true"/>
+
+    <!--Btn Back-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/btnvoltarcriarconta"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/arrowleftback_animation"/>
+
+    <!--Body Create new Account-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Base-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:background="@drawable/designerlogin"
+                android:layout_alignParentBottom="true">
+
+                <!--Text Tittle-->
+                <TextView
+                    android:id="@+id/txttittlecriarconta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/createaccount"
+                    android:textColor="#000"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--Text First Name-->
+                <TextView
+                    android:id="@+id/txttittlenome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#95000000"
+                    android:text="@string/Firstnamecreateaccount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittlecriarconta" />
+
+                <!--Edit text First Name-->
+                <EditText
+                    android:id="@+id/edittextFirstName_userCreateAccount"
+                    android:layout_width="160dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittextcriarconta"
+                    android:hint="@string/exFirstName"
+                    android:inputType="textPersonName"
+                    android:textColor="#000"
+                    android:textColorHint="#27000000"
+                    android:layout_marginStart="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittlenome"
+                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+
+
+                <!--Text Last Name-->
+                <TextView
+                    android:id="@+id/txtlastname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/Lastnamecreateaccount"
+                    android:textColor="#95000000"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/edittextFirstName_userCreateAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittlecriarconta" />
+
+                <!--Edit text Last Name-->
+                <EditText
+                    android:id="@+id/edittextLastName_userCreateAccount"
+                    android:layout_width="160dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittextcriarconta"
+                    android:hint="@string/exLastName"
+                    android:inputType="textPersonName"
+                    android:textColor="#000"
+                    android:textColorHint="#27000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/edittextFirstName_userCreateAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittlenome"
+                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+                <!--Text CPF-->
+                <TextView
+                    android:id="@+id/txttittlecpf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#95000000"
+                    android:text="@string/cpfcreateaccount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextFirstName_userCreateAccount" />
+
+                <!--Edit text CPF-->
+                <EditText
+                    android:id="@+id/edittextcpf_userCreateAccount"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittextcriarconta"
+                    android:hint="@string/masckcpf"
+                    android:inputType="number"
+                    android:textColor="#000"
+                    android:textColorHint="#27000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.488"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittlecpf"
+                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+                <!--Text Email-->
+                <TextView
+                    android:id="@+id/txttittleemail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#95000000"
+                    android:text="@string/emailcreateaccount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextcpf_userCreateAccount" />
+
+                <!--Edit text Email-->
+                <EditText
+                    android:id="@+id/edittextEmail_userCreateAccount"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:textColor="#000"
+                    android:hint="@string/mascaraemail"
+                    android:textColorHint="#27000000"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittextcriarconta"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttittleemail"
+                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+                <!--Base PassWord-->
+                <RelativeLayout
+                    android:id="@+id/basesenhacriarconta"
+                    android:layout_width="350dp"
+                    android:layout_height="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextEmail_userCreateAccount">
+
+                    <!--Text PassWord-->
+                    <TextView
+                        android:id="@+id/txttittlesenha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/passwordcreateaccount"
+                        android:textColor="#95000000"
+                        android:layout_alignParentStart="true"/>
+
+                    <!--Edit text passWord-->
+                    <EditText
+                        android:id="@+id/edittextPassword_userCreateAccount"
+                        android:layout_width="350dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittextcriarconta"
+                        android:inputType="textPassword"
+                        android:textColor="#000"
+                        android:layout_alignParentBottom="true"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
+
+                    <!--Img Eye Closed-->
+                    <ImageView
+                        android:id="@+id/imgolhofechadocriarconta"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="visible"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/olhofechado"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Img Eye Opened-->
+                    <ImageView
+                        android:id="@+id/imgolhoabertocriarconta"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="gone"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/olhoaberto"
+                        tools:ignore="ContentDescription" />
+
+                    <!--Animation rigth-->
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/certosenhacriarconta"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:lottie_rawRes="@raw/checked_animation"
+                        app:lottie_autoPlay="true"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+                <!--Btn Create Account-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewbtncriarconta"
+                    android:layout_width="350dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="32dp"
+                    app:cardBackgroundColor="#FFC75A"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/basesenhacriarconta">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/createaccountbtn"
+                            android:textSize="24sp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <CheckBox
+                    android:id="@+id/checkboxaceitoostermos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#000"
+                    android:buttonTint="#FF5800"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/accepttheterms"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtncriarconta" />
+
+                <!--Text New User-->
+                <TextView
+                    android:id="@+id/txttenhoconta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imalredyhaveaccount"
+                    android:layout_marginEnd="80dp"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkboxaceitoostermos" />
+
+                <!--Text Criar Conta-->
+                <TextView
+                    android:id="@+id/txtLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lognow"
+                    android:layout_marginStart="2dp"
+                    android:textColor="#FFB421"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/txttenhoconta"
+                    app:layout_constraintTop_toBottomOf="@+id/checkboxaceitoostermos" />
+
+                <!--Text Terms-->
+                <TextView
+                    android:id="@+id/txtTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#FF9900"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <!--Text Info Asteristico-->
+                <TextView
+                    android:id="@+id/txtinfoasteristico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="#3E000000"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/explicacaoesteristico"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

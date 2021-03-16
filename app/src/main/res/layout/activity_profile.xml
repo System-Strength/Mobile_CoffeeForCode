@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,503 +8,519 @@
     android:background="@color/backgroung"
     tools:context=".ProfileActivity">
 
-    <!--Header-->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="310dp">
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
+        <!--Header-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:background="@drawable/designer_profile"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="310dp">
 
-            <!--Animation Avatar-->
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animacoavatarprofile"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtName_user"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/profileicon" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@drawable/designer_profile"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <!--Text Name of client-->
-            <TextView
-                android:id="@+id/txtName_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nome"
-                android:textColor="#000"
-                android:textSize="23sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtEmail_user"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Profile_image"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/txtName_user"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="visible"
+                    android:src="@drawable/no_profile_image"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    tools:ignore="RedundantNamespace" />
 
-            <!--Text Email of client-->
-            <TextView
-                android:id="@+id/txtEmail_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/emailaddress"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginBottom="40dp"
+                <!--Text Name of client-->
+                <TextView
+                    android:id="@+id/txtName_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nome"
+                    android:textColor="#000"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/txtEmail_user"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <!--Text Email of client-->
+                <TextView
+                    android:id="@+id/txtEmail_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emailaddress"
+                    android:textColor="#000"
+                    android:textSize="21sp"
+                    android:layout_marginBottom="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Card Edit Profile-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardbtn_editarperfil"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                app:cardBackgroundColor="#FFBA6F"
+                app:cardCornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <!--Card Edit Profile-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardbtn_editarperfil"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_centerHorizontal="true"
-            app:cardBackgroundColor="#FFF200"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editarperfil"
+                        android:textColor="#F8000000"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardeditarperfil"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <!--Btn go to setting-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardeditarperfil"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        app:cardCornerRadius="25dp"
+                        app:cardBackgroundColor="#fff"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/editarperfil"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cardeditarperfil"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--Btn go to setting-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardeditarperfil"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="20dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardBackgroundColor="#fff"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_rawRes="@raw/arrowleftback" />
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--Text Title CPF-->
-        <TextView
-            android:id="@+id/txttilecpfprofile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cpfcadastrado"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--Text CPF of client-->
-        <TextView
-            android:id="@+id/txtcpfperfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cpf"
-            android:textColor="#000"
-            android:textSize="23sp"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txttilecpfprofile" />
-
-        <!--Base Phone register-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/base_phones"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtcpfperfil">
-
-            <!--Base i have phone register-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/base_tem_celular_cadastrado"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
-
-                <!--Text Title Phone-->
-                <TextView
-                    android:id="@+id/txttilecelularprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/celularcadastrado"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--Text Phone of client-->
-                <TextView
-                    android:id="@+id/txtcelularperfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/celularcadastrado"
-                    android:textColor="#000"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txttilecelularprofile" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--Base Not have phone register-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/base_nao_tem_celular_cadastrado"
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="match_parent">
-
-                <!--Text Title Phone-->
-                <TextView
-                    android:id="@+id/txtmodelobasecelular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/semcelularcadastrado"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Card Btr register now-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_cadastarceluar_perfil"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    app:cardBackgroundColor="#FF3C00"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtmodelobasecelular">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cadastraragora"
-                            android:textColor="#fff"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--Base Address Register-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/base_enderco"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/base_phones">
-
-            <!--Base i have address register-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/base_tem_endereco_cadastrado"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
-
-                <!--Text Title Address-->
-                <TextView
-                    android:id="@+id/txttileenderecoprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/enderecocadastrado"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--Text Address of client-->
-                <TextView
-                    android:id="@+id/txtenderecoperfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/enderecocadastrado"
-                    android:textColor="#000"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txttileenderecoprofile" />
-
-                <!--Text Address Plus kkk(Fix latter) -->
-                <TextView
-                    android:id="@+id/txtcomplementoperfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/complementocadastrado"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtenderecoperfil" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--Base Not have address register-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/base_nao_tem_endereco_cadastrado"
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="match_parent">
-
-                <!--Text Title Phone-->
-                <TextView
-                    android:id="@+id/txtmodelobaseendereco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/semenderecocadastrado"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Card Btr register now-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardbtn_cadastrarendereco_perfil"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    app:cardBackgroundColor="#FF3C00"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtmodelobaseendereco">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cadastraragora"
-                            android:textColor="#fff"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--Base Partner-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/base_enderco">
-
-            <!--Client is not a partner-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/nao_sou_parceiro_perfil"
-                android:layout_width="match_parent"
-                android:visibility="visible"
-                android:layout_height="match_parent">
-
-                <!--Card-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="260dp"
-                    android:layout_height="150dp"
-                    app:cardBackgroundColor="#E2000000"
-                    app:cardCornerRadius="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <!--Principal Contender-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <!--Gift Card Animation-->
                         <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/animacaogiftcardperfil"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:lottie_autoPlay="true"
-                            android:visibility="visible"
-                            app:lottie_rawRes="@raw/cardgift"/>
+                            app:lottie_rawRes="@raw/arrowleftback_animation" />
 
-                        <!--Base Desc-->
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Text Title CPF-->
+            <TextView
+                android:id="@+id/txttilecpfprofile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpfcadastrado"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text CPF of client-->
+            <TextView
+                android:id="@+id/txtcpfperfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpf"
+                android:textColor="#E60C0C0C"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txttilecpfprofile" />
+
+            <!--Base Phone register-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/base_phones"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtcpfperfil">
+
+                <!--Base i have phone register-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/base_tem_celular_cadastrado"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+
+                    <!--Text Title Phone-->
+                    <TextView
+                        android:id="@+id/txttilecelularprofile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/celularcadastrado"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--Text Phone of client-->
+                    <TextView
+                        android:id="@+id/txtcelularperfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/celularcadastrado"
+                        android:textColor="#E60C0C0C"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttilecelularprofile" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--Base Not have phone register-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/base_nao_tem_celular_cadastrado"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="match_parent">
+
+                    <!--Text Title Phone-->
+                    <TextView
+                        android:id="@+id/txtmodelobasecelular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/semcelularcadastrado"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Card Btr register now-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_cadastarceluar_perfil"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        app:cardBackgroundColor="#FFA748"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtmodelobasecelular">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/base_desc_parceiro_perfil"
                             android:layout_width="match_parent"
-                            android:padding="2dp"
                             android:layout_height="match_parent">
 
-                            <!--Text Be Partner-->
                             <TextView
-                                android:id="@+id/txtsejaparceiro"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/sejaparceiro"
-                                android:textSize="18sp"
+                                android:text="@string/cadastraragora"
                                 android:textColor="#fff"
-                                android:textStyle="bold"
-                                android:layout_marginTop="2dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <!--Text be Partner-->
-                            <TextView
-                                android:id="@+id/txtdescpartnerperfil"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/descpartner"
-                                android:textAlignment="center"
-                                android:textColor="#fff"
-                                android:textSize="16sp"
+                                android:textSize="22sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <!--Btn be partner-->
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/btnvirarparceiro_perfil"
-                                android:layout_width="150dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="10dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/txtdescpartnerperfil" >
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/virarparceiro"
-                                        android:textSize="20sp"
-                                        android:textColor="#000"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        tools:ignore="TooDeepLayout" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </androidx.cardview.widget.CardView>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--Client is a partner-->
+            <!--Base Address Register-->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cliente_eparceiro"
+                android:id="@+id/base_enderco"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
+                android:layout_height="90dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/base_phones">
 
-                <!--Text Title "Parceria"-->
-                <TextView
-                    android:id="@+id/txtitleparceiriaperfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/parceira"/>
+                <!--Base i have address register-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/base_tem_endereco_cadastrado"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
 
-                <!--Have Card?-->
-                <TextView
-                    android:id="@+id/txtstatuscard_perfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/statuscardparceiro"
-                    android:textColor="#000"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtitleparceiriaperfil"/>
+                    <!--Text Title Address-->
+                    <TextView
+                        android:id="@+id/txttileenderecoprofile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/enderecocadastrado"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <!--Date-->
-                <TextView
-                    android:id="@+id/data_ativacaoparceiro_perfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:text="@string/ativacao"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtstatuscard_perfil"/>
+                    <!--Text Address of client-->
+                    <TextView
+                        android:id="@+id/txtenderecoperfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enderecocadastrado"
+                        android:textColor="#E60C0C0C"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txttileenderecoprofile" />
+
+                    <!--Text Address Plus kkk(Fix latter) -->
+                    <TextView
+                        android:id="@+id/txtcomplementoperfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/complementocadastrado"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtenderecoperfil" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--Base Not have address register-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/base_nao_tem_endereco_cadastrado"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="match_parent">
+
+                    <!--Text Title Phone-->
+                    <TextView
+                        android:id="@+id/txtmodelobaseendereco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/semenderecocadastrado"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Card Btr register now-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardbtn_cadastrarendereco_perfil"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        app:cardBackgroundColor="#FFA748"
+                        app:cardCornerRadius="20dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtmodelobaseendereco">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cadastraragora"
+                                android:textColor="#fff"
+                                android:textSize="22sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Base Partner-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/base_enderco">
+
+                <!--Client is not a partner-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/nao_sou_parceiro_perfil"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="match_parent">
+
+                    <!--Card-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        app:cardBackgroundColor="#FFCA63"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!--Principal Contender-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--Gift Card Animation-->
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:id="@+id/animacaogiftcardperfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:lottie_autoPlay="true"
+                                android:visibility="visible"
+                                app:lottie_rawRes="@raw/cardgift_animation"/>
+
+                            <!--Base Desc-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/base_desc_parceiro_perfil"
+                                android:layout_width="match_parent"
+                                android:padding="2dp"
+                                android:layout_height="match_parent">
+
+                                <!--Text Be Partner-->
+                                <TextView
+                                    android:id="@+id/txtsejaparceiro"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/sejaparceiro"
+                                    android:textSize="20sp"
+                                    android:textColor="#000"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="5dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <!--Text be Partner-->
+                                <TextView
+                                    android:id="@+id/txtdescpartnerperfil"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/descpartner"
+                                    android:textAlignment="center"
+                                    android:textColor="#000"
+                                    android:textSize="16sp"
+                                    android:layout_marginBottom="30dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/txtsejaparceiro" />
+
+                                <!--Btn be partner-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/btnvirarparceiro_perfil"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    app:cardCornerRadius="10dp"
+                                    android:layout_marginTop="5dp"
+                                    app:cardBackgroundColor="#fff"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/txtdescpartnerperfil" >
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:padding="6dp"
+                                        android:layout_height="match_parent"
+                                        tools:ignore="TooDeepLayout">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/virarparceiro"
+                                            android:textSize="20sp"
+                                            android:textColor="#000"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:ignore="TooDeepLayout" />
+
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--Client is a partner-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cliente_eparceiro"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+
+                    <!--Text Title "Parceria"-->
+                    <TextView
+                        android:id="@+id/txtitleparceiriaperfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/parceira"/>
+
+                    <!--Have Card?-->
+                    <TextView
+                        android:id="@+id/txtstatuscard_perfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statuscardparceiro"
+                        android:textColor="#000"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtitleparceiriaperfil"/>
+
+                    <!--Date-->
+                    <TextView
+                        android:id="@+id/data_ativacaoparceiro_perfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:text="@string/ativacao"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtstatuscard_perfil"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -512,7 +528,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+</ScrollView>

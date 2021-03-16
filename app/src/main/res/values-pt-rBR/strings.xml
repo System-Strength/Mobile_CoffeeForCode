@@ -6,7 +6,7 @@
     <string name="docedeleito">Milk Cream</string>
     <string name="cafes">Cafés</string>
     <string name="refresherdemorangocomlimo" tools:ignore="TypographyEllipsis">Refresher de Morango...</string>
-    <string name="salgadosesanduiches">Salgados e sanduíches</string>
+    <string name="salgadosesanduiches">Salgados e Sanduíches</string>
     <string name="candys">Doces</string>
     <string name="sejaparceiro">Sejá Parceiro</string>
     <string name="descpartner">Descontos exclusivos, cartão fidelidade,  frete grátis, premiações mensais</string>
@@ -22,11 +22,11 @@
     <string name="emailaddress">Endereço de Email</string>
     <string name="password">Senha</string>
     <string name="forgotyhepassword">Esqueceu sua senha?</string>
-    <string name="loginto">Logar</string>
+    <string name="logininto">Logar</string>
     <string name="imnewhere">Sou novo aqui.</string>
     <string name="createaccount">Criar Conta</string>
     <string name="wrongemailandpassword">EMAIL OU SENHA informados não estão corretos ou não estão cadastrados Verifique o EMAIL e a SENHA!</string>
-    <string name="namecreateaccount">Nome*</string>
+    <string name="Firstnamecreateaccount">Primeiro Nome*</string>
     <string name="passwordcreateaccount">Senha*</string>
     <string name="createaccountbtn"><u>Criar Conta</u></string>
     <string name="digits">Digitos</string>
@@ -124,7 +124,7 @@
     <string name="confirmnewpassword">Confirme sua nova senha</string>
     <string name="addproduto">Adicionar novo Produto</string>
     <string name="alterproduto">Alterar Produto</string>
-    <string name="excluirproduto">Alterar Produto</string>
+    <string name="excluirproduto">Deletar Produto</string>
     <string name="remember_me">Lembre de mim</string>
     <string name="desccombohapppy">Frappuccino de chocolate Croissant e Torada</string>
     <string name="wehaveaproblem">Estamos com problema em nosso servidor.\\nTente mais tarde</string>
@@ -133,6 +133,13 @@
     <string name="cpf_informed_is_invalid">RG informado é invalido</string>
     <string name="required_fill_email">Necessário preencher o campo: EMAIL</string>
     <string name="fill_email_correctly">Preencha corretamente seu email</string>
-    <string name="necessary_fill_correctly_password">Necessário preencher corretamente o campo: SENHA Minimo 8 caracteres</string>
+    <string name="necessary_fill_correctly_password">Necessário preencher corretamente o campo: SENHA Mínimo 8 caracteres</string>
     <string name="fill_correctly_email">Preencha corretamente: EMAIL</string>
+    <string name="Lastnamecreateaccount">Último Nome*</string>
+    <string name="hintEmailAddressLogin">Endereço de Email</string>
+    <string name="HintpasswordLogin">Senha</string>
+    <string name="register_later">Cadastrar Depois</string>
+    <string name="change_profile_image"><u>Trocar imagem de perfil</u></string>
+    <string name="products">Produtos</string>
+    <string name="category">Categoria</string>
 </resources>
