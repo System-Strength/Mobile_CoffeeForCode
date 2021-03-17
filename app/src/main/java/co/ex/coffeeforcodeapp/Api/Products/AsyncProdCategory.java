@@ -3,13 +3,13 @@ package co.ex.coffeeforcodeapp.Api.Products;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -19,6 +19,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.Products_Adapter;
 import co.ex.coffeeforcodeapp.Api.DtoMenu;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
+import co.ex.coffeeforcodeapp.ProductDetailsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,14 +35,16 @@ public class AsyncProdCategory extends AsyncTask {
     SwipeRefreshLayout SwipeRefreshProducts;
     LottieAnimationView AnimationProductsLoading;
     int cd_cat;
+    String email_user;
 
-    public AsyncProdCategory(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts,
+    public AsyncProdCategory(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, String email_user, SwipeRefreshLayout SwipeRefreshProducts,
                              int cd_cat, Activity contexto) {
         this.recyclerProducts = recyclerProducts;
         this.contexto = contexto;
         this.AnimationProductsLoading = AnimationProductsLoading;
         this.SwipeRefreshProducts = SwipeRefreshProducts;
         this.cd_cat = cd_cat;
+        this.email_user = email_user;
     }
 
     @Override
@@ -62,6 +65,7 @@ public class AsyncProdCategory extends AsyncTask {
             arrayListDto = new ArrayList<>();
             for (int i = 0; i < jsonArray.length() ; i++) {
                 DtoMenu dtoMenu = new DtoMenu();
+                dtoMenu.setCd_prod(jsonArray.getJSONObject(i).getInt("cd_prod"));
                 dtoMenu.setNm_prod(jsonArray.getJSONObject(i).getString("nm_prod"));
                 //dtoMenu.setSize(jsonArray.getJSONObject(i).getString("size"));
                 dtoMenu.setPrice_prod((float) jsonArray.getJSONObject(i).getDouble("price_prod"));
@@ -88,14 +92,18 @@ public class AsyncProdCategory extends AsyncTask {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
         recyclerProducts.setLayoutManager(layoutManager);
         recyclerProducts.setAdapter((RecyclerView.Adapter) products_adapter);
-        ((RecyclerView.Adapter) products_adapter).notifyDataSetChanged();
+        //((RecyclerView.Adapter) products_adapter).notifyDataSetChanged();
         SwipeRefreshProducts.setRefreshing(false);
 
         recyclerProducts.addOnItemTouchListener(new RecyclerItemClickListener(contexto, recyclerProducts,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Toast.makeText(contexto, "Isso é: " + arrayListDto.get(position).getNm_prod(), Toast.LENGTH_SHORT).show();
+                        int cd_prod = arrayListDto.get(position).getCd_prod();
+                        Intent Goto_ProdDesc = new Intent(contexto, ProductDetailsActivity.class);
+                        Goto_ProdDesc.putExtra("cd_prod", cd_prod);
+                        Goto_ProdDesc.putExtra("email_user", email_user);
+                        contexto.startActivity(Goto_ProdDesc);
                     }
 
                     @Override
