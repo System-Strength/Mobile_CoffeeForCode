@@ -35,7 +35,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHo
         holder.ImgProd.setImageBitmap(dtoMenuArrayList.get(position).getImg_prod());
         holder.txtNm_prod.setText(dtoMenuArrayList.get(position).getNm_prod());
         //holder.txtSize_Prod.setText(dtoMenuArrayList.get(position).getSize());
-        holder.txtPrice_Prod.setText("R$ " + (int) dtoMenuArrayList.get(position).getPrice_prod());
+        holder.txtPrice_Prod.setText("R$ " + dtoMenuArrayList.get(position).getPrice_prod());
 
     }
 

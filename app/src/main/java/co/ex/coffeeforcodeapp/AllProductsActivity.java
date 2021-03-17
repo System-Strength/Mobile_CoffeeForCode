@@ -42,7 +42,7 @@ public class AllProductsActivity extends AppCompatActivity {
             loadCategorys();
         }else {
             GetUserInformation(bundle);
-            AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
+            AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, email_user, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
             asyncProdCategory.execute();
             loadCategorys();
         }
@@ -51,7 +51,7 @@ public class AllProductsActivity extends AppCompatActivity {
         SwipeRefreshProducts.setOnRefreshListener(() -> {
             StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
             RecyclerProducts.setLayoutManager(layoutManager);
-            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user, AllProductsActivity.this);
             asyncProducts.execute();
         });
     }
@@ -73,7 +73,7 @@ public class AllProductsActivity extends AppCompatActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
         RecyclerProducts.setLayoutManager(layoutManager);
 
-        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user, AllProductsActivity.this);
         asyncProducts.execute();
 
     }
@@ -82,7 +82,7 @@ public class AllProductsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         RecyclerCategory.setLayoutManager(layoutManager);
 
-        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this, RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts);
+        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this, RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user);
         asyncCategory.execute();
     }
 
