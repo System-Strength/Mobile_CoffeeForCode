@@ -26,8 +26,8 @@
 
 
     <!--Hints / Mask-->
-    <string name="masckcpf" tools:ignore="TypographyDashes" translatable="false">000.000.000-00</string>
-    <string name="mascaraphone" tools:ignore="TypographyDashes" translatable="false">(00) 00000-0000</string>
+    <string name="masckcpf" translatable="false" tools:ignore="TypographyDashes">000.000.000-00</string>
+    <string name="mascaraphone" translatable="false" tools:ignore="TypographyDashes">(00) 00000-0000</string>
     <string name="mascaraemail">example@gmail.com</string>
     <string name="exFirstName" translatable="false">Ex. Fulano</string>
     <string name="exLastName" translatable="false">Ex. Lima</string>
@@ -209,5 +209,7 @@
     <string name="change_profile_image"><u>Change profile image</u></string>
     <string name="products">Products</string>
     <string name="category">Category</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>
