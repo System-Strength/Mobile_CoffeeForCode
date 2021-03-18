@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import co.ex.coffeeforcodeapp.Api.DtoCategorys;
+import co.ex.coffeeforcodeapp.Api.Category.DtoCategorys;
 import co.ex.coffeeforcodeapp.R;
 
 import java.util.ArrayList;

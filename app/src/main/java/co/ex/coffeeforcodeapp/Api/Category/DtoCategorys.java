@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp.Api;
+package co.ex.coffeeforcodeapp.Api.Category;
 
 import android.graphics.Bitmap;
 

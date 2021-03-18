@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp.Api;
+package co.ex.coffeeforcodeapp.Api.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

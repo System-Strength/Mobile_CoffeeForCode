@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
-import co.ex.coffeeforcodeapp.Api.DtoUsers;
-import co.ex.coffeeforcodeapp.Api.UsersService;
+import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
+import co.ex.coffeeforcodeapp.Api.User.UsersService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
