@@ -99,6 +99,7 @@ public class AllProductsActivity extends AppCompatActivity {
         GoTo_Main.putExtra("img_user", img_user);
         GoTo_Main.putExtra("partner", partner);
         GoTo_Main.putExtra("partner_Startdate", partner_Startdate);
+        GoTo_Main.putExtra("statusavisoend", "desativado");
         startActivity(GoTo_Main);
         finish();
 
