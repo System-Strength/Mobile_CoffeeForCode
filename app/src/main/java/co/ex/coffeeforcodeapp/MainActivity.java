@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerPopularProducts.setLayoutManager(layoutManager);
 
-        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, MainActivity.this);
+        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, email_user, MainActivity.this);
         asyncPopularProducts.execute();
     }
 
