@@ -17,7 +17,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.Products_Adapter;
-import co.ex.coffeeforcodeapp.Api.DtoMenu;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
 import co.ex.coffeeforcodeapp.ProductDetailsActivity;
 

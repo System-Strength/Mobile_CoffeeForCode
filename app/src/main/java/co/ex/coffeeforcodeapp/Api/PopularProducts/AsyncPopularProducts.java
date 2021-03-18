@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Adapters.TopProducts_Adapter;
-import co.ex.coffeeforcodeapp.Api.DtoMenu;
+import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
 
 import org.json.JSONArray;

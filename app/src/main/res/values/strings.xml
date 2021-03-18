@@ -207,10 +207,17 @@
     <string name="hintEmailAddressLogin">Email address</string>
     <string name="HintpasswordLogin">Password</string>
     <string name="change_profile_image"><u>Change profile image</u></string>
-    <string name="products">Products</string>
+    <string name="allproducts">Products</string>
     <string name="category">Category</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="buy">Buy</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="less" translatable="false">-</string>
+    <string name="addtoshoppingcart">ADD TO CART</string>
+    <string name="price">price</string>
+    <string name="product_successfully_inserted">Product successfully inserted in your cart!!</string>
+    <string name="goback_to_menu">Go Back to menu</string>
+    <string name="see_cart">See Cart</string>
 
 </resources>

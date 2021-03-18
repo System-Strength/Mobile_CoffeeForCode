@@ -140,7 +140,12 @@
     <string name="HintpasswordLogin">Senha</string>
     <string name="register_later">Cadastrar Depois</string>
     <string name="change_profile_image"><u>Trocar imagem de perfil</u></string>
-    <string name="products">Produtos</string>
+    <string name="allproducts">Produtos</string>
     <string name="category">Categoria</string>
     <string name="buy">Comprar</string>
+    <string name="addtoshoppingcart">ADICIONAR AO CARRINHO</string>
+    <string name="price">Preço</string>
+    <string name="product_successfully_inserted">Producto inserido em seu carrinho com sucesso!!</string>
+    <string name="goback_to_menu">Voltar ao menu</string>
+    <string name="see_cart">Ver carrinho</string>
 </resources>

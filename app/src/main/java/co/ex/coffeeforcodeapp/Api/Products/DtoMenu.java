@@ -1,21 +1,22 @@
-package co.ex.coffeeforcodeapp.Api;
+package co.ex.coffeeforcodeapp.Api.Products;
 
 import android.graphics.Bitmap;
 
 public class DtoMenu {
     int cd_prod, qntd_prod, cd_cat, popular;
     float price_prod;
-    private String  nm_prod, date_prod, size, bonusDesc;
+    private String  nm_prod, date_prod, size, bonusDesc, nm_cat;
     private Bitmap img_prod;
 
     public DtoMenu(){}
 
-    public DtoMenu(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, float price_prod, Bitmap img_prod, String nm_prod, String date_prod) {
+    public DtoMenu(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, float price_prod, Bitmap img_prod, String nm_prod, String date_prod, String nm_cat) {
         this.cd_prod = cd_prod;
         this.qntd_prod = qntd_prod;
         this.size = size;
         this.bonusDesc = bonusDesc;
         this.cd_cat = cd_cat;
+        this.nm_cat = nm_cat;
         this.popular = popular;
         this.price_prod = price_prod;
         this.img_prod = img_prod;
@@ -61,6 +62,14 @@ public class DtoMenu {
 
     public void setCd_cat(int cd_cat) {
         this.cd_cat = cd_cat;
+    }
+
+    public String getNm_cat() {
+        return nm_cat;
+    }
+
+    public void setNm_cat(String nm_cat) {
+        this.nm_cat = nm_cat;
     }
 
     public int getPopular() {

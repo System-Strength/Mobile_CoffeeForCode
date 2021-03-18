@@ -4,12 +4,12 @@ package co.ex.coffeeforcodeapp.Api.Products;
 public class DtoMenuById {
     int cd_prod, qntd_prod, cd_cat, popular;
     float price_prod;
-    private String  nm_prod, date_prod, size, bonusDesc;
+    private String  nm_prod, date_prod, size, bonusDesc, nm_cat;
     private String img_prod;
 
     public DtoMenuById(){}
 
-    public DtoMenuById(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, float price_prod, String img_prod, String nm_prod, String date_prod) {
+    public DtoMenuById(int cd_prod, int qntd_prod, String size, String bonusDesc, int cd_cat, int popular, float price_prod, String img_prod, String nm_prod, String date_prod, String nm_cat) {
         this.cd_prod = cd_prod;
         this.qntd_prod = qntd_prod;
         this.size = size;
@@ -20,6 +20,15 @@ public class DtoMenuById {
         this.img_prod = img_prod;
         this.nm_prod = nm_prod;
         this.date_prod = date_prod;
+        this.nm_cat = nm_cat;
+    }
+
+    public String getNm_cat() {
+        return nm_cat;
+    }
+
+    public void setNm_cat(String nm_cat) {
+        this.nm_cat = nm_cat;
     }
 
     public int getCd_prod() {
