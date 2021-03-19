@@ -40,7 +40,7 @@
             android:name=".RegisterAddressActivity"
             android:label="@string/title_activity_register_addresss_beta"/>
         <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".Editar_PerfilActivity" />
+        <activity android:name=".Edit_ProfileActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AllProductsActivity" />
         <activity android:name=".SaibaMaisActivity" />

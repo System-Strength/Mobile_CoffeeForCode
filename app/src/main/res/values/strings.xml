@@ -224,6 +224,8 @@
     <string name="hintaddressNumberHere">Address number here</string>
     <string name="addressmandatory">Address*</string>
     <string name="numbermandatory">Number*</string>
-    <string name="title_activity_register_addresss_beta">Map</string>
+    <string name="title_activity_register_addresss_beta" translatable="false">Map</string>
+    <string name="zip_codenotobligatory">Zip Code</string>
+    <string name="search_address"><u>Click here to search address</u></string>
 
 </resources>

@@ -152,4 +152,6 @@
     <string name="hintaddressNumberHere">Numero do endereço aqui</string>
     <string name="addressmandatory">Endereço*</string>
     <string name="numbermandatory">Numero*</string>
+    <string name="zip_codenotobligatory">CEP</string>
+    <string name="search_address"><u>Clique aqui para pesquisar o endereço</u></string>
 </resources>

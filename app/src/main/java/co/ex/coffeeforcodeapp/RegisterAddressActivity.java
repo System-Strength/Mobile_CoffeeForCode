@@ -195,14 +195,14 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
                 UsersService usersService = retrofitUserUpdate.create(UsersService.class);
                 String new_address_user = edittext_address_cliente.getText().toString() + " " + edittext_mumber_cliente.getText().toString();
                 String new_complement = edittext_complement_cliente.getText().toString();
-                DtoUsers newAddress = new DtoUsers(new_address_user, new_complement);
+                DtoUsers newAddress = new DtoUsers(zipcode, new_address_user, new_complement);
                 Call<DtoUsers> callUser = usersService.UpdateAddress(id_user, newAddress);
                 callUser.enqueue(new Callback<DtoUsers>() {
                     @Override
                     public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                         address_user = new_address_user;
                         complement = new_complement;
-                        Toast.makeText(RegisterAddressActivity.this, "Endereço cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterAddressActivity.this, "Address registered successfully !!\nEndereço cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
                         GoBack_toMain();
                     }
 
@@ -370,6 +370,7 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         GoBack_ToMain.putExtra("nm_user", nm_user);
         GoBack_ToMain.putExtra("email_user", email_user);
         GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("zipcode", zipcode);
         GoBack_ToMain.putExtra("address_user", address_user);
         GoBack_ToMain.putExtra("complement", complement);
         GoBack_ToMain.putExtra("img_user", img_user);

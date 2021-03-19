@@ -200,11 +200,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200){
                     assert response.body() != null;
                     int id_user, partner;
-                    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+                    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     email_user = response.body().getEmail();
                     phone_user = response.body().getPhone_user();
+                    zipcode = response.body().getZipcode();
                     address_user = response.body().getAddress_user();
                     complement = response.body().getComplement();
                     img_user = response.body().getImg_user();
@@ -220,10 +221,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("pref_password", password);
                         editor.putBoolean("pref_check", boollsChecked);
                         editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }else{
                         mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }
                 }else if(response.code() == 401){;
                     ShowWarning_Email_Password();
@@ -243,12 +244,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String zipcode, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {
         Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
         GoTo_Main.putExtra("id_user", id_user);
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("email_user", email_user);
         GoTo_Main.putExtra("phone_user", phone_user);
+        GoTo_Main.putExtra("zipcode", zipcode);
         GoTo_Main.putExtra("address_user", address_user);
         GoTo_Main.putExtra("complement", complement);
         GoTo_Main.putExtra("img_user", img_user);

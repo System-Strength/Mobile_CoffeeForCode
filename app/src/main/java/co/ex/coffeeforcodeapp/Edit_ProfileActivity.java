@@ -6,9 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,9 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
 
+import co.ex.coffeeforcodeapp.Api.zipcode.DtoZipCode;
+import co.ex.coffeeforcodeapp.Api.zipcode.ZipCodeService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,33 +28,44 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class Editar_PerfilActivity extends AppCompatActivity {
-    EditText edit_nome_edicaoperfil, edit_cpf_edicaoperfil, edit_email_edicaopefil, edit_celular_edicaopefil, edit_endereco_edicaopefil , edit_complemento_edicaopefil;
+public class Edit_ProfileActivity extends AppCompatActivity {
+    EditText edit_nome_edicaoperfil, edit_cpf_edicaoperfil, edit_email_edicaopefil, edit_celular_edicaopefil,
+            edit_zipcode_profileEditing, edit_address_profileEditing, edit_complement_edicaopefil;
     ConstraintLayout base_dados_primarios;
-    TextView txt_alter_senha, txt_btn_confirmar01, txtChangeProfileImage;
+    TextView txt_alter_senha, txt_btn_confirmar01, txtChangeProfileImage, txtSearchAddress;
     CardView card_confirmar_edicao;
     LottieAnimationView btn_voltaraoperfil, animationloading_dados01;
-    Handler timer = new Handler();
+    //Handler timer = new Handler();
     int id_user, partner;
     String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
-    private SharedPreferences mPrefs;
-    private static final String PREFS_NAME = "PrefsFile";
+    String zipcode;
+    //private SharedPreferences mPrefs;
+    //private static final String PREFS_NAME = "PrefsFile";
+
+    //  Apis
     final Retrofit retrofitUserUpdate = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    final Retrofit retrofitZipCode = new Retrofit.Builder()
+            .baseUrl("https://viacep.com.br/ws/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar__perfil);
+        setContentView(R.layout.activity_edit__profile);
         btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
         edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
         edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
         edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
         edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
-        edit_endereco_edicaopefil = findViewById(R.id.edit_address_profileEditing);
-        edit_complemento_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
+        edit_address_profileEditing = findViewById(R.id.edit_address_profileEditing);
+        edit_complement_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
+        edit_zipcode_profileEditing = findViewById(R.id.edit_zipcode_profileEditing);
+        txtSearchAddress = findViewById(R.id.txtSearchAddress);
         card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
         txt_alter_senha = findViewById(R.id.txt_alter_senha);
         txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
@@ -65,6 +77,7 @@ public class Editar_PerfilActivity extends AppCompatActivity {
         //  Set Mask
         edit_cpf_edicaoperfil.addTextChangedListener(MaskEditUtil.mask(edit_cpf_edicaoperfil, MaskEditUtil.FORMAT_CPF));
         edit_celular_edicaopefil.addTextChangedListener(MaskEditUtil.mask(edit_celular_edicaopefil, MaskEditUtil.FORMAT_FONE));
+        edit_zipcode_profileEditing.addTextChangedListener(MaskEditUtil.mask(edit_zipcode_profileEditing, MaskEditUtil.FORMAT_CEP));
 
         //  Get some information
         Intent intent = getIntent();
@@ -74,6 +87,7 @@ public class Editar_PerfilActivity extends AppCompatActivity {
         nm_user = bundle.getString("nm_user");
         cpf_user = bundle.getString("cpf_user");
         phone_user = bundle.getString("phone_user");
+        zipcode = bundle.getString("zipcode");
         address_user = bundle.getString("address_user");
         complement = bundle.getString("complement");
         img_user = bundle.getString("img_user");
@@ -95,6 +109,47 @@ public class Editar_PerfilActivity extends AppCompatActivity {
 
         //  Btn go Back
         btn_voltaraoperfil.setOnClickListener(v -> GoBack_to_Profile());
+
+        //  Text to start seconds dates edit
+        txt_alter_senha.setOnClickListener(v -> {
+            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
+        });
+
+        txtChangeProfileImage.setOnClickListener(v ->{
+            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
+        });
+
+        txtSearchAddress.setOnClickListener(v -> {
+            if(edit_zipcode_profileEditing.getText().length() < 9){
+                Toast.makeText(this, "Zip code required !!\nObrigatório informar o CEP !!", Toast.LENGTH_SHORT).show();
+                edit_zipcode_profileEditing.requestFocus();
+                imm.showSoftInput(edit_zipcode_profileEditing, InputMethodManager.SHOW_IMPLICIT);
+            }else if (edit_zipcode_profileEditing.getText().length() == 9) {
+                zipcode = edit_zipcode_profileEditing.getText().toString();
+                ZipCodeService zipCodeService = retrofitZipCode.create(ZipCodeService.class);
+                Call<DtoZipCode> zipcodeCall = zipCodeService.getAddress(zipcode);
+                zipcodeCall.enqueue(new Callback<DtoZipCode>() {
+                    @Override
+                    public void onResponse(Call<DtoZipCode> call, Response<DtoZipCode> response) {
+                        if (response.isSuccessful()) {
+                            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                                    edit_zipcode_profileEditing.getWindowToken(), 0);
+                            assert response.body() != null;
+                            zipcode = response.body().getCep();
+                            edit_address_profileEditing.setText(response.body().getLogradouro());
+                            edit_complement_edicaopefil.setText(response.body().getComplemento());
+                        } else {
+                            Toast.makeText(Edit_ProfileActivity.this, "Error in get your address\nTry later\nErro em receber seu endereço\nTente mais tarde", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<DtoZipCode> call, Throwable t) {
+                        Toast.makeText(Edit_ProfileActivity.this, "Error in get your address\nErro em receber seu endereço", Toast.LENGTH_SHORT).show();
+                        Log.d("NetWorkError", t.getMessage());
+                    }
+                });
+            }
+        });
 
         //  Card to confirm edit
         card_confirmar_edicao.setOnClickListener(v -> {
@@ -123,25 +178,27 @@ public class Editar_PerfilActivity extends AppCompatActivity {
                 String newNm_user = edit_nome_edicaoperfil.getText().toString();
                 String newCpf_user = edit_cpf_edicaoperfil.getText().toString();
                 String newPhone_User = edit_celular_edicaopefil.getText().toString();
-                String newAddress_User = edit_endereco_edicaopefil.getText().toString();
-                String newComplement_User = edit_complemento_edicaopefil.getText().toString();
+                String new_Zipcode = edit_zipcode_profileEditing.getText().toString();
+                String newAddress_User = edit_address_profileEditing.getText().toString();
+                String newComplement_User = edit_complement_edicaopefil.getText().toString();
                 UsersService usersService = retrofitUserUpdate.create(UsersService.class);
-                DtoUsers newUserInfo = new DtoUsers(newNm_user, newCpf_user, newPhone_User, newAddress_User, newComplement_User);
+                DtoUsers newUserInfo = new DtoUsers(newNm_user, newCpf_user, newPhone_User, new_Zipcode, newAddress_User, newComplement_User);
                 Call<DtoUsers> resultUpdate = usersService.UpdateUser(id_user, newUserInfo);
 
                 resultUpdate.enqueue(new Callback<DtoUsers>() {
                     @Override
                     public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                         if (response.code() == 202){
-                            Toast.makeText(Editar_PerfilActivity.this, "Updated successfully\nAtualizado com sucesso", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Edit_ProfileActivity.this, "Updated successfully\nAtualizado com sucesso", Toast.LENGTH_SHORT).show();
                             nm_user = newNm_user;
                             cpf_user = newCpf_user;
                             phone_user = newPhone_User;
+                            zipcode = new_Zipcode;
                             address_user = newAddress_User;
                             complement = newComplement_User;
                             GoBack_to_Profile();
                         }else{
-                            Toast.makeText(Editar_PerfilActivity.this, "Error try later\nCode: " + response.code(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Edit_ProfileActivity.this, "Error try later\nCode: " + response.code(), Toast.LENGTH_SHORT).show();
                             GoBack_to_Profile();
                             Log.d("NetWorkError", String.valueOf(response.body()));
                         }
@@ -149,24 +206,13 @@ public class Editar_PerfilActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<DtoUsers> call, Throwable t) {
-                        Toast.makeText(Editar_PerfilActivity.this, "Error try later\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Edit_ProfileActivity.this, "Error try later\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
             }
         });
-
-        //  Text to start seconds dates edit
-        txt_alter_senha.setOnClickListener(v -> {
-            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
-        });
-
-        txtChangeProfileImage.setOnClickListener(v ->{
-            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
-        });
-
-
     }
 
     /*public void uploadImage(){
@@ -192,22 +238,23 @@ public class Editar_PerfilActivity extends AppCompatActivity {
             edit_cpf_edicaoperfil.setText(cpf_user);
             edit_email_edicaopefil.setText(email_user);
             edit_celular_edicaopefil.setText(phone_user);
-            edit_endereco_edicaopefil.setText(address_user);
-            edit_complemento_edicaopefil.setText(complement);
+            edit_zipcode_profileEditing.setText(zipcode);
+            edit_address_profileEditing.setText(address_user);
+            edit_complement_edicaopefil.setText(complement);
         }catch (Exception ex){
             Toast.makeText(this, "Erro ao buscar informaçoes: " + ex , Toast.LENGTH_SHORT).show();
             GoBack_to_Profile();
-
         }
     }
 
     public void GoBack_to_Profile(){
-        Intent GoTo_profile = new Intent(Editar_PerfilActivity.this, ProfileActivity.class);
+        Intent GoTo_profile = new Intent(Edit_ProfileActivity.this, ProfileActivity.class);
         GoTo_profile.putExtra("id_user", id_user);
         GoTo_profile.putExtra("email_user", email_user);
         GoTo_profile.putExtra("nm_user", nm_user);
         GoTo_profile.putExtra("cpf_user", cpf_user);
         GoTo_profile.putExtra("phone_user", phone_user);
+        GoTo_profile.putExtra("zipcode", zipcode);
         GoTo_profile.putExtra("address_user", address_user);
         GoTo_profile.putExtra("complement", complement);
         GoTo_profile.putExtra("img_user", img_user);
@@ -223,8 +270,8 @@ public class Editar_PerfilActivity extends AppCompatActivity {
         edit_cpf_edicaoperfil.setEnabled(false);
         edit_email_edicaopefil.setEnabled(false);
         edit_celular_edicaopefil.setEnabled(false);
-        edit_endereco_edicaopefil.setEnabled(false);
-        edit_complemento_edicaopefil.setEnabled(false);
+        edit_address_profileEditing.setEnabled(false);
+        edit_complement_edicaopefil.setEnabled(false);
     }
 
     @Override
