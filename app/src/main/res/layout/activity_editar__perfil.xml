@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <!--Body-->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -71,7 +71,7 @@
             android:id="@+id/base_dados_primarios"
             android:layout_width="match_parent"
             android:visibility="visible"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <!--Text Name-->
             <TextView
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/complemento"
+                android:text="@string/complement"
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -309,6 +309,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
