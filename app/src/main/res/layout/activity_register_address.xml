@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroung"
+    android:orientation="vertical"
+    tools:context=".RegisterAddressActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_weight="1"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:context=".RegisterAddressActivity" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@drawable/designerlogin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!--Text Tittle-->
+            <TextView
+                android:id="@+id/txttituloendereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/cadastroendereco"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Text Title ZipCode-->
+            <TextView
+                android:id="@+id/txtTitleZiCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/zip_code"
+                android:textColor="#88000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txttituloendereco" />
+
+            <!--Edit ZipCode Address-->
+            <EditText
+                android:id="@+id/edittext_zipcode_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittextcriarconta"
+                android:hint="@string/hintexZipCode"
+                android:inputType="number"
+                android:minWidth="350dp"
+                android:textColor="#000"
+                android:textColorHint="#717171"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleZiCode"
+                tools:ignore="Autofill" />
+
+            <!--Text Title Address-->
+            <TextView
+                android:id="@+id/txtTitleaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/addressmandatory"
+                android:textColor="#88000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_zipcode_cliente" />
+
+            <!--Edit Address Address-->
+            <EditText
+                android:id="@+id/edittext_address_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittextcriarconta"
+                android:hint="@string/hintendereco"
+                android:inputType="text"
+                android:minWidth="350dp"
+                android:textColor="#000"
+                android:textColorHint="#717171"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleaddress"
+                tools:ignore="Autofill" />
+
+            <!--Text Title Number-->
+            <TextView
+                android:id="@+id/txtTitlenumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/numbermandatory"
+                android:textColor="#88000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_address_cliente" />
+
+            <!--Edit Number Address-->
+            <EditText
+                android:id="@+id/edittext_mumber_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittextcriarconta"
+                android:hint="@string/hintaddressNumberHere"
+                android:inputType="text"
+                android:minWidth="350dp"
+                android:textColor="#000"
+                android:textColorHint="#717171"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitlenumber"
+                tools:ignore="Autofill" />
+
+            <!--Text Title Complement-->
+            <TextView
+                android:id="@+id/txtTitlecomplement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/complement"
+                android:textColor="#88000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_mumber_cliente" />
+
+            <!--Edit Complement Address-->
+            <EditText
+                android:id="@+id/edittext_complement_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittextcriarconta"
+                android:hint="@string/hintedtextcadastroenderecocomp"
+                android:inputType="text"
+                android:minWidth="350dp"
+                android:textColor="#000"
+                android:textColorHint="#717171"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitlecomplement"
+                tools:ignore="Autofill" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/BtnConfirmRegisterAddress"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:maxWidth="200dp"
+                android:maxHeight="55dp"
+                android:minWidth="200dp"
+                app:cardBackgroundColor="@color/backgroung"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_complement_cliente">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- text animation-->
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animation_address_confirm"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:lottie_loop="true"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/coffeeloading_animation"/>
+
+                    <TextView
+                        android:id="@+id/txtBtnconfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/confirm"
+                        android:textColor="#000"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

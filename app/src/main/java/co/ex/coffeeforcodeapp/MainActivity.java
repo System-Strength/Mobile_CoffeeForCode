@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegisterAddressLater = warning_address.findViewById(R.id.btnRegisterAddressLater);
 
         btnRegisterAddressNow.setOnClickListener(v -> {
-            Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddresssActivity.class);
+            Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddressActivity.class);
             irpara_perfil.putExtra("id_user", id_user);
             irpara_perfil.putExtra("email_user", email_user);
             irpara_perfil.putExtra("nm_user", nm_user);
