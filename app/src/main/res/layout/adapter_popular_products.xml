@@ -64,7 +64,7 @@
 
             <!--Text Size-->
             <TextView
-                android:id="@+id/txtSize_popularProduct"
+                android:id="@+id/txtSize_ProductDesc"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -100,7 +100,7 @@
                 android:background="@drawable/btnofmoreinprincipal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSize_popularProduct"
+                app:layout_constraintTop_toBottomOf="@+id/txtSize_ProductDesc"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="TooManyViews">
 

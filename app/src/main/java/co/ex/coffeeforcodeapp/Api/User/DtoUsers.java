@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp.Api;
+package co.ex.coffeeforcodeapp.Api.User;
 
 public class DtoUsers {
     int id_user, partner;

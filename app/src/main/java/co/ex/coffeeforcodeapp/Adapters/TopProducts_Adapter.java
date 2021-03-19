@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import co.ex.coffeeforcodeapp.Api.DtoMenu;
+import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
 import co.ex.coffeeforcodeapp.R;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class TopProducts_Adapter extends RecyclerView.Adapter<TopProducts_Adapte
             ImgPopularProduct = itemView.findViewById(R.id.ImgPopularProduct);
             txtStart_PopularProduct = itemView.findViewById(R.id.txtStart_PopularProduct);
             txtName_popularProduct = itemView.findViewById(R.id.txtName_popularProduct);
-            txtSize_popularProduct = itemView.findViewById(R.id.txtSize_popularProduct);
+            txtSize_popularProduct = itemView.findViewById(R.id.txtSize_ProductDesc);
 
         }
     }

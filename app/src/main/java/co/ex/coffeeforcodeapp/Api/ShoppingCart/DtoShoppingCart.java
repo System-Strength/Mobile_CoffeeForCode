@@ -1,10 +1,18 @@
 package co.ex.coffeeforcodeapp.Api.ShoppingCart;
 
 public class DtoShoppingCart {
-    int cd_prod, qt_prod;
+    int cd_prod, qt_prod, length;
     String email_user;
 
     public DtoShoppingCart(){}
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
 
     public int getCd_prod() {
         return cd_prod;

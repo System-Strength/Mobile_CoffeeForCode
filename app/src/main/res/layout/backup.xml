@@ -1,109 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroung"
-    android:animateLayoutChanges="true"
-    android:orientation="horizontal"
-    tools:context=".LoginActivity">
+    android:background="@color/backgroung">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#fff"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+    <!--Inicial Animation-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="20dp"
+        app:lottie_rawRes="@raw/enderecoac_animation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Base Scroll of text-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!--Base of Base of texts-->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ImgProd"
-                android:layout_width="160dp"
-                android:layout_height="180dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/img_frappuccinounicornio"
+            <!--Base of texts-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="ContentDescription" />
+                android:background="@drawable/designerlogin">
 
-            <TextView
-                android:id="@+id/txtNm_prod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/products"
-                android:textColor="#000"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <!--Text Tittle-->
+                <TextView
+                    android:id="@+id/txttituloendereco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/cadastroendereco"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtSize_Prod"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:text="@string/desccafes"
-                android:textColor="#C1000000"
-                android:textSize="16sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNm_prod" />
+                <!--Text Address-->
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/enderecocom_asterisco"
+                    android:textColor="#000"
+                    app:layout_constraintBottom_toTopOf="@+id/edittextenderecocliente"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/txtPrice_Prod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:text="R$ 20"
-                android:textColor="#C1000000"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSize_Prod" />
+                <!--Edit ZipCode Address-->
+                <EditText
+                    android:id="@+id/edittext_zipcode_cliente"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/edittextcriarconta"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txttituloendereco"
+                    android:textColor="#000"
+                    android:hint="@string/hintedittextcadastroendereco"
+                    android:textColorHint="#717171"
+                    android:inputType="text"
+                    tools:ignore="Autofill" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="130dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="#FFA055"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ImgProd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPrice_Prod">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <!--Text Address-->
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/enderecocom_asterisco"
+                    android:textColor="#000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittext_zipcode_cliente" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/knowmore"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <!--Edit Text Address-->
+                <EditText
+                    android:id="@+id/edittextenderecocliente"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/edittextcriarconta"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3"
+                    android:textColor="#000"
+                    android:hint="@string/hintedittextcadastroendereco"
+                    android:textColorHint="#717171"
+                    android:inputType="text"
+                    tools:ignore="Autofill" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--Text Complement-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complement"
+                    android:textColor="#000"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginStart="26dp"
+                    app:layout_constraintBottom_toTopOf="@+id/edittextenderecoclientecomp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            </androidx.cardview.widget.CardView>
+                <!--Edit Complement-->
+                <EditText
+                    android:id="@+id/edittextenderecoclientecomp"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/edittextcriarconta"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextenderecocliente"
+                    android:textColor="#000"
+                    android:hint="@string/hintedtextcadastroenderecocomp"
+                    android:textColorHint="#717171"
+                    android:inputType="text"
+                    tools:ignore="Autofill" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--Confirm button-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewenderecoconfirmar"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="50dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#FFC75A"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edittextenderecoclientecomp">
 
-    </androidx.cardview.widget.CardView>
+                    <!--Animation and text base-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-</LinearLayout>
+                        <!-- text animation-->
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/animation_address_confirm"
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:lottie_rawRes="@raw/coffeeloading_animation"/>
+
+                        <TextView
+                            android:id="@+id/txtbtnconfirmar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirm"
+                            android:textColor="#FFFFFF"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/animation_address_confirm"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/animation_address_confirm" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Register later button-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardviewenderecodepois"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#FFC75A"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewenderecoconfirmar">
+
+                    <!--Animation and text base-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- text animation-->
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/animationenderecodepois"
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:lottie_rawRes="@raw/coffeeloading_animation"/>
+
+                        <TextView
+                            android:id="@+id/txtbtncadastrardepois"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/register_later"
+                            android:textColor="#fff"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/animationenderecodepois"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/animationenderecodepois" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
