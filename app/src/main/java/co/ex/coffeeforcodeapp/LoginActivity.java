@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
@@ -52,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+    private FirebaseAuth mAuth;
+    Dialog warning_emailnotverified;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -59,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getIds();
+        warning_emailnotverified = new Dialog(this);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -136,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //  When click here will go to CriarContaActivity
         txtcriarnovaconta.setOnClickListener(v -> {
-            Intent irparacriacaodeconta = new Intent(LoginActivity.this,CriarContaActivity.class);
+            Intent irparacriacaodeconta = new Intent(LoginActivity.this, CreateAccountActivity.class);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_para_cima, R.anim.mover_para_baixo);
             ActivityCompat.startActivity(LoginActivity.this,irparacriacaodeconta, activityOptionsCompat.toBundle());
             finish();
@@ -158,9 +166,34 @@ public class LoginActivity extends AppCompatActivity {
                 animation_loadingLogin.setVisibility(View.VISIBLE);
                 animation_loadingLogin.playAnimation();
                 txtlogarlogin.setVisibility(View.GONE);
-                DoLogin(retrofitUser, email, password);
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        if (mAuth.getCurrentUser().isEmailVerified()){
+                            DoLogin(retrofitUser, email, password);
+                        }else{
+                            ShowEmailisNotVerified();
+                        }
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
+    }
+
+    //  Create Method for show alert of email not verified
+    private void ShowEmailisNotVerified() {
+        animation_loadingLogin.setVisibility(View.GONE);
+        animation_loadingLogin.playAnimation();
+        txtlogarlogin.setVisibility(View.VISIBLE);
+
+        CardView btnIwillConfirmLogin;
+        warning_emailnotverified.setContentView(R.layout.adapter_emailnotverified);
+        warning_emailnotverified.setCancelable(false);
+        btnIwillConfirmLogin = warning_emailnotverified.findViewById(R.id.btnIwillConfirmLogin);
+
+        btnIwillConfirmLogin.setOnClickListener(v -> warning_emailnotverified.dismiss());
+        warning_emailnotverified.show();
     }
 
     private void getIds() {
@@ -228,10 +261,16 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }else if(response.code() == 401){;
                     ShowWarning_Email_Password();
+                    animation_loadingLogin.setVisibility(View.GONE);
+                    animation_loadingLogin.playAnimation();
+                    txtlogarlogin.setVisibility(View.VISIBLE);
                 }else{
                     Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                     loading.dimissDialog();
                     Log.d("NetWorkError", response.message());
+                    animation_loadingLogin.setVisibility(View.GONE);
+                    animation_loadingLogin.playAnimation();
+                    txtlogarlogin.setVisibility(View.VISIBLE);
                 }
             }
 

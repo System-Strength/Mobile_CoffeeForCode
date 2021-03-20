@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class CarrinhoDeCompraActivity extends AppCompatActivity {
+public class ShoppingCartActivity extends AppCompatActivity {
     String emaillogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carrinho_de_compra);
+        setContentView(R.layout.activity_shoppingcart);
 
         // get some information  
         Intent intent = getIntent();
@@ -22,7 +22,7 @@ public class CarrinhoDeCompraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraoprincipal = new Intent(CarrinhoDeCompraActivity.this, MainActivity.class);
+        Intent voltaraoprincipal = new Intent(ShoppingCartActivity.this, MainActivity.class);
         voltaraoprincipal.putExtra("emailuser",emaillogado);
         voltaraoprincipal.putExtra("statusavisoend","desativado");
         startActivity(voltaraoprincipal);

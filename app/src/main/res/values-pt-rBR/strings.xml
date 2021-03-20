@@ -154,4 +154,7 @@
     <string name="numbermandatory">Numero*</string>
     <string name="zip_codenotobligatory">CEP</string>
     <string name="search_address"><u>Clique aqui para pesquisar o endereço</u></string>
+    <string name="hello_emailsend">Olá, seu usuário foi cadastrado com sucesso :)\nMandamos um email de verificação para o email cadastrado, por favor confirmar no email antes de se loga</string>
+    <string name="ok_i_will_confirm">Ok, vou confirmar</string>
+    <string name="txt_weverify_email_not_verified">Verificamos que seu email não foi confirmada, por favor confirmar sua conta com o email que lhe enviamos.</string>
 </resources>

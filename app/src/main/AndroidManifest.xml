@@ -44,12 +44,12 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AllProductsActivity" />
         <activity android:name=".SaibaMaisActivity" />
-        <activity android:name=".CarrinhoDeCompraActivity" />
+        <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".CadastrarCartoesActivity" />
         <activity android:name=".CartoesActivity" />
         <activity android:name=".SejaParceiroActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CriarContaActivity" />
+        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
