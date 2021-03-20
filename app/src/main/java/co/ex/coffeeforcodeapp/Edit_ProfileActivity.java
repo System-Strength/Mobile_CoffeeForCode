@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.Objects;
 
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
@@ -41,7 +49,6 @@ public class Edit_ProfileActivity extends AppCompatActivity {
     String zipcode;
     //private SharedPreferences mPrefs;
     //private static final String PREFS_NAME = "PrefsFile";
-
     //  Apis
     final Retrofit retrofitUserUpdate = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/user/")
@@ -53,25 +60,19 @@ public class Edit_ProfileActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
+    int PICK_IMAGE_REQUEST = 111;
+    Uri filePath;
+    ProgressDialog pd;
+    //creating reference to firebase storage
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://coffeeforcode.appspot.com");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
-        btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
-        edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
-        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
-        edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
-        edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
-        edit_address_profileEditing = findViewById(R.id.edit_address_profileEditing);
-        edit_complement_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
-        edit_zipcode_profileEditing = findViewById(R.id.edit_zipcode_profileEditing);
-        txtSearchAddress = findViewById(R.id.txtSearchAddress);
-        card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
-        txt_alter_senha = findViewById(R.id.txt_alter_senha);
-        txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
-        base_dados_primarios = findViewById(R.id.base_dados_primarios);
-        animationloading_dados01 = findViewById(R.id.animationloading_dados01);
-        txt_btn_confirmar01 = findViewById(R.id.txt_btn_confirmar01);
+        Ids();
         InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //  Set Mask
@@ -116,7 +117,12 @@ public class Edit_ProfileActivity extends AppCompatActivity {
         });
 
         txtChangeProfileImage.setOnClickListener(v ->{
-            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
+            pd = new ProgressDialog(this);
+            pd.setMessage("Uploading....");
+            Intent openGallery = new Intent();
+            openGallery.setType("image/*");
+            openGallery.setAction(Intent.ACTION_PICK);
+            startActivityForResult(Intent.createChooser(openGallery, "Select Image"), PICK_IMAGE_REQUEST);
         });
 
         txtSearchAddress.setOnClickListener(v -> {
@@ -215,22 +221,85 @@ public class Edit_ProfileActivity extends AppCompatActivity {
         });
     }
 
-    /*public void uploadImage(){
-        android.app.AlertDialog.Builder selectImage = new AlertDialog.Builder(Editar_PerfilActivity.this);
-        selectImage.setTitle("Origem da foto");
-        selectImage.setMessage("Por favor, selecione a origem da foto!");
-        selectImage.setPositiveButton("Galeria", (dialog, which) -> {
-            Intent galeria = new Intent(Intent.ACTION_GET_CONTENT);
-            galeria.setType("image/*");
-            startActivityForResult(galeria, 2);
-        });
-        selectImage.setNegativeButton("Camera", (dialog, which) -> {
-            Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera, 1);
 
-        });
-        selectImage.show();
-    }*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+
+            try {
+                //getting image from gallery
+                if(filePath != null) {
+                    pd.show();
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+
+                    StorageReference storageRef = this.storageRef.child("ProfileImage_" + id_user + "_" + bitmap.getByteCount());
+
+                    //uploading the image
+                    storageRef.putFile(filePath).continueWithTask(task -> {
+                        if (!task.isSuccessful()) {
+                            pd.dismiss();
+                            Toast.makeText(Edit_ProfileActivity.this, R.string.couldnt_insert, Toast.LENGTH_SHORT).show();
+                        }
+                        return storageRef.getDownloadUrl();
+                    }).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            UsersService usersService = retrofitUserUpdate.create(UsersService.class);
+                            DtoUsers newimg = new DtoUsers(downloadUri.toString());
+                            Call<DtoUsers> usersCall = usersService.UpdateImgUser(id_user, newimg);
+                            usersCall.enqueue(new Callback<DtoUsers>() {
+                                @Override
+                                public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                                    if (response.code() == 202){
+                                        pd.dismiss();
+                                        img_user = downloadUri.toString();
+
+                                        Toast.makeText(Edit_ProfileActivity.this, R.string.upload_successful, Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        pd.dismiss();
+                                        Toast.makeText(Edit_ProfileActivity.this, R.string.couldnt_insert, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<DtoUsers> call, Throwable t) {
+                                    Toast.makeText(Edit_ProfileActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                                    Log.d("ServerErrorUpload", t.getMessage());
+                                }
+                            });
+                        } else {
+                            Toast.makeText(Edit_ProfileActivity.this, "upload failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(Edit_ProfileActivity.this, R.string.select_an_image, Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void Ids() {
+        btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
+        edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
+        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
+        edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
+        edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
+        edit_address_profileEditing = findViewById(R.id.edit_address_profileEditing);
+        edit_complement_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
+        edit_zipcode_profileEditing = findViewById(R.id.edit_zipcode_profileEditing);
+        txtSearchAddress = findViewById(R.id.txtSearchAddress);
+        card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
+        txt_alter_senha = findViewById(R.id.txt_alter_senha);
+        txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
+        base_dados_primarios = findViewById(R.id.base_dados_primarios);
+        animationloading_dados01 = findViewById(R.id.animationloading_dados01);
+        txt_btn_confirmar01 = findViewById(R.id.txt_btn_confirmar01);
+    }
 
     public void buscar_informacoes(){
         try {
