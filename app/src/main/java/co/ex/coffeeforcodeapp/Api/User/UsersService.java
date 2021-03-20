@@ -21,6 +21,9 @@ public interface UsersService {
     @PATCH("update/{id_user}")
     Call<DtoUsers> UpdateUser(@Path("id_user") int id_user, @Body DtoUsers newUserInfo);
 
+    @PATCH("updateimg/{id_user}")
+    Call<DtoUsers> UpdateImgUser(@Path("id_user") int id_user, @Body DtoUsers newImg);
+
     @GET("/info/{email}")
     Call<DtoUsers> infoUser(@Path("email") String email);
 }

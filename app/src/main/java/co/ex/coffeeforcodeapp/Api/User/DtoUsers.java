@@ -16,6 +16,10 @@ public class DtoUsers {
 
     }
 
+    public DtoUsers(String img_user){
+        this.img_user = img_user;
+    }
+
     public DtoUsers(String email, String nm_user, String cpf_user, String password){
         this.email = email;
         this.nm_user = nm_user;
