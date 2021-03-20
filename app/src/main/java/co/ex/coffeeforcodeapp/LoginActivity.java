@@ -261,12 +261,14 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }else if(response.code() == 401){;
                     ShowWarning_Email_Password();
+                    mPrefs.edit().clear().apply();
                     animation_loadingLogin.setVisibility(View.GONE);
                     animation_loadingLogin.playAnimation();
                     txtlogarlogin.setVisibility(View.VISIBLE);
                 }else{
                     Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                     loading.dimissDialog();
+                    mPrefs.edit().clear().apply();
                     Log.d("NetWorkError", response.message());
                     animation_loadingLogin.setVisibility(View.GONE);
                     animation_loadingLogin.playAnimation();
