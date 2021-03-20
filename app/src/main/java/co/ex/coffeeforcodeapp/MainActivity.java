@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     CardView cardshopcafe, cardRefreshersMain, cardhamburguerandsandwiches, cardcandys ;
 
     int id_user, partner, cd_cat;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
     final Retrofit Productsretrofit = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/products/")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             nm_user  = bundle.getString("nm_user");
             email_user  = bundle.getString("email_user");
             phone_user  = bundle.getString("phone_user");
+            zipcode  = bundle.getString("zipcode");
             address_user  = bundle.getString("address_user");
             complement  = bundle.getString("complement");
             img_user  = bundle.getString("img_user");
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             GoTo_BePartner.putExtra("nm_user", nm_user);
             GoTo_BePartner.putExtra("cpf_user", cpf_user);
             GoTo_BePartner.putExtra("phone_user", phone_user);
+            GoTo_BePartner.putExtra("zipcode", zipcode);
             GoTo_BePartner.putExtra("address_user", address_user);
             GoTo_BePartner.putExtra("complement", complement);
             GoTo_BePartner.putExtra("img_user", img_user);
@@ -153,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             GoTo_AllProducts.putExtra("nm_user", nm_user);
             GoTo_AllProducts.putExtra("cpf_user", cpf_user);
             GoTo_AllProducts.putExtra("phone_user", phone_user);
+            GoTo_AllProducts.putExtra("zipcode", zipcode);
             GoTo_AllProducts.putExtra("address_user", address_user);
             GoTo_AllProducts.putExtra("complement", complement);
             GoTo_AllProducts.putExtra("img_user", img_user);
@@ -194,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 GoTo_profile.putExtra("nm_user", nm_user);
                 GoTo_profile.putExtra("cpf_user", cpf_user);
                 GoTo_profile.putExtra("phone_user", phone_user);
+                GoTo_profile.putExtra("zipcode", zipcode);
                 GoTo_profile.putExtra("address_user", address_user);
                 GoTo_profile.putExtra("complement", complement);
                 GoTo_profile.putExtra("img_user", img_user);
@@ -251,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
         GoToAllProducts_With_CatCd.putExtra("nm_user", nm_user);
         GoToAllProducts_With_CatCd.putExtra("cpf_user", cpf_user);
         GoToAllProducts_With_CatCd.putExtra("phone_user", phone_user);
+        GoToAllProducts_With_CatCd.putExtra("zipcode", zipcode);
         GoToAllProducts_With_CatCd.putExtra("address_user", address_user);
         GoToAllProducts_With_CatCd.putExtra("complement", complement);
         GoToAllProducts_With_CatCd.putExtra("img_user", img_user);
@@ -287,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerPopularProducts.setLayoutManager(layoutManager);
 
-        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, MainActivity.this);
+        AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, email_user, MainActivity.this);
         asyncPopularProducts.execute();
     }
 
@@ -326,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegisterAddressLater = warning_address.findViewById(R.id.btnRegisterAddressLater);
 
         btnRegisterAddressNow.setOnClickListener(v -> {
-            Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddresssActivity.class);
+            Intent irpara_perfil = new Intent(MainActivity.this, RegisterAddressActivity.class);
             irpara_perfil.putExtra("id_user", id_user);
             irpara_perfil.putExtra("email_user", email_user);
             irpara_perfil.putExtra("nm_user", nm_user);

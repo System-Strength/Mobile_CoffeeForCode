@@ -93,7 +93,7 @@
     <string name="cancelarcartao">Cancelar Cartão</string>
     <string name="cadastroendereco">Cadastro de Endereço</string>
     <string name="enderecocom_asterisco">Endereço*</string>
-    <string name="complemento">Complemento</string>
+    <string name="complement">Complemento</string>
     <string name="editarperfil">Clique aqui para editar seu perfil</string>
     <string name="cpfcadastrado">CPF Cadastrado</string>
     <string name="celularcadastrado">Celular Cadastrado</string>
@@ -112,7 +112,7 @@
     <string name="hitcpf">Insira seu cpf aqui</string>
     <string name="hintemail">Insira seu email aqui</string>
     <string name="hintcelular">Insira seu celular aqui</string>
-    <string name="hintendereco">Insira seu endereço aqui</string>
+    <string name="hintendereco">Seu endereço aqui</string>
     <string name="hintcomplemento">Insira seu complemento aqui</string>
     <string name="confirm">Confirmar</string>
     <string name="alter_senha"><u>Alterar Senha</u></string>
@@ -140,6 +140,24 @@
     <string name="HintpasswordLogin">Senha</string>
     <string name="register_later">Cadastrar Depois</string>
     <string name="change_profile_image"><u>Trocar imagem de perfil</u></string>
-    <string name="products">Produtos</string>
+    <string name="allproducts">Produtos</string>
     <string name="category">Categoria</string>
+    <string name="buy">Comprar</string>
+    <string name="addtoshoppingcart">ADICIONAR AO CARRINHO</string>
+    <string name="price">Preço</string>
+    <string name="product_successfully_inserted">Producto inserido em seu carrinho com sucesso!!</string>
+    <string name="goback_to_menu">Voltar ao menu</string>
+    <string name="see_cart">Ver carrinho</string>
+    <string name="zip_code">CEP*</string>
+    <string name="hintaddressNumberHere">Numero do endereço aqui</string>
+    <string name="addressmandatory">Endereço*</string>
+    <string name="numbermandatory">Numero*</string>
+    <string name="zip_codenotobligatory">CEP</string>
+    <string name="search_address"><u>Clique aqui para pesquisar o endereço</u></string>
+    <string name="hello_emailsend">Olá, seu usuário foi cadastrado com sucesso :)\nMandamos um email de verificação para o email cadastrado, por favor confirmar no email antes de se loga</string>
+    <string name="ok_i_will_confirm">Ok, vou confirmar</string>
+    <string name="txt_weverify_email_not_verified">Verificamos que seu email não foi confirmada, por favor confirmar sua conta com o email que lhe enviamos.</string>
+    <string name="upload_successful">Upload bem sucedido</string>
+    <string name="couldnt_insert">Não foi possível inserir</string>
+    <string name="select_an_image">Selecione uma imagem</string>
 </resources>

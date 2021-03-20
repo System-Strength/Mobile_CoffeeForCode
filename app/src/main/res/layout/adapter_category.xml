@@ -6,13 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="135dp"
-        android:layout_height="135dp"
+        android:layout_width="wrap_content"
+        android:layout_height="126dp"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#fff"
+        app:cardBackgroundColor="#FFF2D9"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,10 +21,14 @@
 
             <ImageView
                 android:id="@+id/ImgCategory"
-                android:layout_width="70dp"
+                android:layout_width="95dp"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                android:maxHeight="70dp"
+                android:maxWidth="95dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/no_profile_image"
+                android:src="@drawable/frappuccino_category"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/category"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

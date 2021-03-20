@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView Profile_image;
     Handler timer = new Handler();
     int id_user, partner;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         nm_user = bundle.getString("nm_user");
         cpf_user = bundle.getString("cpf_user");
         phone_user = bundle.getString("phone_user");
+        zipcode = bundle.getString("zipcode");
         address_user = bundle.getString("address_user");
         complement = bundle.getString("complement");
         img_user = bundle.getString("img_user");
@@ -87,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             irpara_sejaparceira.putExtra("nm_user", nm_user);
             irpara_sejaparceira.putExtra("cpf_user", cpf_user);
             irpara_sejaparceira.putExtra("phone_user", phone_user);
+            irpara_sejaparceira.putExtra("zipcode", zipcode);
             irpara_sejaparceira.putExtra("address_user", address_user);
             irpara_sejaparceira.putExtra("complement", complement);
             irpara_sejaparceira.putExtra("img_user", img_user);
@@ -110,12 +112,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void GoTo_EditProfile() {
-        Intent GoTo_EditPofile = new Intent(ProfileActivity.this, Editar_PerfilActivity.class);
+        Intent GoTo_EditPofile = new Intent(ProfileActivity.this, Edit_ProfileActivity.class);
         GoTo_EditPofile.putExtra("id_user", id_user);
         GoTo_EditPofile.putExtra("email_user", email_user);
         GoTo_EditPofile.putExtra("nm_user", nm_user);
         GoTo_EditPofile.putExtra("cpf_user", cpf_user);
         GoTo_EditPofile.putExtra("phone_user", phone_user);
+        GoTo_EditPofile.putExtra("zipcode", zipcode);
         GoTo_EditPofile.putExtra("address_user", address_user);
         GoTo_EditPofile.putExtra("complement", complement);
         GoTo_EditPofile.putExtra("img_user", img_user);
@@ -183,6 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
         GoBack_ToMain.putExtra("nm_user", nm_user);
         GoBack_ToMain.putExtra("email_user", email_user);
         GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("zipcode", zipcode);
         GoBack_ToMain.putExtra("address_user", address_user);
         GoBack_ToMain.putExtra("complement", complement);
         GoBack_ToMain.putExtra("img_user", img_user);

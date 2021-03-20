@@ -15,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.Category_Adapter;
-import co.ex.coffeeforcodeapp.Api.DtoCategorys;
 import co.ex.coffeeforcodeapp.Api.Products.AsyncProdCategory;
 import co.ex.coffeeforcodeapp.Api.Products.RecyclerItemClickListener;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
@@ -32,13 +31,15 @@ public class AsyncCategory extends AsyncTask {
     Activity contexto;
     RecyclerView recyclerCategorys;
     LottieAnimationView AnimationcategoryLoading;
+    String email_user;
 
     //  Products
     RecyclerView recyclerProducts;
     LottieAnimationView AnimationproductsLoading;
     SwipeRefreshLayout SwipeRefreshProducts;
 
-    public AsyncCategory(RecyclerView recyclerCategorys, LottieAnimationView AnimationcategoryLoading, Activity contexto, RecyclerView recyclerProducts, LottieAnimationView AnimationproductsLoading, SwipeRefreshLayout SwipeRefreshProducts) {
+    public AsyncCategory(RecyclerView recyclerCategorys, LottieAnimationView AnimationcategoryLoading, Activity contexto, RecyclerView recyclerProducts,
+                         LottieAnimationView AnimationproductsLoading, SwipeRefreshLayout SwipeRefreshProducts, String email_user) {
         this.recyclerCategorys = recyclerCategorys;
         this.contexto = contexto;
         this.AnimationcategoryLoading =  AnimationcategoryLoading;
@@ -46,6 +47,7 @@ public class AsyncCategory extends AsyncTask {
         this.recyclerProducts = recyclerProducts;
         this.AnimationproductsLoading = AnimationproductsLoading;
         this.SwipeRefreshProducts = SwipeRefreshProducts;
+        this.email_user = email_user;
     }
 
     @Override
@@ -95,7 +97,7 @@ public class AsyncCategory extends AsyncTask {
                         int cd_cat = arrayListDto.get(position).getCd_cat();
                         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
                         recyclerProducts.setLayoutManager(layoutManager);
-                        AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, SwipeRefreshProducts, cd_cat, contexto);
+                        AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, email_user, SwipeRefreshProducts, cd_cat, contexto);
                         asyncProdCategory.execute();
                     }
 
@@ -109,7 +111,5 @@ public class AsyncCategory extends AsyncTask {
 
                     }
                 }));
-
-
     }
 }

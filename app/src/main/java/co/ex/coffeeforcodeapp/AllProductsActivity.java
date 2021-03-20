@@ -19,7 +19,7 @@ public class AllProductsActivity extends AppCompatActivity {
     LottieAnimationView AnimationcategoryLoading, AnimationProductsLoading;
     SwipeRefreshLayout SwipeRefreshProducts;
     int id_user, partner, cd_cat;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class AllProductsActivity extends AppCompatActivity {
             loadCategorys();
         }else {
             GetUserInformation(bundle);
-            AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
+            AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, email_user, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
             asyncProdCategory.execute();
             loadCategorys();
         }
@@ -51,7 +51,7 @@ public class AllProductsActivity extends AppCompatActivity {
         SwipeRefreshProducts.setOnRefreshListener(() -> {
             StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
             RecyclerProducts.setLayoutManager(layoutManager);
-            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+            AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user, AllProductsActivity.this);
             asyncProducts.execute();
         });
     }
@@ -62,6 +62,7 @@ public class AllProductsActivity extends AppCompatActivity {
         nm_user = bundle.getString("nm_user");
         cpf_user = bundle.getString("cpf_user");
         phone_user = bundle.getString("phone_user");
+        zipcode = bundle.getString("zipcode");
         address_user = bundle.getString("address_user");
         complement = bundle.getString("complement");
         img_user = bundle.getString("img_user");
@@ -73,7 +74,7 @@ public class AllProductsActivity extends AppCompatActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
         RecyclerProducts.setLayoutManager(layoutManager);
 
-        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, AllProductsActivity.this);
+        AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user, AllProductsActivity.this);
         asyncProducts.execute();
 
     }
@@ -82,7 +83,7 @@ public class AllProductsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         RecyclerCategory.setLayoutManager(layoutManager);
 
-        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this, RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts);
+        AsyncCategory asyncCategory = new AsyncCategory(RecyclerCategory, AnimationcategoryLoading, AllProductsActivity.this, RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user);
         asyncCategory.execute();
     }
 
@@ -94,11 +95,13 @@ public class AllProductsActivity extends AppCompatActivity {
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("cpf_user", cpf_user);
         GoTo_Main.putExtra("phone_user", phone_user);
+        GoTo_Main.putExtra("zipcode", zipcode);
         GoTo_Main.putExtra("address_user", address_user);
         GoTo_Main.putExtra("complement", complement);
         GoTo_Main.putExtra("img_user", img_user);
         GoTo_Main.putExtra("partner", partner);
         GoTo_Main.putExtra("partner_Startdate", partner_Startdate);
+        GoTo_Main.putExtra("statusavisoend", "desativado");
         startActivity(GoTo_Main);
         finish();
 

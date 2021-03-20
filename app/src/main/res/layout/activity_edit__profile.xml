@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroung"
     android:orientation="vertical"
-    tools:context=".Editar_PerfilActivity">
+    tools:context=".Edit_ProfileActivity">
 
     <!--Header-->
     <LinearLayout
@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <!--Body-->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -71,7 +71,7 @@
             android:id="@+id/base_dados_primarios"
             android:layout_width="match_parent"
             android:visibility="visible"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <!--Text Name-->
             <TextView
@@ -192,6 +192,49 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_title_celualr"
                 tools:ignore="Autofill,TextFields" />
 
+            <!--Text Zip Code-->
+            <TextView
+                android:id="@+id/text_title_zipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/zip_codenotobligatory"
+                android:textColor="#EE000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_profileEditing" />
+
+            <!--Edit Zip Code-->
+            <EditText
+                android:id="@+id/edit_zipcode_profileEditing"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:hint="@string/hintexZipCode"
+                android:textColorHint="#92403D3D"
+                android:inputType="number"
+                android:textColor="#000"
+                android:background="@drawable/editeditarperfil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title_zipcode"
+                tools:ignore="Autofill,TextFields" />
+
+            <!-- Text Search Address -->
+            <TextView
+                android:id="@+id/txtSearchAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_address"
+                android:textColor="#D7000000"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_zipcode_profileEditing" />
+
+
             <!--Text Address-->
             <TextView
                 android:id="@+id/text_title_endereco"
@@ -203,7 +246,7 @@
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_phone_profileEditing" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSearchAddress" />
 
             <!--Edit Address-->
             <EditText
@@ -228,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/complemento"
+                android:text="@string/complement"
                 android:textColor="#EE000000"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -302,6 +345,8 @@
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="italic"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -309,6 +354,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

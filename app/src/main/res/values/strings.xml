@@ -26,8 +26,8 @@
 
 
     <!--Hints / Mask-->
-    <string name="masckcpf" tools:ignore="TypographyDashes" translatable="false">000.000.000-00</string>
-    <string name="mascaraphone" tools:ignore="TypographyDashes" translatable="false">(00) 00000-0000</string>
+    <string name="masckcpf" translatable="false" tools:ignore="TypographyDashes">000.000.000-00</string>
+    <string name="mascaraphone" translatable="false" tools:ignore="TypographyDashes">(00) 00000-0000</string>
     <string name="mascaraemail">example@gmail.com</string>
     <string name="exFirstName" translatable="false">Ex. Fulano</string>
     <string name="exLastName" translatable="false">Ex. Lima</string>
@@ -162,7 +162,7 @@
     <string name="hintedittextcadastroendereco" translatable="false">Ex. Rua 00</string>
     <string name="hintedtextcadastroenderecocomp" translatable="false">Ex. Ap 2 Bl 20</string>
     <string name="enderecocom_asterisco">Address*</string>
-    <string name="complemento">Complement</string>
+    <string name="complement">Complement</string>
     <string name="register_later">Register Later</string>
 
     <!--Profile Screen-->
@@ -186,7 +186,7 @@
     <string name="hitcpf">Enter your CPF here</string>
     <string name="hintemail">Enter your email here</string>
     <string name="hintcelular">Insert your phone here</string>
-    <string name="hintendereco">Enter your address here</string>
+    <string name="hintendereco">Your address here</string>
     <string name="hintcomplemento">Insert your add-on here</string>
     <string name="confirm">Confirm</string>
     <string name="alter_senha"><u> Change Password </u></string>
@@ -196,6 +196,9 @@
     <string name="hintnewpassword">Enter your new password</string>
     <string name="hintconfirmnrepassword">Confirm your new password</string>
     <string name="confirmnewpassword">Confirm your new password</string>
+    <string name="upload_successful">Upload successful!!</string>
+    <string name="couldnt_insert">Couldn`t insert</string>
+    <string name="select_an_image">Select an image</string>
 
 
     <!-- Tela de Adms-->
@@ -207,7 +210,28 @@
     <string name="hintEmailAddressLogin">Email address</string>
     <string name="HintpasswordLogin">Password</string>
     <string name="change_profile_image"><u>Change profile image</u></string>
-    <string name="products">Products</string>
+    <string name="allproducts">Products</string>
     <string name="category">Category</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="buy">Buy</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="less" translatable="false">-</string>
+    <string name="addtoshoppingcart">ADD TO CART</string>
+    <string name="price">price</string>
+    <string name="product_successfully_inserted">Product successfully inserted in your cart!!</string>
+    <string name="goback_to_menu">Go Back to menu</string>
+    <string name="see_cart">See Cart</string>
+    <string name="zip_code">Zip Code*</string>
+    <string name="hintexZipCode" translatable="false">00000-000</string>
+    <string name="hintaddressNumberHere">Address number here</string>
+    <string name="addressmandatory">Address*</string>
+    <string name="numbermandatory">Number*</string>
+    <string name="title_activity_register_addresss_beta" translatable="false">Map</string>
+    <string name="zip_codenotobligatory">Zip Code</string>
+    <string name="search_address"><u>Click here to search address</u></string>
+    <string name="hello_emailsend">Hello, your user has been successfully registered :)\nWe sent a verification email to the registered email, please confirm in the email before logging in.</string>
+    <string name="ok_i_will_confirm">Ok, I will confirm</string>
+    <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
 
 </resources>

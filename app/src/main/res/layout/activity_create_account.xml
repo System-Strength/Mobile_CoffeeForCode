@@ -7,7 +7,7 @@
     android:background="@color/backgroung"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context=".CriarContaActivity">
+    tools:context=".CreateAccountActivity">
 
     <!--Animation Delivery-->
     <com.airbnb.lottie.LottieAnimationView

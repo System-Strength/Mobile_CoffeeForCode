@@ -32,7 +32,7 @@ public class AsyncUserImage extends AsyncTask {
     protected Object doInBackground(Object[] objects) {
         Bitmap img_prod = null;
         try {
-                URL url = new URL("https://coffeeforcode.herokuapp.com/" + img_user);
+                URL url = new URL(img_user);
                 img_prod = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             } catch (IOException malformedURLException) {
             malformedURLException.printStackTrace();

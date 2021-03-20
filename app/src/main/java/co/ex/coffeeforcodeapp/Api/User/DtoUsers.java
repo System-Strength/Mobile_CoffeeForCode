@@ -1,15 +1,23 @@
-package co.ex.coffeeforcodeapp.Api;
+package co.ex.coffeeforcodeapp.Api.User;
 
 public class DtoUsers {
     int id_user, partner;
-    String email, nm_user, cpf_user, phone_user, address_user,complement, img_user, password, partner_Startdate, message;
+    String email, nm_user, cpf_user, phone_user, zipcode, address_user,complement, img_user, password, partner_Startdate, message;
 
 
 
-    public DtoUsers(String address_user, String complement){
+    public DtoUsers(String newNm_user, String newCpf_user, String newPhone_User, String new_Zipcode, String address_user, String complement){
         this.address_user = address_user;
         this.complement = complement;
+        this.nm_user = newNm_user;
+        this.cpf_user = newCpf_user;
+        this.phone_user = newPhone_User;
+        this.zipcode = new_Zipcode;
 
+    }
+
+    public DtoUsers(String img_user){
+        this.img_user = img_user;
     }
 
     public DtoUsers(String email, String nm_user, String cpf_user, String password){
@@ -28,14 +36,20 @@ public class DtoUsers {
         this.complement = complement;
     }
 
-    public DtoUsers(int id_user, String email, String nm_user, String cpf_user, String phone_user, String password, int partner) {
-        this.id_user = id_user;
-        this.email = email;
-        this.nm_user = nm_user;
-        this.cpf_user = cpf_user;
-        this.phone_user = phone_user;
-        this.password = password;
+    public DtoUsers(String zipcode, String address_user, String complement) {
+        this.complement = complement;
+        this.address_user = address_user;
+        this.zipcode = zipcode;
     }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
     public String getAddress_user() {
         return address_user;
     }
