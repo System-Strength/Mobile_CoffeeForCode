@@ -57,21 +57,7 @@ public class Edit_ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__profile);
-        btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
-        edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
-        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
-        edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
-        edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
-        edit_address_profileEditing = findViewById(R.id.edit_address_profileEditing);
-        edit_complement_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
-        edit_zipcode_profileEditing = findViewById(R.id.edit_zipcode_profileEditing);
-        txtSearchAddress = findViewById(R.id.txtSearchAddress);
-        card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
-        txt_alter_senha = findViewById(R.id.txt_alter_senha);
-        txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
-        base_dados_primarios = findViewById(R.id.base_dados_primarios);
-        animationloading_dados01 = findViewById(R.id.animationloading_dados01);
-        txt_btn_confirmar01 = findViewById(R.id.txt_btn_confirmar01);
+        Ids();
         InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //  Set Mask
@@ -214,23 +200,23 @@ public class Edit_ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*public void uploadImage(){
-        android.app.AlertDialog.Builder selectImage = new AlertDialog.Builder(Editar_PerfilActivity.this);
-        selectImage.setTitle("Origem da foto");
-        selectImage.setMessage("Por favor, selecione a origem da foto!");
-        selectImage.setPositiveButton("Galeria", (dialog, which) -> {
-            Intent galeria = new Intent(Intent.ACTION_GET_CONTENT);
-            galeria.setType("image/*");
-            startActivityForResult(galeria, 2);
-        });
-        selectImage.setNegativeButton("Camera", (dialog, which) -> {
-            Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera, 1);
-
-        });
-        selectImage.show();
-    }*/
+    private void Ids() {
+        btn_voltaraoperfil = findViewById(R.id.btn_voltaraoperfil);
+        edit_nome_edicaoperfil = findViewById(R.id.edit_name_profileEditing);
+        edit_cpf_edicaoperfil = findViewById(R.id.edit_cpf_profileEditing);
+        edit_email_edicaopefil = findViewById(R.id.edit_email_profileEditing);
+        edit_celular_edicaopefil = findViewById(R.id.edit_phone_profileEditing);
+        edit_address_profileEditing = findViewById(R.id.edit_address_profileEditing);
+        edit_complement_edicaopefil = findViewById(R.id.edit_complement_edicaopefil);
+        edit_zipcode_profileEditing = findViewById(R.id.edit_zipcode_profileEditing);
+        txtSearchAddress = findViewById(R.id.txtSearchAddress);
+        card_confirmar_edicao = findViewById(R.id.card_confirmar_edicao);
+        txt_alter_senha = findViewById(R.id.txt_alter_senha);
+        txtChangeProfileImage = findViewById(R.id.txtChangeProfileImage);
+        base_dados_primarios = findViewById(R.id.base_dados_primarios);
+        animationloading_dados01 = findViewById(R.id.animationloading_dados01);
+        txt_btn_confirmar01 = findViewById(R.id.txt_btn_confirmar01);
+    }
 
     public void buscar_informacoes(){
         try {
