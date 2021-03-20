@@ -31,6 +31,8 @@ android {
 }
 
 apply plugin: 'com.android.application'
+// ADD THIS AT THE BOTTOM
+apply plugin: 'com.google.gms.google-services'
 
 dependencies {
 
@@ -42,6 +44,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //  Auth
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
 
     //  Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
