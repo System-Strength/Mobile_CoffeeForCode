@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
@@ -52,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+    private FirebaseAuth mAuth;
+    Dialog warning_emailnotverified;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -59,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getIds();
+        warning_emailnotverified = new Dialog(this);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -136,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //  When click here will go to CriarContaActivity
         txtcriarnovaconta.setOnClickListener(v -> {
-            Intent irparacriacaodeconta = new Intent(LoginActivity.this,CriarContaActivity.class);
+            Intent irparacriacaodeconta = new Intent(LoginActivity.this, CreateAccountActivity.class);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_para_cima, R.anim.mover_para_baixo);
             ActivityCompat.startActivity(LoginActivity.this,irparacriacaodeconta, activityOptionsCompat.toBundle());
             finish();
@@ -158,9 +166,34 @@ public class LoginActivity extends AppCompatActivity {
                 animation_loadingLogin.setVisibility(View.VISIBLE);
                 animation_loadingLogin.playAnimation();
                 txtlogarlogin.setVisibility(View.GONE);
-                DoLogin(retrofitUser, email, password);
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        if (mAuth.getCurrentUser().isEmailVerified()){
+                            DoLogin(retrofitUser, email, password);
+                        }else{
+                            ShowEmailisNotVerified();
+                        }
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
+    }
+
+    //  Create Method for show alert of email not verified
+    private void ShowEmailisNotVerified() {
+        animation_loadingLogin.setVisibility(View.GONE);
+        animation_loadingLogin.playAnimation();
+        txtlogarlogin.setVisibility(View.VISIBLE);
+
+        CardView btnIwillConfirmLogin;
+        warning_emailnotverified.setContentView(R.layout.adapter_emailnotverified);
+        warning_emailnotverified.setCancelable(false);
+        btnIwillConfirmLogin = warning_emailnotverified.findViewById(R.id.btnIwillConfirmLogin);
+
+        btnIwillConfirmLogin.setOnClickListener(v -> warning_emailnotverified.dismiss());
+        warning_emailnotverified.show();
     }
 
     private void getIds() {
@@ -200,11 +233,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200){
                     assert response.body() != null;
                     int id_user, partner;
-                    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+                    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     email_user = response.body().getEmail();
                     phone_user = response.body().getPhone_user();
+                    zipcode = response.body().getZipcode();
                     address_user = response.body().getAddress_user();
                     complement = response.body().getComplement();
                     img_user = response.body().getImg_user();
@@ -220,17 +254,25 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("pref_password", password);
                         editor.putBoolean("pref_check", boollsChecked);
                         editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }else{
                         mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }
                 }else if(response.code() == 401){;
                     ShowWarning_Email_Password();
+                    mPrefs.edit().clear().apply();
+                    animation_loadingLogin.setVisibility(View.GONE);
+                    animation_loadingLogin.playAnimation();
+                    txtlogarlogin.setVisibility(View.VISIBLE);
                 }else{
                     Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                     loading.dimissDialog();
+                    mPrefs.edit().clear().apply();
                     Log.d("NetWorkError", response.message());
+                    animation_loadingLogin.setVisibility(View.GONE);
+                    animation_loadingLogin.playAnimation();
+                    txtlogarlogin.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -243,12 +285,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {
+    private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String zipcode, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {
         Intent GoTo_Main = new Intent(LoginActivity.this, MainActivity.class);
         GoTo_Main.putExtra("id_user", id_user);
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("email_user", email_user);
         GoTo_Main.putExtra("phone_user", phone_user);
+        GoTo_Main.putExtra("zipcode", zipcode);
         GoTo_Main.putExtra("address_user", address_user);
         GoTo_Main.putExtra("complement", complement);
         GoTo_Main.putExtra("img_user", img_user);

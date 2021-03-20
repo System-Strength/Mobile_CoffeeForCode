@@ -19,7 +19,7 @@ public class AllProductsActivity extends AppCompatActivity {
     LottieAnimationView AnimationcategoryLoading, AnimationProductsLoading;
     SwipeRefreshLayout SwipeRefreshProducts;
     int id_user, partner, cd_cat;
-    String nm_user, email_user, phone_user, address_user, complement, img_user, cpf_user, partner_Startdate;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class AllProductsActivity extends AppCompatActivity {
         nm_user = bundle.getString("nm_user");
         cpf_user = bundle.getString("cpf_user");
         phone_user = bundle.getString("phone_user");
+        zipcode = bundle.getString("zipcode");
         address_user = bundle.getString("address_user");
         complement = bundle.getString("complement");
         img_user = bundle.getString("img_user");
@@ -94,6 +95,7 @@ public class AllProductsActivity extends AppCompatActivity {
         GoTo_Main.putExtra("nm_user", nm_user);
         GoTo_Main.putExtra("cpf_user", cpf_user);
         GoTo_Main.putExtra("phone_user", phone_user);
+        GoTo_Main.putExtra("zipcode", zipcode);
         GoTo_Main.putExtra("address_user", address_user);
         GoTo_Main.putExtra("complement", complement);
         GoTo_Main.putExtra("img_user", img_user);

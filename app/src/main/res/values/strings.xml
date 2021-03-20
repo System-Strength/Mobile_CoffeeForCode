@@ -224,6 +224,11 @@
     <string name="hintaddressNumberHere">Address number here</string>
     <string name="addressmandatory">Address*</string>
     <string name="numbermandatory">Number*</string>
-    <string name="title_activity_register_addresss_beta">Map</string>
+    <string name="title_activity_register_addresss_beta" translatable="false">Map</string>
+    <string name="zip_codenotobligatory">Zip Code</string>
+    <string name="search_address"><u>Click here to search address</u></string>
+    <string name="hello_emailsend">Hello, your user has been successfully registered :)\nWe sent a verification email to the registered email, please confirm in the email before logging in.</string>
+    <string name="ok_i_will_confirm">Ok, I will confirm</string>
+    <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
 
 </resources>

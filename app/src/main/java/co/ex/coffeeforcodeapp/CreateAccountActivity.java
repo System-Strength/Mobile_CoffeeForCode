@@ -13,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -22,7 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
+import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
+import co.ex.coffeeforcodeapp.Api.Products.MenuService;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
 
@@ -34,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
-public class CriarContaActivity extends AppCompatActivity {
+public class CreateAccountActivity extends AppCompatActivity {
     TextView txtLogin, txtTerms;
     CheckBox checkboxaceitoostermos;
     EditText edittextFirstName_userCreateAccount, edittextLastName_userCreateAccount, edittextcpf_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
@@ -42,33 +50,36 @@ public class CriarContaActivity extends AppCompatActivity {
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
     CardView cardviewbtncriarconta;
     Dialog termos, avisoerro;
+    private FirebaseAuth mAuth;
+    Dialog warning_emailsend;
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    final Retrofit retrofitPreLoad = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/products/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        btnvoltarcriarconta = findViewById(R.id.btnvoltarcriarconta);
-        certosenhacriarconta = findViewById(R.id.certosenhacriarconta);
-        cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
-        imgolhofechadocriarconta = findViewById(R.id.imgolhofechadocriarconta);
-        imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
-        edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);
-        edittextEmail_userCreateAccount = findViewById(R.id.edittextEmail_userCreateAccount);
-        edittextFirstName_userCreateAccount = findViewById(R.id.edittextFirstName_userCreateAccount);
-        edittextLastName_userCreateAccount = findViewById(R.id.edittextLastName_userCreateAccount);
-        edittextcpf_userCreateAccount = findViewById(R.id.edittextcpf_userCreateAccount);
-        checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
-        txtTerms = findViewById(R.id.txtTerms);
-        txtLogin = findViewById(R.id.txtLogin);
+        Ids();
         termos = new Dialog(this);
         avisoerro = new Dialog(this);
-        LoadingDialog loadingDialog = new LoadingDialog(CriarContaActivity.this);
+        warning_emailsend = new Dialog(this);
+        LoadingDialog loadingDialog = new LoadingDialog(CreateAccountActivity.this);
+        PreloadServer();
+
+
+        // Initialize Firebase Auth
+        FirebaseApp.initializeApp(CreateAccountActivity.this);
+        mAuth = FirebaseAuth.getInstance();
         InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        final Retrofit retrofitUser = new Retrofit.Builder()
-                .baseUrl("https://coffeeforcode.herokuapp.com/user/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+
 
         //  Set Mask
         edittextcpf_userCreateAccount.addTextChangedListener(MaskEditUtil.mask(edittextcpf_userCreateAccount, MaskEditUtil.FORMAT_CPF));
@@ -96,7 +107,7 @@ public class CriarContaActivity extends AppCompatActivity {
 
         //  When click here will go back to LoginActivity
         btnvoltarcriarconta.setOnClickListener(v -> {
-            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+            Intent voltaraologin = new Intent(CreateAccountActivity.this, LoginActivity.class);
             startActivity(voltaraologin);
             finish();
         });
@@ -129,7 +140,7 @@ public class CriarContaActivity extends AppCompatActivity {
                 edittextEmail_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextEmail_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(edittextEmail_userCreateAccount.getText()).matches()){
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(edittextEmail_userCreateAccount.getText()).matches()){
                 edittextEmail_userCreateAccount.setError("Fill in your email correctly" + "\n" + "Preencha corretamente seu email");
                 //Toast.makeText(this, R.string.fill_email_correctly, Toast.LENGTH_SHORT).show();
                 edittextEmail_userCreateAccount.requestFocus();
@@ -151,41 +162,53 @@ public class CriarContaActivity extends AppCompatActivity {
                 String email = edittextEmail_userCreateAccount.getText().toString();
                 String cpf_user = edittextcpf_userCreateAccount.getText().toString();
                 String password = edittextPassword_userCreateAccount.getText().toString();
-                UsersService usersService = retrofitUser.create(UsersService.class);
-                DtoUsers newuser = new DtoUsers(email, nm_user, cpf_user, password);
-                Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
                 loadingDialog.startLoading();
-
-                clientesCall.enqueue(new Callback<DtoUsers>() {
-                    @Override
-                    public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
-                        if(response.code() == 201 || response.code() == 200){
-                            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
-                            voltaraologin.putExtra("email_user", email);
-                            voltaraologin.putExtra("password_user", password);
-                            startActivity(voltaraologin);
-                            finish();
-                        }
-                        else if (response.code() == 409){
-                            loadingDialog.dimissDialog();
-                            showError();
-                        }else{
-                            Toast.makeText(CriarContaActivity.this, R.string.wehaveaproblem, Toast.LENGTH_LONG).show();
-                            loadingDialog.dimissDialog();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<DtoUsers> call, Throwable t) {
-                        Toast.makeText(CriarContaActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_LONG).show();
-                        loadingDialog.dimissDialog();
-                    }
-                });
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("StatusCreateAccount", "createUserWithEmail:success");
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        UsersService usersService = retrofitUser.create(UsersService.class);
+                                        DtoUsers newuser = new DtoUsers(email, nm_user, cpf_user, password);
+                                        Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
+                                        clientesCall.enqueue(new Callback<DtoUsers>() {
+                                            @Override
+                                            public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                                                if(response.code() == 201 || response.code() == 200){
+                                                    Log.d("EmailStatus", "Email sent.");
+                                                    Show_WeSendEmail_Warning(email, password);
+                                                }
+                                                else if (response.code() == 409){
+                                                    loadingDialog.dimissDialog();
+                                                    showError();
+                                                }else{
+                                                    Toast.makeText(CreateAccountActivity.this, R.string.wehaveaproblem, Toast.LENGTH_LONG).show();
+                                                    loadingDialog.dimissDialog();
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(Call<DtoUsers> call, Throwable t) {
+                                                Toast.makeText(CreateAccountActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_LONG).show();
+                                                loadingDialog.dimissDialog();
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("StatusCreateAccount", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
         //  When click will go back to LoginActivity
         txtLogin.setOnClickListener(v -> {
-            Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+            Intent voltaraologin = new Intent(CreateAccountActivity.this, LoginActivity.class);
             startActivity(voltaraologin);
             finish();
         });
@@ -230,6 +253,66 @@ public class CriarContaActivity extends AppCompatActivity {
         txtTerms.setOnClickListener(v -> ShowTerms());
     }
 
+    private void PreloadServer() {
+        int cd_prod = 14;
+        MenuService menuService = retrofitPreLoad.create(MenuService.class);
+        Call<DtoMenuById> call = menuService.getProductByCd(cd_prod);
+        call.enqueue(new Callback<DtoMenuById>() {
+            @Override
+            public void onResponse(Call<DtoMenuById> call, Response<DtoMenuById> response) {
+                Log.d("PreLoadStatus", "Server ON");
+            }
+            @Override
+            public void onFailure(Call<DtoMenuById> call, Throwable t) {
+                Toast.makeText(CreateAccountActivity.this, "We have a problem with our servers, please try again later !!\nEstamos com problema em nossos servidores tente novamente mais tarde!!", Toast.LENGTH_SHORT).show();
+                Log.d("ServerError", t.getMessage());
+            }
+        });
+    }
+
+    private void Ids() {
+        btnvoltarcriarconta = findViewById(R.id.btnvoltarcriarconta);
+        certosenhacriarconta = findViewById(R.id.certosenhacriarconta);
+        cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
+        imgolhofechadocriarconta = findViewById(R.id.imgolhofechadocriarconta);
+        imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
+        edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);
+        edittextEmail_userCreateAccount = findViewById(R.id.edittextEmail_userCreateAccount);
+        edittextFirstName_userCreateAccount = findViewById(R.id.edittextFirstName_userCreateAccount);
+        edittextLastName_userCreateAccount = findViewById(R.id.edittextLastName_userCreateAccount);
+        edittextcpf_userCreateAccount = findViewById(R.id.edittextcpf_userCreateAccount);
+        checkboxaceitoostermos = findViewById(R.id.checkboxaceitoostermos);
+        txtTerms = findViewById(R.id.txtTerms);
+        txtLogin = findViewById(R.id.txtLogin);
+    }
+
+    //  Create Method for show alert of email send
+    private void Show_WeSendEmail_Warning(String email, String password){
+        CardView btnIwillConfirm;
+        warning_emailsend.setContentView(R.layout.adapter_wesendemail);
+        warning_emailsend.setCancelable(false);
+        btnIwillConfirm = warning_emailsend.findViewById(R.id.btnIwillConfirm);
+
+        btnIwillConfirm.setOnClickListener(v -> {
+            Intent voltaraologin = new Intent(CreateAccountActivity.this, LoginActivity.class);
+            voltaraologin.putExtra("email_user", email);
+            voltaraologin.putExtra("password_user", password);
+            startActivity(voltaraologin);
+            finish();
+        });
+        warning_emailsend.show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            onRestart();
+        }
+    }
+
     //  Create method to see the terms
     private void ShowTerms() {
         LottieAnimationView btnfechartermos;
@@ -258,11 +341,11 @@ public class CriarContaActivity extends AppCompatActivity {
         avisoerro.setCancelable(false);
 
         cardokavisoerro.setOnClickListener(v -> {
-            Intent voltaramain = new Intent(CriarContaActivity.this, SplashActivity.class);
+            Intent voltaramain = new Intent(CreateAccountActivity.this, SplashActivity.class);
             voltaramain.putExtra("new_time_to_start",1);
             voltaramain.putExtra("new_time_to_showOptions",200);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
-            ActivityCompat.startActivity(CriarContaActivity.this,voltaramain, activityOptionsCompat.toBundle());
+            ActivityCompat.startActivity(CreateAccountActivity.this,voltaramain, activityOptionsCompat.toBundle());
             finish();
         });
 
@@ -271,7 +354,7 @@ public class CriarContaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent voltaraologin = new Intent(CriarContaActivity.this, LoginActivity.class);
+        Intent voltaraologin = new Intent(CreateAccountActivity.this, LoginActivity.class);
         startActivity(voltaraologin);
         finish();
     }

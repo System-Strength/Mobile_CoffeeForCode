@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -39,16 +40,16 @@
             android:name=".RegisterAddressActivity"
             android:label="@string/title_activity_register_addresss_beta"/>
         <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".Editar_PerfilActivity" />
+        <activity android:name=".Edit_ProfileActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AllProductsActivity" />
         <activity android:name=".SaibaMaisActivity" />
-        <activity android:name=".CarrinhoDeCompraActivity" />
+        <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".CadastrarCartoesActivity" />
         <activity android:name=".CartoesActivity" />
         <activity android:name=".SejaParceiroActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CriarContaActivity" />
+        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

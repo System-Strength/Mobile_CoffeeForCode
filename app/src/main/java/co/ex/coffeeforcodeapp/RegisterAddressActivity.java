@@ -1,8 +1,9 @@
 package co.ex.coffeeforcodeapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -10,9 +11,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionInfo;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,11 +35,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.security.Permission;
 import java.util.List;
+import java.util.Locale;
 
-import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
 import co.ex.coffeeforcodeapp.Api.zipcode.DtoZipCode;
@@ -47,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class RegisterAddressActivity extends FragmentActivity implements OnMapReadyCallback {
+public class RegisterAddressActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     EditText edittext_zipcode_cliente, edittext_address_cliente, edittext_mumber_cliente, edittext_complement_cliente;
@@ -60,6 +62,9 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
     String zipcode = "01310-100";
     private double latitude;
     private double longitude;
+    Location lastLocation;
+    private GoogleApiClient googleApiClient;
+    LatLng locationMap;
 
     //  Api Retrofit
     final Retrofit retrofitUserUpdate = new Retrofit.Builder()
@@ -73,6 +78,8 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+    private final int FINE_LOCATION_CODE = 1;
+    private int ACCESS_COARSE_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,16 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         BtnConfirmRegisterAddress = findViewById(R.id.BtnConfirmRegisterAddress);
         animation_address_confirm = findViewById(R.id.animation_address_confirm);
         txtBtnconfirm = findViewById(R.id.txtBtnconfirm);
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        //Tentando conexão com o Google API. Se a tentativa for bem sucessidade, o método onConnected() será chamado, senão, o método onConnectionFailed() será chamado.
+        googleApiClient.connect();
+
+
         //  Set Mask
         edittext_zipcode_cliente.addTextChangedListener(MaskEditUtil.mask(edittext_zipcode_cliente, MaskEditUtil.FORMAT_CEP));
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -119,15 +136,15 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (edittext_zipcode_cliente.getText().length() == 9){
+                if (edittext_zipcode_cliente.getText().length() == 9) {
                     zipcode = edittext_zipcode_cliente.getText().toString();
                     ZipCodeService zipCodeService = retrofitZipCode.create(ZipCodeService.class);
                     Call<DtoZipCode> zipcodeCall = zipCodeService.getAddress(zipcode);
                     zipcodeCall.enqueue(new Callback<DtoZipCode>() {
                         @Override
                         public void onResponse(Call<DtoZipCode> call, Response<DtoZipCode> response) {
-                            if (response.isSuccessful()){
-                                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                            if (response.isSuccessful()) {
+                                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
                                         edittext_zipcode_cliente.getWindowToken(), 0);
                                 assert response.body() != null;
                                 zipcode = response.body().getCep();
@@ -141,7 +158,7 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
                                 edittext_address_cliente.setEnabled(true);
                                 edittext_mumber_cliente.setEnabled(true);
                                 edittext_complement_cliente.setEnabled(true);
-                            }else{
+                            } else {
                                 Toast.makeText(RegisterAddressActivity.this, "Error in get your address\nTry later\nErro em receber seu endereço\nTente mais tarde", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -157,35 +174,35 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         });
 
         BtnConfirmRegisterAddress.setOnClickListener(v -> {
-            if (edittext_zipcode_cliente.getText() == null || edittext_zipcode_cliente.getText().length() < 9){
+            if (edittext_zipcode_cliente.getText() == null || edittext_zipcode_cliente.getText().length() < 9) {
                 Toast.makeText(this, "You need to enter your zip code\nNecessário inserir seu CEP", Toast.LENGTH_SHORT).show();
                 edittext_zipcode_cliente.requestFocus();
                 imm.showSoftInput(edittext_zipcode_cliente, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if(edittext_address_cliente.getText() == null || edittext_address_cliente.getText().length() < 5){
+            } else if (edittext_address_cliente.getText() == null || edittext_address_cliente.getText().length() < 5) {
                 Toast.makeText(this, "You need to enter your address\nNecessário inserir seu Endereço", Toast.LENGTH_SHORT).show();
                 edittext_address_cliente.requestFocus();
                 imm.showSoftInput(edittext_address_cliente, InputMethodManager.SHOW_IMPLICIT);
 
-            }else if(edittext_mumber_cliente.getText() == null || edittext_mumber_cliente.getText().length() == 0){
+            } else if (edittext_mumber_cliente.getText() == null || edittext_mumber_cliente.getText().length() == 0) {
                 Toast.makeText(this, "You need to enter your address number\nNecessário inserir seu Numero de Endereço", Toast.LENGTH_SHORT).show();
                 edittext_mumber_cliente.requestFocus();
                 imm.showSoftInput(edittext_mumber_cliente, InputMethodManager.SHOW_IMPLICIT);
-            }else{
+            } else {
                 txtBtnconfirm.setVisibility(View.GONE);
                 animation_address_confirm.setVisibility(View.VISIBLE);
                 animation_address_confirm.playAnimation();
                 UsersService usersService = retrofitUserUpdate.create(UsersService.class);
                 String new_address_user = edittext_address_cliente.getText().toString() + " " + edittext_mumber_cliente.getText().toString();
                 String new_complement = edittext_complement_cliente.getText().toString();
-                DtoUsers newAddress = new DtoUsers(new_address_user, new_complement);
+                DtoUsers newAddress = new DtoUsers(zipcode, new_address_user, new_complement);
                 Call<DtoUsers> callUser = usersService.UpdateAddress(id_user, newAddress);
                 callUser.enqueue(new Callback<DtoUsers>() {
                     @Override
                     public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
                         address_user = new_address_user;
                         complement = new_complement;
-                        Toast.makeText(RegisterAddressActivity.this, "Endereço cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterAddressActivity.this, "Address registered successfully !!\nEndereço cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
                         GoBack_toMain();
                     }
 
@@ -200,8 +217,6 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
                 });
             }
         });
-
-
     }
 
     private void goToZipCode() {
@@ -218,9 +233,10 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
                 // Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             } else {
                 // Display appropriate message when Geocoder services are not available
-                Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Zip Code is invalid\nO código postal é inválido", Toast.LENGTH_LONG).show();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            Toast.makeText(this, "Error in get your address\nErro ao obter o seu endereço\nError code: " + e.toString(), Toast.LENGTH_SHORT).show();
             // handle exception
         }
     }
@@ -230,9 +246,10 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         mMap = googleMap;
 
         // Add a marker in location and move the camera
-        LatLng location = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(location).title(zipcode));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
+        locationMap = new LatLng(latitude, longitude);
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(locationMap).title(zipcode));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationMap, 15f));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -254,12 +271,106 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         partner_Startdate = bundle.getString("partner_Startdate");
     }
 
-    private void GoBack_toMain(){
+    @Override
+    protected void onStop() {
+        super.onStop();
+        StopConexaoWithGoogleApi();
+    }
+
+    public void StopConexaoWithGoogleApi() {
+        //Verificando se está conectado para então cancelar a conexão!
+        if (googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_CODE);
+            ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_COARSE_CODE);
+        }else{
+
+            lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(lastLocation.getLatitude(), lastLocation.getLongitude(), 1);
+                String address = addresses.get(0).getAddressLine(0);
+                String zipcode = addresses.get(0).getPostalCode();
+                edittext_zipcode_cliente.setText(zipcode);
+                edittext_address_cliente.setText(address);
+                latitude = lastLocation.getLatitude();
+                longitude = lastLocation.getLongitude();
+                onMapReady(mMap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    /*public void requestPermissions(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+            new AlertDialog.Builder(this)
+                    .setTitle("Permisson needed")
+                    .setMessage("É precisso conseder perm")
+                    .setPositiveButton("ok", (dialog, which) -> {
+                        ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_CODE);
+                        ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_COARSE_CODE);
+                    })
+                    .setNegativeButton("cancelar", (dialog, which) -> dialog.dismiss())
+                    .create().show();
+        }else{
+            ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_CODE);
+            ActivityCompat.requestPermissions(RegisterAddressActivity.this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_COARSE_CODE);
+        }
+    } */
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == FINE_LOCATION_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                finish();
+                Intent gotoHere = new Intent(RegisterAddressActivity.this, RegisterAddressActivity.class);
+                gotoHere.putExtra("id_user", id_user);
+                gotoHere.putExtra("nm_user", nm_user);
+                gotoHere.putExtra("email_user", email_user);
+                gotoHere.putExtra("phone_user", phone_user);
+                gotoHere.putExtra("address_user", address_user);
+                gotoHere.putExtra("complement", complement);
+                gotoHere.putExtra("img_user", img_user);
+                gotoHere.putExtra("address_user", address_user);
+                gotoHere.putExtra("cpf_user", cpf_user);
+                gotoHere.putExtra("partner", partner);
+                gotoHere.putExtra("partner_Startdate", partner_Startdate);
+                gotoHere.putExtra("statusavisoend", "desativado");
+                startActivity(gotoHere);
+            }
+        }else{
+            googleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        StopConexaoWithGoogleApi();
+    }
+
+    private void GoBack_toMain() {
         Intent GoBack_ToMain = new Intent(RegisterAddressActivity.this, MainActivity.class);
         GoBack_ToMain.putExtra("id_user", id_user);
         GoBack_ToMain.putExtra("nm_user", nm_user);
         GoBack_ToMain.putExtra("email_user", email_user);
         GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("zipcode", zipcode);
         GoBack_ToMain.putExtra("address_user", address_user);
         GoBack_ToMain.putExtra("complement", complement);
         GoBack_ToMain.putExtra("img_user", img_user);
@@ -267,8 +378,9 @@ public class RegisterAddressActivity extends FragmentActivity implements OnMapRe
         GoBack_ToMain.putExtra("cpf_user", cpf_user);
         GoBack_ToMain.putExtra("partner", partner);
         GoBack_ToMain.putExtra("partner_Startdate", partner_Startdate);
-        GoBack_ToMain.putExtra("statusavisoend","desativado");
+        GoBack_ToMain.putExtra("statusavisoend", "desativado");
         startActivity(GoBack_ToMain);
+        StopConexaoWithGoogleApi();
         finish();
     }
 
