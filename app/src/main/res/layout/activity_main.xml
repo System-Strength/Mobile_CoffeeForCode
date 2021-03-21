@@ -689,10 +689,38 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/baseQTProd_ShoopingCart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittlecart">
+
+                                <TextView
+                                    android:id="@+id/txtQtProdMain"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="@string/price"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="#E2000000"
+                                    android:textAlignment="center"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
                             <com.airbnb.lottie.LottieAnimationView
                                 android:id="@+id/animationcart"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp"
+                                android:layout_height="60dp"
+                                android:maxHeight="60dp"
+                                android:visibility="visible"
                                 app:layout_constraintTop_toBottomOf="@+id/txttittlecart"
                                 app:lottie_autoPlay="true"
                                 app:lottie_rawRes="@raw/shoppingcart_animation" />
@@ -704,10 +732,10 @@
                                 android:layout_height="40dp"
                                 app:cardBackgroundColor="#fff"
                                 app:cardCornerRadius="15dp"
+                                android:layout_marginBottom="8dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/animationcart">
+                                app:layout_constraintStart_toStartOf="parent">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
@@ -717,11 +745,11 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/iconemais"
-                                        android:textSize="30sp"
-                                        android:textColor="#000"
-                                        android:textStyle="bold"
                                         android:layout_marginBottom="4dp"
+                                        android:text="@string/iconemais"
+                                        android:textColor="#000"
+                                        android:textSize="30sp"
+                                        android:textStyle="bold"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -887,10 +915,6 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
                 </androidx.cardview.widget.CardView>
 
