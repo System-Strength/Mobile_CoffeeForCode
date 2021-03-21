@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,15 +19,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
     //  Text Header
-    TextView txtName_user, txtEmail_user;
+    TextView txt_Name_user_profile, txt_Email_user;
     //  Text Body
-    TextView txtcpfperfil, txtcelularperfil, txtenderecoperfil, txtcomplementoperfil, txtstatuscard_perfil, data_ativacaoparceiro_perfil;
+    TextView txt_cpf_profile, txt_phone_profile, txt_address_profile, txt_complement_erfil, txtstatuscard_profile, date_activationPartner_profile;
     //  Bases
-    ConstraintLayout base_nao_tem_celular_cadastrado, base_tem_celular_cadastrado, base_tem_endereco_cadastrado, base_nao_tem_endereco_cadastrado,
-            nao_sou_parceiro_perfil, cliente_eparceiro, base_desc_parceiro_perfil;
-    LottieAnimationView animacaogiftcardperfil;
-    CardView btnvirarparceiro_perfil, card_cadastarceluar_perfil, cardbtn_cadastrarendereco_perfil, cardbtn_editarperfil;
+    ConstraintLayout base_notHave_phone_registred, base_have_phone_registred, base_have_address_registraded, base_notHave_address_registraded,
+            iam_notPartner_profile, client_is_partner, base_desc_partner_profile;
+    LottieAnimationView animation_giftcard_profile;
+    CardView btn_be_partner_profile, card_registerphone_profile, cardbtn_registerAddress_profile, cardbtn_edit_profile;
     CircleImageView Profile_image;
+    @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     int id_user, partner;
     String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
@@ -36,28 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setTheme(R.style.Perfil);
-
-        txtName_user = findViewById(R.id.txtName_user);
-        txtEmail_user = findViewById(R.id.txtEmail_user);
-        txtcpfperfil = findViewById(R.id.txtcpfperfil);
-        base_nao_tem_celular_cadastrado = findViewById(R.id.base_nao_tem_celular_cadastrado);
-        base_tem_celular_cadastrado = findViewById(R.id.base_tem_celular_cadastrado);
-        txtcelularperfil = findViewById(R.id.txtcelularperfil);
-        txtenderecoperfil = findViewById(R.id.txtenderecoperfil);
-        txtcomplementoperfil = findViewById(R.id.txtcomplementoperfil);
-        base_tem_endereco_cadastrado = findViewById(R.id.base_tem_endereco_cadastrado);
-        base_nao_tem_endereco_cadastrado = findViewById(R.id.base_nao_tem_endereco_cadastrado);
-        nao_sou_parceiro_perfil = findViewById(R.id.nao_sou_parceiro_perfil);
-        cliente_eparceiro = findViewById(R.id.cliente_eparceiro);
-        animacaogiftcardperfil = findViewById(R.id.animacaogiftcardperfil);
-        base_desc_parceiro_perfil = findViewById(R.id.base_desc_parceiro_perfil);
-        txtstatuscard_perfil = findViewById(R.id.txtstatuscard_perfil);
-        data_ativacaoparceiro_perfil = findViewById(R.id.data_ativacaoparceiro_perfil);
-        btnvirarparceiro_perfil = findViewById(R.id.btnvirarparceiro_perfil);
-        card_cadastarceluar_perfil = findViewById(R.id.card_cadastarceluar_perfil);
-        cardbtn_cadastrarendereco_perfil = findViewById(R.id.cardbtn_cadastrarendereco_perfil);
-        cardbtn_editarperfil = findViewById(R.id.cardbtn_editarperfil);
-        Profile_image = findViewById(R.id.Profile_image);
+        Ids();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -74,14 +55,15 @@ public class ProfileActivity extends AppCompatActivity {
         partner_Startdate = bundle.getString("partner_Startdate");
 
         if (img_user == null){
-            carregar_info_user();
+            load_user_info();
         }else{
-            carregar_info_user();
             loadProfileImage();
+            load_user_info();
+            Log.d("ProfileImageStatus", "loading image");
         }
 
 
-        btnvirarparceiro_perfil.setOnClickListener(v -> {
+        btn_be_partner_profile.setOnClickListener(v -> {
             Intent irpara_sejaparceira = new Intent(ProfileActivity.this, SejaParceiroActivity.class);
             irpara_sejaparceira.putExtra("id_user", id_user);
             irpara_sejaparceira.putExtra("email_user", email_user);
@@ -98,16 +80,41 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         });
 
-        cardbtn_editarperfil.setOnClickListener(v -> GoTo_EditProfile());
+        cardbtn_edit_profile.setOnClickListener(v -> GoTo_EditProfile());
 
-        card_cadastarceluar_perfil.setOnClickListener(v -> GoTo_EditProfile());
+        card_registerphone_profile.setOnClickListener(v -> GoTo_EditProfile());
 
-        cardbtn_cadastrarendereco_perfil.setOnClickListener(v -> GoTo_EditProfile());
+        cardbtn_registerAddress_profile.setOnClickListener(v -> GoTo_EditProfile());
 
+    }
+
+    private void Ids() {
+        txt_Name_user_profile = findViewById(R.id.txt_Name_user_profile);
+        txt_Email_user = findViewById(R.id.txt_Email_user);
+        txt_cpf_profile = findViewById(R.id.txt_cpf_profile);
+        base_notHave_phone_registred = findViewById(R.id.base_notHave_phone_registred);
+        base_have_phone_registred = findViewById(R.id.base_have_phone_registred);
+        txt_phone_profile = findViewById(R.id.txt_phone_profile);
+        txt_address_profile = findViewById(R.id.txt_address_profile);
+        txt_complement_erfil = findViewById(R.id.txt_complement_erfil);
+        base_have_address_registraded = findViewById(R.id.base_have_address_registraded);
+        base_notHave_address_registraded = findViewById(R.id.base_notHave_address_registraded);
+        iam_notPartner_profile = findViewById(R.id.iam_notPartner_profile);
+        client_is_partner = findViewById(R.id.client_is_partner);
+        animation_giftcard_profile = findViewById(R.id.animation_giftcard_profile);
+        base_desc_partner_profile = findViewById(R.id.base_desc_partner_profile);
+        txtstatuscard_profile = findViewById(R.id.txtstatuscard_profile);
+        date_activationPartner_profile = findViewById(R.id.date_activationPartner_profile);
+        btn_be_partner_profile = findViewById(R.id.btn_be_partner_profile);
+        card_registerphone_profile = findViewById(R.id.card_registerphone_profile);
+        cardbtn_registerAddress_profile = findViewById(R.id.cardbtn_registerAddress_profile);
+        cardbtn_edit_profile = findViewById(R.id.cardbtn_edit_profile);
+        Profile_image = findViewById(R.id.Profile_image);
     }
 
     private void loadProfileImage() {
         AsyncUserImage loadimage = new AsyncUserImage(img_user, Profile_image);
+        //noinspection deprecation
         loadimage.execute();
     }
 
@@ -128,30 +135,30 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void carregar_info_user(){
-        txtName_user.setText(nm_user);
-        txtEmail_user.setText(email_user);
-        txtcpfperfil.setText(cpf_user);
+    private void load_user_info(){
+        txt_Name_user_profile.setText(nm_user);
+        txt_Email_user.setText(email_user);
+        txt_cpf_profile.setText(cpf_user);
         if (phone_user == null || phone_user.equals(" ")){
-            base_nao_tem_celular_cadastrado.setVisibility(View.VISIBLE);
-            base_tem_celular_cadastrado.setVisibility(View.GONE);
+            base_notHave_phone_registred.setVisibility(View.VISIBLE);
+            base_have_phone_registred.setVisibility(View.GONE);
         }else {
-            txtcelularperfil.setText(phone_user);
-            base_nao_tem_celular_cadastrado.setVisibility(View.GONE);
-            base_tem_celular_cadastrado.setVisibility(View.VISIBLE);
+            txt_phone_profile.setText(phone_user);
+            base_notHave_phone_registred.setVisibility(View.GONE);
+            base_have_phone_registred.setVisibility(View.VISIBLE);
         }
         if (address_user == null || address_user.equals(" ")){
-            base_tem_endereco_cadastrado.setVisibility(View.GONE);
-            base_nao_tem_endereco_cadastrado.setVisibility(View.VISIBLE);
+            base_have_address_registraded.setVisibility(View.GONE);
+            base_notHave_address_registraded.setVisibility(View.VISIBLE);
 
         }else {
-            base_tem_endereco_cadastrado.setVisibility(View.VISIBLE);
-            base_nao_tem_endereco_cadastrado.setVisibility(View.GONE);
-            txtenderecoperfil.setText(address_user);
+            base_have_address_registraded.setVisibility(View.VISIBLE);
+            base_notHave_address_registraded.setVisibility(View.GONE);
+            txt_address_profile.setText(address_user);
             if (complement == null){
-                txtcomplementoperfil.setText("Complemento não cadastrado");
+                txt_complement_erfil.setText(R.string.complement_not_registred);
             }else {
-                txtcomplementoperfil.setText(complement);
+                txt_complement_erfil.setText(complement);
             }
         }
         info_parceiro();
@@ -161,21 +168,20 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void info_parceiro(){
         if (partner == 0){
-            cliente_eparceiro.setVisibility(View.GONE);
-            base_desc_parceiro_perfil.setVisibility(View.GONE);
-            nao_sou_parceiro_perfil.setVisibility(View.VISIBLE);
-            animacaogiftcardperfil.setVisibility(View.VISIBLE);
-            animacaogiftcardperfil.playAnimation();
+            client_is_partner.setVisibility(View.GONE);
+            base_desc_partner_profile.setVisibility(View.GONE);
+            iam_notPartner_profile.setVisibility(View.VISIBLE);
+            animation_giftcard_profile.setVisibility(View.VISIBLE);
+            animation_giftcard_profile.playAnimation();
             timer.postDelayed(() -> {
-                animacaogiftcardperfil.setVisibility(View.GONE);
-                base_desc_parceiro_perfil.setVisibility(View.VISIBLE);
+                animation_giftcard_profile.setVisibility(View.GONE);
+                base_desc_partner_profile.setVisibility(View.VISIBLE);
             },2950);
         }else {
-
-            cliente_eparceiro.setVisibility(View.VISIBLE);
-            nao_sou_parceiro_perfil.setVisibility(View.GONE);
-            txtstatuscard_perfil.setText("A um cartao ativado!!");
-            data_ativacaoparceiro_perfil.setText("Assinatura gerada em: " + partner_Startdate);
+            client_is_partner.setVisibility(View.VISIBLE);
+            iam_notPartner_profile.setVisibility(View.GONE);
+            txtstatuscard_profile.setText(R.string.activated_card);
+            date_activationPartner_profile.setText("Assinatura gerada em: " + partner_Startdate);
         }
     }
 

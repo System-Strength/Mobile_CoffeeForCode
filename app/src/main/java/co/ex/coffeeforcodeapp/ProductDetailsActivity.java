@@ -9,13 +9,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
@@ -55,6 +56,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+    LottieAnimationView animation_add_to_cart;
+    TextView txt_add_to_cart;
     LoadingDialog loadingDialog = new LoadingDialog(ProductDetailsActivity.this);
 
     @SuppressLint("SetTextI18n")
@@ -74,6 +77,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnPlusQT_Prod = findViewById(R.id.btnPlusQT_Prod);
         BtnAddToCart = findViewById(R.id.BtnAddToCart);
         infoCartSize = findViewById(R.id.infoCartSize);
+        animation_add_to_cart = findViewById(R.id.animation_add_to_cart);
+        txt_add_to_cart = findViewById(R.id.txt_add_to_cart);
         ShoppingCartAlert = new Dialog(this);
 
         Intent intent = getIntent();
@@ -83,7 +88,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         nm_cat = bundle.getString("nm_cat");
         if (cd_prod == 0){
             txtQt_prod.setText(qt_prod +"" );
-            Toast.makeText(this, "Error for select product\nTry Again\nErro em selecionar produto\nTente novamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_for_select_product, Toast.LENGTH_SHORT).show();
             finish();
         }else{
             txtQt_prod.setText(qt_prod +"" );
@@ -94,7 +99,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         btnLessQT_Prod.setOnClickListener(v -> {
             if (qt_prod == 1){
-                Toast.makeText(this, "1 is the minimum quantity\n1 é a quantidade mínima", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.one_is_the_minumum_quantity, Toast.LENGTH_SHORT).show();
             }else{
                 qt_prod--;
                 RefreshQtText();
@@ -103,7 +108,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         btnPlusQT_Prod.setOnClickListener(v -> {
             if (qt_prod == 20){
-                Toast.makeText(this, "The maximum quantity to buy is 20\nA quantidade maxima por comprar é 20", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.the_maximum_quantity_is_20, Toast.LENGTH_SHORT).show();
             }else {
                 qt_prod++;
                 RefreshQtText();
@@ -114,30 +119,42 @@ public class ProductDetailsActivity extends AppCompatActivity {
             BtnAddToCart.setEnabled(false);
             btnLessQT_Prod.setEnabled(false);
             btnPlusQT_Prod.setEnabled(false);
+            animation_add_to_cart.setVisibility(View.VISIBLE);
+            animation_add_to_cart.playAnimation();
+            txt_add_to_cart.setVisibility(View.GONE);
             ShoppingCartService shoppingCartService = retrofitShoppingCart.create(ShoppingCartService.class);
             Call<DtoShoppingCart> cartCall = shoppingCartService.insertItem(email_user, cd_prod, qt_prod);
 
             cartCall.enqueue(new Callback<DtoShoppingCart>() {
                 @Override
-                public void onResponse(Call<DtoShoppingCart> call, Response<DtoShoppingCart> response) {
+                public void onResponse(@NotNull Call<DtoShoppingCart> call, @NotNull Response<DtoShoppingCart> response) {
                     if (response.code() == 201){
                         ShowShoppingCartAlert();
-                        //Toast.makeText(ProductDetailsActivity.this, "Successfully inserted", Toast.LENGTH_SHORT).show();
+                        pauseLoadingAnimation();
                     }else if (response.code() == 409){
-                        Toast.makeText(ProductDetailsActivity.this, "You already have this product in your cart", Toast.LENGTH_SHORT).show();
+                        pauseLoadingAnimation();
+                        Toast.makeText(ProductDetailsActivity.this, R.string.you_already_have_this_products_in_your_cart, Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(ProductDetailsActivity.this, "No possible to insert this item right now", Toast.LENGTH_SHORT).show();
+                        pauseLoadingAnimation();
+                        Toast.makeText(ProductDetailsActivity.this, R.string.no_possible_to_insert_this, Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<DtoShoppingCart> call, Throwable t) {
+                public void onFailure(@NotNull Call<DtoShoppingCart> call, @NotNull Throwable t) {
+                    pauseLoadingAnimation();
                     Toast.makeText(ProductDetailsActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });
 
         btnGoBackAllProducts.setOnClickListener(v -> finish());
+    }
+
+    private void pauseLoadingAnimation() {
+        animation_add_to_cart.setVisibility(View.GONE);
+        animation_add_to_cart.pauseAnimation();
+        txt_add_to_cart.setVisibility(View.VISIBLE);
     }
 
     private void ShowShoppingCartAlert() {
@@ -148,9 +165,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cardBtnSeeCart = ShoppingCartAlert.findViewById(R.id.cardBtnSeeCart);
         cardBtnGoBackMenu = ShoppingCartAlert.findViewById(R.id.cardBtnGoBackMenu);
 
-        cardBtnSeeCart.setOnClickListener(v -> {
-            Toast.makeText(this, "Under development", Toast.LENGTH_SHORT).show();
-        });
+        cardBtnSeeCart.setOnClickListener(v -> Toast.makeText(this, "Under development", Toast.LENGTH_SHORT).show());
 
         cardBtnGoBackMenu.setOnClickListener(v -> finish());
 
@@ -164,18 +179,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartCall.enqueue(new Callback<DtoShoppingCart>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<DtoShoppingCart> call, Response<DtoShoppingCart> response) {
+            public void onResponse(@NotNull Call<DtoShoppingCart> call, @NotNull Response<DtoShoppingCart> response) {
                 if (response.code() == 412){
                     infoCartSize.setVisibility(View.GONE);
                     txtCartSize.setText("");
                 }else if(response.code() == 200){
+                    assert response.body() != null;
                     txtCartSize.setText(response.body().getLength() + "");
                     infoCartSize.setVisibility(View.VISIBLE);
                 }
             }
             @Override
-            public void onFailure(Call<DtoShoppingCart> call, Throwable t) {
-                Toast.makeText(ProductDetailsActivity.this, "Erro to find your cart", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NotNull Call<DtoShoppingCart> call, @NotNull Throwable t) {
+                Toast.makeText(ProductDetailsActivity.this, R.string.error_to_find_your_cart, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -193,9 +209,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         menuCall.enqueue(new Callback<DtoMenuById>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<DtoMenuById> call, Response<DtoMenuById> response) {
+            public void onResponse(@NotNull Call<DtoMenuById> call, @NotNull Response<DtoMenuById> response) {
                 if (response.code() == 200){
-                    String  a = response.body().toString();
+                    assert response.body() != null;
                     nm_prod_Desc.setText(response.body().getNm_prod());
                     txtSize_ProductDesc.setText(response.body().getSize());
                     txtCategory_Prod_Desc.setText(nm_cat);
@@ -211,18 +227,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         @Override
                         public void onError(Exception e) {
                             loadingDialog.dimissDialog();
-                            Toast.makeText(ProductDetailsActivity.this, "Error to get image\nErro em receber a imagem", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductDetailsActivity.this, R.string.error_to_get_image, Toast.LENGTH_SHORT).show();
                         }
                     });
                 }else if(response.code() == 404){
-                    Toast.makeText(ProductDetailsActivity.this, "Products not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailsActivity.this, R.string.products_not_found, Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(ProductDetailsActivity.this, "Server timeout try later", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailsActivity.this, R.string.server_timeout, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<DtoMenuById> call, Throwable t) {
+            public void onFailure(@NotNull Call<DtoMenuById> call, @NotNull Throwable t) {
                 loadingDialog.dimissDialog();
                 Toast.makeText(ProductDetailsActivity.this, "Server error :" + t.getMessage(), Toast.LENGTH_LONG).show();
 
