@@ -160,4 +160,17 @@
     <string name="upload_successful">Upload bem sucedido</string>
     <string name="couldnt_insert">Não foi possível inserir</string>
     <string name="select_an_image">Selecione uma imagem</string>
+    <string name="activated_card">A um cartão ativado!!</string>
+    <string name="complement_not_registred">Complemento não cadastrado</string>
+    <string name="authfailed_thisemail">Falha na autenticação!\\nEste e-mail já está registrado.</string>
+    <string name="error_for_select_product">Erro em selecionar produto\\nTente novamente</string>
+    <string name="one_is_the_minumum_quantity">1 é a quantidade mínima</string>
+    <string name="the_maximum_quantity_is_20">A quantidade maxima por comprar é 20</string>
+    <string name="you_already_have_this_products_in_your_cart">Você já tem este produto em seu carrinho</string>
+    <string name="no_possible_to_insert_this">Não é possível inserir este item agora</string>
+    <string name="error_to_find_your_cart">Erro ao encontrar seu carrinho</string>
+    <string name="error_to_get_image">Erro em receber a imagem</string>
+    <string name="products_not_found">Produtos não encontrados</string>
+    <string name="server_timeout">Tempo limite do servidor, tente mais tarde</string>
+    <string name="default_notification_channel_id">Olá, é a coffee for code</string>
 </resources>

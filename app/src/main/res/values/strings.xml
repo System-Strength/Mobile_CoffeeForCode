@@ -83,6 +83,7 @@
     <string name="required_fill_email">Required to fill in the field: EMAIL</string>
     <string name="fill_email_correctly">Fill in your email correctly</string>
     <string name="necessary_fill_correctly_password">Necessary to fill the field correctly: PASSWORD\nMinimum 8 characters</string>
+    <string name="authfailed_thisemail">Authentication failed!\nThis email is already registered.</string>
 
     <!--Principal Screen-->
     <string name="atalhos">Shortcuts</string>
@@ -141,7 +142,7 @@
     <string name="aproveiteseusbeneficios">Enjoy your benefits</string>
 
 
-    <!--Cartoes Screen-->
+    <!--Cards Screen-->
     <string name="seuscartoes">Your Cards</string>
     <string name="desccardcfc">For discounted purchases on our website, app and store</string>
     <string name="setinhafeita" translatable="false">-></string>
@@ -177,6 +178,8 @@
     <string name="parceira">Partnership</string>
     <string name="statuscardparceiro">Status Card</string>
     <string name="ativacao">Activation</string>
+    <string name="activated_card">To an activated card !!</string>
+    <string name="complement_not_registred">Complement not registered</string>
 
     <!--Edit Profile-->
     <string name="title_editProfile">Edit profile</string>
@@ -200,8 +203,19 @@
     <string name="couldnt_insert">Couldn`t insert</string>
     <string name="select_an_image">Select an image</string>
 
+    <!-- Products Details -->
+    <string name="error_for_select_product">Error for select product\nTry Again</string>
+    <string name="one_is_the_minumum_quantity">1 is the minimum quantity</string>
+    <string name="the_maximum_quantity_is_20">The maximum quantity to buy is 20</string>
+    <string name="you_already_have_this_products_in_your_cart">You already have this product in your cart</string>
+    <string name="no_possible_to_insert_this">No possible to insert this item right now</string>
+    <string name="error_to_find_your_cart">Error to find your cart</string>
+    <string name="error_to_get_image">Error to get image</string>
+    <string name="products_not_found">Products not found</string>
+    <string name="server_timeout">Server timeout try later</string>
 
-    <!-- Tela de Adms-->
+
+    <!-- Tools-->
     <string name="addproduto">Add New Product</string>
     <string name="alterproduto">Change Product</string>
     <string name="excluirproduto">Delete Product</string>
@@ -212,8 +226,8 @@
     <string name="change_profile_image"><u>Change profile image</u></string>
     <string name="allproducts">Products</string>
     <string name="category">Category</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
     <string name="buy">Buy</string>
     <string name="plus" translatable="false">+</string>
     <string name="less" translatable="false">-</string>
@@ -233,5 +247,6 @@
     <string name="hello_emailsend">Hello, your user has been successfully registered :)\nWe sent a verification email to the registered email, please confirm in the email before logging in.</string>
     <string name="ok_i_will_confirm">Ok, I will confirm</string>
     <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
+    <string name="default_notification_channel_id">Hey, It`s coffee for code</string>
 
 </resources>

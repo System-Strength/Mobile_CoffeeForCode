@@ -15,17 +15,28 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import co.ex.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
+import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
+import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
 import co.ex.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+
+import org.jetbrains.annotations.NotNull;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -45,22 +56,26 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
 
+    //  Shopping Cart
+    ConstraintLayout baseQTProd_ShoopingCart;
+    TextView txtQtProdMain;
+    LottieAnimationView animationcart;
+
     // Shortcuts Cards
     CardView cardshopcafe, cardRefreshersMain, cardhamburguerandsandwiches, cardcandys ;
 
     int id_user, partner, cd_cat;
     String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, Show_warning_address, partner_Startdate;
-    final Retrofit Productsretrofit = new Retrofit.Builder()
-            .baseUrl("https://coffeeforcode.herokuapp.com/products/")
+
+    String baseurl = "https://coffeeforcode.herokuapp.com/";
+    final Retrofit retrofitShoppingCart = new Retrofit.Builder()
+            .baseUrl( baseurl + "shoppingcart/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    final Retrofit retrofitUser = new Retrofit.Builder()
-            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    //  Firebase
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -69,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Finds_Ids();
         warning_address = new Dialog(this);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
 
         //  Get information for login of client
@@ -96,9 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (img_user == null){
             loadPopularProducts();
+            GetCartSize();
         }else {
-            loadPopularProducts();
             loadProfileImage();
+            loadPopularProducts();
+            GetCartSize();
+            Log.d("ProfileImageStatus", "loading image");
         }
 
 
@@ -162,6 +183,10 @@ public class MainActivity extends AppCompatActivity {
             GoTo_AllProducts.putExtra("partner", partner);
             GoTo_AllProducts.putExtra("partner_Startdate", partner_Startdate);
             startActivity(GoTo_AllProducts);
+            Bundle bundlefirebase = new Bundle();
+            bundlefirebase.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MainActivity");
+            bundlefirebase.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AllProductsActivity");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundlefirebase);
             finish();
         });
 
@@ -247,6 +272,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void GetCartSize() {
+        ShoppingCartService shoppingCartService = retrofitShoppingCart.create(ShoppingCartService.class);
+        Call<DtoShoppingCart> cartCall = shoppingCartService.getCartInfomration(email_user);
+        cartCall.enqueue(new Callback<DtoShoppingCart>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NotNull Call<DtoShoppingCart> call, @NotNull Response<DtoShoppingCart> response) {
+                if (response.code() == 412){
+                    animationcart.setVisibility(View.VISIBLE);
+                    baseQTProd_ShoopingCart.setVisibility(View.GONE);
+                }else if(response.code() == 200){
+                    animationcart.setVisibility(View.GONE);
+                    baseQTProd_ShoopingCart.setVisibility(View.VISIBLE);
+                    assert response.body() != null;
+                    txtQtProdMain.setText("Você tem " + response.body().getLength() + " produtos em seu carrinho");
+                }
+            }
+            @Override
+            public void onFailure(@NotNull Call<DtoShoppingCart> call, @NotNull Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro to find your cart", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void GoTo_AllProductsWithCDCAT(int cd_cat) {
         Intent GoToAllProducts_With_CatCd = new Intent(MainActivity.this, AllProductsActivity.class);
         GoToAllProducts_With_CatCd.putExtra("cd_cat", cd_cat);
@@ -276,6 +325,11 @@ public class MainActivity extends AppCompatActivity {
         btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
         icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
 
+        //  Shopping Cart
+        baseQTProd_ShoopingCart = findViewById(R.id.baseQTProd_ShoopingCart);
+        txtQtProdMain = findViewById(R.id.txtQtProdMain);
+        animationcart = findViewById(R.id.animationcart);
+
         //  Shortcuts Ids
         cardshopcafe = findViewById(R.id.cardshopcafe);
         cardRefreshersMain = findViewById(R.id.cardRefreshersMain);
@@ -285,6 +339,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadProfileImage() {
         AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
+        //noinspection deprecation
         loadimage.execute();
     }
 
@@ -293,6 +348,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerPopularProducts.setLayoutManager(layoutManager);
 
         AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, email_user, MainActivity.this);
+        //noinspection deprecation
         asyncPopularProducts.execute();
     }
 

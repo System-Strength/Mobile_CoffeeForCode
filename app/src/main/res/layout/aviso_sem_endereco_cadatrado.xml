@@ -1,53 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:background="@drawable/back_noback"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--Principal Contender-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="360dp"
-        android:layout_height="210dp"
-        android:background="@drawable/back_noback"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!--Body-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="350dp"
-            android:layout_height="200dp"
-            android:background="@drawable/back_body_noaddress_found"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <!--Text Desc-->
-            <TextView
-                android:id="@+id/txtdescavisoend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/descnenhumendencontrado"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="340dp"
+        android:background="#fff"
+        android:layout_height="wrap_content">
 
         <!--Header-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -72,17 +40,35 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--Text Desc-->
+        <TextView
+            android:id="@+id/txtdescavisoend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="330dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/descnenhumendencontrado"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
         <!--Btn Register Now-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnRegisterAddressNow"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
             android:background="@drawable/btncadastraragoraend"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
+            app:layout_constraintEnd_toStartOf="@+id/btnRegisterAddressLater"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtdescavisoend">
 
             <TextView
                 android:layout_width="100dp"
@@ -104,10 +90,11 @@
             android:id="@+id/btnRegisterAddressLater"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btncadastrardepoisend"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtdescavisoend">
 
             <!--Text Register after-->
             <TextView
@@ -128,4 +115,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

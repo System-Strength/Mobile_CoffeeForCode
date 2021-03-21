@@ -199,7 +199,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("StatusCreateAccount", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
+                                loadingDialog.dimissDialog();
+                                Toast.makeText(CreateAccountActivity.this, R.string.authfailed_thisemail,
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
