@@ -160,4 +160,7 @@
     <string name="upload_successful">Upload bem sucedido</string>
     <string name="couldnt_insert">Não foi possível inserir</string>
     <string name="select_an_image">Selecione uma imagem</string>
+    <string name="activated_card">A um cartão ativado!!</string>
+    <string name="complement_not_registred">Complemento não cadastrado</string>
+    <string name="authfailed_thisemail">Falha na autenticação!\\nEste e-mail já está registrado.</string>
 </resources>
