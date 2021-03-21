@@ -174,7 +174,8 @@ public class LoginActivity extends AppCompatActivity {
                             ShowEmailisNotVerified();
                         }
                     }else{
-                        Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        ShowWarning_Email_Password();
+                        //Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
