@@ -172,4 +172,5 @@
     <string name="error_to_get_image">Erro em receber a imagem</string>
     <string name="products_not_found">Produtos não encontrados</string>
     <string name="server_timeout">Tempo limite do servidor, tente mais tarde</string>
+    <string name="default_notification_channel_id">Olá, é a coffee for code</string>
 </resources>

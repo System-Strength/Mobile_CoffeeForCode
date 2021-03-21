@@ -28,6 +28,7 @@ import co.ex.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    //  Firebase
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Finds_Ids();
         warning_address = new Dialog(this);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
 
         //  Get information for login of client
@@ -176,6 +183,10 @@ public class MainActivity extends AppCompatActivity {
             GoTo_AllProducts.putExtra("partner", partner);
             GoTo_AllProducts.putExtra("partner_Startdate", partner_Startdate);
             startActivity(GoTo_AllProducts);
+            Bundle bundlefirebase = new Bundle();
+            bundlefirebase.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MainActivity");
+            bundlefirebase.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "AllProductsActivity");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundlefirebase);
             finish();
         });
 

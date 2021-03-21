@@ -247,5 +247,6 @@
     <string name="hello_emailsend">Hello, your user has been successfully registered :)\nWe sent a verification email to the registered email, please confirm in the email before logging in.</string>
     <string name="ok_i_will_confirm">Ok, I will confirm</string>
     <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
+    <string name="default_notification_channel_id">Hey, It`s coffee for code</string>
 
 </resources>
