@@ -5,17 +5,35 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.Objects;
+
+import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
+import co.ex.coffeeforcodeapp.Api.User.UsersService;
 import co.ex.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ProfileActivity extends AppCompatActivity {
     //  Text Header
@@ -28,8 +46,24 @@ public class ProfileActivity extends AppCompatActivity {
     LottieAnimationView animation_giftcard_profile;
     CardView btn_be_partner_profile, card_registerphone_profile, cardbtn_registerAddress_profile, cardbtn_edit_profile;
     CircleImageView Profile_image;
-    @SuppressWarnings("deprecation")
     Handler timer = new Handler();
+
+
+    int PICK_IMAGE_REQUEST = 111;
+    Uri filePath;
+    @SuppressWarnings("deprecation")
+    ProgressDialog pd;
+    //creating reference to firebase storage
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://coffeeforcode.appspot.com");
+
+    final Retrofit retrofitUserUpdate = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    //  User information
     int id_user, partner;
     String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
 
@@ -86,6 +120,78 @@ public class ProfileActivity extends AppCompatActivity {
 
         cardbtn_registerAddress_profile.setOnClickListener(v -> GoTo_EditProfile());
 
+        //  Click to upload new profile image
+        Profile_image.setOnClickListener(v -> {
+            pd = new ProgressDialog(this);
+            pd.setMessage("Uploading....");
+            Intent openGallery = new Intent();
+            openGallery.setType("image/*");
+            openGallery.setAction(Intent.ACTION_PICK);
+            startActivityForResult(Intent.createChooser(openGallery, "Select Image"), PICK_IMAGE_REQUEST);
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+
+            try {
+                //getting image from gallery
+                if(filePath != null) {
+                    pd.show();
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+
+                    //   + "_" + bitmap.getByteCount()
+                    StorageReference storageRef = this.storageRef.child("ProfileImage_" + id_user);
+
+                    //uploading the image
+                    storageRef.putFile(filePath).continueWithTask(task -> {
+                        if (!task.isSuccessful()) {
+                            pd.dismiss();
+                            Toast.makeText(ProfileActivity.this, R.string.couldnt_insert, Toast.LENGTH_SHORT).show();
+                        }
+                        return storageRef.getDownloadUrl();
+                    }).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            UsersService usersService = retrofitUserUpdate.create(UsersService.class);
+                            DtoUsers newimg = new DtoUsers(downloadUri.toString());
+                            Call<DtoUsers> usersCall = usersService.UpdateImgUser(id_user, newimg);
+                            usersCall.enqueue(new Callback<DtoUsers>() {
+                                @Override
+                                public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                                    if (response.code() == 202){
+                                        pd.dismiss();
+                                        img_user = downloadUri.toString();
+                                        loadProfileImage();
+
+                                        Toast.makeText(ProfileActivity.this, R.string.upload_successful, Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        pd.dismiss();
+                                        Toast.makeText(ProfileActivity.this, R.string.couldnt_insert, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<DtoUsers> call, Throwable t) {
+                                    Toast.makeText(ProfileActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                                    Log.d("ServerErrorUpload", t.getMessage());
+                                }
+                            });
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "upload failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(ProfileActivity.this, R.string.select_an_image, Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void Ids() {
@@ -114,7 +220,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadProfileImage() {
         AsyncUserImage loadimage = new AsyncUserImage(img_user, Profile_image);
-        //noinspection deprecation
         loadimage.execute();
     }
 

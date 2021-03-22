@@ -234,7 +234,8 @@ public class Edit_ProfileActivity extends AppCompatActivity {
                     pd.show();
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 
-                    StorageReference storageRef = this.storageRef.child("ProfileImage_" + id_user + "_" + bitmap.getByteCount());
+                    //   + "_" + bitmap.getByteCount()
+                    StorageReference storageRef = this.storageRef.child("ProfileImage_" + id_user);
 
                     //uploading the image
                     storageRef.putFile(filePath).continueWithTask(task -> {
