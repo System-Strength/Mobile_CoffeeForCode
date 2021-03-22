@@ -11,11 +11,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 public class SplashActivity extends AppCompatActivity{
-    @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     CardView cardviewseemore, cardviewlogin;
     LinearLayout navbarmain, bodymain, linearanimationcoffeeconstant;
@@ -34,8 +34,10 @@ public class SplashActivity extends AppCompatActivity{
         animationcoffee = findViewById(R.id.animationcoffee);
         animationcoffeeconstant = findViewById(R.id.animationcoffeeconstant);
         linearanimationcoffeeconstant = findViewById(R.id.linearanimationcoffeeconstant);
-        cardviewseemore = findViewById(R.id.cardviewseemore);
+        cardviewseemore = findViewById(R.id.cardviewsee_more);
         cardviewlogin = findViewById(R.id.cardviewlogin);
+        cardviewseemore.setElevation(20);
+        cardviewlogin.setElevation(20);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -76,11 +78,16 @@ public class SplashActivity extends AppCompatActivity{
 
         //  WHen click here go to MoreActivity
         cardviewseemore.setOnClickListener(v -> {
+            cardviewseemore.setElevation(0);
+            Toast.makeText(this, R.string.under_development, Toast.LENGTH_SHORT).show();
             //  Soon
         });
 
         //  When click here will go to LoginActivity
-        cardviewlogin.setOnClickListener(v -> GoToLogin());
+        cardviewlogin.setOnClickListener(v -> {
+            cardviewlogin.setElevation(0);
+            GoToLogin();
+        });
     }
 
     private void GoToLogin() {

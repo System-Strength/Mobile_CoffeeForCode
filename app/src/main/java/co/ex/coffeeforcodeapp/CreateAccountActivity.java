@@ -28,6 +28,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.jetbrains.annotations.NotNull;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
 import co.ex.coffeeforcodeapp.Api.Products.MenuService;
@@ -48,7 +50,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     EditText edittextFirstName_userCreateAccount, edittextLastName_userCreateAccount, edittextcpf_userCreateAccount, edittextEmail_userCreateAccount, edittextPassword_userCreateAccount;
     ImageView imgolhofechadocriarconta, imgolhoabertocriarconta;
     LottieAnimationView btnvoltarcriarconta, certosenhacriarconta;
-    CardView cardviewbtncriarconta;
+    CardView card_btn_create_account;
     Dialog termos, avisoerro;
     private FirebaseAuth mAuth;
     Dialog warning_emailsend;
@@ -73,6 +75,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         warning_emailsend = new Dialog(this);
         LoadingDialog loadingDialog = new LoadingDialog(CreateAccountActivity.this);
         PreloadServer();
+        card_btn_create_account.setElevation(20);
 
 
         // Initialize Firebase Auth
@@ -113,48 +116,46 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
 
         //  When click here will try to create a new account
-        cardviewbtncriarconta.setOnClickListener(v -> {
+        card_btn_create_account.setOnClickListener(v -> {
+            card_btn_create_account.setElevation(0);
             if (edittextFirstName_userCreateAccount.getText() == null || edittextFirstName_userCreateAccount.getText().length() < 4){
                 edittextFirstName_userCreateAccount.setError("Necessary to fill in the field correctly: FIRST NAME" + "\n" +
                         "Necessário preencher corretamente o campo: PRIMEIRO NOME");
-                //Toast.makeText(this, R.string.necessary_fill_name, Toast.LENGTH_SHORT).show();
                 edittextFirstName_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextFirstName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if(edittextLastName_userCreateAccount.getText() == null || edittextLastName_userCreateAccount.getText().length() < 2){
                 edittextLastName_userCreateAccount.setError("Necessary to fill in the field correctly: LAST NAME" + "\n" +
                         "Necessário preencher corretamente o campo: ULTIMO NOME");
-                //Toast.makeText(this, R.string.necessary_fill_name, Toast.LENGTH_SHORT).show();
                 edittextLastName_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextLastName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if(edittextcpf_userCreateAccount.getText() == null || edittextcpf_userCreateAccount.getText().length() < 14){
                 edittextcpf_userCreateAccount.setError("CPF informed is invalid" + "\n"  + "CPF informado é invalido");
-                //Toast.makeText(this, R.string.cpf_informed_is_invalid, Toast.LENGTH_SHORT).show();
                 edittextcpf_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextcpf_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if(edittextEmail_userCreateAccount.getText() == null || edittextEmail_userCreateAccount.getText().length() == 0){
                 edittextEmail_userCreateAccount.setError("Required to fill in the field: EMAIL" + "\n" + "Necessário preencher o campo: EMAIL");
-                //Toast.makeText(this, R.string.required_fill_email, Toast.LENGTH_SHORT).show();
                 edittextEmail_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextEmail_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if (!Patterns.EMAIL_ADDRESS.matcher(edittextEmail_userCreateAccount.getText()).matches()){
                 edittextEmail_userCreateAccount.setError("Fill in your email correctly" + "\n" + "Preencha corretamente seu email");
                 //Toast.makeText(this, R.string.fill_email_correctly, Toast.LENGTH_SHORT).show();
                 edittextEmail_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextEmail_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if (edittextPassword_userCreateAccount.getText() == null || edittextPassword_userCreateAccount.getText().length() < 8){
                 edittextPassword_userCreateAccount.setError("Necessary to fill the field correctly: PASSWORD\n" +
                         "Minimum 8 characters" + "\n" + "Necessário preencher corretamente o campo: SENHA\n" +  "Minimo 8 caracteres");
                 //Toast.makeText(this, R.string.necessary_fill_correctly_password, Toast.LENGTH_SHORT).show();
                 edittextPassword_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextPassword_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-
+                card_btn_create_account.setElevation(20);
             }else if(!checkboxaceitoostermos.isChecked()){
                 Toast.makeText(this, "Necessario aceitar os termos", Toast.LENGTH_SHORT).show();
+                card_btn_create_account.setElevation(20);
             }else {
                 String First_name = edittextFirstName_userCreateAccount.getText().toString();
                 String Last_Name = edittextLastName_userCreateAccount.getText().toString();
@@ -179,19 +180,23 @@ public class CreateAccountActivity extends AppCompatActivity {
                                                 if(response.code() == 201 || response.code() == 200){
                                                     Log.d("EmailStatus", "Email sent.");
                                                     Show_WeSendEmail_Warning(email, password);
+                                                    card_btn_create_account.setElevation(20);
                                                 }
                                                 else if (response.code() == 409){
                                                     loadingDialog.dimissDialog();
                                                     showError();
+                                                    card_btn_create_account.setElevation(20);
                                                 }else{
                                                     Toast.makeText(CreateAccountActivity.this, R.string.wehaveaproblem, Toast.LENGTH_LONG).show();
                                                     loadingDialog.dimissDialog();
+                                                    card_btn_create_account.setElevation(20);
                                                 }
                                             }
                                             @Override
                                             public void onFailure(Call<DtoUsers> call, Throwable t) {
                                                 Toast.makeText(CreateAccountActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_LONG).show();
                                                 loadingDialog.dimissDialog();
+                                                card_btn_create_account.setElevation(20);
                                             }
                                         });
                                     }
@@ -202,6 +207,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 loadingDialog.dimissDialog();
                                 Toast.makeText(CreateAccountActivity.this, R.string.authfailed_thisemail,
                                         Toast.LENGTH_SHORT).show();
+                                card_btn_create_account.setElevation(20);
                             }
                         });
             }
@@ -260,12 +266,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         Call<DtoMenuById> call = menuService.getProductByCd(cd_prod);
         call.enqueue(new Callback<DtoMenuById>() {
             @Override
-            public void onResponse(Call<DtoMenuById> call, Response<DtoMenuById> response) {
+            public void onResponse(@NotNull Call<DtoMenuById> call, @NotNull Response<DtoMenuById> response) {
                 Log.d("PreLoadStatus", "Server ON");
             }
             @Override
-            public void onFailure(Call<DtoMenuById> call, Throwable t) {
-                Toast.makeText(CreateAccountActivity.this, "We have a problem with our servers, please try again later !!\nEstamos com problema em nossos servidores tente novamente mais tarde!!", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NotNull Call<DtoMenuById> call, @NotNull Throwable t) {
+                //Toast.makeText(CreateAccountActivity.this, "We have a problem with our servers, please try again later !!\nEstamos com problema em nossos servidores tente novamente mais tarde!!", Toast.LENGTH_SHORT).show();
                 Log.d("ServerError", t.getMessage());
             }
         });
@@ -274,7 +280,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void Ids() {
         btnvoltarcriarconta = findViewById(R.id.btnvoltarcriarconta);
         certosenhacriarconta = findViewById(R.id.certosenhacriarconta);
-        cardviewbtncriarconta = findViewById(R.id.cardviewbtncriarconta);
+        card_btn_create_account = findViewById(R.id.card_btn_create_account);
         imgolhofechadocriarconta = findViewById(R.id.imgolhofechadocriarconta);
         imgolhoabertocriarconta = findViewById(R.id.imgolhoabertocriarconta);
         edittextPassword_userCreateAccount = findViewById(R.id.edittextPassword_userCreateAccount);

@@ -53,6 +53,8 @@
                     android:id="@+id/txttittlecriarconta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="240dp"
+                    android:maxHeight="50dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/createaccount"
                     android:textColor="#000"
@@ -78,6 +80,7 @@
                 <EditText
                     android:id="@+id/edittextFirstName_userCreateAccount"
                     android:layout_width="160dp"
+                    android:maxWidth="160dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/edittextcriarconta"
@@ -112,8 +115,11 @@
                 <EditText
                     android:id="@+id/edittextLastName_userCreateAccount"
                     android:layout_width="160dp"
+                    android:maxWidth="160dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/edittextcriarconta"
                     android:hint="@string/exLastName"
                     android:inputType="textPersonName"
@@ -140,6 +146,7 @@
                 <EditText
                     android:id="@+id/edittextcpf_userCreateAccount"
                     android:layout_width="350dp"
+                    android:maxWidth="350dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/edittextcriarconta"
@@ -169,6 +176,7 @@
                 <EditText
                     android:id="@+id/edittextEmail_userCreateAccount"
                     android:layout_width="350dp"
+                    android:maxWidth="350dp"
                     android:layout_height="50dp"
                     android:textColor="#000"
                     android:hint="@string/mascaraemail"
@@ -204,6 +212,7 @@
                     <EditText
                         android:id="@+id/edittextPassword_userCreateAccount"
                         android:layout_width="350dp"
+                        android:maxWidth="350dp"
                         android:layout_height="50dp"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/edittextcriarconta"
@@ -254,15 +263,15 @@
 
                 <!--Btn Create Account-->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardviewbtncriarconta"
+                    android:id="@+id/card_btn_create_account"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_marginTop="32dp"
                     app:cardBackgroundColor="#FFC75A"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/basesenhacriarconta">
+                    app:layout_constraintTop_toBottomOf="@+id/checkboxaceitoostermos">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -272,8 +281,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/createaccountbtn"
-                            android:textSize="24sp"
                             android:textColor="#000"
+                            android:textSize="24sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -288,45 +297,46 @@
                     android:id="@+id/checkboxaceitoostermos"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:textColor="#000"
-                    android:buttonTint="#FF5800"
+                    android:maxHeight="30dp"
                     android:layout_marginStart="16dp"
+                    android:buttonTint="#FF5800"
+                    android:layout_marginTop="20dp"
                     android:text="@string/accepttheterms"
+                    android:textColor="#000"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardviewbtncriarconta" />
+                    app:layout_constraintTop_toBottomOf="@+id/basesenhacriarconta" />
 
                 <!--Text New User-->
                 <TextView
                     android:id="@+id/txttenhoconta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/imalredyhaveaccount"
                     android:layout_marginEnd="80dp"
-                    android:textSize="15sp"
-                    android:textColor="#000"
                     android:layout_marginBottom="20dp"
+                    android:text="@string/imalredyhaveaccount"
+                    android:textColor="#000"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/checkboxaceitoostermos" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_btn_create_account" />
 
                 <!--Text Criar Conta-->
                 <TextView
                     android:id="@+id/txtLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lognow"
                     android:layout_marginStart="2dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/lognow"
                     android:textColor="#FFB421"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/txttenhoconta"
-                    app:layout_constraintTop_toBottomOf="@+id/checkboxaceitoostermos" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_btn_create_account" />
 
                 <!--Text Terms-->
                 <TextView

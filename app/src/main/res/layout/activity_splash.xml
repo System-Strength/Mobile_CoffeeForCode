@@ -115,21 +115,24 @@
 
             <!--Btn know more-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardviewseemore"
+                android:id="@+id/cardviewsee_more"
                 android:layout_width="150dp"
                 android:layout_height="55dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
+                android:layout_marginStart="24dp"
                 app:cardBackgroundColor="#fff"
                 app:cardCornerRadius="20dp"
-                android:layout_marginStart="24dp"
+                app:cardElevation="@dimen/cardview_default_elevation"
+                android:layout_marginEnd="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardviewlogin"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:background="@drawable/cardsaibamais"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardsaibamais">
 
                     <TextView
                         android:layout_width="wrap_content"

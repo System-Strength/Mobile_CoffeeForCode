@@ -27,6 +27,8 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.jetbrains.annotations.NotNull;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
@@ -39,10 +41,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView txtcriarnovaconta, txtlogarlogin;
+    TextView txt_create_new_account, txtlogarlogin, txtForgoutPassword;
     LottieAnimationView cardviewbtnlogin, animation_loadingLogin;
     ImageView img_closed_eye, img_opened_eye;
-    CardView cardviewbtnlogar;
+    CardView cardviewbtnlogar, Card_base_login;
     EditText edittextEmail_userLogin, edittexPassword_userLogin;
     CheckBox checkbox_rememberMe;
     Dialog Warning_Email_Password;
@@ -64,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getIds();
         warning_emailnotverified = new Dialog(this);
+        Card_base_login.setElevation(30);
+        cardviewbtnlogar.setElevation(20);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -143,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //  When click here will go to CriarContaActivity
-        txtcriarnovaconta.setOnClickListener(v -> {
+        txt_create_new_account.setOnClickListener(v -> {
             Intent irparacriacaodeconta = new Intent(LoginActivity.this, CreateAccountActivity.class);
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.mover_para_cima, R.anim.mover_para_baixo);
             ActivityCompat.startActivity(LoginActivity.this,irparacriacaodeconta, activityOptionsCompat.toBundle());
@@ -152,15 +156,19 @@ public class LoginActivity extends AppCompatActivity {
 
         //  When click here will login and go to PrincipalActivity
         cardviewbtnlogar.setOnClickListener(v -> {
+            cardviewbtnlogar.setElevation(0);
             if (edittextEmail_userLogin.getText() == null || edittextEmail_userLogin.getText().length() == 0){
                 edittextEmail_userLogin.setError("Fill in correctly: EMAIL" + "\n" + "Preencha corretamente: EMAIL");
                 edittextEmail_userLogin.requestFocus();
                 imm.showSoftInput(edittextEmail_userLogin, InputMethodManager.SHOW_IMPLICIT);
+                cardviewbtnlogar.setElevation(20);
             }else if (edittexPassword_userLogin.getText() == null || edittexPassword_userLogin.getText().length() == 0){
                 Toast.makeText(this, "Fill in correctly: PASSWOR!!\nPreencha corretamente: SENHA!!", Toast.LENGTH_SHORT).show();
                 edittexPassword_userLogin.requestFocus();
                 imm.showSoftInput(edittexPassword_userLogin, InputMethodManager.SHOW_IMPLICIT);
+                cardviewbtnlogar.setElevation(20);
             }else {
+                cardviewbtnlogar.setEnabled(false);
                 String email = edittextEmail_userLogin.getText().toString();
                 String password = edittexPassword_userLogin.getText().toString();
                 animation_loadingLogin.setVisibility(View.VISIBLE);
@@ -187,6 +195,8 @@ public class LoginActivity extends AppCompatActivity {
         animation_loadingLogin.setVisibility(View.GONE);
         animation_loadingLogin.playAnimation();
         txtlogarlogin.setVisibility(View.VISIBLE);
+        cardviewbtnlogar.setEnabled(true);
+        cardviewbtnlogar.setElevation(20);
 
         CardView btnIwillConfirmLogin;
         warning_emailnotverified.setContentView(R.layout.adapter_emailnotverified);
@@ -202,12 +212,14 @@ public class LoginActivity extends AppCompatActivity {
         edittextEmail_userLogin = findViewById(R.id.edittextEmail_userLogin);
         edittexPassword_userLogin = findViewById(R.id.edittexPassword_userLogin);
         checkbox_rememberMe = findViewById(R.id.checkbox_rememberMe);
-        txtcriarnovaconta = findViewById(R.id.txtcriarnovaconta);
+        txt_create_new_account = findViewById(R.id.txt_create_new_account);
+        txtForgoutPassword = findViewById(R.id.txtForgoutPassword);
         img_closed_eye = findViewById(R.id.img_closed_eye);
         img_opened_eye = findViewById(R.id.img_opened_eye);
         cardviewbtnlogar = findViewById(R.id.cardviewbtnlogin);
         animation_loadingLogin = findViewById(R.id.animationloadinglogin);
         txtlogarlogin = findViewById(R.id.txtlogarlogin);
+        Card_base_login = findViewById(R.id.Card_base_login);
         Warning_Email_Password = new Dialog(this);
     }
 
@@ -224,13 +236,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void DoLogin(Retrofit retrofitUser, String email, String password) {
+    private void DoLogin(@NotNull Retrofit retrofitUser, String email, String password) {
         UsersService usersService = retrofitUser.create(UsersService.class);
         Call<DtoUsers> resultLogin = usersService.loginUser(email, password);
 
         resultLogin.enqueue(new Callback<DtoUsers>() {
             @Override
-            public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+            public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
                 if (response.code() == 200){
                     assert response.body() != null;
                     int id_user, partner;
@@ -260,12 +272,13 @@ public class LoginActivity extends AppCompatActivity {
                         mPrefs.edit().clear().apply();
                         GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
                     }
-                }else if(response.code() == 401){;
+                }else if(response.code() == 401){
                     ShowWarning_Email_Password();
                     mPrefs.edit().clear().apply();
                     animation_loadingLogin.setVisibility(View.GONE);
                     animation_loadingLogin.playAnimation();
                     txtlogarlogin.setVisibility(View.VISIBLE);
+                    cardviewbtnlogar.setElevation(20);
                 }else{
                     Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                     loading.dimissDialog();
@@ -274,14 +287,17 @@ public class LoginActivity extends AppCompatActivity {
                     animation_loadingLogin.setVisibility(View.GONE);
                     animation_loadingLogin.playAnimation();
                     txtlogarlogin.setVisibility(View.VISIBLE);
+                    cardviewbtnlogar.setElevation(20);
+                    cardviewbtnlogar.setEnabled(true);
                 }
             }
 
             @Override
-            public void onFailure(Call<DtoUsers> call, Throwable t) {
+            public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
                 Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
                 Log.d("NetWorkError", t.getMessage());
                 loading.dimissDialog();
+                cardviewbtnlogar.setElevation(20);
             }
         });
     }
@@ -314,6 +330,7 @@ public class LoginActivity extends AppCompatActivity {
         animation_loadingLogin.pauseAnimation();
         txtlogarlogin.setVisibility(View.VISIBLE);
         edittexPassword_userLogin.setText(null);
+        cardviewbtnlogar.setEnabled(true);
 
         loading.dimissDialog();
 
