@@ -17,8 +17,8 @@
     <string name="aceitoostermos">Eu aceito os Termos</string>
     <string name="knowmore">Saiba Mais</string>
     <string name="access">Acessar</string>
-    <string name="txt_welcome"><u><b>Bem Vindo!!</b></u></string>
-    <string name="txtChoosetheCfc">Escolha o <u> Coffee For Code </u> o café para começar o dia !!</string>
+    <string name="txt_welcome"><u><b>SEJA BEM-VINDO!!</b></u></string>
+    <string name="txtChoosetheCfc">Escolha o <u><b>CFC</b> </u> \no café para começar o dia !!</string>
     <string name="emailaddress">Endereço de Email</string>
     <string name="password">Senha</string>
     <string name="forgotyhepassword">Esqueceu sua senha?</string>
@@ -174,4 +174,15 @@
     <string name="server_timeout">Tempo limite do servidor, tente mais tarde</string>
     <string name="default_notification_channel_id">Olá, é a coffee for code</string>
     <string name="under_development">Em desenvolvimento</string>
+    <string name="desc_knowmore">Somos uma empresa que vende alimentos e bebidas dos nossos parceiros, ajudando nossos clientes para que eles possam ter o seu produto de forma rápida e prática.</string>
+    <string name="desc_img_knowmore">Lembrando que todas as imagens e produtos são ilustrativos, não temos nenhuma intenção de nos beneficiarmos com as marcas.</string>
+    <string name="desc_cfc_isapp_withoutfis_knowMore">Coffee For Code, é uma aplicação que não contém fins lucrativos, e sim, estudantis.</string>
+    <string name="support">Apoie</string>
+    <string name="members">Membros</string>
+    <string name="view_portfolio">Ver portfólio</string>
+    <string name="desc_support">Nosso Aplicativo é para estudos. Não recebemos nenhum fundo financeiro através dele, e está sendo mantido por fundos próprios.</string>
+    <string name="you_can_support">VOCÊ PODE NOS APOIAR DAS SEGUINTES MANEIRAS:</string>
+    <string name="make_donation">Realizar doação</string>
+    <string name="see_ad">VEJA UM ANÚNCIO</string>
+    <string name="sorry_ad">Desculpe, mas não será possível reproduzir um anúncio, pois estamos com pequenos problemas com o provedor de anúncios!!\nDesculpe pelo inconveniente</string>
 </resources>

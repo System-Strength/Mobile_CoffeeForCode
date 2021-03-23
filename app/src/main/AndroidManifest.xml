@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="co.ex.coffeeforcodeapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_coffee_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-
+        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".MembersActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,12 +38,12 @@
 
         <activity
             android:name=".RegisterAddressActivity"
-            android:label="@string/title_activity_register_addresss_beta"/>
+            android:label="@string/title_activity_register_addresss_beta" />
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".Edit_ProfileActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AllProductsActivity" />
-        <activity android:name=".SaibaMaisActivity" />
+        <activity android:name=".KnowMoreActivity" />
         <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".CadastrarCartoesActivity" />
         <activity android:name=".CartoesActivity" />
@@ -57,9 +57,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Start Firebase -->
+        </activity> <!-- Start Firebase -->
         <service
             android:name=".Notifications.CDCMessasingService"
             android:exported="false">
@@ -67,24 +65,23 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logocfcsembg" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/backgroung" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
-
-        <!-- End Firebase -->
-
+            android:value="@string/default_notification_channel_id" /> <!-- End Firebase -->
         <receiver android:name=".ProductsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
