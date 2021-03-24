@@ -25,6 +25,7 @@ public class KnowMoreActivity extends AppCompatActivity {
     LottieAnimationView btngoback_splash;
     CardView btnMembers, btnSupport;
     Handler timer = new Handler();
+    //  Retrofit
     final Retrofit retrofitPreLoad = new Retrofit.Builder()
             .baseUrl("https://coffeeforcode.herokuapp.com/products/")
             .addConverterFactory(ScalarsConverterFactory.create())
