@@ -45,7 +45,7 @@
     <string name="knowmore">Know more</string>
     <string name="access">Access</string>
     <string name="txt_welcome"><u><b>Welcome!!</b></u></string>
-    <string name="txtChoosetheCfc" tools:ignore="TypographyEllipsis">Choose the<u> Coffee For Code </u> the coffee to start your day !!</string>
+    <string name="txtChoosetheCfc" tools:ignore="TypographyEllipsis">Choose the <u><b>CFC</b></u> \nthe coffee to start your day !!</string>
 
     <!--Login Screen-->
     <string name="login" translatable="false">Login</string>
@@ -249,5 +249,23 @@
     <string name="ok_i_will_confirm">Ok, I will confirm</string>
     <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
     <string name="default_notification_channel_id">Hey, It`s coffee for code</string>
+
+    <!-- Know More Screen -->
+    <string name="desc_knowmore">We are a company that sells food and drinks from our partners, helping our customers so that they can have your product quickly and conveniently.</string>
+    <string name="desc_img_knowmore">Remembering that all images and products are illustrative, we have no intention of benefiting from the brands.</string>
+    <string name="desc_cfc_isapp_withoutfis_knowMore">Coffee For Code, is an application that is not for profit, but for students.</string>
+    <string name="members">Members</string>
+    <string name="support">Support</string>
+    <string name="mobile_developer" translatable="false">Mobile Developer</string>
+    <string name="kaua_vitorio" translatable="false">Kauã Vitorio</string>
+    <string name="view_portfolio">View Portfolio</string>
+    <string name="matheus_leite" translatable="false">Matheus Leite</string>
+    <string name="ui_ux_designer" translatable="false">UI/UX Designer</string>
+    <string name="desc_support">Our Application is for studies. We have not received any financial funds through it, and it is being maintained by our own funds.</string>
+    <string name="you_can_support">YOU CAN SUPPORT US IN THE FOLLOWING WAYS:</string>
+    <string name="make_donation">Make donation</string>
+    <string name="see_ad">See AD</string>
+    <string name="sorry_ad">Sorry, but it will not be possible to play an ad, as we are having small problems with the ad provider !!\nSorry for the inconvenience</string>
+    <string name="ok" translatable="false">OK</string>
 
 </resources>

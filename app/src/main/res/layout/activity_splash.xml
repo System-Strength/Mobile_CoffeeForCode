@@ -9,182 +9,146 @@
     android:orientation="vertical"
     tools:context=".SplashActivity">
 
-    <!--Body-->
-    <LinearLayout
-        android:id="@+id/bodymain"
-        android:layout_weight="1"
+    <!-- Base Splash Screen -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/base_splash"
+        android:visibility="gone"
         android:layout_width="match_parent"
+        android:background="@color/semeback"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--Animation Splash-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationcoffee"
+            android:layout_width="260dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/coffeemenu_animation" />
 
-            <!--Animation Splash-->
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationcoffee"
-                android:layout_width="260dp"
-                android:layout_height="300dp"
-                android:visibility="gone"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/coffeemenu_animation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--Animation Constant-->
-            <LinearLayout
-                android:id="@+id/linearanimationcoffeeconstant"
-                android:orientation="vertical"
-                android:layout_width="350dp"
-                android:layout_height="600dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <!--Animation-->
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animationcoffeeconstant"
-                        android:layout_width="350dp"
-                        android:layout_height="200dp"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.29000002"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/littlecoffee_animation" />
-
-                    <!--Txt Wellcome-->
-                    <TextView
-                        android:id="@+id/txtbemvindo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="282dp"
-                        android:text="@string/txt_welcome"
-                        android:textColor="#CD292929"
-                        android:textSize="40sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/txtChoosetheCfc"
-                        android:layout_marginTop="8dp"
-                        android:textSize="28sp"
-                        android:textColor="#BA4C4C4C"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtbemvindo" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </LinearLayout>
-
-    <!--NavBar-->
-    <LinearLayout
-        android:id="@+id/navbarmain"
-        android:orientation="horizontal"
-        android:layout_weight="6"
+    <!-- Base Info Screen -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/base_itens_splash"
+        android:layout_width="match_parent"
         android:visibility="visible"
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!--Animation-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationcoffeeconstant"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="260dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/littlecoffee_animation" />
 
-            <!--Btn know more-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardviewsee_more"
-                android:layout_width="150dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="24dp"
-                app:cardBackgroundColor="#fff"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cardviewlogin"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <!--Txt Welcome-->
+        <TextView
+            android:id="@+id/txtwelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_welcome"
+            android:textColor="#CD292929"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animationcoffeeconstant" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/cardsaibamais">
+        <!--Text Desc-->
+        <TextView
+            android:id="@+id/txtDescWelcome"
+            android:layout_width="wrap_content"
+            android:maxWidth="360dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txtChoosetheCfc"
+            android:textAlignment="center"
+            android:textColor="#BA4C4C4C"
+            android:textSize="23sp"
+            android:lineSpacingExtra="5dp"
+            android:textStyle="bold"
+            android:layout_marginTop="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtwelcome" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/knowmore"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <!--Btn Login-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewlogin"
+            android:layout_width="205dp"
+            android:layout_height="64dp"
+            app:cardBackgroundColor="#FFC75A"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="30dp"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescWelcome">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/access"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Btn Login-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardviewlogin"
-                android:layout_width="150dp"
-                android:layout_height="55dp"
-                app:cardBackgroundColor="#fff"
-                android:layout_marginEnd="24dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/cardlogar"
-                    android:layout_height="match_parent">
+        </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/access"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <!--Btn know more-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewsee_more"
+            android:layout_width="205dp"
+            android:layout_height="64dp"
+            app:cardBackgroundColor="#FFDA91"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="30dp"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewlogin">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/knowmore"
+                    android:textColor="#000"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package co.ex.coffeeforcodeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
@@ -10,16 +11,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.airbnb.lottie.LottieAnimationView;
 
 public class SplashActivity extends AppCompatActivity{
     Handler timer = new Handler();
+    ConstraintLayout base_splash, base_itens_splash;
     CardView cardviewseemore, cardviewlogin;
-    LinearLayout navbarmain, bodymain, linearanimationcoffeeconstant;
-    LottieAnimationView animationcoffee, animationcoffeeconstant;
     int TIME_STARTLOADING;
     int TIMER_SHOWOPTION;
     private SharedPreferences mPrefs;
@@ -29,13 +25,12 @@ public class SplashActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        navbarmain = findViewById(R.id.navbarmain);
-        bodymain = findViewById(R.id.bodymain);
-        animationcoffee = findViewById(R.id.animationcoffee);
-        animationcoffeeconstant = findViewById(R.id.animationcoffeeconstant);
-        linearanimationcoffeeconstant = findViewById(R.id.linearanimationcoffeeconstant);
+        base_splash = findViewById(R.id.base_splash);
+        base_itens_splash = findViewById(R.id.base_itens_splash);
         cardviewseemore = findViewById(R.id.cardviewsee_more);
         cardviewlogin = findViewById(R.id.cardviewlogin);
+        base_splash.setVisibility(View.VISIBLE);
+        base_itens_splash.setVisibility(View.GONE);
         cardviewseemore.setElevation(20);
         cardviewlogin.setElevation(20);
 
@@ -56,44 +51,37 @@ public class SplashActivity extends AppCompatActivity{
             GoToLogin();
 
         //  Set some thinks with gone and set background color
-        navbarmain.setVisibility(View.GONE);
-        animationcoffee.setVisibility(View.GONE);
-        linearanimationcoffeeconstant.setVisibility(View.GONE);
-        bodymain.setBackgroundResource(R.color.semeback);
-        navbarmain.setBackgroundResource(R.color.semeback);
 
         timer.postDelayed(() -> {
-            animationcoffee.setVisibility(View.VISIBLE);
-            animationcoffee.playAnimation();
+            base_splash.setVisibility(View.VISIBLE);
             timer.postDelayed(() -> {
-                bodymain.setBackgroundResource(R.color.normalback);
-                navbarmain.setBackgroundResource(R.color.normalback);
-                animationcoffeeconstant.setVisibility(View.VISIBLE);
-                navbarmain.setVisibility(View.VISIBLE);
-                linearanimationcoffeeconstant.setVisibility(View.VISIBLE);
-                animationcoffee.setVisibility(View.GONE);
-                animationcoffeeconstant.playAnimation();
+                base_splash.setVisibility(View.GONE);
+                base_itens_splash.setVisibility(View.VISIBLE);
             },TIMER_SHOWOPTION);
         },TIME_STARTLOADING);
 
-        //  WHen click here go to MoreActivity
+        //  WHen click here go to KnowMoreActivity
         cardviewseemore.setOnClickListener(v -> {
             cardviewseemore.setElevation(0);
-            Toast.makeText(this, R.string.under_development, Toast.LENGTH_SHORT).show();
-            //  Soon
+            cardviewseemore.setEnabled(false);
+            Intent goto_know_more = new Intent(SplashActivity.this, KnowMoreActivity.class);
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
+            ActivityCompat.startActivity(SplashActivity.this, goto_know_more, activityOptionsCompat.toBundle());
+            finish();
         });
 
         //  When click here will go to LoginActivity
         cardviewlogin.setOnClickListener(v -> {
             cardviewlogin.setElevation(0);
+            cardviewseemore.setEnabled(false);
             GoToLogin();
         });
     }
 
     private void GoToLogin() {
-        Intent irparalogin = new Intent(SplashActivity.this, LoginActivity.class);
+        Intent goto_login = new Intent(SplashActivity.this, LoginActivity.class);
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(),R.anim.move_to_left, R.anim.move_to_right);
-        ActivityCompat.startActivity(SplashActivity.this,irparalogin, activityOptionsCompat.toBundle());
+        ActivityCompat.startActivity(SplashActivity.this, goto_login, activityOptionsCompat.toBundle());
         finish();
     }
 }
