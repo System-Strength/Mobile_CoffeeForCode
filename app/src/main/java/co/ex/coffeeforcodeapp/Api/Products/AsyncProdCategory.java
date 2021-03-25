@@ -67,13 +67,11 @@ public class AsyncProdCategory extends AsyncTask {
                 dtoMenu.setPrice_prod((float) jsonArray.getJSONObject(i).getDouble("price_prod"));
                 img_prod_st = jsonArray.getJSONObject(i).getString("img_prod");
                 dtoMenu.setImg_prod_st(img_prod_st);
-                /*URL url = new URL(jsonArray.getJSONObject(i).getString("img_prod"));
-                Bitmap img_cat = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                dtoMenu.setImg_prod(img_cat);*/
 
                 arrayListDto.add(dtoMenu);
             }
             products_adapter = new Products_Adapter(arrayListDto);
+            products_adapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("ErrorNetWork", e.toString());

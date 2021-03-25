@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import co.ex.coffeeforcodeapp.Activitys.EditProductActivity;
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Adapters.ShoppingCart_Adapter;
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
@@ -67,7 +69,7 @@ public class AsyncShoppingCart extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         String json =  JsonHandler.getJson("https://coffeeforcode.herokuapp.com/shoppingcart/" + email_user);
-        ShoppingCart_Adapter shoppingCart_adapter = null;
+        ShoppingCart_Adapter shoppingCart_adapter_ad = null;
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray("CartItens");
@@ -83,12 +85,13 @@ public class AsyncShoppingCart extends AsyncTask {
                 dtoShoppingCart.setImg_prod(jsonArray.getJSONObject(i).getString("img_prod"));
                 arrayListDto.add(dtoShoppingCart);
             }
-            shoppingCart_adapter = new ShoppingCart_Adapter(arrayListDto);
+            shoppingCart_adapter_ad = new ShoppingCart_Adapter(arrayListDto);
+            shoppingCart_adapter_ad.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("ErrorNetWork", e.toString());
         }
-        return shoppingCart_adapter;
+        return shoppingCart_adapter_ad;
     }
 
     @SuppressLint("SetTextI18n")
@@ -100,6 +103,7 @@ public class AsyncShoppingCart extends AsyncTask {
         recyclerShoppingCart.setAdapter((RecyclerView.Adapter) shoppingCart_adapter);
         txt_total.setText("Total: R$ "+ numberFormat.format(fullPrice));
         loadingDialog.dimissDialog();
+        recyclerShoppingCart.getRecycledViewPool().clear();
         recyclerShoppingCart.addOnItemTouchListener(new RecyclerItemClickListener(contexto, recyclerShoppingCart,
                 new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -108,7 +112,6 @@ public class AsyncShoppingCart extends AsyncTask {
                         .setTitle(arrayListDto.get(position).getNm_prod() + "")
                         .setMessage(R.string.what_would_you_this_product)
                         .setPositiveButton(R.string.remove, (dialog, which) -> {
-                            Toast.makeText(contexto, "Vai dar bom", Toast.LENGTH_SHORT).show();
                             int cd_prod = arrayListDto.get(position).getCd_prod();
                             MenuService menuService = retrofitShoppingCart.create(MenuService.class);
                             Call<DtoMenu> menuCall = menuService.removeProd(email_user, cd_prod);
@@ -116,6 +119,7 @@ public class AsyncShoppingCart extends AsyncTask {
                                 @Override
                                 public void onResponse(Call<DtoMenu> call, Response<DtoMenu> response) {
                                     if (response.code() == 202){
+                                        arrayListDto.remove(position);
                                         AsyncShoppingCart asyncShoppingCart = new AsyncShoppingCart(recyclerShoppingCart, email_user, txt_total, contexto);
                                         asyncShoppingCart.execute();
                                     }else{
@@ -129,11 +133,17 @@ public class AsyncShoppingCart extends AsyncTask {
                                 }
                             });
                         })
-                        .setNegativeButton(R.string.edit, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
+                        .setNegativeButton(R.string.edit, (dialog, which) -> {
+                            Intent goTo_Edit_prod = new Intent(contexto, EditProductActivity.class);
+                            goTo_Edit_prod.putExtra("email_user", email_user);
+                            goTo_Edit_prod.putExtra("cd_prod", arrayListDto.get(position).getCd_prod());
+                            goTo_Edit_prod.putExtra("img_prod", arrayListDto.get(position).getImg_prod());
+                            goTo_Edit_prod.putExtra("nm_prod", arrayListDto.get(position).getNm_prod());
+                            goTo_Edit_prod.putExtra("qt_prod", arrayListDto.get(position).getQt_prod());
+                            goTo_Edit_prod.putExtra("price_prod", arrayListDto.get(position).getFull_price_prod());
+                            goTo_Edit_prod.putExtra("unit_prod_price", arrayListDto.get(position).getPrice_unit_prod());
+                            contexto.startActivity(goTo_Edit_prod);
+                            contexto.finish();
                         });
                 alert.show();
             }

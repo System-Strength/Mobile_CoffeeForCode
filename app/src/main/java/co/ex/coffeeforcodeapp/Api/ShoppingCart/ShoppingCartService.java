@@ -2,6 +2,7 @@ package co.ex.coffeeforcodeapp.Api.ShoppingCart;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -13,4 +14,7 @@ public interface ShoppingCartService {
 
     @GET("{email_user}")
     Call<DtoShoppingCart> getCartInfomration (@Path("email_user") String email_user);
+
+    @PATCH("updatecart/{email_user}/{cd_prod}/{qt_prod}/{full_price_prod}")
+    Call<DtoShoppingCart> updateItem(@Path("email_user") String email_user, @Path("cd_prod") int cd_prod, @Path("qt_prod") int qt_prod, @Path("full_price_prod") float full_price_prod);
 }

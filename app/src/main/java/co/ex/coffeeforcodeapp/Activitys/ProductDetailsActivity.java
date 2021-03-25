@@ -76,7 +76,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
+        setContentView(R.layout.activity_products_product_details);
         nm_prod_Desc = findViewById(R.id.nm_prod_Desc);
         txtSize_ProductDesc = findViewById(R.id.txtSize_ProductDesc);
         txtCartSize = findViewById(R.id.txtCartSize);

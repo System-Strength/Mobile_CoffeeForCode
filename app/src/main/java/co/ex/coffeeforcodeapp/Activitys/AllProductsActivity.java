@@ -45,7 +45,7 @@ public class AllProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_products);
+        setContentView(R.layout.activity_products_all_products);
         RecyclerCategory = findViewById(R.id.RecyclerCategory);
         RecyclerProducts = findViewById(R.id.RecyclerProducts);
         SwipeRefreshProducts = findViewById(R.id.SwipeRefreshProducts);

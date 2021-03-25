@@ -77,6 +77,7 @@ public class ShoppingCartActivity extends AppCompatActivity{
         btnBuy_shoppingcart.setOnClickListener(v -> {
             btnBuy_shoppingcart.setElevation(0);
             recycler_shoppingcart.scrollToPosition(recycler_shoppingcart.getAdapter().getItemCount() - 1);
+            Toast.makeText(this, R.string.under_development, Toast.LENGTH_SHORT).show();
             timer.postDelayed(() -> btnBuy_shoppingcart.setElevation(20),1500);
         });
 
