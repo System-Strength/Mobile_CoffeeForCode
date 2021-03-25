@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.Random;
+
+import co.ex.coffeeforcodeapp.MaskEditUtil;
+import co.ex.coffeeforcodeapp.R;
 
 public class SejaParceiroActivity extends AppCompatActivity {
     @SuppressWarnings("deprecation")

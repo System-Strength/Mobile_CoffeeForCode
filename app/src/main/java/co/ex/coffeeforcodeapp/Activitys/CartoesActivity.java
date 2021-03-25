@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+
+import co.ex.coffeeforcodeapp.R;
 
 public class CartoesActivity extends AppCompatActivity {
     ConstraintLayout basenaotemcartaocfc, basetenhocartaocfc;
@@ -62,7 +64,7 @@ public class CartoesActivity extends AppCompatActivity {
 
         //  When click here will to SejaParceiro
         btnvermaissobrecardcfc.setOnClickListener(v -> {
-            Intent irparavirarparceiro = new Intent(CartoesActivity.this,SejaParceiroActivity.class);
+            Intent irparavirarparceiro = new Intent(CartoesActivity.this, SejaParceiroActivity.class);
             irparavirarparceiro.putExtra("emailuser",emaillogado);
             startActivity(irparavirarparceiro);
             finish();

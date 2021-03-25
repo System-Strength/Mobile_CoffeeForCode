@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -33,6 +33,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jetbrains.annotations.NotNull;
 
+import co.ex.coffeeforcodeapp.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         //  When click in this card user will to SejaParceiroActivity
         card_Be_Partner.setOnClickListener(v -> {
-            Intent GoTo_BePartner = new Intent(MainActivity.this,SejaParceiroActivity.class);
+            Intent GoTo_BePartner = new Intent(MainActivity.this, SejaParceiroActivity.class);
             GoTo_BePartner.putExtra("id_user", id_user);
             GoTo_BePartner.putExtra("email_user", email_user);
             GoTo_BePartner.putExtra("nm_user", nm_user);
@@ -337,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadProfileImage() {
         AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
-        //noinspection deprecation
         loadimage.execute();
     }
 
@@ -346,7 +346,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerPopularProducts.setLayoutManager(layoutManager);
 
         AsyncPopularProducts asyncPopularProducts = new AsyncPopularProducts(recyclerPopularProducts, AnimationLoading_PopularProducts, email_user, MainActivity.this);
-        //noinspection deprecation
         asyncPopularProducts.execute();
     }
 

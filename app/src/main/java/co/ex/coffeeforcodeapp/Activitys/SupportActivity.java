@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.airbnb.lottie.LottieAnimationView;
+
+import co.ex.coffeeforcodeapp.R;
 
 public class SupportActivity extends AppCompatActivity {
     LottieAnimationView btngoback_knowmore_support;

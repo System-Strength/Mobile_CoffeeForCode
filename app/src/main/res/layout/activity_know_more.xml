@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroung"
-    tools:context=".KnowMoreActivity">
+    tools:context=".Activitys.KnowMoreActivity">
 
     <!-- Body -->
     <androidx.constraintlayout.widget.ConstraintLayout

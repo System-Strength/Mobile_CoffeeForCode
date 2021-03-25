@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroung"
     android:orientation="vertical"
-    tools:context=".AllProductsActivity">
+    tools:context=".Activitys.AllProductsActivity">
 
     <!--Header Products-->
     <LinearLayout

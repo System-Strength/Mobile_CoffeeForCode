@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -26,6 +26,7 @@ import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
 import co.ex.coffeeforcodeapp.Api.Products.MenuService;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
+import co.ex.coffeeforcodeapp.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

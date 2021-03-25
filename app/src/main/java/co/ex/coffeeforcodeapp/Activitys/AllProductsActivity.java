@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,11 +8,25 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+
+import java.util.ArrayList;
+
 import co.ex.coffeeforcodeapp.Api.Category.AsyncCategory;
 import co.ex.coffeeforcodeapp.Api.Products.AsyncProdCategory;
 import co.ex.coffeeforcodeapp.Api.Products.AsyncProducts;
+import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
+import co.ex.coffeeforcodeapp.Api.Products.MenuService;
+import co.ex.coffeeforcodeapp.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AllProductsActivity extends AppCompatActivity {
     RecyclerView RecyclerCategory, RecyclerProducts;
@@ -20,6 +34,13 @@ public class AllProductsActivity extends AppCompatActivity {
     SwipeRefreshLayout SwipeRefreshProducts;
     int id_user, partner, cd_cat;
     String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
+
+    final Retrofit retrofitProducs = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    ArrayList<DtoMenu> dtoMenus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +61,7 @@ public class AllProductsActivity extends AppCompatActivity {
             GetUserInformation(bundle);
             loadProducts();
             loadCategorys();
+            //loadproducts();
         }else {
             GetUserInformation(bundle);
             AsyncProdCategory asyncProdCategory = new AsyncProdCategory(RecyclerProducts, AnimationProductsLoading, email_user, SwipeRefreshProducts, cd_cat, AllProductsActivity.this);
@@ -47,12 +69,29 @@ public class AllProductsActivity extends AppCompatActivity {
             loadCategorys();
         }
 
-
         SwipeRefreshProducts.setOnRefreshListener(() -> {
-            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
+            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2, StaggeredGridLayoutManager.VERTICAL);
             RecyclerProducts.setLayoutManager(layoutManager);
             AsyncProducts asyncProducts = new AsyncProducts(RecyclerProducts, AnimationProductsLoading, SwipeRefreshProducts, email_user, AllProductsActivity.this);
             asyncProducts.execute();
+        });
+    }
+
+    public void loadproducts(){
+        MenuService menuService = retrofitProducs.create(MenuService.class);
+        Call<ArrayList<DtoMenu>> menuCall = menuService.getAllProducts();
+        menuCall.enqueue(new Callback<ArrayList<DtoMenu>>() {
+            @Override
+            public void onResponse(Call<ArrayList<DtoMenu>> call, Response<ArrayList<DtoMenu>> response) {
+                dtoMenus = new ArrayList<>();
+                Toast.makeText(AllProductsActivity.this, "Deu certo", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<DtoMenu>> call, Throwable t) {
+                Toast.makeText(AllProductsActivity.this, "Não deu " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("ErrorArrayProd", t.getMessage());
+            }
         });
     }
 

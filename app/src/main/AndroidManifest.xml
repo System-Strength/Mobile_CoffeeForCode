@@ -22,8 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_coffee_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".SupportActivity"/>
-        <activity android:name=".MembersActivity" />
+        <activity android:name=".Activitys.EditProductActivity"></activity>
+        <activity android:name=".Activitys.SupportActivity" />
+        <activity android:name=".Activitys.MembersActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,21 +38,21 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".RegisterAddressActivity"
+            android:name=".Activitys.RegisterAddressActivity"
             android:label="@string/title_activity_register_addresss_beta" />
-        <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".Edit_ProfileActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".AllProductsActivity" />
-        <activity android:name=".KnowMoreActivity" />
-        <activity android:name=".ShoppingCartActivity" />
-        <activity android:name=".CadastrarCartoesActivity" />
-        <activity android:name=".CartoesActivity" />
-        <activity android:name=".SejaParceiroActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Activitys.ProductDetailsActivity" />
+        <activity android:name=".Activitys.Edit_ProfileActivity" />
+        <activity android:name=".Activitys.ProfileActivity" />
+        <activity android:name=".Activitys.AllProductsActivity" />
+        <activity android:name=".Activitys.KnowMoreActivity" />
+        <activity android:name=".Activitys.ShoppingCartActivity" />
+        <activity android:name=".Activitys.CadastrarCartoesActivity" />
+        <activity android:name=".Activitys.CartoesActivity" />
+        <activity android:name=".Activitys.SejaParceiroActivity" />
+        <activity android:name=".Activitys.MainActivity" />
+        <activity android:name=".Activitys.CreateAccountActivity" />
+        <activity android:name=".Activitys.LoginActivity" />
+        <activity android:name=".Activitys.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,7 +83,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- End Firebase -->
-        <receiver android:name=".ProductsWidget">
+        <receiver android:name=".Activitys.ProductsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -91,6 +92,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/products_widget_info" />
         </receiver>
+
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />

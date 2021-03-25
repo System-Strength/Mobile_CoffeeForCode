@@ -1,9 +1,11 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
+
+import co.ex.coffeeforcodeapp.R;
 
 /**
  * Implementation of App Widget functionality.

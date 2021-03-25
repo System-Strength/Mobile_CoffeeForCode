@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
+import co.ex.coffeeforcodeapp.MaskEditUtil;
+import co.ex.coffeeforcodeapp.R;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
     ConstraintLayout frentedocartao, primeirodadoscartao, segundodadoscartao;

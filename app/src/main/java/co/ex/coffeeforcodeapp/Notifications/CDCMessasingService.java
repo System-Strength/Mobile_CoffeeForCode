@@ -11,9 +11,8 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import co.ex.coffeeforcodeapp.MainActivity;
 import co.ex.coffeeforcodeapp.R;
-import co.ex.coffeeforcodeapp.ShoppingCartActivity;
+import co.ex.coffeeforcodeapp.Activitys.ShoppingCartActivity;
 
 public class CDCMessasingService extends FirebaseMessagingService {
 

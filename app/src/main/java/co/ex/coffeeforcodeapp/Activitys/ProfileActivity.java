@@ -1,4 +1,4 @@
-package co.ex.coffeeforcodeapp;
+package co.ex.coffeeforcodeapp.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -27,6 +27,7 @@ import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
 import co.ex.coffeeforcodeapp.Api.User.UsersService;
 import co.ex.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 
+import co.ex.coffeeforcodeapp.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;

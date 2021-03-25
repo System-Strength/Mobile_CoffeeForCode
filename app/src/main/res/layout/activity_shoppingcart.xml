@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroung"
     android:orientation="vertical"
-    tools:context=".ShoppingCartActivity">
+    tools:context=".Activitys.ShoppingCartActivity">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,7 +95,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Base Recycler -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:id="@+id/swipe_recycler_shoppingcart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -104,16 +104,56 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintTop_toBottomOf="@+id/constraint_title_shoppingcart">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_shoppingcart"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Empty Cart -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/base_empty_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/anim_sad_box_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/sad_empty_box" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/your_cart_is_empty"
+                    android:textColor="#000"
+                    android:textSize="23sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/anim_sad_box_cart" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_shoppingcart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <!-- Base Total -->
     <androidx.constraintlayout.widget.ConstraintLayout

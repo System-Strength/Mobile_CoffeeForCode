@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroung"
     android:orientation="vertical"
-    tools:context=".Edit_ProfileActivity">
+    tools:context=".Activitys.Edit_ProfileActivity">
 
     <!--Header-->
     <LinearLayout

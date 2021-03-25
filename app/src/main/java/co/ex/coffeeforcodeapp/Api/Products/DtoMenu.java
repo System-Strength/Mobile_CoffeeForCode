@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 public class DtoMenu {
     int cd_prod, qntd_prod, cd_cat, popular;
     float price_prod;
-    private String  nm_prod, date_prod, size, bonusDesc, nm_cat;
+    private String  nm_prod, date_prod, size, bonusDesc, nm_cat, img_prod_st;
     private Bitmap img_prod;
 
     public DtoMenu(){}
@@ -22,6 +22,14 @@ public class DtoMenu {
         this.img_prod = img_prod;
         this.nm_prod = nm_prod;
         this.date_prod = date_prod;
+    }
+
+    public String getImg_prod_st() {
+        return img_prod_st;
+    }
+
+    public void setImg_prod_st(String img_prod_st) {
+        this.img_prod_st = img_prod_st;
     }
 
     public int getCd_prod() {
