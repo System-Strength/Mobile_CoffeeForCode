@@ -269,5 +269,12 @@
     <string name="ok" translatable="false">OK</string>
     <string name="my_cart">My Cart</string>
     <string name="total" translatable="false">Total</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+
+    <!-- Shopping Screen -->
+    <string name="what_would_you_this_product">What would you like to do with this product?</string>
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
+    <string name="you_dont_have_product_cart">You dont have this product on your cart</string>
 
 </resources>

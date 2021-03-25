@@ -3,8 +3,6 @@ package co.ex.coffeeforcodeapp.Api.Products;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +14,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.Products_Adapter;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
-import co.ex.coffeeforcodeapp.ProductDetailsActivity;
+import co.ex.coffeeforcodeapp.Activitys.ProductDetailsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 @SuppressLint("StaticFieldLeak")
@@ -31,7 +28,7 @@ public class AsyncProducts extends AsyncTask {
     RecyclerView recyclerProducts;
     SwipeRefreshLayout SwipeRefreshProducts;
     LottieAnimationView AnimationProductsLoading;
-    String email_user;
+    String email_user, img_prod_ad;
     private Object DtoMenu;
 
     public AsyncProducts(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts, String email_user, Activity contexto) {
@@ -65,9 +62,11 @@ public class AsyncProducts extends AsyncTask {
                 dtoMenu.setNm_cat(jsonArray.getJSONObject(i).getString("nm_cat"));
                 //dtoMenu.setSize(jsonArray.getJSONObject(i).getString("size"));
                 dtoMenu.setPrice_prod((float) jsonArray.getJSONObject(i).getDouble("price_prod"));
-                URL url = new URL(jsonArray.getJSONObject(i).getString("img_prod"));
+                img_prod_ad = jsonArray.getJSONObject(i).getString("img_prod");
+                dtoMenu.setImg_prod_st(img_prod_ad);
+                /*URL url = new URL(jsonArray.getJSONObject(i).getString("img_prod"));
                 Bitmap img_cat = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                dtoMenu.setImg_prod(img_cat);
+                dtoMenu.setImg_prod(img_cat);*/
 
                 arrayListDto.add(dtoMenu);
             }

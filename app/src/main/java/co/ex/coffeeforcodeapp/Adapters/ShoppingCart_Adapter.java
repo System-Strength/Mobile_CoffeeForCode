@@ -13,21 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.R;
 
 public class ShoppingCart_Adapter extends RecyclerView.Adapter<ShoppingCart_Adapter.MyHolderShoppingCart> {
     ArrayList<DtoShoppingCart> dtoShoppingCarts;
-    TextView txt_total;
-    float total_price;
 
-    public ShoppingCart_Adapter(TextView txt_total, ArrayList<DtoShoppingCart> arrayListDto) {
+    public ShoppingCart_Adapter(ArrayList<DtoShoppingCart> arrayListDto) {
         this.dtoShoppingCarts = arrayListDto;
-        this.txt_total = txt_total;
     }
 
     @NonNull
@@ -40,15 +35,11 @@ public class ShoppingCart_Adapter extends RecyclerView.Adapter<ShoppingCart_Adap
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyHolderShoppingCart holder, int position) {
-        holder.img_prod_shoppingcart.setImageBitmap(dtoShoppingCarts.get(position).getImg_prod_cart());
+        Picasso.get().load(dtoShoppingCarts.get(position).getImg_prod()).into(holder.img_prod_shoppingcart);
         holder.txt_name_prod_shoopingcart.setText(dtoShoppingCarts.get(position).getNm_prod());
-        holder.txt_full_price_prod_shoppingcart.setText(dtoShoppingCarts.get(position).getFull_price_prod() + "");
+        holder.txt_full_price_prod_shoppingcart.setText("R$" + dtoShoppingCarts.get(position).getFull_price_prod());
         holder.txtQt_prod_shoppingcart_ad.setText(dtoShoppingCarts.get(position).getQt_prod() + "");
         holder.card_adapter_shoppingcart.setElevation(20);
-        total_price += dtoShoppingCarts.get(position).getFull_price_prod();
-        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));
-        numberFormat.setMaximumFractionDigits(2);
-        txt_total.setText("Total R$"+ numberFormat.format(total_price) );
     }
 
     @Override

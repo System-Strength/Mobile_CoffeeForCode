@@ -145,7 +145,7 @@
     <string name="buy">Comprar</string>
     <string name="addtoshoppingcart">ADICIONAR AO CARRINHO</string>
     <string name="price">Preço</string>
-    <string name="product_successfully_inserted">Producto inserido em seu carrinho com sucesso!!</string>
+    <string name="product_successfully_inserted">Produto inserido em seu carrinho com sucesso!!</string>
     <string name="goback_to_menu">Voltar ao menu</string>
     <string name="see_cart">Ver carrinho</string>
     <string name="zip_code">CEP*</string>
@@ -186,4 +186,9 @@
     <string name="see_ad">VEJA UM ANÚNCIO</string>
     <string name="sorry_ad">Desculpe, mas não será possível reproduzir um anúncio, pois estamos com pequenos problemas com o provedor de anúncios!!\nDesculpe pelo inconveniente</string>
     <string name="my_cart">Meu carrinho</string>
+    <string name="your_cart_is_empty">Seu carrinho está vazio</string>
+    <string name="what_would_you_this_product">O\'Que gostaria de fazer com esse produto?</string>
+    <string name="remove">Remover</string>
+    <string name="edit">Editar</string>
+    <string name="you_dont_have_product_cart">Você não tem este produto no seu carrinho</string>
 </resources>

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
 import co.ex.coffeeforcodeapp.R;
 
@@ -30,15 +32,14 @@ public class TopProducts_Adapter extends RecyclerView.Adapter<TopProducts_Adapte
         return new MyHolder(listItem);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+        Picasso.get().load(dtoMenusArrayList.get(position).getImg_prod_st()).into(holder.ImgPopularProduct);
         holder.txtStart_PopularProduct.setText(dtoMenusArrayList.get(position).getBonusDesc());
         holder.txtName_popularProduct.setText(dtoMenusArrayList.get(position).getNm_prod());
         holder.txtSize_popularProduct.setText(dtoMenusArrayList.get(position).getSize());
-        holder.ImgPopularProduct.setImageBitmap(dtoMenusArrayList.get(position).getImg_prod());
+        //holder.ImgPopularProduct.setImageBitmap(dtoMenusArrayList.get(position).getImg_prod());
     }
-
 
     @Override
     public int getItemCount() {

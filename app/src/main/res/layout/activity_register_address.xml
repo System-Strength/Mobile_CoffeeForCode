@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroung"
     android:orientation="vertical"
-    tools:context=".RegisterAddressActivity">
+    tools:context=".Activitys.RegisterAddressActivity">
 
     <fragment
         android:id="@+id/map"
@@ -14,7 +14,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:context=".RegisterAddressActivity" />
+        tools:context=".Activitys.RegisterAddressActivity" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -10,10 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
 import co.ex.coffeeforcodeapp.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHolderProducts> {
     ArrayList<DtoMenu> dtoMenuArrayList;
@@ -25,17 +29,20 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHo
     @NonNull
     @Override
     public MyHolderProducts onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View listItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_products, parent, false);
+        View listItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_products_products, parent, false);
         return new MyHolderProducts(listItem);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyHolderProducts holder, int position) {
-        holder.ImgProd.setImageBitmap(dtoMenuArrayList.get(position).getImg_prod());
+        Picasso.get().load(dtoMenuArrayList.get(position).getImg_prod_st()).into(holder.ImgProd);
+        //holder.ImgProd.setImageBitmap(dtoMenuArrayList.get(position).getImg_prod());
         holder.txtNm_prod.setText(dtoMenuArrayList.get(position).getNm_prod());
         holder.txtCategory_Prod.setText(dtoMenuArrayList.get(position).getNm_cat());
-        holder.txtPrice_Prod.setText("R$ " + dtoMenuArrayList.get(position).getPrice_prod());
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));
+        numberFormat.setMaximumFractionDigits(2);
+        holder.txtPrice_Prod.setText("R$ " + numberFormat.format(dtoMenuArrayList.get(position).getPrice_prod()));
 
     }
 
