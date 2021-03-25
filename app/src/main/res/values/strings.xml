@@ -276,5 +276,9 @@
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
     <string name="you_dont_have_product_cart">You dont have this product on your cart</string>
+    <string name="address">Address</string>
+    <string name="addres_no_registred">No registered address</string>
+    <string name="desc_purchase_no_address">We need your address so that we can ship your order.</string>
+    <string name="singup">Sign Up</string>
 
 </resources>

@@ -69,9 +69,7 @@ public class AsyncCategory extends AsyncTask {
                 DtoCategorys dtoCategorys = new DtoCategorys();
                 dtoCategorys.setCd_cat(jsonArray.getJSONObject(i).getInt("cd_cat"));
                 dtoCategorys.setNm_cat(jsonArray.getJSONObject(i).getString("nm_cat"));
-                URL url = new URL(jsonArray.getJSONObject(i).getString("img_cat"));
-                Bitmap img_cat = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                dtoCategorys.setImg_cat(img_cat);
+                dtoCategorys.setImg_cat_st(jsonArray.getJSONObject(i).getString("img_cat"));
 
                 arrayListDto.add(dtoCategorys);
             }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroung"
+    tools:context=".Activitys.FinishPurchaseActivity">
+
+    <!-- CardGoBack -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnGoBackPurchase"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardBackgroundColor="#FFE8BE"
+        app:cardCornerRadius="20dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            android:layout_marginEnd="2dp"
+            app:lottie_rawRes="@raw/arrowleftback_animation" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Cart Info -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/infoCartSize_purchase"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardBackgroundColor="#FFC75A"
+            app:cardCornerRadius="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtCartSize_purchase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/shoppingcart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Text Address -->
+    <TextView
+        android:id="@+id/txtAddress_Prod_Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:textColor="#3F3F3F"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGoBackPurchase" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="331dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#FFF2D9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddress_Prod_Desc" >
+
+        <!-- Container -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Text Address -->
+            <TextView
+                android:id="@+id/txtAddress_purchase"
+                android:layout_width="wrap_content"
+                android:maxWidth="220dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addressmandatory"
+                android:textSize="18sp"
+                android:textColor="#E1000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout_check_purchase"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Constraint Check -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_check_purchase"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/checkbox_purchase"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/check"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
