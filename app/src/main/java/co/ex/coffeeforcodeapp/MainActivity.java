@@ -200,11 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
         //  When click in this card user will to cardvercarrinhodecompra
         card_Shopping_Cart.setOnClickListener(v -> {
-            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
-            /*Intent vercarrinhodecompra = new Intent(MainActivity.this,CarrinhoDeCompraActivity.class);
-            startActivity(vercarrinhodecompra);
-            finish();*/
-
+            Intent goTo_cart = new Intent(MainActivity.this, ShoppingCartActivity.class);
+            goTo_cart.putExtra("email_user", email_user);
+            startActivity(goTo_cart);
         });
 
         //  When click here will show info_perfil

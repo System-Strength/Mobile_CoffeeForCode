@@ -18,6 +18,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
 import co.ex.coffeeforcodeapp.Api.Products.MenuService;
@@ -46,6 +49,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
     int qt_prod = 1;
     String email_user, nm_cat;
     String baseurl = "https://coffeeforcode.herokuapp.com/";
+    String ImageUrl;
+    String nm_prod;
+
+    //  Product Information
+    float unit_prod_price;
+    float full_prod_price = unit_prod_price;
+
+    //  Retrofit's
     final Retrofit retrofitShoppingCart = new Retrofit.Builder()
             .baseUrl( baseurl + "shoppingcart/")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -80,6 +91,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         animation_add_to_cart = findViewById(R.id.animation_add_to_cart);
         txt_add_to_cart = findViewById(R.id.txt_add_to_cart);
         ShoppingCartAlert = new Dialog(this);
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));
+        numberFormat.setMaximumFractionDigits(2);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -102,6 +115,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.one_is_the_minumum_quantity, Toast.LENGTH_SHORT).show();
             }else{
                 qt_prod--;
+                setNewPrice(numberFormat);
                 RefreshQtText();
             }
         });
@@ -111,6 +125,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.the_maximum_quantity_is_20, Toast.LENGTH_SHORT).show();
             }else {
                 qt_prod++;
+                setNewPrice(numberFormat);
                 RefreshQtText();
             }
         });
@@ -122,8 +137,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
             animation_add_to_cart.setVisibility(View.VISIBLE);
             animation_add_to_cart.playAnimation();
             txt_add_to_cart.setVisibility(View.GONE);
+            setNewPrice(numberFormat);
             ShoppingCartService shoppingCartService = retrofitShoppingCart.create(ShoppingCartService.class);
-            Call<DtoShoppingCart> cartCall = shoppingCartService.insertItem(email_user, cd_prod, qt_prod);
+            Call<DtoShoppingCart> cartCall = shoppingCartService.insertItem(email_user, cd_prod, nm_prod, ImageUrl, qt_prod, unit_prod_price, full_prod_price);
 
             cartCall.enqueue(new Callback<DtoShoppingCart>() {
                 @Override
@@ -151,10 +167,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnGoBackAllProducts.setOnClickListener(v -> finish());
     }
 
+    @SuppressLint("SetTextI18n")
+    private void setNewPrice(NumberFormat numberFormat) {
+        full_prod_price = unit_prod_price * qt_prod;
+        price_prod_Desc.setText("R$ " + numberFormat.format(full_prod_price));
+    }
+
     private void pauseLoadingAnimation() {
         animation_add_to_cart.setVisibility(View.GONE);
         animation_add_to_cart.pauseAnimation();
         txt_add_to_cart.setVisibility(View.VISIBLE);
+
+        BtnAddToCart.setEnabled(true);
+        btnLessQT_Prod.setEnabled(true);
+        btnPlusQT_Prod.setEnabled(true);
     }
 
     private void ShowShoppingCartAlert() {
@@ -165,7 +191,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cardBtnSeeCart = ShoppingCartAlert.findViewById(R.id.cardBtnSeeCart);
         cardBtnGoBackMenu = ShoppingCartAlert.findViewById(R.id.cardBtnGoBackMenu);
 
-        cardBtnSeeCart.setOnClickListener(v -> Toast.makeText(this, "Under development", Toast.LENGTH_SHORT).show());
+        cardBtnSeeCart.setOnClickListener(v -> {
+            Intent goTo_cart = new Intent(ProductDetailsActivity.this, ShoppingCartActivity.class);
+            goTo_cart.putExtra("email_user", email_user);
+            startActivity(goTo_cart);
+            finish();
+        });
 
         cardBtnGoBackMenu.setOnClickListener(v -> finish());
 
@@ -212,11 +243,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call<DtoMenuById> call, @NotNull Response<DtoMenuById> response) {
                 if (response.code() == 200){
                     assert response.body() != null;
-                    nm_prod_Desc.setText(response.body().getNm_prod());
+                    nm_prod = response.body().getNm_prod();
+                    ImageUrl = response.body().getImg_prod();
+                    nm_prod_Desc.setText(nm_prod);
                     txtSize_ProductDesc.setText(response.body().getSize());
                     txtCategory_Prod_Desc.setText(nm_cat);
-                    price_prod_Desc.setText("R$ "+ response.body().getPrice_prod());
-                    String ImageUrl = response.body().getImg_prod();
+                    unit_prod_price = response.body().getPrice_prod();
+                    price_prod_Desc.setText("R$ "+ unit_prod_price);
                     Picasso.get().load(ImageUrl).into(ImgProd_Desc, new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {

@@ -267,5 +267,7 @@
     <string name="see_ad">See AD</string>
     <string name="sorry_ad">Sorry, but it will not be possible to play an ad, as we are having small problems with the ad provider !!\nSorry for the inconvenience</string>
     <string name="ok" translatable="false">OK</string>
+    <string name="my_cart">My Cart</string>
+    <string name="total" translatable="false">Total</string>
 
 </resources>
