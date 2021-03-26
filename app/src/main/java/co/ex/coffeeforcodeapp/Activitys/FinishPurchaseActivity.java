@@ -3,6 +3,7 @@ package co.ex.coffeeforcodeapp.Activitys;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,9 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class FinishPurchaseActivity extends AppCompatActivity {
-    TextView txtAddress_purchase;
+    TextView txtAddress_purchase, txtTotal_purchase, txtCheckout_purchase;
     TextView txtCartSize_purchase;
-    CardView infoCartSize_purchase, btnGoBackPurchase;
+    CardView infoCartSize_purchase, btnGoBackPurchase, btnCheckout_purchase, btnregistercart_purchase;
+    ConstraintLayout btnSeeCart_purchase;
 
     //  User information
     int id_user, partner;
@@ -49,6 +51,7 @@ public class FinishPurchaseActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +60,75 @@ public class FinishPurchaseActivity extends AppCompatActivity {
         txtCartSize_purchase = findViewById(R.id.txtCartSize_purchase);
         infoCartSize_purchase = findViewById(R.id.infoCartSize_purchase);
         btnGoBackPurchase = findViewById(R.id.btnGoBackPurchase);
+        txtTotal_purchase = findViewById(R.id.txtTotal_purchase);
+        txtCheckout_purchase = findViewById(R.id.txtCheckout_purchase);
+        btnCheckout_purchase = findViewById(R.id.btnCheckout_purchase);
+        btnSeeCart_purchase = findViewById(R.id.btnSeeCart_purchase);
+        btnregistercart_purchase = findViewById(R.id.btnregistercart_purchase);
+        btnCheckout_purchase.setElevation(20);
 
         // get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         email_user = bundle.getString("email_user");
+        txtTotal_purchase.setText(bundle.getString("price"));
+
+        String txtTotalBase = bundle.getString("price") + " ";
+        String[]  totalBase = txtTotalBase.split(" ");
+        String valueTotal = totalBase[2];
+
+        //  Set txt on checkout button
+        String txttranslate = txtCheckout_purchase.getText().toString();
+        if (txttranslate.equals("CHECKOUT")){
+            txtCheckout_purchase.setText("CHECKOUT " + "(R$" + valueTotal + ")");
+
+        }else{
+            txtCheckout_purchase.setText("COMPRAR " + "(R$" + valueTotal + ")");
+        }
 
         loadUserInformation();
         GetCartSize();
-        Toast.makeText(this, R.string.under_development, Toast.LENGTH_LONG).show();
 
+        btnregistercart_purchase.setOnClickListener(v -> {
+            Intent goto_registercard = new Intent(FinishPurchaseActivity.this, RegisterCardActivity.class);
+            goto_registercard.putExtra("id_user", id_user);
+            goto_registercard.putExtra("email_user", email_user);
+            goto_registercard.putExtra("nm_user", nm_user);
+            goto_registercard.putExtra("cpf_user", cpf_user);
+            goto_registercard.putExtra("phone_user", phone_user);
+            goto_registercard.putExtra("zipcode", zipcode);
+            goto_registercard.putExtra("address_user", address_user);
+            goto_registercard.putExtra("complement", complement);
+            goto_registercard.putExtra("img_user", img_user);
+            goto_registercard.putExtra("partner", partner);
+            goto_registercard.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(goto_registercard);
+            finish();
+        });
+
+        btnCheckout_purchase.setOnClickListener(v -> {
+            btnCheckout_purchase.setElevation(0);
+        });
+
+        //  When click go to ShoppingCart
+        btnSeeCart_purchase.setOnClickListener(v -> {
+            Intent goTo_cart = new Intent(FinishPurchaseActivity.this, ShoppingCartActivity.class);
+            goTo_cart.putExtra("id_user", id_user);
+            goTo_cart.putExtra("email_user", email_user);
+            goTo_cart.putExtra("nm_user", nm_user);
+            goTo_cart.putExtra("cpf_user", cpf_user);
+            goTo_cart.putExtra("phone_user", phone_user);
+            goTo_cart.putExtra("zipcode", zipcode);
+            goTo_cart.putExtra("address_user", address_user);
+            goTo_cart.putExtra("complement", complement);
+            goTo_cart.putExtra("img_user", img_user);
+            goTo_cart.putExtra("partner", partner);
+            goTo_cart.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(goTo_cart);
+            finish();
+        });
+
+        //  When click will return to main activity
         btnGoBackPurchase.setOnClickListener(v -> goTo_main());
     }
 
