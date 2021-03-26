@@ -19,8 +19,11 @@ import org.jetbrains.annotations.NotNull;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
+import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
+import co.ex.coffeeforcodeapp.Api.User.UsersService;
 import co.ex.coffeeforcodeapp.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,14 +46,21 @@ public class EditProductActivity extends AppCompatActivity {
     //  Product Information
     float unit_prod_price;
     float full_price_prod = unit_prod_price;
-    //  User Information
-    String email_user;
+    //  User information
+    int id_user, partner;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
+    LoadingDialog loadingDialog = new LoadingDialog(EditProductActivity.this);
 
 
     //  Retrofit's
     String baseurl = "https://coffeeforcode.herokuapp.com/";
     final Retrofit retrofitShoppingCart = new Retrofit.Builder()
             .baseUrl( baseurl + "shoppingcart/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/info/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -85,6 +95,7 @@ public class EditProductActivity extends AppCompatActivity {
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));
         numberFormat.setMaximumFractionDigits(2);
         GetCartSize();
+        loadUserInformation();
 
 
         Picasso.get().load(img_prod).into(ImgProd_Desc_edit);
@@ -144,6 +155,36 @@ public class EditProductActivity extends AppCompatActivity {
             });
         });
     }
+    public void loadUserInformation(){
+        loadingDialog.startLoading();
+        UsersService usersService = retrofitUser.create(UsersService.class);
+        Call<DtoUsers> call = usersService.infoUser(email_user);
+        call.enqueue(new Callback<DtoUsers>() {
+            @Override
+            public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
+                if (response.code() == 200) {
+                    loadingDialog.dimissDialog();
+                    id_user = response.body().getId_user();
+                    nm_user = response.body().getNm_user();
+                    phone_user = response.body().getPhone_user();
+                    cpf_user = response.body().getCpf_user();
+                    partner = response.body().getPartner();
+                    partner_Startdate = response.body().getPartner_Startdate();
+                    address_user = response.body().getAddress_user();
+                    complement = response.body().getComplement();
+                    zipcode = response.body().getZipcode();
+                    img_user = response.body().getImg_user();
+                }else {
+                    loadingDialog.dimissDialog();
+                }
+            }
+            @Override
+            public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
+                loadingDialog.dimissDialog();
+                Toast.makeText(EditProductActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @SuppressLint("SetTextI18n")
     private void RefreshQtText() {
@@ -181,9 +222,19 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void gobackShoppingCart() {
-        Intent goBack_toShoppingCart = new Intent(EditProductActivity.this, ShoppingCartActivity.class);
-        goBack_toShoppingCart.putExtra("email_user", email_user);
-        startActivity(goBack_toShoppingCart);
+        Intent goTo_cart = new Intent(EditProductActivity.this, ShoppingCartActivity.class);
+        goTo_cart.putExtra("id_user", id_user);
+        goTo_cart.putExtra("email_user", email_user);
+        goTo_cart.putExtra("nm_user", nm_user);
+        goTo_cart.putExtra("cpf_user", cpf_user);
+        goTo_cart.putExtra("phone_user", phone_user);
+        goTo_cart.putExtra("zipcode", zipcode);
+        goTo_cart.putExtra("address_user", address_user);
+        goTo_cart.putExtra("complement", complement);
+        goTo_cart.putExtra("img_user", img_user);
+        goTo_cart.putExtra("partner", partner);
+        goTo_cart.putExtra("partner_Startdate", partner_Startdate);
+        startActivity(goTo_cart);
         finish();
     }
 
