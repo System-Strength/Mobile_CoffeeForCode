@@ -149,10 +149,10 @@
     <string name="setinhafeita" translatable="false">-></string>
     <string name="nenhumcartaocadastrado">No Card registered !!</string>
     <string name="cadastarcartao">Register New Card</string>
-    <string name="numerodocartao">Card number</string>
+    <string name="cardnumber">Card number</string>
     <string name="nomeempresonocartao">Name Printed on the card</string>
     <string name="validade">Shelf life</string>
-    <string name="ccc" translatable="false">CCC</string>
+    <string name="cvv" translatable="false">CVV</string>
     <string name="cadastar">Cadastrar</string>
     <string name="treszero" translatable="false">000</string>
     <string name="outroscartoes">Other Cards</string>
@@ -276,5 +276,13 @@
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
     <string name="you_dont_have_product_cart">You dont have this product on your cart</string>
+    <string name="address">Address</string>
+    <string name="addres_no_registred">No registered address</string>
+    <string name="desc_purchase_no_address">We need your address so that we can ship your order.</string>
+    <string name="singup">Sign Up</string>
+    <string name="payment">Payment</string>
+    <string name="no_cards_added">No cards added</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="addcard">ADD CARD</string>
 
 </resources>

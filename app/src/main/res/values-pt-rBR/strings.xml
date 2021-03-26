@@ -84,7 +84,7 @@
     <string name="desccardcfc">Para compras com descontos em nosso site, aplicativo e loja</string>
     <string name="nenhumcartaocadastrado">Nenhum Cartão cadastrado!!</string>
     <string name="cadastarcartao">Cadastrar Novo Cartão</string>
-    <string name="numerodocartao">Número do Cartão</string>
+    <string name="cardnumber">Número do Cartão</string>
     <string name="nomeempresonocartao">Nome Impresso no cartão</string>
     <string name="validade">Validade</string>
     <string name="cadastar">Cadastrar</string>
@@ -191,4 +191,12 @@
     <string name="remove">Remover</string>
     <string name="edit">Editar</string>
     <string name="you_dont_have_product_cart">Você não tem este produto no seu carrinho</string>
+    <string name="address">Endereço</string>
+    <string name="addres_no_registred">Nenhum endereço cadastrado</string>
+    <string name="desc_purchase_no_address">Precisamos de seu endereço para que possamos enviar seu pedido.</string>
+    <string name="singup">Cadastrar</string>
+    <string name="payment">Pagamento</string>
+    <string name="no_cards_added">Nenhum cartão adicionado</string>
+    <string name="checkout">COMPRAR</string>
+    <string name="addcard">ADICIONAR CARTÃO</string>
 </resources>

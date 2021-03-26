@@ -22,7 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_coffee_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".Activitys.EditProductActivity"></activity>
+        <activity android:name=".Activitys.RegisterCardActivity"></activity>
+        <activity android:name=".Activitys.FinishPurchaseActivity" />
+        <activity android:name=".Activitys.EditProductActivity" />
         <activity android:name=".Activitys.SupportActivity" />
         <activity android:name=".Activitys.MembersActivity" />
         <!--
@@ -46,8 +48,6 @@
         <activity android:name=".Activitys.AllProductsActivity" />
         <activity android:name=".Activitys.KnowMoreActivity" />
         <activity android:name=".Activitys.ShoppingCartActivity" />
-        <activity android:name=".Activitys.CadastrarCartoesActivity" />
-        <activity android:name=".Activitys.CartoesActivity" />
         <activity android:name=".Activitys.SejaParceiroActivity" />
         <activity android:name=".Activitys.MainActivity" />
         <activity android:name=".Activitys.CreateAccountActivity" />

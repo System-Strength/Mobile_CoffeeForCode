@@ -37,15 +37,16 @@ public class ShoppingCartActivity extends AppCompatActivity{
     CardView btnBuy_shoppingcart;
     ConstraintLayout base_empty_cart;
     ScrollView swipe_recycler_shoppingcart;
-    String baseurl = "https://coffeeforcode.herokuapp.com/";
     CardView infoCartSize_shoppingcart;
     TextView txtCartSize_shoppingcart;
     Handler timer = new Handler();
 
     //  User information
-    String email_user;
+    int id_user, partner;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
 
     //  Retrofit's
+    String baseurl = "https://coffeeforcode.herokuapp.com/";
     final Retrofit retrofitShoppingCart = new Retrofit.Builder()
             .baseUrl( baseurl + "shoppingcart/")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -69,7 +70,17 @@ public class ShoppingCartActivity extends AppCompatActivity{
         // get some information
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        id_user = bundle.getInt("id_user");
         email_user = bundle.getString("email_user");
+        nm_user = bundle.getString("nm_user");
+        cpf_user = bundle.getString("cpf_user");
+        phone_user = bundle.getString("phone_user");
+        zipcode = bundle.getString("zipcode");
+        address_user = bundle.getString("address_user");
+        complement = bundle.getString("complement");
+        img_user = bundle.getString("img_user");
+        partner = bundle.getInt("partner");
+        partner_Startdate = bundle.getString("partner_Startdate");
 
         loadCart();
         GetCartSize();
@@ -77,10 +88,15 @@ public class ShoppingCartActivity extends AppCompatActivity{
         btnBuy_shoppingcart.setOnClickListener(v -> {
             btnBuy_shoppingcart.setElevation(0);
             recycler_shoppingcart.scrollToPosition(recycler_shoppingcart.getAdapter().getItemCount() - 1);
+            Intent goTo_purchase = new Intent(ShoppingCartActivity.this, FinishPurchaseActivity.class);
+            goTo_purchase.putExtra("price", txt_total.getText().toString());
+            goTo_purchase.putExtra("email_user", email_user);
+            startActivity(goTo_purchase);
+            finish();
             timer.postDelayed(() -> btnBuy_shoppingcart.setElevation(20),1500);
         });
 
-        btngoback_shoppingcart.setOnClickListener(v -> finish());
+        btngoback_shoppingcart.setOnClickListener(v -> goTo_main());
     }
 
     private void loadCart() {
@@ -120,6 +136,25 @@ public class ShoppingCartActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
+        goTo_main();
+    }
+
+    private void goTo_main() {
+        Intent GoBack_ToMain = new Intent(ShoppingCartActivity.this, MainActivity.class);
+        GoBack_ToMain.putExtra("id_user", id_user);
+        GoBack_ToMain.putExtra("nm_user", nm_user);
+        GoBack_ToMain.putExtra("email_user", email_user);
+        GoBack_ToMain.putExtra("phone_user", phone_user);
+        GoBack_ToMain.putExtra("zipcode", zipcode);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("complement", complement);
+        GoBack_ToMain.putExtra("img_user", img_user);
+        GoBack_ToMain.putExtra("address_user", address_user);
+        GoBack_ToMain.putExtra("cpf_user", cpf_user);
+        GoBack_ToMain.putExtra("partner", partner);
+        GoBack_ToMain.putExtra("partner_Startdate", partner_Startdate);
+        GoBack_ToMain.putExtra("statusavisoend","desativado");
+        startActivity(GoBack_ToMain);
         finish();
     }
 }

@@ -1,5 +1,6 @@
 package co.ex.coffeeforcodeapp.Activitys;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,6 +27,8 @@ import co.ex.coffeeforcodeapp.Api.Products.DtoMenuById;
 import co.ex.coffeeforcodeapp.Api.Products.MenuService;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
+import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
+import co.ex.coffeeforcodeapp.Api.User.UsersService;
 import co.ex.coffeeforcodeapp.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,9 +49,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
     Dialog ShoppingCartAlert;
 
     //  User information
+    //  User information
+    int id_user, partner;
+    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
     int  cd_prod;
     int qt_prod = 1;
-    String email_user, nm_cat;
+    String nm_cat;
     String baseurl = "https://coffeeforcode.herokuapp.com/";
     String ImageUrl;
     String nm_prod;
@@ -65,6 +71,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
             .build();
     final Retrofit retrofitProduct = new Retrofit.Builder()
             .baseUrl( baseurl + "products/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    final Retrofit retrofitUser = new Retrofit.Builder()
+            .baseUrl("https://coffeeforcode.herokuapp.com/user/info/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -107,6 +118,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }else{
             txtQt_prod.setText(qt_prod +"" );
             ImgProd_Desc.setVisibility(View.VISIBLE);
+            loadUserInformation();
             getProductDescription();
             GetCartSize();
         }
@@ -140,7 +152,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             txt_add_to_cart.setVisibility(View.GONE);
             setNewPrice(numberFormat);
             ShoppingCartService shoppingCartService = retrofitShoppingCart.create(ShoppingCartService.class);
-            Call<DtoShoppingCart> cartCall = shoppingCartService.insertItem(email_user, cd_prod, nm_prod, ImageUrl, qt_prod, unit_prod_price, full_prod_price);
+            Call<DtoShoppingCart> cartCall = shoppingCartService.insertItem(id_user, email_user, cd_prod, nm_prod, ImageUrl, qt_prod, unit_prod_price, full_prod_price);
 
             cartCall.enqueue(new Callback<DtoShoppingCart>() {
                 @Override
@@ -174,6 +186,36 @@ public class ProductDetailsActivity extends AppCompatActivity {
         price_prod_Desc.setText("R$ " + numberFormat.format(full_prod_price));
     }
 
+    public void loadUserInformation(){
+        UsersService usersService = retrofitUser.create(UsersService.class);
+        Call<DtoUsers> call = usersService.infoUser(email_user);
+        call.enqueue(new Callback<DtoUsers>() {
+            @Override
+            public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
+                if (response.code() == 200) {
+                    id_user = response.body().getId_user();
+                    nm_user = response.body().getNm_user();
+                    phone_user = response.body().getPhone_user();
+                    cpf_user = response.body().getCpf_user();
+                    partner = response.body().getPartner();
+                    partner_Startdate = response.body().getPartner_Startdate();
+                    address_user = response.body().getAddress_user();
+                    complement = response.body().getComplement();
+                    zipcode = response.body().getZipcode();
+                    img_user = response.body().getImg_user();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
+                loadingDialog.dimissDialog();
+                Toast.makeText(ProductDetailsActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     private void pauseLoadingAnimation() {
         animation_add_to_cart.setVisibility(View.GONE);
         animation_add_to_cart.pauseAnimation();
@@ -193,8 +235,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cardBtnGoBackMenu = ShoppingCartAlert.findViewById(R.id.cardBtnGoBackMenu);
 
         cardBtnSeeCart.setOnClickListener(v -> {
+            MainActivity mainActivity = new MainActivity();
+            mainActivity.finish();
             Intent goTo_cart = new Intent(ProductDetailsActivity.this, ShoppingCartActivity.class);
+            goTo_cart.putExtra("id_user", id_user);
             goTo_cart.putExtra("email_user", email_user);
+            goTo_cart.putExtra("nm_user", nm_user);
+            goTo_cart.putExtra("cpf_user", cpf_user);
+            goTo_cart.putExtra("phone_user", phone_user);
+            goTo_cart.putExtra("zipcode", zipcode);
+            goTo_cart.putExtra("address_user", address_user);
+            goTo_cart.putExtra("complement", complement);
+            goTo_cart.putExtra("img_user", img_user);
+            goTo_cart.putExtra("partner", partner);
+            goTo_cart.putExtra("partner_Startdate", partner_Startdate);
             startActivity(goTo_cart);
             finish();
         });

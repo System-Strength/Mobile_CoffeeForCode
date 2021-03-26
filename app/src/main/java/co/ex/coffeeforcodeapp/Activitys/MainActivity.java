@@ -202,8 +202,19 @@ public class MainActivity extends AppCompatActivity {
         //  When click in this card user will to cardvercarrinhodecompra
         card_Shopping_Cart.setOnClickListener(v -> {
             Intent goTo_cart = new Intent(MainActivity.this, ShoppingCartActivity.class);
+            goTo_cart.putExtra("id_user", id_user);
             goTo_cart.putExtra("email_user", email_user);
+            goTo_cart.putExtra("nm_user", nm_user);
+            goTo_cart.putExtra("cpf_user", cpf_user);
+            goTo_cart.putExtra("phone_user", phone_user);
+            goTo_cart.putExtra("zipcode", zipcode);
+            goTo_cart.putExtra("address_user", address_user);
+            goTo_cart.putExtra("complement", complement);
+            goTo_cart.putExtra("img_user", img_user);
+            goTo_cart.putExtra("partner", partner);
+            goTo_cart.putExtra("partner_Startdate", partner_Startdate);
             startActivity(goTo_cart);
+            finish();
         });
 
         //  When click here will show info_perfil
