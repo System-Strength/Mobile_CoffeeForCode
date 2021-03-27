@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_coffee_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".Activitys.RegisterCardActivity"></activity>
+        <activity android:name=".Activitys.CardsActivity"/>
+        <activity android:name=".Activitys.RegisterCardActivity" />
         <activity android:name=".Activitys.FinishPurchaseActivity" />
         <activity android:name=".Activitys.EditProductActivity" />
         <activity android:name=".Activitys.SupportActivity" />
