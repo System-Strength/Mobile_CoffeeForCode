@@ -184,10 +184,16 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }else{
                         ShowWarning_Email_Password();
-                        //Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
+        });
+
+        //  When click here will to ForgotPasswordActivity
+        txtForgoutPassword.setOnClickListener(v -> {
+            Intent goTo_forgotPassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(goTo_forgotPassword);
+            finish();
         });
     }
 
@@ -239,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void DoLogin(@NotNull Retrofit retrofitUser, String email, String password) {
         UsersService usersService = retrofitUser.create(UsersService.class);
-        Call<DtoUsers> resultLogin = usersService.loginUser(email, password);
+        Call<DtoUsers> resultLogin = usersService.loginUser(email);
 
         resultLogin.enqueue(new Callback<DtoUsers>() {
             @Override
@@ -326,6 +332,7 @@ public class LoginActivity extends AppCompatActivity {
         CardView btnokavisoemailousenhaerrado;
         Warning_Email_Password.setContentView(R.layout.aviso_emailousenhaerrodo);
         btnokavisoemailousenhaerrado = Warning_Email_Password.findViewById(R.id.btnokavisoemailousenhaerrado);
+        cardviewbtnlogar.setElevation(20);
 
         animation_loadingLogin.setVisibility(View.GONE);
         animation_loadingLogin.pauseAnimation();

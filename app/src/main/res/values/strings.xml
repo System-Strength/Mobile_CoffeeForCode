@@ -301,5 +301,10 @@
     <string name="what_would_you_this_card">What would you this card</string>
     <string name="card_not_found">Card not found</string>
     <string name="leave">Leave</string>
+    <string name="forgotmypassword">Forgot my Password</string>
+    <string name="descForgotpassword">Don\'t worry, we can change it for you, you just need to inform the email that you created your account.</string>
+    <string name="changepassword">Change Password</string>
+    <string name="we_have_send_reset_password">We have sent you instructions to reset your password!</string>
+    <string name="failed_send_email">Failed to send reset email!</string>
 
 </resources>

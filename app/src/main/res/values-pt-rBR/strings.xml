@@ -214,4 +214,9 @@
     <string name="what_would_you_this_card">O que você gostaria este cartão</string>
     <string name="card_not_found">Cartão não encontrado</string>
     <string name="leave">Sair</string>
+    <string name="forgotmypassword">Esqueci minha senha</string>
+    <string name="descForgotpassword">Não se preocupe podemos trocá-la para você apenas será necessário informar o email que você criou sua conta.</string>
+    <string name="changepassword">Trocar Senha</string>
+    <string name="we_have_send_reset_password">Enviamos instruções para redefinir sua senha em seu email!</string>
+    <string name="failed_send_email">Falha ao enviar e-mail de redefinição!</string>
 </resources>
