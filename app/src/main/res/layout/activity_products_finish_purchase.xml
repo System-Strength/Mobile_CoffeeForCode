@@ -201,13 +201,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_cards_pruchase"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtPayment_Prod_Desc" />
+
             <!-- Card No Card Added -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_noCard_purchase"
                 android:layout_width="331dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="#FFF2D9"
                 app:cardCornerRadius="30dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPayment_Prod_Desc">

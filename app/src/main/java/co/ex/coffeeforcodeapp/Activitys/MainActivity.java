@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import co.ex.coffeeforcodeapp.Api.Card.CardService;
+import co.ex.coffeeforcodeapp.Api.Card.DtoCard;
 import co.ex.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
@@ -46,10 +48,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MainActivity extends AppCompatActivity {
     //  User img
     CircleImageView icon_ProfileUser_principal;
-    TextView txt_Name_user;
+
+    TextView txt_Name_user, txtQt_cards;
     CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
             btnSee_AllProducts;
-    @SuppressWarnings("deprecation")
     Handler timer = new Handler();
     Dialog warning_address;
     RecyclerView recyclerPopularProducts;
@@ -71,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
     String baseurl = "https://coffeeforcode.herokuapp.com/";
     final Retrofit retrofitShoppingCart = new Retrofit.Builder()
             .baseUrl( baseurl + "shoppingcart/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    final Retrofit retrofitCard = new Retrofit.Builder()
+            .baseUrl( baseurl + "card/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -116,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
         if (img_user == null){
             loadPopularProducts();
             GetCartSize();
+            GetCards();
         }else {
             loadProfileImage();
             loadPopularProducts();
             GetCartSize();
+            GetCards();
             Log.d("ProfileImageStatus", "loading image");
         }
 
@@ -191,12 +200,24 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        //  When click in this card user will to CartoesActivity
+        //  When click in this card user will to CardActivity
         card_See_Cards.setOnClickListener(v -> {
-            Toast.makeText(this, "Under Development!!\nEm Desenvolvimento!!", Toast.LENGTH_SHORT).show();
-            /*Intent irparacartoes = new Intent(MainActivity.this,CartoesActivity.class);
-            startActivity(irparacartoes);
-            finish();*/
+            Intent goToCards = new Intent(MainActivity.this, CardsActivity.class);
+            goToCards.putExtra("id_user", id_user);
+            goToCards.putExtra("nm_user", nm_user);
+            goToCards.putExtra("email_user", email_user);
+            goToCards.putExtra("phone_user", phone_user);
+            goToCards.putExtra("zipcode", zipcode);
+            goToCards.putExtra("address_user", address_user);
+            goToCards.putExtra("complement", complement);
+            goToCards.putExtra("img_user", img_user);
+            goToCards.putExtra("address_user", address_user);
+            goToCards.putExtra("cpf_user", cpf_user);
+            goToCards.putExtra("partner", partner);
+            goToCards.putExtra("partner_Startdate", partner_Startdate);
+            goToCards.putExtra("statusavisoend","desativado");
+            startActivity(goToCards);
+            finish();
         });
 
         //  When click in this card user will to cardvercarrinhodecompra
@@ -282,6 +303,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void GetCards(){
+        CardService cardService = retrofitCard.create(CardService.class);
+        Call<DtoCard> cardCall = cardService.getCardsOfUser(email_user);
+        cardCall.enqueue(new Callback<DtoCard>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NotNull Call<DtoCard> call, @NotNull Response<DtoCard> response) {
+                if (response.code() == 412){
+                    txtQt_cards.setText("0");
+                }else if(response.code() == 200){
+                    assert response.body() != null;
+                    txtQt_cards.setText(response.body().getLength() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<DtoCard> call, @NotNull Throwable t) {
+                Toast.makeText(MainActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void GetCartSize() {
         ShoppingCartService shoppingCartService = retrofitShoppingCart.create(ShoppingCartService.class);
         Call<DtoShoppingCart> cartCall = shoppingCartService.getCartInfomration(email_user);
@@ -334,6 +377,7 @@ public class MainActivity extends AppCompatActivity {
         card_Shopping_Cart = findViewById(R.id.card_Shopping_Cart);
         btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
         icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
+        txtQt_cards = findViewById(R.id.txtQt_cards);
 
         //  Shopping Cart
         baseQTProd_ShoopingCart = findViewById(R.id.baseQTProd_ShoopingCart);

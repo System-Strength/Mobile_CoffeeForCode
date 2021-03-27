@@ -284,5 +284,22 @@
     <string name="no_cards_added">No cards added</string>
     <string name="checkout">CHECKOUT</string>
     <string name="addcard">ADD CARD</string>
+    <string name="ex_shelflife_card" translatable="false">XX/XX</string>
+    <string name="ex_numbercard_card" translatable="false">•••• •••• •••• ••••</string>
+    <string name="warning_cardRegister">It is worth remembering that Coffee for code is very tied to the security of your data,\nso we ask that you <b>DO NOT</b> enter the information of your real card, but a fictitious one just so that you can continue your experience in our application, if you want you can click on “Generate card” to create a fake card.</string>
+    <string name="generate_card">Generate card</string>
+    <string name="no_flag_selected">The card`s flag was not requested</string>
+    <string name="cardNumber_worginsert">Card number inserted incorrectly</string>
+    <string name="shelflife_incorrectly">Validity entered incorrectly</string>
+    <string name="cvv_inserted_incorrectly">CVV inserted incorrectly</string>
+    <string name="name_incorrectly_inserted">Name entered incorrectly</string>
+    <string name="you_have_moreOf_theree_cards">You have more than 3 cards registered</string>
+    <string name="card_already_inserted">Card already inserted</string>
+    <string name="registered_cards">Registered cards</string>
+    <string name="register_a_card">Register a card</string>
+    <string name="yourscards">Your cards</string>
+    <string name="what_would_you_this_card">What would you this card</string>
+    <string name="card_not_found">Card not found</string>
+    <string name="leave">Leave</string>
 
 </resources>

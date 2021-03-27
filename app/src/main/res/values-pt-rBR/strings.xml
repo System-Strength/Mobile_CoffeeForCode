@@ -199,4 +199,19 @@
     <string name="no_cards_added">Nenhum cartão adicionado</string>
     <string name="checkout">COMPRAR</string>
     <string name="addcard">ADICIONAR CARTÃO</string>
+    <string name="warning_cardRegister">Valido lembrar que a Coffee for code presa muito pela segurança de seus dados,\nentão pedimos que <b>NÃO</b> insira as informações de seu cartão verdadeiro, e sim um fictício, apenas para que você possa continuar sua experiência no nosso aplicativo,\ncaso queira poderá clicar em “Gerar cartão” para geremos um cartão fake</string>
+    <string name="generate_card">Gerar cartão</string>
+    <string name="no_flag_selected">A bandeira do cartão não foi solicitado</string>
+    <string name="cardNumber_worginsert">Número do cartão inserido incorretamente</string>
+    <string name="shelflife_incorrectly">Validade inserida incorretamente</string>
+    <string name="cvv_inserted_incorrectly">CVV inserido incorretamente</string>
+    <string name="name_incorrectly_inserted">Nome inserido incorretamente</string>
+    <string name="you_have_moreOf_theree_cards">Você tem mais de 3 cartões registrados</string>
+    <string name="card_already_inserted">Cartão já inserido</string>
+    <string name="registered_cards">Cartões cadastrados</string>
+    <string name="register_a_card">Cadastrar um cartão</string>
+    <string name="yourscards">Seus cartões</string>
+    <string name="what_would_you_this_card">O que você gostaria este cartão</string>
+    <string name="card_not_found">Cartão não encontrado</string>
+    <string name="leave">Sair</string>
 </resources>

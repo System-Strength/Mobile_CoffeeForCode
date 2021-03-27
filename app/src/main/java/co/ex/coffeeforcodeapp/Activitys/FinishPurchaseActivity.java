@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
+import co.ex.coffeeforcodeapp.Api.Card.AsyncCardsPurchase;
+import co.ex.coffeeforcodeapp.Api.Card.CardService;
+import co.ex.coffeeforcodeapp.Api.Card.DtoCard;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
@@ -32,6 +37,8 @@ public class FinishPurchaseActivity extends AppCompatActivity {
     TextView txtCartSize_purchase;
     CardView infoCartSize_purchase, btnGoBackPurchase, btnCheckout_purchase, btnregistercart_purchase;
     ConstraintLayout btnSeeCart_purchase;
+    RecyclerView recycler_cards_pruchase;
+    CardView card_noCard_purchase;
 
     //  User information
     int id_user, partner;
@@ -50,6 +57,11 @@ public class FinishPurchaseActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+    final Retrofit retrofitCard = new Retrofit.Builder()
+            .baseUrl( baseurl + "card/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -65,6 +77,8 @@ public class FinishPurchaseActivity extends AppCompatActivity {
         btnCheckout_purchase = findViewById(R.id.btnCheckout_purchase);
         btnSeeCart_purchase = findViewById(R.id.btnSeeCart_purchase);
         btnregistercart_purchase = findViewById(R.id.btnregistercart_purchase);
+        recycler_cards_pruchase = findViewById(R.id.recycler_cards_pruchase);
+        card_noCard_purchase = findViewById(R.id.card_noCard_purchase);
         btnCheckout_purchase.setElevation(20);
 
         // get some information
@@ -87,6 +101,7 @@ public class FinishPurchaseActivity extends AppCompatActivity {
         }
 
         loadUserInformation();
+        GetCards();
         GetCartSize();
 
         btnregistercart_purchase.setOnClickListener(v -> {
@@ -130,6 +145,33 @@ public class FinishPurchaseActivity extends AppCompatActivity {
 
         //  When click will return to main activity
         btnGoBackPurchase.setOnClickListener(v -> goTo_main());
+    }
+
+    private void GetCards(){
+        CardService cardService = retrofitCard.create(CardService.class);
+        Call<DtoCard> cardCall = cardService.getCardsOfUser(email_user);
+        cardCall.enqueue(new Callback<DtoCard>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NotNull Call<DtoCard> call, @NotNull Response<DtoCard> response) {
+                if (response.code() == 412){
+                    card_noCard_purchase.setVisibility(View.VISIBLE);
+                    recycler_cards_pruchase.setVisibility(View.GONE);
+                }else if(response.code() == 200){
+                    card_noCard_purchase.setVisibility(View.GONE);
+                    recycler_cards_pruchase.setVisibility(View.VISIBLE);
+                    LinearLayoutManager linearLayout = new LinearLayoutManager(FinishPurchaseActivity.this);
+                    recycler_cards_pruchase.setLayoutManager(linearLayout);
+                    AsyncCardsPurchase asyncCards = new AsyncCardsPurchase(recycler_cards_pruchase, card_noCard_purchase, FinishPurchaseActivity.this, email_user);
+                    asyncCards.execute();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<DtoCard> call, @NotNull Throwable t) {
+                Toast.makeText(FinishPurchaseActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void loadUserInformation(){
