@@ -306,5 +306,9 @@
     <string name="changepassword">Change Password</string>
     <string name="we_have_send_reset_password">We have sent you instructions to reset your password!</string>
     <string name="failed_send_email">Failed to send reset email!</string>
+    <string name="versionnotfound">Version not found</string>
+    <string name="updatenow">Update Now</string>
+    <string name="updatelater">Update Later</string>
+    <string name="have_new_version">We have a new application update available, to ensure better experience in our application we recommend that you update.</string>
 
 </resources>

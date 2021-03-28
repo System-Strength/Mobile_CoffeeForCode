@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import co.ex.coffeeforcodeapp.Api.Card.CardService;
 import co.ex.coffeeforcodeapp.Api.Card.DtoCard;
+import co.ex.coffeeforcodeapp.Api.Mobile.DtoMobile;
+import co.ex.coffeeforcodeapp.Api.Mobile.MobileService;
 import co.ex.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
@@ -35,6 +38,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jetbrains.annotations.NotNull;
 
+import co.ex.coffeeforcodeapp.BuildConfig;
 import co.ex.coffeeforcodeapp.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -53,11 +57,14 @@ public class MainActivity extends AppCompatActivity {
     CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
             btnSee_AllProducts;
     Handler timer = new Handler();
-    Dialog warning_address;
+    Dialog warning_address, warning_update;
     RecyclerView recyclerPopularProducts;
     private BottomSheetDialog bottomSheetDialog;
     private SharedPreferences mPrefs;
     private static final String PREFS_NAME = "PrefsFile";
+
+    //  Mobile Information
+    String versionName = BuildConfig.VERSION_NAME;
 
     //  Shopping Cart
     ConstraintLayout baseQTProd_ShoopingCart;
@@ -91,11 +98,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Finds_Ids();
+        CheckMobileVersion();
         warning_address = new Dialog(this);
+        warning_update = new Dialog(this);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
 
         //  Get information for login of client
         Intent intent = getIntent();
@@ -303,6 +311,57 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void CheckMobileVersion(){
+        final Retrofit retrofitMobile = new Retrofit.Builder()
+                .baseUrl( baseurl + "mobile/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        MobileService mobileService = retrofitMobile.create(MobileService.class);
+        Call<DtoMobile> mobileCall = mobileService.getMobileVersion();
+        mobileCall.enqueue(new Callback<DtoMobile>() {
+            @Override
+            public void onResponse(@NotNull Call<DtoMobile> call, @NotNull Response<DtoMobile> response) {
+                switch (response.code()){
+                    case 401:
+                        Toast.makeText(MainActivity.this, R.string.versionnotfound, Toast.LENGTH_SHORT).show();
+                        break;
+                    case 200:
+                        String versionNameGetApi = response.body().getVersionName();
+                        if (versionNameGetApi.equals(versionName)){
+                            Log.d("MobileVersion", "OK: " + versionNameGetApi);
+                        }else{
+                            ConstraintLayout btnUpdateNow, btnUpdateLater;
+                            warning_update.setContentView(R.layout.adapter_x_appneedupdate);
+                            warning_update.setCancelable(false);
+                            btnUpdateNow = warning_update.findViewById(R.id.btnUpdateNow);
+                            btnUpdateLater = warning_update.findViewById(R.id.btnUpdateLater);
+
+                            btnUpdateNow.setOnClickListener(v -> {
+                                String url = "https://play.google.com/store/apps/details?id=co.ex.coffeeforcodeapp";
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(url));
+                                startActivity(i);
+                                warning_update.dismiss();
+                            });
+
+                            btnUpdateLater.setOnClickListener(v -> warning_update.dismiss());
+                            warning_update.show();
+                            Log.d("MobileVersion", "Need update: " + versionNameGetApi);
+                        }
+                        break;
+                    case 500:
+                        Toast.makeText(MainActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+            @Override
+            public void onFailure(@NotNull Call<DtoMobile> call, @NotNull Throwable t) {
+                Toast.makeText(MainActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void GetCards(){
         CardService cardService = retrofitCard.create(CardService.class);
         Call<DtoCard> cardCall = cardService.getCardsOfUser(email_user);
@@ -472,5 +531,4 @@ public class MainActivity extends AppCompatActivity {
             constraintdescnotpartner.setVisibility(View.VISIBLE);
         },2950);
     }
-
 }

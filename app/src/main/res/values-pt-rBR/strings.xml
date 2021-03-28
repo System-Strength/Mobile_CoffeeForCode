@@ -219,4 +219,8 @@
     <string name="changepassword">Trocar Senha</string>
     <string name="we_have_send_reset_password">Enviamos instruções para redefinir sua senha em seu email!</string>
     <string name="failed_send_email">Falha ao enviar e-mail de redefinição!</string>
+    <string name="versionnotfound">Versão não encontrada</string>
+    <string name="updatenow">Atualizar Agora</string>
+    <string name="updatelater">Atualizar Depois</string>
+    <string name="have_new_version">Tem uma nova atualização disponível aplicativo, para garantir melhor experiência em nosso aplicativo recomendamos que atualize.</string>
 </resources>
