@@ -115,7 +115,7 @@ public class EditProductActivity extends AppCompatActivity {
 
         btnPlusQT_Prod_edit.setOnClickListener(v -> {
             if (qt_prod == 20){
-                Toast.makeText(this, R.string.the_maximum_quantity_is_20, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.maximum_amount_reached, Toast.LENGTH_SHORT).show();
             }else {
                 qt_prod++;
                 setNewPrice(numberFormat);

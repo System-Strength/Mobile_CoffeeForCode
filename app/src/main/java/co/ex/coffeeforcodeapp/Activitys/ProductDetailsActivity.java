@@ -1,6 +1,5 @@
 package co.ex.coffeeforcodeapp.Activitys;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -54,6 +53,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
     int  cd_prod;
     int qt_prod = 1;
+    int qt_prodGet;
     String nm_cat;
     String baseurl = "https://coffeeforcode.herokuapp.com/";
     String ImageUrl;
@@ -134,8 +134,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
         btnPlusQT_Prod.setOnClickListener(v -> {
-            if (qt_prod == 20){
-                Toast.makeText(this, R.string.the_maximum_quantity_is_20, Toast.LENGTH_SHORT).show();
+            if (qt_prod == qt_prodGet || qt_prod == 20){
+                Toast.makeText(this, R.string.maximum_amount_reached, Toast.LENGTH_SHORT).show();
             }else {
                 qt_prod++;
                 setNewPrice(numberFormat);
@@ -298,30 +298,39 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call<DtoMenuById> call, @NotNull Response<DtoMenuById> response) {
                 if (response.code() == 200){
                     assert response.body() != null;
-                    nm_prod = response.body().getNm_prod();
-                    ImageUrl = response.body().getImg_prod();
-                    nm_prod_Desc.setText(nm_prod);
-                    txtSize_ProductDesc.setText(response.body().getSize());
-                    txtCategory_Prod_Desc.setText(nm_cat);
-                    unit_prod_price = response.body().getPrice_prod();
-                    price_prod_Desc.setText("R$ "+ unit_prod_price);
-                    Picasso.get().load(ImageUrl).into(ImgProd_Desc, new com.squareup.picasso.Callback() {
-                        @Override
-                        public void onSuccess() {
-                            ImgProd_Desc.setVisibility(View.VISIBLE);
-                            loadingDialog.dimissDialog();
-                        }
+                    qt_prodGet = response.body().getQntd_prod();
+                    if (qt_prodGet <= 0){
+                        Toast.makeText(ProductDetailsActivity.this, "Sem estoque", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        nm_prod = response.body().getNm_prod();
+                        ImageUrl = response.body().getImg_prod();
+                        nm_prod_Desc.setText(nm_prod);
+                        txtSize_ProductDesc.setText(response.body().getSize());
+                        txtCategory_Prod_Desc.setText(nm_cat);
+                        unit_prod_price = response.body().getPrice_prod();
+                        price_prod_Desc.setText("R$ "+ unit_prod_price);
+                        Picasso.get().load(ImageUrl).into(ImgProd_Desc, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                ImgProd_Desc.setVisibility(View.VISIBLE);
+                                loadingDialog.dimissDialog();
+                            }
 
-                        @Override
-                        public void onError(Exception e) {
-                            loadingDialog.dimissDialog();
-                            Toast.makeText(ProductDetailsActivity.this, R.string.error_to_get_image, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            @Override
+                            public void onError(Exception e) {
+                                loadingDialog.dimissDialog();
+                                Toast.makeText(ProductDetailsActivity.this, R.string.error_to_get_image, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }else if(response.code() == 404){
+                    loadingDialog.dimissDialog();
                     Toast.makeText(ProductDetailsActivity.this, R.string.products_not_found, Toast.LENGTH_SHORT).show();
+                    finish();
                 }else {
                     Toast.makeText(ProductDetailsActivity.this, R.string.server_timeout, Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 

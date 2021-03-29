@@ -207,7 +207,7 @@
     <!-- Products Details -->
     <string name="error_for_select_product">Error for select product\nTry Again</string>
     <string name="one_is_the_minumum_quantity">1 is the minimum quantity</string>
-    <string name="the_maximum_quantity_is_20">The maximum quantity to buy is 20</string>
+    <string name="maximum_amount_reached">Maximum amount reached</string>
     <string name="you_already_have_this_products_in_your_cart">You already have this product in your cart</string>
     <string name="no_possible_to_insert_this">No possible to insert this item right now</string>
     <string name="error_to_find_your_cart">Error to find your cart</string>

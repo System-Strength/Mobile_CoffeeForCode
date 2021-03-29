@@ -21,6 +21,7 @@ import co.ex.coffeeforcodeapp.Activitys.ProductDetailsActivity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @SuppressLint("StaticFieldLeak")
@@ -33,7 +34,7 @@ public class AsyncProdCategory extends AsyncTask {
     int cd_cat;
     String email_user, img_prod_st;
 
-    public AsyncProdCategory(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, String email_user, SwipeRefreshLayout SwipeRefreshProducts,
+    public AsyncProdCategory(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, ArrayList<DtoMenu> arrayListDto, String email_user, SwipeRefreshLayout SwipeRefreshProducts,
                              int cd_cat, Activity contexto) {
         this.recyclerProducts = recyclerProducts;
         this.contexto = contexto;
@@ -41,6 +42,7 @@ public class AsyncProdCategory extends AsyncTask {
         this.SwipeRefreshProducts = SwipeRefreshProducts;
         this.cd_cat = cd_cat;
         this.email_user = email_user;
+        this.arrayListDto = arrayListDto;
     }
 
     @Override
@@ -58,7 +60,6 @@ public class AsyncProdCategory extends AsyncTask {
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray("Products");
-            arrayListDto = new ArrayList<>();
             for (int i = 0; i < jsonArray.length() ; i++) {
                 DtoMenu dtoMenu = new DtoMenu();
                 dtoMenu.setCd_prod(jsonArray.getJSONObject(i).getInt("cd_prod"));

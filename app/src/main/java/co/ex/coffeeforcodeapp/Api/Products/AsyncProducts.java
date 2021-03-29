@@ -31,12 +31,13 @@ public class AsyncProducts extends AsyncTask {
     String email_user, img_prod_ad;
     private Object DtoMenu;
 
-    public AsyncProducts(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts, String email_user, Activity contexto) {
+    public AsyncProducts(RecyclerView recyclerProducts, LottieAnimationView AnimationProductsLoading, SwipeRefreshLayout SwipeRefreshProducts, ArrayList<DtoMenu> arrayListDto, String email_user, Activity contexto) {
         this.recyclerProducts = recyclerProducts;
         this.contexto = contexto;
         this.AnimationProductsLoading = AnimationProductsLoading;
         this.SwipeRefreshProducts = SwipeRefreshProducts;
         this.email_user = email_user;
+        this.arrayListDto = arrayListDto;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class AsyncProducts extends AsyncTask {
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONArray("Products");
-            arrayListDto = new ArrayList<>();
+            //arrayListDto = new ArrayList<>();
             for (int i = 0; i < jsonArray.length() ; i++) {
                 DtoMenu dtoMenu = new DtoMenu();
                 dtoMenu.setCd_prod(jsonArray.getJSONObject(i).getInt("cd_prod"));
@@ -71,6 +72,7 @@ public class AsyncProducts extends AsyncTask {
                 arrayListDto.add(dtoMenu);
             }
             products_adapter = new Products_Adapter(arrayListDto);
+            products_adapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("ErrorNetWork", e.toString());

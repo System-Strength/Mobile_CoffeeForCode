@@ -165,7 +165,7 @@
     <string name="authfailed_thisemail">Falha na autenticação!\\nEste e-mail já está registrado.</string>
     <string name="error_for_select_product">Erro em selecionar produto\\nTente novamente</string>
     <string name="one_is_the_minumum_quantity">1 é a quantidade mínima</string>
-    <string name="the_maximum_quantity_is_20">A quantidade maxima por comprar é 20</string>
+    <string name="maximum_amount_reached">Quantidade máxima atingida</string>
     <string name="you_already_have_this_products_in_your_cart">Você já tem este produto em seu carrinho</string>
     <string name="no_possible_to_insert_this">Não é possível inserir este item agora</string>
     <string name="error_to_find_your_cart">Erro ao encontrar seu carrinho</string>
