@@ -11,8 +11,8 @@ android {
         applicationId "co.ex.coffeeforcodeapp"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 13
-        versionName "3.7.1"
+        versionCode 14
+        versionName "3.8.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -85,6 +85,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     /*--------------- End Retrofit Dependencies  ---------------*/
+
+    /*--------------- Start QrCode Dependencies  --------------*/
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    /*--------------- End QrCode Dependencies  ---------------*/
 
     /*--------------- Another's  ---------------*/
     //  Picasso
