@@ -29,11 +29,11 @@ import co.ex.coffeeforcodeapp.Api.Mobile.MobileService;
 import co.ex.coffeeforcodeapp.Api.PopularProducts.AsyncPopularProducts;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
-import co.ex.coffeeforcodeapp.Api.UserImage.AsyncUserImage;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.squareup.picasso.Picasso;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "PrefsFile";
 
     //  Mobile Information
-    String versionName = BuildConfig.VERSION_NAME;
+    int versionCode = BuildConfig.VERSION_CODE;
 
     //  Shopping Cart
     ConstraintLayout baseQTProd_ShoopingCart;
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         icon_ProfileUser_principal.setVisibility(View.VISIBLE);
 
-        if (img_user == null){
+        if (img_user == null || img_user.equals(" ") || img_user.equals("")){
             loadPopularProducts();
             GetCartSize();
             GetCards();
@@ -327,9 +327,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, R.string.versionnotfound, Toast.LENGTH_SHORT).show();
                         break;
                     case 200:
-                        String versionNameGetApi = response.body().getVersionName();
-                        if (versionNameGetApi.equals(versionName)){
-                            Log.d("MobileVersion", "OK: " + versionNameGetApi);
+                        assert response.body() != null;
+                        int versionCodeGetApi = response.body().getVersionCode();
+                        if (versionCodeGetApi <= versionCode){
+                            Log.d("MobileVersion", "OK: " + versionCode);
                         }else{
                             ConstraintLayout btnUpdateNow, btnUpdateLater;
                             warning_update.setContentView(R.layout.adapter_x_appneedupdate);
@@ -347,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
 
                             btnUpdateLater.setOnClickListener(v -> warning_update.dismiss());
                             warning_update.show();
-                            Log.d("MobileVersion", "Need update: " + versionNameGetApi);
+                            Log.d("MobileVersion", "Need update: " + versionCode);
                         }
                         break;
                     case 500:
@@ -451,8 +452,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadProfileImage() {
-        AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
-        loadimage.execute();
+        Picasso.get().load(img_user).into(icon_ProfileUser_principal);
+        //AsyncUserImage loadimage = new AsyncUserImage(img_user, icon_ProfileUser_principal);
+        //loadimage.execute();
     }
 
     private void loadPopularProducts() {
@@ -489,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //  Create Method for show alert of no adress register
+    //  Create Method for show alert of no address register
     private void Show_AddressWarning(){
         ConstraintLayout btnRegisterAddressNow, btnRegisterAddressLater;
         warning_address.setContentView(R.layout.aviso_sem_endereco_cadatrado);

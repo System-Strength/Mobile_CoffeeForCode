@@ -37,7 +37,6 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyHo
     @Override
     public void onBindViewHolder(@NonNull MyHolderProducts holder, int position) {
         Picasso.get().load(dtoMenuArrayList.get(position).getImg_prod_st()).into(holder.ImgProd);
-        //holder.ImgProd.setImageBitmap(dtoMenuArrayList.get(position).getImg_prod());
         holder.txtNm_prod.setText(dtoMenuArrayList.get(position).getNm_prod());
         holder.txtCategory_Prod.setText(dtoMenuArrayList.get(position).getNm_cat());
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));

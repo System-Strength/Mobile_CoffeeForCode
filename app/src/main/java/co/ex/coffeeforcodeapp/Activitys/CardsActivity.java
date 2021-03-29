@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -72,7 +73,12 @@ public class CardsActivity extends AppCompatActivity {
         img_user = bundle.getString("img_user");
         partner = bundle.getInt("partner");
         partner_Startdate = bundle.getString("partner_Startdate");
-        Picasso.get().load(img_user).into(icon_ProfileUser_allcards);
+        if (img_user == null || img_user.equals(" ") || img_user.equals("")){
+            Log.d("ProfileImageStatus", "no image to load");
+        }else {
+            Picasso.get().load(img_user).into(icon_ProfileUser_allcards);
+            Log.d("ProfileImageStatus", "loading image");
+        }
 
         getCardsInformation();
 
