@@ -149,9 +149,9 @@
     <string name="goback_to_menu">Voltar ao menu</string>
     <string name="see_cart">Ver carrinho</string>
     <string name="zip_code">CEP*</string>
-    <string name="hintaddressNumberHere">Numero do endereço aqui</string>
+    <string name="hintaddressNumberHere">Número do endereço aqui</string>
     <string name="addressmandatory">Endereço*</string>
-    <string name="numbermandatory">Numero*</string>
+    <string name="numbermandatory">Número*</string>
     <string name="zip_codenotobligatory">CEP</string>
     <string name="search_address"><u>Clique aqui para pesquisar o endereço</u></string>
     <string name="hello_emailsend">Olá, seu usuário foi cadastrado com sucesso :)\nMandamos um email de verificação para o email cadastrado, por favor confirmar no email antes de se loga</string>
@@ -223,4 +223,7 @@
     <string name="updatenow">Atualizar Agora</string>
     <string name="updatelater">Atualizar Depois</string>
     <string name="have_new_version">Tem uma nova atualização disponível aplicativo, para garantir melhor experiência em nosso aplicativo recomendamos que atualize.</string>
+    <string name="error_to_readqrcode">Erro ao ler o código Qr\nMotivo: O código Qr não é de um produto Coffee For Code</string>
+    <string name="scan_the_qrcode">Escaneie o QR code</string>
+    <string name="noresult">Sem resultado</string>
 </resources>

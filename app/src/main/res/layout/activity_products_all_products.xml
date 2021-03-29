@@ -9,22 +9,40 @@
     tools:context=".Activitys.AllProductsActivity">
 
     <!--Header Products-->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="50dp"
         tools:ignore="UselessParent">
 
+        <!-- Title Category -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/category"
             android:textColor="#3F3F3F"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginTop="27dp"
-            android:layout_marginStart="18dp"/>
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <!-- Btn QrCode Scanner -->
+        <ImageView
+            android:id="@+id/btn_scanner_qrcode"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/icon_qrcode_sanner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Body Recycler Category -->
     <LinearLayout

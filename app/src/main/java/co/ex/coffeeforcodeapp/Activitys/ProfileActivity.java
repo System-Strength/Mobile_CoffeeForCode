@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -89,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         partner = bundle.getInt("partner");
         partner_Startdate = bundle.getString("partner_Startdate");
 
-        if (img_user == null){
+        if (img_user == null || img_user.equals(" ") || img_user.equals("")){
             load_user_info();
         }else{
             loadProfileImage();
@@ -163,7 +166,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Call<DtoUsers> usersCall = usersService.UpdateImgUser(id_user, newimg);
                             usersCall.enqueue(new Callback<DtoUsers>() {
                                 @Override
-                                public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                                public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
                                     if (response.code() == 202){
                                         pd.dismiss();
                                         img_user = downloadUri.toString();
@@ -176,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     }
                                 }
                                 @Override
-                                public void onFailure(Call<DtoUsers> call, Throwable t) {
+                                public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
                                     Toast.makeText(ProfileActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                                     Log.d("ServerErrorUpload", t.getMessage());
                                 }
@@ -220,8 +223,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadProfileImage() {
-        AsyncUserImage loadimage = new AsyncUserImage(img_user, Profile_image);
-        loadimage.execute();
+        Picasso.get().load(img_user).into(Profile_image);
+        //AsyncUserImage loadimage = new AsyncUserImage(img_user, Profile_image);
+        //loadimage.execute();
     }
 
     private void GoTo_EditProfile() {

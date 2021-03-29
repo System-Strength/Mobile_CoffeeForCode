@@ -310,5 +310,8 @@
     <string name="updatenow">Update Now</string>
     <string name="updatelater">Update Later</string>
     <string name="have_new_version">We have a new application update available, to ensure better experience in our application we recommend that you update.</string>
+    <string name="error_to_readqrcode">Error reading the Qr code\nReason: The Qr code is not for a Coffee For Code product</string>
+    <string name="scan_the_qrcode">Scan the QR code</string>
+    <string name="noresult">No result</string>
 
 </resources>
