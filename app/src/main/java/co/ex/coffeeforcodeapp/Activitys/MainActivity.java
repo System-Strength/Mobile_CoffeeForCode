@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txt_Name_user, txtQt_cards;
     CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
-            btnSee_AllProducts;
+            btnSee_AllProducts, btnSee_allorders;
     Handler timer = new Handler();
     Dialog warning_address, warning_update;
     RecyclerView recyclerPopularProducts;
@@ -243,6 +243,25 @@ public class MainActivity extends AppCompatActivity {
             goTo_cart.putExtra("partner", partner);
             goTo_cart.putExtra("partner_Startdate", partner_Startdate);
             startActivity(goTo_cart);
+            finish();
+        });
+
+        btnSee_allorders.setOnClickListener(v -> {
+            Intent goTo_Orders = new Intent(MainActivity.this, MyOrdersActivity.class);
+            goTo_Orders.putExtra("id_user", id_user);
+            goTo_Orders.putExtra("nm_user", nm_user);
+            goTo_Orders.putExtra("email_user", email_user);
+            goTo_Orders.putExtra("phone_user", phone_user);
+            goTo_Orders.putExtra("zipcode", zipcode);
+            goTo_Orders.putExtra("address_user", address_user);
+            goTo_Orders.putExtra("complement", complement);
+            goTo_Orders.putExtra("img_user", img_user);
+            goTo_Orders.putExtra("address_user", address_user);
+            goTo_Orders.putExtra("cpf_user", cpf_user);
+            goTo_Orders.putExtra("partner", partner);
+            goTo_Orders.putExtra("partner_Startdate", partner_Startdate);
+            goTo_Orders.putExtra("statusavisoend","desativado");
+            startActivity(goTo_Orders);
             finish();
         });
 
@@ -438,6 +457,7 @@ public class MainActivity extends AppCompatActivity {
         btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
         icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
         txtQt_cards = findViewById(R.id.txtQt_cards);
+        btnSee_allorders = findViewById(R.id.btnSee_allorders);
 
         //  Shopping Cart
         baseQTProd_ShoopingCart = findViewById(R.id.baseQTProd_ShoopingCart);

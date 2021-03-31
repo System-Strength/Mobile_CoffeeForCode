@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,8 @@ import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.Card.AsyncCardsPurchase;
 import co.ex.coffeeforcodeapp.Api.Card.CardService;
 import co.ex.coffeeforcodeapp.Api.Card.DtoCard;
+import co.ex.coffeeforcodeapp.Api.Orders.DtoOrders;
+import co.ex.coffeeforcodeapp.Api.Orders.OrdersServices;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.DtoShoppingCart;
 import co.ex.coffeeforcodeapp.Api.ShoppingCart.ShoppingCartService;
 import co.ex.coffeeforcodeapp.Api.User.DtoUsers;
@@ -39,6 +43,11 @@ public class FinishPurchaseActivity extends AppCompatActivity {
     ConstraintLayout btnSeeCart_purchase;
     RecyclerView recycler_cards_pruchase;
     CardView card_noCard_purchase;
+    String status;
+    String txttranslate;
+    String PayFormat_user = "Cartão de Credito";
+    Handler timer = new Handler();
+    int Cd_orderAfter;
 
     //  User information
     int id_user, partner;
@@ -57,8 +66,15 @@ public class FinishPurchaseActivity extends AppCompatActivity {
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
     final Retrofit retrofitCard = new Retrofit.Builder()
             .baseUrl( baseurl + "card/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    final Retrofit retrofitOrder = new Retrofit.Builder()
+            .baseUrl( baseurl + "orders/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -92,7 +108,7 @@ public class FinishPurchaseActivity extends AppCompatActivity {
         String valueTotal = totalBase[2];
 
         //  Set txt on checkout button
-        String txttranslate = txtCheckout_purchase.getText().toString();
+        txttranslate = txtCheckout_purchase.getText().toString();
         if (txttranslate.equals("CHECKOUT")){
             txtCheckout_purchase.setText("CHECKOUT " + "(R$" + valueTotal + ")");
 
@@ -123,6 +139,53 @@ public class FinishPurchaseActivity extends AppCompatActivity {
 
         btnCheckout_purchase.setOnClickListener(v -> {
             btnCheckout_purchase.setElevation(0);
+            loadingDialog.startLoading();
+            status = "Pendente";
+            OrdersServices ordersServices = retrofitOrder.create(OrdersServices.class);
+            Call<DtoOrders> ordersCall = ordersServices.postOrder(email_user, zipcode, address_user, complement, PayFormat_user, status);
+            ordersCall.enqueue(new Callback<DtoOrders>() {
+                @Override
+                public void onResponse(@NotNull Call<DtoOrders> call, @NotNull Response<DtoOrders> response) {
+                    if (response.code() == 201){
+                        Cd_orderAfter = response.body().getCd_order();
+                        StatusUpdateState1();
+                        loadingDialog.dimissDialog();
+                        Toast.makeText(FinishPurchaseActivity.this, R.string.order_successful, Toast.LENGTH_SHORT).show();
+                        Intent goTo_Orders = new Intent(FinishPurchaseActivity.this, MyOrdersActivity.class);
+                        goTo_Orders.putExtra("id_user", id_user);
+                        goTo_Orders.putExtra("nm_user", nm_user);
+                        goTo_Orders.putExtra("email_user", email_user);
+                        goTo_Orders.putExtra("phone_user", phone_user);
+                        goTo_Orders.putExtra("zipcode", zipcode);
+                        goTo_Orders.putExtra("address_user", address_user);
+                        goTo_Orders.putExtra("complement", complement);
+                        goTo_Orders.putExtra("img_user", img_user);
+                        goTo_Orders.putExtra("address_user", address_user);
+                        goTo_Orders.putExtra("cpf_user", cpf_user);
+                        goTo_Orders.putExtra("partner", partner);
+                        goTo_Orders.putExtra("partner_Startdate", partner_Startdate);
+                        goTo_Orders.putExtra("statusavisoend","desativado");
+                        startActivity(goTo_Orders);
+                        finish();
+                    }else if(response.code() == 409){
+                        loadingDialog.dimissDialog();
+                        Toast.makeText(FinishPurchaseActivity.this, R.string.sorry_no_stock, Toast.LENGTH_SHORT).show();
+                    }else{
+                        loadingDialog.dimissDialog();
+                        Toast.makeText(FinishPurchaseActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                        goTo_main();
+                        Log.d("OrderPostStstus", response.body().toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(@NotNull Call<DtoOrders> call, @NotNull Throwable t) {
+                    loadingDialog.dimissDialog();
+                    Toast.makeText(FinishPurchaseActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                    goTo_main();
+                    Log.d("OrderPostStstus", t.getMessage());
+                }
+            });
         });
 
         //  When click go to ShoppingCart
@@ -233,6 +296,25 @@ public class FinishPurchaseActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void StatusUpdateState1(){
+        timer.postDelayed(() -> {
+            OrdersServices ordersServices = retrofitOrder.create(OrdersServices.class);
+            status = "Em preparo";
+            Call<DtoOrders> ordersCall = ordersServices.updateStatus(Cd_orderAfter, status);
+            ordersCall.enqueue(new Callback<DtoOrders>() {
+                @Override
+                public void onResponse(@NotNull Call<DtoOrders> call, @NotNull Response<DtoOrders> response) {
+                    Log.d("OrderStatus", "Updated");
+                }
+                @Override
+                public void onFailure(@NotNull Call<DtoOrders> call, @NotNull Throwable t) {
+                    Log.d("OrderStatus", "Not update: " + t.getMessage());
+
+                }
+            });
+        },300000);
     }
 
     private void goTo_main() {

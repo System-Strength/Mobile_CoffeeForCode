@@ -655,6 +655,94 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <!--Card  Orders -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardorders"
+                        android:layout_width="145dp"
+                        android:layout_height="150dp"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"
+                        app:cardCornerRadius="20dp"
+                        android:outlineProvider="none"
+                        app:cardBackgroundColor="#6AFFB422"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardallproducts"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:padding="3dp"
+                            android:layout_height="match_parent">
+
+                            <!--Text All Orders -->
+                            <TextView
+                                android:id="@+id/txttittleallorders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/allorders"
+                                android:textAlignment="center"
+                                android:textColor="#F7000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--Text Desc All Orders -->
+                            <TextView
+                                android:id="@+id/txtdescreallorders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/descallorders"
+                                android:layout_marginTop="4dp"
+                                android:textAlignment="center"
+                                android:textColor="#000"
+                                android:textSize="13sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txttittleallorders"/>
+
+                            <!--Card More Coffee-->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnSee_allorders"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="#fff"
+                                app:cardCornerRadius="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtdescreallorders">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <!--Text Plus-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/conferir"
+                                        android:textSize="17sp"
+                                        android:textColor="#000"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TooDeepLayout" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
                     <!--Card Shopping cart-->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardshoppingcart"
@@ -666,7 +754,7 @@
                         android:outlineProvider="none"
                         app:cardBackgroundColor="#6AFFB422"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/cardallproducts"
+                        app:layout_constraintStart_toEndOf="@+id/cardorders"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <!--Base-->

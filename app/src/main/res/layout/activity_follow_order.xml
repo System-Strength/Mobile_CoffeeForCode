@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activitys.FollowOrderActivity" >
+
+    <!-- CardGoBack -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnGoBackMain_followorder"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="33dp"
+        app:cardBackgroundColor="#FFE8BE"
+        app:cardCornerRadius="20dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/arrowleftback_animation" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Maps -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activitys.FollowOrderActivity" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="327dp"
+        android:layout_height="310dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/designerlogin">
+
+        <!-- Image Bag -->
+        <ImageView
+            android:id="@+id/imageViewbag_followorder"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/bag_followorder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewmap_followorder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewbag_followorder">
+
+            <ProgressBar
+                android:id="@+id/progress_state01"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+            <ProgressBar
+                android:id="@+id/progress_state02"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+            <ProgressBar
+                android:id="@+id/progress_state03"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+            <ProgressBar
+                android:id="@+id/progress_state04"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+            <ProgressBar
+                android:id="@+id/progress_state05"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+            <ProgressBar
+                android:id="@+id/progress_state06"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:progressDrawable="@drawable/progress_set_followorder" />
+
+        </LinearLayout>
+
+        <!-- Img Map -->
+        <ImageView
+            android:id="@+id/imageViewmap_followorder"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/map_followorder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewbag_followorder"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txttitleorder_followorder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/order_twopoint"
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txtCd_order_followorder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:text="@string/order_twopoint"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
