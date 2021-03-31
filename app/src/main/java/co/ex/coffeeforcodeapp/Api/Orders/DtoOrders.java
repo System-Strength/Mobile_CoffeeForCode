@@ -1,6 +1,5 @@
 package co.ex.coffeeforcodeapp.Api.Orders;
 
-import java.util.Date;
 
 public class DtoOrders {
     int cd_order;

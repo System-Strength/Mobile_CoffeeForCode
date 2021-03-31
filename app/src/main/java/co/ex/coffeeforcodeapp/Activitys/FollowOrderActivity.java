@@ -42,13 +42,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class FollowOrderActivity extends FragmentActivity implements OnMapReadyCallback {
-    CardView btnGoBackMain_followorder;
-    TextView txtCd_order_followorder;
-    ProgressBar progress_state01, progress_state02, progress_state03, progress_state04, progress_state05, progress_state06;
+    CardView _btnGoBackMain_followorder;
+    TextView _txtCd_order_followorder;
+    ProgressBar _progress_state01, _progress_state02, _progress_state03, _progress_state04, _progress_state05, _progress_state06;
 
-    private GoogleMap mMap;
-    LoadingDialog loadingDialog = new LoadingDialog(FollowOrderActivity.this);
-
+    private GoogleMap _mMap;
+    LoadingDialog _loadingDialog = new LoadingDialog(FollowOrderActivity.this);
 
     //  User information
     int id_user, partner;
@@ -83,14 +82,14 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        btnGoBackMain_followorder = findViewById(R.id.btnGoBackMain_followorder);
-        txtCd_order_followorder = findViewById(R.id.txtCd_order_followorder);
-        progress_state01 = findViewById(R.id.progress_state01);
-        progress_state02 = findViewById(R.id.progress_state02);
-        progress_state03 = findViewById(R.id.progress_state03);
-        progress_state04 = findViewById(R.id.progress_state04);
-        progress_state05 = findViewById(R.id.progress_state05);
-        progress_state06 = findViewById(R.id.progress_state06);
+        _btnGoBackMain_followorder = findViewById(R.id.btnGoBackMain_followorder);
+        _txtCd_order_followorder = findViewById(R.id.txtCd_order_followorder);
+        _progress_state01 = findViewById(R.id.progress_state01);
+        _progress_state02 = findViewById(R.id.progress_state02);
+        _progress_state03 = findViewById(R.id.progress_state03);
+        _progress_state04 = findViewById(R.id.progress_state04);
+        _progress_state05 = findViewById(R.id.progress_state05);
+        _progress_state06 = findViewById(R.id.progress_state06);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -109,21 +108,21 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
         getOrderInformation();
         loadUserInformation();
 
-        txtCd_order_followorder.setText(cd_order + "");
+        _txtCd_order_followorder.setText(cd_order + "");
 
-        btnGoBackMain_followorder.setOnClickListener(v -> finish());
+        _btnGoBackMain_followorder.setOnClickListener(v -> finish());
 
     }
 
     public void loadUserInformation(){
-        loadingDialog.startLoading();
+        _loadingDialog.startLoading();
         UsersService usersService = retrofitUser.create(UsersService.class);
         Call<DtoUsers> call = usersService.infoUser(email_user);
         call.enqueue(new Callback<DtoUsers>() {
             @Override
             public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
                 if (response.code() == 200) {
-                    loadingDialog.dimissDialog();
+                    _loadingDialog.dimissDialog();
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     phone_user = response.body().getPhone_user();
@@ -145,7 +144,7 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                                     address.getLatitude(), address.getLongitude());
                             latitude = address.getLatitude();
                             longitude = address.getLongitude();
-                            onMapReady(mMap);
+                            onMapReady(_mMap);
                         } else {
                             // Display appropriate message when Geocoder services are not available
                             Toast.makeText(FollowOrderActivity.this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
@@ -154,12 +153,12 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                         Log.d("GeoStatus", e.toString());
                     }
                 }else{
-                    loadingDialog.dimissDialog();
+                    _loadingDialog.dimissDialog();
                 }
             }
             @Override
             public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
-                loadingDialog.dimissDialog();
+                _loadingDialog.dimissDialog();
                 Log.d("GeoStatus", t.getMessage());
             }
         });
@@ -175,32 +174,32 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                 if (response.code() == 200){
                     switch (response.body().getStatus()){
                         case "Pendente":
-                            progress_state01.setProgress(100);
+                            _progress_state01.setProgress(100);
                             break;
                         case "Em preparo":
-                            progress_state01.setProgress(100);
-                            progress_state02.setProgress(100);
+                            _progress_state01.setProgress(100);
+                            _progress_state02.setProgress(100);
                             break;
                         case "Entregador à caminho":
-                            progress_state01.setProgress(100);
-                            progress_state02.setProgress(100);
-                            progress_state03.setProgress(100);
+                            _progress_state01.setProgress(100);
+                            _progress_state02.setProgress(100);
+                            _progress_state03.setProgress(100);
                             break;
                         case "Entregue":
-                            progress_state01.setProgress(100);
-                            progress_state02.setProgress(100);
-                            progress_state03.setProgress(100);
-                            progress_state04.setProgress(100);
-                            progress_state05.setProgress(100);
+                            _progress_state01.setProgress(100);
+                            _progress_state02.setProgress(100);
+                            _progress_state03.setProgress(100);
+                            _progress_state04.setProgress(100);
+                            _progress_state05.setProgress(100);
                             break;
                         case "Concluído":
-                            progress_state01.setProgress(100);
-                            progress_state02.setProgress(100);
-                            progress_state03.setProgress(100);
-                            progress_state04.setProgress(100);
-                            progress_state05.setProgress(100);
-                            progress_state06.setProgress(100);
-                            txtCd_order_followorder.setText(cd_order + " (Concluído)");
+                            _progress_state01.setProgress(100);
+                            _progress_state02.setProgress(100);
+                            _progress_state03.setProgress(100);
+                            _progress_state04.setProgress(100);
+                            _progress_state05.setProgress(100);
+                            _progress_state06.setProgress(100);
+                            _txtCd_order_followorder.setText(cd_order + " (Concluído)");
                             break;
                     }
                 }else if (response.code() == 410){
@@ -223,16 +222,16 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        _mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng location = new LatLng(latitude, longitude);
-        mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(location).title(zipcode));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
+        _mMap.clear();
+        _mMap.addMarker(new MarkerOptions().position(location).title(zipcode));
+        _mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMap.setMyLocationEnabled(false);
+        _mMap.setMyLocationEnabled(false);
     }
 }
