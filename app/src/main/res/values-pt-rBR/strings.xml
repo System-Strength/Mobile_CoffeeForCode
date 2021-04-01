@@ -165,7 +165,7 @@
     <string name="authfailed_thisemail">Falha na autenticação!\\nEste e-mail já está registrado.</string>
     <string name="error_for_select_product">Erro em selecionar produto\\nTente novamente</string>
     <string name="one_is_the_minumum_quantity">1 é a quantidade mínima</string>
-    <string name="the_maximum_quantity_is_20">A quantidade maxima por comprar é 20</string>
+    <string name="maximum_amount_reached">Quantidade máxima atingida</string>
     <string name="you_already_have_this_products_in_your_cart">Você já tem este produto em seu carrinho</string>
     <string name="no_possible_to_insert_this">Não é possível inserir este item agora</string>
     <string name="error_to_find_your_cart">Erro ao encontrar seu carrinho</string>
@@ -226,4 +226,17 @@
     <string name="error_to_readqrcode">Erro ao ler o código Qr\nMotivo: O código Qr não é de um produto Coffee For Code</string>
     <string name="scan_the_qrcode">Escaneie o QR code</string>
     <string name="noresult">Sem resultado</string>
+    <string name="order_twopoint">Pedido:</string>
+    <string name="held_in_twopoint">Realizado em:</string>
+    <string name="payment_twopoint">Pagamento:</string>
+    <string name="follow_order">ACOMPANHAR PEDIDO</string>
+    <string name="allorders">Todos Pedidos</string>
+    <string name="sorry_no_stock">Desculpe o transtorno, mas não temos mais estoque :(\nEm algumas hora vamos repor nosso estoque</string>
+    <string name="descallorders">Aqui você pode ver todos os pedidos</string>
+    <string name="status_twopoint">Status:</string>
+    <string name="order_successful">Pedido bem sucedido</string>
+    <string name="order_not_found">Pedido não encontrado</string>
+    <string name="you_have_no_requests">Você não tem nenhum pedido</string>
+    <string name="delivery_forecast">Previsão de entrega</string>
+    <string name="orderdelivered">Pedido entregue</string>
 </resources>

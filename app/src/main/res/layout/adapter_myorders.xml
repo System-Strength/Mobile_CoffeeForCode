@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="340dp"
+        android:minHeight="250dp"
+        android:maxWidth="340dp"
+        android:maxHeight="250dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Card Main -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="321dp"
+            android:maxHeight="210dp"
+            android:minHeight="210dp"
+            android:minWidth="321dp"
+            app:cardBackgroundColor="#FFF2D9"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="321dp"
+                android:maxHeight="210dp"
+                android:minHeight="210dp"
+                android:minWidth="321dp">
+
+                <!-- Text Order -->
+                <TextView
+                    android:id="@+id/txtbase_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_twopoint"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Text Order Number -->
+                <TextView
+                    android:id="@+id/txt_ordernumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fulanodetal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/txtbase_order"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Text Held in -->
+                <TextView
+                    android:id="@+id/txtbase_held_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/held_in_twopoint"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtbase_order" />
+
+                <!-- Text Held in Date -->
+                <TextView
+                    android:id="@+id/txt_held_in_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/fulanodetal"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/txtbase_held_in"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_ordernumber" />
+
+                <!-- Text Payment -->
+                <TextView
+                    android:id="@+id/txtbase_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/payment_twopoint"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtbase_held_in" />
+
+                <!-- Text Payment Type -->
+                <TextView
+                    android:id="@+id/txt_payment_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/fulanodetal"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/txtbase_payment"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_held_in_date" />
+
+                <!-- Text Base Status -->
+                <TextView
+                    android:id="@+id/txtbase_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/status_twopoint"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtbase_payment" />
+
+                <!-- Text Status -->
+                <TextView
+                    android:id="@+id/txt_Status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/fulanodetal"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/txtbase_status"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_payment_type" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card Btn -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFollowOrder"
+            android:layout_width="280dp"
+            android:layout_height="63dp"
+            app:cardCornerRadius="15dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#FFD686"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/follow_order"
+                    android:textColor="#3F3F3F"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -26,25 +28,23 @@
         android:roundIcon="@mipmap/ic_launcher_coffee_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoffeeForCodeApp">
-        <activity android:name=".Activitys.ForgotPasswordActivity"/>
+        <activity android:name=".Activitys.AppInfoActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".Activitys.FollowOrderActivity"
+            android:label="@string/title_activity_follow_order" />
+        <activity android:name=".Activitys.MyOrdersActivity" />
+        <activity android:name=".Activitys.ForgotPasswordActivity" />
         <activity android:name=".Activitys.CardsActivity" />
         <activity android:name=".Activitys.RegisterCardActivity" />
         <activity android:name=".Activitys.FinishPurchaseActivity" />
         <activity android:name=".Activitys.EditProductActivity" />
         <activity android:name=".Activitys.SupportActivity" />
         <activity android:name=".Activitys.MembersActivity" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".Activitys.RegisterAddressActivity"
             android:label="@string/title_activity_register_addresss_beta" />
@@ -65,12 +65,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activitys.CaptureAct"
+        <activity
+            android:name=".Activitys.CaptureAct"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-        <!-- Start Firebase -->
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- Start Firebase -->
         <service
             android:name=".Notifications.CDCMessasingService"
             android:exported="false">

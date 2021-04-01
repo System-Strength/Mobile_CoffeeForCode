@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txt_Name_user, txtQt_cards;
     CardView cardview_notPartner, card_Be_Partner, card_See_Cards, card_Shopping_Cart, AnimationLoading_PopularProducts,
-            btnSee_AllProducts;
+            btnSee_AllProducts, btnSee_allorders;
     Handler timer = new Handler();
     Dialog warning_address, warning_update;
     RecyclerView recyclerPopularProducts;
@@ -246,12 +247,39 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        btnSee_allorders.setOnClickListener(v -> {
+            Intent goTo_Orders = new Intent(MainActivity.this, MyOrdersActivity.class);
+            goTo_Orders.putExtra("id_user", id_user);
+            goTo_Orders.putExtra("nm_user", nm_user);
+            goTo_Orders.putExtra("email_user", email_user);
+            goTo_Orders.putExtra("phone_user", phone_user);
+            goTo_Orders.putExtra("zipcode", zipcode);
+            goTo_Orders.putExtra("address_user", address_user);
+            goTo_Orders.putExtra("complement", complement);
+            goTo_Orders.putExtra("img_user", img_user);
+            goTo_Orders.putExtra("address_user", address_user);
+            goTo_Orders.putExtra("cpf_user", cpf_user);
+            goTo_Orders.putExtra("partner", partner);
+            goTo_Orders.putExtra("partner_Startdate", partner_Startdate);
+            goTo_Orders.putExtra("statusavisoend","desativado");
+            startActivity(goTo_Orders);
+            finish();
+        });
+
         //  When click here will show info_perfil
         icon_ProfileUser_principal.setOnClickListener(v -> {
             bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.BottomSheetTheme);
 
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
                     findViewById(R.id.menu_sheet_principal));
+
+
+            if (img_user == null || img_user.equals(" ") || img_user.equals("")){
+                Log.d("ProfileImageStatus", "No profile image");
+            }else {
+                Picasso.get().load(img_user).into((ImageView) sheetview.findViewById(R.id.img_user_sheet));
+                Log.d("ProfileImageStatus", "loading image");
+            }
 
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
@@ -274,7 +302,8 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to app information
             sheetview.findViewById(R.id.btninfoapp).setOnClickListener(v1 -> {
-                Toast.makeText(MainActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                Intent goTo_appinfo = new Intent(MainActivity.this, AppInfoActivity.class);
+                startActivity(goTo_appinfo);
                 bottomSheetDialog.dismiss();
             });
 
@@ -438,6 +467,7 @@ public class MainActivity extends AppCompatActivity {
         btnSee_AllProducts = findViewById(R.id.btnSee_AllProducts);
         icon_ProfileUser_principal = findViewById(R.id.icon_ProfileUser_principal);
         txtQt_cards = findViewById(R.id.txtQt_cards);
+        btnSee_allorders = findViewById(R.id.btnSee_allorders);
 
         //  Shopping Cart
         baseQTProd_ShoopingCart = findViewById(R.id.baseQTProd_ShoopingCart);

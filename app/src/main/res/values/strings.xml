@@ -207,7 +207,7 @@
     <!-- Products Details -->
     <string name="error_for_select_product">Error for select product\nTry Again</string>
     <string name="one_is_the_minumum_quantity">1 is the minimum quantity</string>
-    <string name="the_maximum_quantity_is_20">The maximum quantity to buy is 20</string>
+    <string name="maximum_amount_reached">Maximum amount reached</string>
     <string name="you_already_have_this_products_in_your_cart">You already have this product in your cart</string>
     <string name="no_possible_to_insert_this">No possible to insert this item right now</string>
     <string name="error_to_find_your_cart">Error to find your cart</string>
@@ -313,5 +313,19 @@
     <string name="error_to_readqrcode">Error reading the Qr code\nReason: The Qr code is not for a Coffee For Code product</string>
     <string name="scan_the_qrcode">Scan the QR code</string>
     <string name="noresult">No result</string>
+    <string name="order_twopoint">Order:</string>
+    <string name="held_in_twopoint">Held in:</string>
+    <string name="payment_twopoint">Payment:</string>
+    <string name="follow_order">FOLLOW ORDER</string>
+    <string name="allorders">All Orders</string>
+    <string name="sorry_no_stock">Sorry for the inconvenience, but we have no more stock :(\nIn a few hours we will replenish our stock</string>
+    <string name="descallorders">Here you can see all or orders</string>
+    <string name="status_twopoint">Status:</string>
+    <string name="title_activity_follow_order" translatable="false">Map</string>
+    <string name="order_successful">Order Successful</string>
+    <string name="order_not_found">Order not found</string>
+    <string name="you_have_no_requests">You have no requests</string>
+    <string name="delivery_forecast">Delivery forecast</string>
+    <string name="orderdelivered">Order delivered</string>
 
 </resources>

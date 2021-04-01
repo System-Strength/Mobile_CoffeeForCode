@@ -175,17 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                 animation_loadingLogin.setVisibility(View.VISIBLE);
                 animation_loadingLogin.playAnimation();
                 txtlogarlogin.setVisibility(View.GONE);
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        if (mAuth.getCurrentUser().isEmailVerified()){
-                            DoLogin(retrofitUser, email, password);
-                        }else{
-                            ShowEmailisNotVerified();
-                        }
-                    }else{
-                        ShowWarning_Email_Password();
-                    }
-                });
+                DoLogin(email, password);
             }
         });
 
@@ -194,6 +184,83 @@ public class LoginActivity extends AppCompatActivity {
             Intent goTo_forgotPassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(goTo_forgotPassword);
             finish();
+        });
+    }
+
+    private void DoLogin(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                if (mAuth.getCurrentUser().isEmailVerified()){
+                    UsersService usersService = retrofitUser.create(UsersService.class);
+                    Call<DtoUsers> resultLogin = usersService.loginUser(email);
+
+                    resultLogin.enqueue(new Callback<DtoUsers>() {
+                        @Override
+                        public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
+                            if (response.code() == 200){
+                                assert response.body() != null;
+                                int id_user, partner;
+                                String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
+                                id_user = response.body().getId_user();
+                                nm_user = response.body().getNm_user();
+                                email_user = response.body().getEmail();
+                                phone_user = response.body().getPhone_user();
+                                zipcode = response.body().getZipcode();
+                                address_user = response.body().getAddress_user();
+                                complement = response.body().getComplement();
+                                img_user = response.body().getImg_user();
+                                cpf_user = response.body().getCpf_user();
+                                partner = response.body().getPartner();
+                                partner_Startdate = response.body().getPartner_Startdate();
+
+                                if (checkbox_rememberMe.isChecked()){
+                                    mPrefs.edit().clear().apply();
+                                    boolean boollsChecked = checkbox_rememberMe.isChecked();
+                                    SharedPreferences.Editor editor = mPrefs.edit();
+                                    editor.putString("pref_email", email);
+                                    editor.putString("pref_password", password);
+                                    editor.putBoolean("pref_check", boollsChecked);
+                                    editor.apply();
+                                    GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                                }else{
+                                    mPrefs.edit().clear().apply();
+                                    GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
+                                }
+                            }else if(response.code() == 401){
+                                ShowWarning_Email_Password();
+                                mPrefs.edit().clear().apply();
+                                animation_loadingLogin.setVisibility(View.GONE);
+                                animation_loadingLogin.playAnimation();
+                                txtlogarlogin.setVisibility(View.VISIBLE);
+                                cardviewbtnlogar.setElevation(20);
+                            }else{
+                                Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
+                                loading.dimissDialog();
+                                mPrefs.edit().clear().apply();
+                                Log.d("NetWorkError", response.message());
+                                animation_loadingLogin.setVisibility(View.GONE);
+                                animation_loadingLogin.playAnimation();
+                                txtlogarlogin.setVisibility(View.VISIBLE);
+                                cardviewbtnlogar.setElevation(20);
+                                cardviewbtnlogar.setEnabled(true);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
+                            Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
+                            Log.d("NetWorkError", t.getMessage());
+                            loading.dimissDialog();
+                            cardviewbtnlogar.setElevation(20);
+                        }
+                    });
+
+                }else{
+                    ShowEmailisNotVerified();
+                }
+            }else{
+                ShowWarning_Email_Password();
+            }
         });
     }
 
@@ -237,76 +304,10 @@ public class LoginActivity extends AppCompatActivity {
             String emailPref = sp.getString("pref_email", "not found");
             String PassPref = sp.getString("pref_password", "not found");
             checkbox_rememberMe.setChecked(sp.getBoolean("pref_check", true));
-            DoLogin(retrofitUser, emailPref, PassPref);
+            DoLogin(emailPref, PassPref);
         }else {
             loading.dimissDialog();
         }
-    }
-
-    private void DoLogin(@NotNull Retrofit retrofitUser, String email, String password) {
-        UsersService usersService = retrofitUser.create(UsersService.class);
-        Call<DtoUsers> resultLogin = usersService.loginUser(email);
-
-        resultLogin.enqueue(new Callback<DtoUsers>() {
-            @Override
-            public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
-                if (response.code() == 200){
-                    assert response.body() != null;
-                    int id_user, partner;
-                    String nm_user, email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner_Startdate;
-                    id_user = response.body().getId_user();
-                    nm_user = response.body().getNm_user();
-                    email_user = response.body().getEmail();
-                    phone_user = response.body().getPhone_user();
-                    zipcode = response.body().getZipcode();
-                    address_user = response.body().getAddress_user();
-                    complement = response.body().getComplement();
-                    img_user = response.body().getImg_user();
-                    cpf_user = response.body().getCpf_user();
-                    partner = response.body().getPartner();
-                    partner_Startdate = response.body().getPartner_Startdate();
-
-                    if (checkbox_rememberMe.isChecked()){
-                        mPrefs.edit().clear().apply();
-                        boolean boollsChecked = checkbox_rememberMe.isChecked();
-                        SharedPreferences.Editor editor = mPrefs.edit();
-                        editor.putString("pref_email", email);
-                        editor.putString("pref_password", password);
-                        editor.putBoolean("pref_check", boollsChecked);
-                        editor.apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
-                    }else{
-                        mPrefs.edit().clear().apply();
-                        GoToMain_Intent(id_user, nm_user,email_user, phone_user, zipcode, address_user, complement, img_user, cpf_user, partner, partner_Startdate);
-                    }
-                }else if(response.code() == 401){
-                    ShowWarning_Email_Password();
-                    mPrefs.edit().clear().apply();
-                    animation_loadingLogin.setVisibility(View.GONE);
-                    animation_loadingLogin.playAnimation();
-                    txtlogarlogin.setVisibility(View.VISIBLE);
-                    cardviewbtnlogar.setElevation(20);
-                }else{
-                    Toast.makeText(LoginActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
-                    loading.dimissDialog();
-                    mPrefs.edit().clear().apply();
-                    Log.d("NetWorkError", response.message());
-                    animation_loadingLogin.setVisibility(View.GONE);
-                    animation_loadingLogin.playAnimation();
-                    txtlogarlogin.setVisibility(View.VISIBLE);
-                    cardviewbtnlogar.setElevation(20);
-                    cardviewbtnlogar.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
-                Toast.makeText(LoginActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_SHORT).show();
-                Log.d("NetWorkError", t.getMessage());
-                loading.dimissDialog();
-                cardviewbtnlogar.setElevation(20);
-            }
-        });
     }
 
     private void GoToMain_Intent(int id_user, String nm_user, String email_user, String phone_user, String zipcode, String address_user, String complement, String img_user, String cpf_user, int partner, String partner_Startdate) {

@@ -82,6 +82,23 @@ public class CardsActivity extends AppCompatActivity {
 
         getCardsInformation();
 
+        icon_ProfileUser_allcards.setOnClickListener(v -> {
+            Intent GoTo_profile = new Intent(CardsActivity.this, ProfileActivity.class);
+            GoTo_profile.putExtra("id_user", id_user);
+            GoTo_profile.putExtra("email_user", email_user);
+            GoTo_profile.putExtra("nm_user", nm_user);
+            GoTo_profile.putExtra("cpf_user", cpf_user);
+            GoTo_profile.putExtra("phone_user", phone_user);
+            GoTo_profile.putExtra("zipcode", zipcode);
+            GoTo_profile.putExtra("address_user", address_user);
+            GoTo_profile.putExtra("complement", complement);
+            GoTo_profile.putExtra("img_user", img_user);
+            GoTo_profile.putExtra("partner", partner);
+            GoTo_profile.putExtra("partner_Startdate", partner_Startdate);
+            startActivity(GoTo_profile);
+            finish();
+        });
+
         btnGoBackMain_cards.setOnClickListener(v -> GoBack_toMain());
 
         cardBtn_RegisteraCard_main.setOnClickListener(v -> goto_card_resgister());

@@ -2,8 +2,6 @@ package co.ex.coffeeforcodeapp.Api.Category;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -16,13 +14,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.airbnb.lottie.LottieAnimationView;
 import co.ex.coffeeforcodeapp.Adapters.Category_Adapter;
 import co.ex.coffeeforcodeapp.Api.Products.AsyncProdCategory;
+import co.ex.coffeeforcodeapp.Api.Products.DtoMenu;
 import co.ex.coffeeforcodeapp.Api.Products.RecyclerItemClickListener;
 import co.ex.coffeeforcodeapp.HandlerJson.JsonHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 @SuppressLint("StaticFieldLeak")
@@ -34,11 +32,12 @@ public class AsyncCategory extends AsyncTask {
     String email_user;
 
     //  Products
+    ArrayList<DtoMenu> arrayListDtomenu = new ArrayList<>();
     RecyclerView recyclerProducts;
     LottieAnimationView AnimationproductsLoading;
     SwipeRefreshLayout SwipeRefreshProducts;
 
-    public AsyncCategory(RecyclerView recyclerCategorys, LottieAnimationView AnimationcategoryLoading, Activity contexto, RecyclerView recyclerProducts,
+    public AsyncCategory(RecyclerView recyclerCategorys, LottieAnimationView AnimationcategoryLoading, Activity contexto, ArrayList<DtoMenu> arrayListDto, RecyclerView recyclerProducts,
                          LottieAnimationView AnimationproductsLoading, SwipeRefreshLayout SwipeRefreshProducts, String email_user) {
         this.recyclerCategorys = recyclerCategorys;
         this.contexto = contexto;
@@ -48,6 +47,7 @@ public class AsyncCategory extends AsyncTask {
         this.AnimationproductsLoading = AnimationproductsLoading;
         this.SwipeRefreshProducts = SwipeRefreshProducts;
         this.email_user = email_user;
+        this.arrayListDtomenu = arrayListDto;
     }
 
     @Override
@@ -95,7 +95,8 @@ public class AsyncCategory extends AsyncTask {
                         int cd_cat = arrayListDto.get(position).getCd_cat();
                         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager (2,StaggeredGridLayoutManager.VERTICAL);
                         recyclerProducts.setLayoutManager(layoutManager);
-                        AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, email_user, SwipeRefreshProducts, cd_cat, contexto);
+                        arrayListDtomenu.clear();
+                        AsyncProdCategory asyncProdCategory = new AsyncProdCategory(recyclerProducts, AnimationproductsLoading, arrayListDtomenu, email_user, SwipeRefreshProducts, cd_cat, contexto);
                         asyncProdCategory.execute();
                     }
 
