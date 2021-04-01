@@ -3,9 +3,17 @@ package co.ex.coffeeforcodeapp.Api.Orders;
 
 public class DtoOrders {
     int cd_order;
-    String email_user, zipcode, address_user, complement, cd_prods, PayFormat_user, status, held_in;
+    String email_user, zipcode, address_user, complement, cd_prods, PayFormat_user, status, held_in, delivery_time;
     int length;
 
+
+    public String getDelivery_time() {
+        return delivery_time;
+    }
+
+    public void setDelivery_time(String delivery_time) {
+        this.delivery_time = delivery_time;
+    }
 
     public int getLength() {
         return length;

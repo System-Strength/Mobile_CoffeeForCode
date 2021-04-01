@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import co.ex.coffeeforcodeapp.Adapters.LoadingDialog;
 import co.ex.coffeeforcodeapp.Api.Orders.DtoOrders;
@@ -43,7 +44,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class FollowOrderActivity extends FragmentActivity implements OnMapReadyCallback {
     CardView _btnGoBackMain_followorder;
-    TextView _txtCd_order_followorder;
+    TextView _txtCd_order_followorder, _txt_address_followorder, _txt_deliveryForecast;
     ProgressBar _progress_state01, _progress_state02, _progress_state03, _progress_state04, _progress_state05, _progress_state06;
 
     private GoogleMap _mMap;
@@ -61,7 +62,7 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
     //  Retrofit's
     String baseurl = "https://coffeeforcode.herokuapp.com/";
     final Retrofit retrofitOrder = new Retrofit.Builder()
-            .baseUrl( baseurl + "orders/")
+            .baseUrl(baseurl + "orders/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -80,10 +81,13 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
         _btnGoBackMain_followorder = findViewById(R.id.btnGoBackMain_followorder);
         _txtCd_order_followorder = findViewById(R.id.txtCd_order_followorder);
+        _txt_address_followorder = findViewById(R.id.txt_address_followorder);
+        _txt_deliveryForecast = findViewById(R.id.txt_deliveryForecast);
         _progress_state01 = findViewById(R.id.progress_state01);
         _progress_state02 = findViewById(R.id.progress_state02);
         _progress_state03 = findViewById(R.id.progress_state03);
@@ -114,7 +118,7 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
 
     }
 
-    public void loadUserInformation(){
+    public void loadUserInformation() {
         _loadingDialog.startLoading();
         UsersService usersService = retrofitUser.create(UsersService.class);
         Call<DtoUsers> call = usersService.infoUser(email_user);
@@ -123,6 +127,7 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
             public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
                 if (response.code() == 200) {
                     _loadingDialog.dimissDialog();
+                    assert response.body() != null;
                     id_user = response.body().getId_user();
                     nm_user = response.body().getNm_user();
                     phone_user = response.body().getPhone_user();
@@ -140,22 +145,27 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                         if (addresses != null && !addresses.isEmpty()) {
                             Address address = addresses.get(0);
                             // Use the address as needed
-                            @SuppressLint("DefaultLocale") String message = String.format("Latitude: %f, Longitude: %f",
-                                    address.getLatitude(), address.getLongitude());
                             latitude = address.getLatitude();
                             longitude = address.getLongitude();
                             onMapReady(_mMap);
                         } else {
                             // Display appropriate message when Geocoder services are not available
-                            Toast.makeText(FollowOrderActivity.this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
+                            latitude = -23.5636351;
+                            longitude = -46.8130342;
+                            onMapReady(_mMap);
+                            Log.e("GeocoderStatus", "Address is null");
                         }
                     } catch (IOException e) {
-                        Log.d("GeoStatus", e.toString());
+                        latitude = -23.5636351;
+                        longitude = -46.8130342;
+                        onMapReady(_mMap);
+                        Log.e("GeocoderStatus", e.toString());
                     }
-                }else{
+                } else {
                     _loadingDialog.dimissDialog();
                 }
             }
+
             @Override
             public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
                 _loadingDialog.dimissDialog();
@@ -171,8 +181,8 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NotNull Call<DtoOrders> call, @NotNull Response<DtoOrders> response) {
-                if (response.code() == 200){
-                    switch (response.body().getStatus()){
+                if (response.code() == 200) {
+                    switch (Objects.requireNonNull(response.body()).getStatus()) {
                         case "Pendente":
                             _progress_state01.setProgress(100);
                             break;
@@ -202,11 +212,19 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
                             _txtCd_order_followorder.setText(cd_order + " (Concluído)");
                             break;
                     }
-                }else if (response.code() == 410){
+
+                    String fullAddress = response.body().getAddress_user() + ", " + response.body().getComplement() + ", " + response.body().getZipcode();
+                    _txt_address_followorder.setText(fullAddress);
+                    if (response.body().getStatus().equals("Concluído")) {
+                        _txt_deliveryForecast.setText(R.string.orderdelivered);
+                    } else {
+                        _txt_deliveryForecast.setText(response.body().getDelivery_time());
+                    }
+                } else if (response.code() == 410) {
                     Toast.makeText(FollowOrderActivity.this, R.string.order_not_found, Toast.LENGTH_SHORT).show();
                     finish();
 
-                }else if (response.code() == 500){
+                } else if (response.code() == 500) {
                     Toast.makeText(FollowOrderActivity.this, R.string.wehaveaproblem, Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -223,15 +241,15 @@ public class FollowOrderActivity extends FragmentActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         _mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
         LatLng location = new LatLng(latitude, longitude);
         _mMap.clear();
-        _mMap.addMarker(new MarkerOptions().position(location).title(zipcode));
+        _mMap.addMarker(new MarkerOptions().position(location).title("Pedido: " + cd_order));
         _mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        _mMap.setMyLocationEnabled(false);
+        _mMap.isMyLocationEnabled();
+        _mMap.setMyLocationEnabled(true);
     }
 }

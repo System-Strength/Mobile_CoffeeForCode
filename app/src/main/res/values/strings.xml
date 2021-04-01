@@ -325,5 +325,7 @@
     <string name="order_successful">Order Successful</string>
     <string name="order_not_found">Order not found</string>
     <string name="you_have_no_requests">You have no requests</string>
+    <string name="delivery_forecast">Delivery forecast</string>
+    <string name="orderdelivered">Order delivered</string>
 
 </resources>

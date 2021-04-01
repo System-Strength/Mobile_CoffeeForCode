@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -272,6 +273,14 @@ public class MainActivity extends AppCompatActivity {
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.menu_sheet,
                     findViewById(R.id.menu_sheet_principal));
 
+
+            if (img_user == null || img_user.equals(" ") || img_user.equals("")){
+                Log.d("ProfileImageStatus", "No profile image");
+            }else {
+                Picasso.get().load(img_user).into((ImageView) sheetview.findViewById(R.id.img_user_sheet));
+                Log.d("ProfileImageStatus", "loading image");
+            }
+
             //  When click in this linear will to profile information
             sheetview.findViewById(R.id.btnperfil).setOnClickListener(v1 -> {
                 Intent GoTo_profile = new Intent(MainActivity.this, ProfileActivity.class);
@@ -293,7 +302,8 @@ public class MainActivity extends AppCompatActivity {
 
             //  When click in this linear will to app information
             sheetview.findViewById(R.id.btninfoapp).setOnClickListener(v1 -> {
-                Toast.makeText(MainActivity.this, "Em desenvolvimento!!", Toast.LENGTH_SHORT).show();
+                Intent goTo_appinfo = new Intent(MainActivity.this, AppInfoActivity.class);
+                startActivity(goTo_appinfo);
                 bottomSheetDialog.dismiss();
             });
 

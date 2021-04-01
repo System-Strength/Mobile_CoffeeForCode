@@ -237,4 +237,6 @@
     <string name="order_successful">Pedido bem sucedido</string>
     <string name="order_not_found">Pedido não encontrado</string>
     <string name="you_have_no_requests">Você não tem nenhum pedido</string>
+    <string name="delivery_forecast">Previsão de entrega</string>
+    <string name="orderdelivered">Pedido entregue</string>
 </resources>

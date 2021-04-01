@@ -37,6 +37,7 @@
         android:layout_height="match_parent"
         tools:context=".Activitys.FollowOrderActivity" />
 
+    <!-- Container Information -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="327dp"
         android:layout_height="310dp"
@@ -56,11 +57,43 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
+        <!-- Text Order Code -->
         <LinearLayout
+            android:id="@+id/linearLayout_ordercode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewbag_followorder"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txttitleorder_followorder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/order_twopoint"
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txtCd_order_followorder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:text="@string/order_twopoint"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Progress Bars -->
+        <LinearLayout
+            android:id="@+id/linearLayout_progress_followorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/imageViewmap_followorder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewbag_followorder">
@@ -114,6 +147,49 @@
 
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout_address_followorder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout_progress_followorder"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_ordercode">
+
+            <TextView
+                android:id="@+id/txtBase_deliveryforecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_forecast"
+                android:textSize="15sp"
+                android:textColor="#000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_deliveryForecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/access"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtBase_deliveryforecast" />
+
+            <ImageView
+                android:id="@+id/animation_delivery_followorder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtBase_deliveryforecast"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/chronometer"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <!-- Img Map -->
         <ImageView
             android:id="@+id/imageViewmap_followorder"
@@ -126,31 +202,32 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="ContentDescription" />
 
+        <!-- Text Address -->
         <LinearLayout
+            android:id="@+id/linearLayout_address_followorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@+id/imageViewbag_followorder"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginBottom="20dp"
+            android:maxWidth="200dp"
+            android:maxHeight="60dp"
+            android:minWidth="200dp"
+            android:minHeight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewmap_followorder"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_progress_followorder">
 
             <TextView
-                android:id="@+id/txttitleorder_followorder"
+                android:id="@+id/txt_address_followorder"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/order_twopoint"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:maxHeight="60dp"
+                android:minWidth="200dp"
+                android:minHeight="20dp"
+                android:text="@string/address"
                 android:textColor="#000"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/txtCd_order_followorder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:text="@string/order_twopoint"
-                android:textColor="#000"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
