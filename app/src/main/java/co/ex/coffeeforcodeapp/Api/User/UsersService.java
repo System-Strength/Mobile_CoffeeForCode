@@ -12,8 +12,8 @@ public interface UsersService {
     @POST("register")
     Call<DtoUsers> registerNewUse(@Body DtoUsers users);
 
-    @GET("login/{email}/{password}")
-    Call<DtoUsers> loginUser(@Path("email") String email, @Path("password") String password);
+    @GET("login/{email}")
+    Call<DtoUsers> loginUser(@Path("email") String email);
 
     @PATCH("updateaddress/{id_user}")
     Call<DtoUsers> UpdateAddress(@Path("id_user") int id_user, @Body DtoUsers newAddress);
@@ -24,6 +24,6 @@ public interface UsersService {
     @PATCH("updateimg/{id_user}")
     Call<DtoUsers> UpdateImgUser(@Path("id_user") int id_user, @Body DtoUsers newImg);
 
-    @GET("/info/{email}")
+    @GET("{email}")
     Call<DtoUsers> infoUser(@Path("email") String email);
 }

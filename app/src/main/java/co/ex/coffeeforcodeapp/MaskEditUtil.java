@@ -9,7 +9,7 @@ import android.widget.EditText;
  *  Responsible developer: https://github.com/Kauavitorio
  **/
 
-abstract class MaskEditUtil {
+public abstract class MaskEditUtil {
 
     public static final String FORMAT_CPF = "###.###.###-##";
     public static final String FORMAT_RG = "##.###.###-#";

@@ -7,6 +7,7 @@
     <string name="docedeleito">Doce de Leite</string>
     <string name="quinhentosml" translatable="false">500 ml</string>
     <string name="seissentosml" translatable="false">600 ml</string>
+    <string name="under_development">Under Development</string>
 
     <!--Coffee Names-->
     <string name="refreshers" translatable="false">Refreshers™</string>
@@ -36,7 +37,7 @@
     <string name="carregando" tools:ignore="TypographyEllipsis">Loading...</string>
 
     <!--Terms-->
-    <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>CoffeeForCode</b></u>\nThis instrument establishes the terms and conditions applicable to your access and participation in the My CoffeeForCode Rewards ™ program, operated by CoffeeForCode Brasil Comércio de Cafés Ltda.- CNPJ Nº. 17.884.267 / 0001-00, with address at Avenida Paulista nº 900, Bela Vista São Paulo, (hereinafter CoffeeForCode Brasil), its subsidiaries, licensed branches and related companies, and does not reduce the terms and conditions of any other agreement entered into between the customer and Starbucks, with respect to products and services offered by CoffeeForCode. \ n \ n <u> <b> MIT License </b> </u> \ n <u> Copyright (c) 2020 System Strength </u> \ nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: \ n \ nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. \ n \ nTHE S OFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+    <string name="termoscfc" tools:ignore="TypographyDashes"><u><b>Coffee For Code</b></u>\nBy accepting the terms, I agree that all my personal information informed in records with email, cpf, name, email, address and etc. are being directed to a database with encryption protocols to preserve my information and I know that this application is non-profit making, but student-oriented. \n\nApplication license: \nCopyright © 2021 Kauã Vitorio \nPermission is granted, free of charge, to anyone who obtains a copy of this software and associated documentation files (the "Software "), to deal with the Software without restriction, including, without limitation, the rights to use, copy, modify, merge, publish, distribute, sublicense and / or sell copies of the Software, and to allow the persons to whom the Software is provided to do so, subject to the following conditions:\nThe above copyright notice and this permission notice must be included in all copies or substantial parts of the Software.\nTHE SOFTWARE IS PROVIDED "AS IS" , WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGE OR OTHER LIABILITY, WHETHER IN ACTION OF CONTRACT, CRIME OR OTHERWISE ARISING OUT OF, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OF THE SOFTWARE OR NEGOTIATION OR THE USE OF THE SOFTWARE OR THE USE OF THE SOFTWARE OR THE USE OF THE SOFTWARE. NO PROGRAMS.</string>
     <string name="termosparaserparceiro"><u><b>Partner</b></u>\n\nI agree that my account will be charged a fee of R $ 20 per month for my subscription as a partner to be renewed and I agree that the CFC card is only valid for purchases on our website, application and store and is not valid for purchases on other stores.</string>
     <string name="aceitoostermos">I accept the Terms</string>
 
@@ -44,7 +45,7 @@
     <string name="knowmore">Know more</string>
     <string name="access">Access</string>
     <string name="txt_welcome"><u><b>Welcome!!</b></u></string>
-    <string name="txtChoosetheCfc" tools:ignore="TypographyEllipsis">Choose the<u> Coffee For Code </u> the coffee to start your day !!</string>
+    <string name="txtChoosetheCfc" tools:ignore="TypographyEllipsis">Choose the <u><b>CFC</b></u> \nthe coffee to start your day !!</string>
 
     <!--Login Screen-->
     <string name="login" translatable="false">Login</string>
@@ -83,6 +84,7 @@
     <string name="required_fill_email">Required to fill in the field: EMAIL</string>
     <string name="fill_email_correctly">Fill in your email correctly</string>
     <string name="necessary_fill_correctly_password">Necessary to fill the field correctly: PASSWORD\nMinimum 8 characters</string>
+    <string name="authfailed_thisemail">Authentication failed!\nThis email is already registered.</string>
 
     <!--Principal Screen-->
     <string name="atalhos">Shortcuts</string>
@@ -141,16 +143,16 @@
     <string name="aproveiteseusbeneficios">Enjoy your benefits</string>
 
 
-    <!--Cartoes Screen-->
+    <!--Cards Screen-->
     <string name="seuscartoes">Your Cards</string>
     <string name="desccardcfc">For discounted purchases on our website, app and store</string>
     <string name="setinhafeita" translatable="false">-></string>
     <string name="nenhumcartaocadastrado">No Card registered !!</string>
     <string name="cadastarcartao">Register New Card</string>
-    <string name="numerodocartao">Card number</string>
+    <string name="cardnumber">Card number</string>
     <string name="nomeempresonocartao">Name Printed on the card</string>
     <string name="validade">Shelf life</string>
-    <string name="ccc" translatable="false">CCC</string>
+    <string name="cvv" translatable="false">CVV</string>
     <string name="cadastar">Cadastrar</string>
     <string name="treszero" translatable="false">000</string>
     <string name="outroscartoes">Other Cards</string>
@@ -177,6 +179,8 @@
     <string name="parceira">Partnership</string>
     <string name="statuscardparceiro">Status Card</string>
     <string name="ativacao">Activation</string>
+    <string name="activated_card">To an activated card !!</string>
+    <string name="complement_not_registred">Complement not registered</string>
 
     <!--Edit Profile-->
     <string name="title_editProfile">Edit profile</string>
@@ -200,8 +204,19 @@
     <string name="couldnt_insert">Couldn`t insert</string>
     <string name="select_an_image">Select an image</string>
 
+    <!-- Products Details -->
+    <string name="error_for_select_product">Error for select product\nTry Again</string>
+    <string name="one_is_the_minumum_quantity">1 is the minimum quantity</string>
+    <string name="the_maximum_quantity_is_20">The maximum quantity to buy is 20</string>
+    <string name="you_already_have_this_products_in_your_cart">You already have this product in your cart</string>
+    <string name="no_possible_to_insert_this">No possible to insert this item right now</string>
+    <string name="error_to_find_your_cart">Error to find your cart</string>
+    <string name="error_to_get_image">Error to get image</string>
+    <string name="products_not_found">Products not found</string>
+    <string name="server_timeout">Server timeout try later</string>
 
-    <!-- Tela de Adms-->
+
+    <!-- Tools-->
     <string name="addproduto">Add New Product</string>
     <string name="alterproduto">Change Product</string>
     <string name="excluirproduto">Delete Product</string>
@@ -212,8 +227,8 @@
     <string name="change_profile_image"><u>Change profile image</u></string>
     <string name="allproducts">Products</string>
     <string name="category">Category</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
     <string name="buy">Buy</string>
     <string name="plus" translatable="false">+</string>
     <string name="less" translatable="false">-</string>
@@ -233,5 +248,70 @@
     <string name="hello_emailsend">Hello, your user has been successfully registered :)\nWe sent a verification email to the registered email, please confirm in the email before logging in.</string>
     <string name="ok_i_will_confirm">Ok, I will confirm</string>
     <string name="txt_weverify_email_not_verified">We verify that your email has not been confirmed, please confirm your account with the email we sent you.</string>
+    <string name="default_notification_channel_id">Hey, It`s coffee for code</string>
+
+    <!-- Know More Screen -->
+    <string name="desc_knowmore">We are a company that sells food and drinks from our partners, helping our customers so that they can have your product quickly and conveniently.</string>
+    <string name="desc_img_knowmore">Remembering that all images and products are illustrative, we have no intention of benefiting from the brands.</string>
+    <string name="desc_cfc_isapp_withoutfis_knowMore">Coffee For Code, is an application that is not for profit, but for students.</string>
+    <string name="members">Members</string>
+    <string name="support">Support</string>
+    <string name="mobile_developer" translatable="false">Mobile Developer</string>
+    <string name="kaua_vitorio" translatable="false">Kauã Vitorio</string>
+    <string name="view_portfolio">View Portfolio</string>
+    <string name="matheus_leite" translatable="false">Matheus Leite</string>
+    <string name="ui_ux_designer" translatable="false">UI/UX Designer</string>
+    <string name="desc_support">Our Application is for studies. We have not received any financial funds through it, and it is being maintained by our own funds.</string>
+    <string name="you_can_support">YOU CAN SUPPORT US IN THE FOLLOWING WAYS:</string>
+    <string name="make_donation">Make donation</string>
+    <string name="see_ad">See AD</string>
+    <string name="sorry_ad">Sorry, but it will not be possible to play an ad, as we are having small problems with the ad provider !!\nSorry for the inconvenience</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="my_cart">My Cart</string>
+    <string name="total" translatable="false">Total</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+
+    <!-- Shopping Screen -->
+    <string name="what_would_you_this_product">What would you like to do with this product?</string>
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
+    <string name="you_dont_have_product_cart">You dont have this product on your cart</string>
+    <string name="address">Address</string>
+    <string name="addres_no_registred">No registered address</string>
+    <string name="desc_purchase_no_address">We need your address so that we can ship your order.</string>
+    <string name="singup">Sign Up</string>
+    <string name="payment">Payment</string>
+    <string name="no_cards_added">No cards added</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="addcard">ADD CARD</string>
+    <string name="ex_shelflife_card" translatable="false">XX/XX</string>
+    <string name="ex_numbercard_card" translatable="false">•••• •••• •••• ••••</string>
+    <string name="warning_cardRegister">It is worth remembering that Coffee for code is very tied to the security of your data,\nso we ask that you <b>DO NOT</b> enter the information of your real card, but a fictitious one just so that you can continue your experience in our application, if you want you can click on “Generate card” to create a fake card.</string>
+    <string name="generate_card">Generate card</string>
+    <string name="no_flag_selected">The card`s flag was not requested</string>
+    <string name="cardNumber_worginsert">Card number inserted incorrectly</string>
+    <string name="shelflife_incorrectly">Validity entered incorrectly</string>
+    <string name="cvv_inserted_incorrectly">CVV inserted incorrectly</string>
+    <string name="name_incorrectly_inserted">Name entered incorrectly</string>
+    <string name="you_have_moreOf_theree_cards">You have more than 3 cards registered</string>
+    <string name="card_already_inserted">Card already inserted</string>
+    <string name="registered_cards">Registered cards</string>
+    <string name="register_a_card">Register a card</string>
+    <string name="yourscards">Your cards</string>
+    <string name="what_would_you_this_card">What would you this card</string>
+    <string name="card_not_found">Card not found</string>
+    <string name="leave">Leave</string>
+    <string name="forgotmypassword">Forgot my Password</string>
+    <string name="descForgotpassword">Don\'t worry, we can change it for you, you just need to inform the email that you created your account.</string>
+    <string name="changepassword">Change Password</string>
+    <string name="we_have_send_reset_password">We have sent you instructions to reset your password!</string>
+    <string name="failed_send_email">Failed to send reset email!</string>
+    <string name="versionnotfound">Version not found</string>
+    <string name="updatenow">Update Now</string>
+    <string name="updatelater">Update Later</string>
+    <string name="have_new_version">We have a new application update available, to ensure better experience in our application we recommend that you update.</string>
+    <string name="error_to_readqrcode">Error reading the Qr code\nReason: The Qr code is not for a Coffee For Code product</string>
+    <string name="scan_the_qrcode">Scan the QR code</string>
+    <string name="noresult">No result</string>
 
 </resources>

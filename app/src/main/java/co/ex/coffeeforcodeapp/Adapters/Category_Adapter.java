@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import co.ex.coffeeforcodeapp.Api.Category.DtoCategorys;
 import co.ex.coffeeforcodeapp.R;
 
@@ -31,7 +33,8 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.MyHo
 
     @Override
     public void onBindViewHolder(@NonNull MyHolderCategory holder, int position) {
-        holder.ImgCategory.setImageBitmap(dtoCategorysArrayList.get(position).getImg_cat());
+        Picasso.get().load(dtoCategorysArrayList.get(position).getImg_cat_st()).into(holder.ImgCategory);
+        //holder.ImgCategory.setImageBitmap(dtoCategorysArrayList.get(position).getImg_cat());
         holder.txtNm_Category.setText(dtoCategorysArrayList.get(position).getNm_cat());
 
     }

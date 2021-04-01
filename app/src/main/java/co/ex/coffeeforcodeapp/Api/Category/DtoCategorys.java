@@ -4,10 +4,18 @@ import android.graphics.Bitmap;
 
 public class DtoCategorys {
     int cd_cat;
-    String nm_cat;
+    String nm_cat, img_cat_st;
     Bitmap img_cat;
 
     public DtoCategorys(){}
+
+    public String getImg_cat_st() {
+        return img_cat_st;
+    }
+
+    public void setImg_cat_st(String img_cat_st) {
+        this.img_cat_st = img_cat_st;
+    }
 
     public int getCd_cat() {
         return cd_cat;
