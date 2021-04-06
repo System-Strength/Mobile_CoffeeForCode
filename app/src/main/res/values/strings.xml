@@ -71,7 +71,7 @@
     <string name="special_characters">Special Characters</string>
     <string name="lognow">Login Now</string>
     <string name="imalredyhaveaccount">I already have an account.</string>
-    <string name="cpfcreateaccount" translatable="false">CPF*</string>
+    <string name="cpfcreateaccount" translatable="false">CPF</string>
     <string name="accepttheterms">I accept the terms of CoffeeForCode</string>
     <string name="terms"><u>Terms</u></string>
     <string name="ApplicationErrorTryLater">Application error please try again later !!</string>
@@ -181,6 +181,7 @@
     <string name="ativacao">Activation</string>
     <string name="activated_card">To an activated card !!</string>
     <string name="complement_not_registred">Complement not registered</string>
+    <string name="nocpfregistred">No CPF registered</string>
 
     <!--Edit Profile-->
     <string name="title_editProfile">Edit profile</string>

@@ -132,11 +132,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 edittextLastName_userCreateAccount.requestFocus();
                 imm.showSoftInput(edittextLastName_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
                 card_btn_create_account.setElevation(20);
-            }else if(edittextcpf_userCreateAccount.getText() == null || edittextcpf_userCreateAccount.getText().length() < 14){
-                edittextcpf_userCreateAccount.setError("CPF informed is invalid" + "\n"  + "CPF informado é invalido");
-                edittextcpf_userCreateAccount.requestFocus();
-                imm.showSoftInput(edittextcpf_userCreateAccount, InputMethodManager.SHOW_IMPLICIT);
-                card_btn_create_account.setElevation(20);
             }else if(edittextEmail_userCreateAccount.getText() == null || edittextEmail_userCreateAccount.getText().length() == 0){
                 edittextEmail_userCreateAccount.setError("Required to fill in the field: EMAIL" + "\n" + "Necessário preencher o campo: EMAIL");
                 edittextEmail_userCreateAccount.requestFocus();
@@ -178,7 +173,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                         Call<DtoUsers> clientesCall = usersService.registerNewUse(newuser);
                                         clientesCall.enqueue(new Callback<DtoUsers>() {
                                             @Override
-                                            public void onResponse(Call<DtoUsers> call, Response<DtoUsers> response) {
+                                            public void onResponse(@NotNull Call<DtoUsers> call, @NotNull Response<DtoUsers> response) {
                                                 if(response.code() == 201 || response.code() == 200){
                                                     Log.d("EmailStatus", "Email sent.");
                                                     Show_WeSendEmail_Warning(email, password);
@@ -195,7 +190,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                                 }
                                             }
                                             @Override
-                                            public void onFailure(Call<DtoUsers> call, Throwable t) {
+                                            public void onFailure(@NotNull Call<DtoUsers> call, @NotNull Throwable t) {
                                                 Toast.makeText(CreateAccountActivity.this, R.string.ApplicationErrorTryLater, Toast.LENGTH_LONG).show();
                                                 loadingDialog.dimissDialog();
                                                 card_btn_create_account.setElevation(20);

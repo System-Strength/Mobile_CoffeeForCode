@@ -248,7 +248,11 @@ public class ProfileActivity extends AppCompatActivity {
     private void load_user_info(){
         txt_Name_user_profile.setText(nm_user);
         txt_Email_user.setText(email_user);
-        txt_cpf_profile.setText(cpf_user);
+        if (cpf_user == null || cpf_user.equals(" ") || cpf_user.equals("")){
+            txt_cpf_profile.setText(R.string.nocpfregistred);
+        }else{
+            txt_cpf_profile.setText(cpf_user);
+        }
         if (phone_user == null || phone_user.equals(" ")){
             base_notHave_phone_registred.setVisibility(View.VISIBLE);
             base_have_phone_registred.setVisibility(View.GONE);
