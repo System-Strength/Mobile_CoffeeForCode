@@ -165,10 +165,6 @@ public class Edit_ProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "Nome obrigatorio!!", Toast.LENGTH_SHORT).show();
                 edit_nome_edicaoperfil.requestFocus();
                 imm.showSoftInput(edit_nome_edicaoperfil, InputMethodManager.SHOW_IMPLICIT);
-            }else if(edit_cpf_edicaoperfil.getText() == null || edit_cpf_edicaoperfil.getText().length() < 14){
-                Toast.makeText(this, "CPF obrigatorio!!", Toast.LENGTH_SHORT).show();
-                edit_cpf_edicaoperfil.requestFocus();
-                imm.showSoftInput(edit_cpf_edicaoperfil, InputMethodManager.SHOW_IMPLICIT);
             }else if(edit_email_edicaopefil.getText() == null || edit_email_edicaopefil.getText().length() == 0){
                 Toast.makeText(this, "Necessário preencher o campo: EMAIL", Toast.LENGTH_SHORT).show();
                 edit_email_edicaopefil.requestFocus();

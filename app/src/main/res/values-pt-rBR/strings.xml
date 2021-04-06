@@ -239,4 +239,5 @@
     <string name="you_have_no_requests">Você não tem nenhum pedido</string>
     <string name="delivery_forecast">Previsão de entrega</string>
     <string name="orderdelivered">Pedido entregue</string>
+    <string name="nocpfregistred">Nenhum CPF registrado</string>
 </resources>
