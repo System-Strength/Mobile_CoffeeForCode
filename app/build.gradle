@@ -31,10 +31,12 @@ android {
 }
 
 apply plugin: 'com.android.application'
-// ADD THIS AT THE BOTTOM
+// Apply Google Services
 apply plugin: 'com.google.gms.google-services'
 // Apply the Performance Monitoring plugin
 apply plugin: 'com.google.firebase.firebase-perf'
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 dependencies {
 
@@ -67,6 +69,8 @@ dependencies {
 
     // Declare the dependency for the Performance Monitoring library
     implementation 'com.google.firebase:firebase-perf'
+
+    implementation 'com.google.firebase:firebase-crashlytics'
 
     /*--------------- End Firebase Dependencies  ---------------*/
 
